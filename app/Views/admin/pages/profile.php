@@ -84,7 +84,7 @@
 
                                     <div class="form-group">
                                         <label>Keterangan</label>
-                                        <textarea type="text" class="form-control" name="keterangan"> <?= $user['keterangan']; ?></textarea>
+                                        <textarea type="text" class="form-control" name="keterangan"><?= $user['keterangan']; ?></textarea>
                                     </div>
                                     <hr>
                                     <div class="row">

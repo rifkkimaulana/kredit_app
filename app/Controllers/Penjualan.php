@@ -83,7 +83,6 @@ class Penjualan extends Controller
         if (
             session('user_level') !== 'administrator'
             && session('user_level') !== 'manager'
-            && session('user_level') !== 'member'
         ) {
             return redirect()->to('login');
         }

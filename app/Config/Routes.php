@@ -39,7 +39,10 @@ $routes->get('laporan_penjualan', 'CommingSoon::index');
 $routes->get('pesanan', 'CommingSoon::index');
 $routes->get('tagihan', 'CommingSoon::index');
 $routes->get('bayar_angsuran', 'CommingSoon::index');
-$routes->get('riwayat_pembayaran', 'CommingSoon::index');
+
+// Pembayaran Tagihan
+$routes->get('pembayaran', 'Pembayaran::index');
+$routes->post('pembayaran/tambah', 'Pembayaran::pembayaranInsert');
 
 // Log Aktifitas User
 $routes->get('log_aktivitas', 'LogAktifitas::index');

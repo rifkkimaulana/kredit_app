@@ -149,21 +149,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= base_url('tagihan'); ?>" class="nav-link <?= $title === 'Tagihan' ? 'active' : ''; ?>">
+                            <a href="<?= base_url('pembayaran'); ?>" class="nav-link <?= $title === 'Pembayaran' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Tagihan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('bayar_angsuran'); ?>" class="nav-link <?= $title === 'Tagihan' ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Bayar Angsuran</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('riwayat_pembayaran'); ?>" class="nav-link <?= $title === 'Riwayat Pembayaran' ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Riwayat Pembayaran</p>
+                                <p>Pembayaran Tagihan</p>
                             </a>
                         </li>
                     </ul>
