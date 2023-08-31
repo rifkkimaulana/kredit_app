@@ -29,15 +29,14 @@
 
     <link rel="stylesheet" href="<?= base_url('assets/plugins/fontawesome-free/css/all.min.css'); ?>">
 
-
-    <link rel="stylesheet" href="<?= base_url('assets/plugins/bs-stepper/css/bs-stepper.min.css'); ?>">
-
     <link rel="stylesheet" href="<?= base_url('assets/plugins/select2/css/select2.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css'); ?>">
 
     <link rel="stylesheet" href="<?= base_url('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css'); ?>">
+    <!-- Include Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body class="hold-transition sidebar-colapse layout-fixed">
@@ -50,8 +49,6 @@
         <?= $this->include('admin/layout/navbar'); ?>
         <?= $this->include('admin/layout/sidebar'); ?>
 
-
-        <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <div class="card"></div>
             <?= $this->renderSection('content'); ?>
@@ -95,7 +92,6 @@
         <!-- /.control-sidebar -->
 
     </div>
-    <!-- ./wrapper -->
 
     <!-- jQuery -->
     <script src="<?= base_url('assets/plugins/jquery/jquery.min.js'); ?>"></script>
@@ -145,10 +141,6 @@
 
     <script src="<?= base_url('assets/plugins/select2/js/select2.full.min.js'); ?>"></script>
 
-    <!-- Include Toastr CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-    <!-- Include Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>

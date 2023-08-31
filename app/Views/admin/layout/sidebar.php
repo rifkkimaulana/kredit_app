@@ -87,14 +87,6 @@
                                 </a>
                             </li>
                         </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?= base_url('payment_api_setting'); ?>" class="nav-link <?= $title === 'Users' ? 'active' : ''; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Payment Gateway</p>
-                                </a>
-                            </li>
-                        </ul>
                     <?php endif; ?>
                 </li>
                 <?php if ($user['user_level'] === 'administrator') : ?>
@@ -177,36 +169,9 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-money-check-alt nav-icon"></i>
-                        <p>
-                            Online Payment
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <!-- Submenu Duitku -->
-                        <li class="nav-item">
-                            <a href="<?= base_url('online_payment/duitku'); ?>" class="nav-link <?= $title === 'Duitku' ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Duitku</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- Tambahkan Menu Log Aktivitas -->
-                <li class="nav-item">
                     <a href="<?= base_url('log_aktivitas'); ?>" class="nav-link <?= $title === 'Log Aktivitas' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-history"></i>
                         <p>Log Aktivitas</p>
-                    </a>
-                </li>
-
-                <!-- Tambahkan Menu Pusat Bantuan -->
-                <li class="nav-item">
-                    <a href="<?= base_url('pusat_bantuan'); ?>" class="nav-link <?= $title === 'Pusat Bantuan' ? 'active' : ''; ?>">
-                        <i class="nav-icon fas fa-question-circle"></i>
-                        <p>Pusat Bantuan</p>
                     </a>
                 </li>
             </ul>

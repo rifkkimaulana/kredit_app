@@ -32,19 +32,17 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 //$routes->get('/', 'Home::index');
-$routes->get('payment_api_setting', 'CommingSoon::index');
+
 $routes->get('email_setting', 'CommingSoon::index');
-
-
 
 $routes->get('laporan_penjualan', 'CommingSoon::index');
 $routes->get('pesanan', 'CommingSoon::index');
 $routes->get('tagihan', 'CommingSoon::index');
 $routes->get('bayar_angsuran', 'CommingSoon::index');
 $routes->get('riwayat_pembayaran', 'CommingSoon::index');
-$routes->get('online_payment/duitku', 'CommingSoon::index');
-$routes->get('log_aktivitas', 'CommingSoon::index');
-$routes->get('pusat_bantuan', 'CommingSoon::index');
+
+// Log Aktifitas User
+$routes->get('log_aktivitas', 'LogAktifitas::index');
 
 // Produk Routes
 $routes->get('produk', 'Produk::index');
