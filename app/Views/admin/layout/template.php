@@ -26,8 +26,9 @@
     <link rel="stylesheet" href="<?= base_url('assets/plugins/daterangepicker/daterangepicker.css'); ?>">
     <!-- summernote -->
     <link rel="stylesheet" href="<?= base_url('assets/plugins/summernote/summernote-bs4.min.css'); ?>">
-    <!-- Load DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.7/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" href="<?= base_url('assets/plugins/fontawesome-free/css/all.min.css'); ?>">
+
 
     <link rel="stylesheet" href="<?= base_url('assets/plugins/bs-stepper/css/bs-stepper.min.css'); ?>">
 
@@ -126,16 +127,7 @@
     <script src="<?= base_url('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js'); ?>"></script>
     <!-- AdminLTE App -->
     <script src="<?= base_url('assets/dist/js/adminlte.js'); ?>"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="<?= base_url('assets/dist/js/pages/dashboard.js'); ?>"></script>
 
-    <script src="<?= base_url('assets/plugins/bs-stepper/js/bs-stepper.min.js'); ?>"></script>
-    <script>
-        // BS-Stepper Init
-        document.addEventListener('DOMContentLoaded', function() {
-            window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-        })
-    </script>
     <script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
     <script src="<?= base_url('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
     <script src="<?= base_url('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js'); ?>"></script>
@@ -149,6 +141,8 @@
     <script src="<?= base_url('assets/plugins/datatables-buttons/js/buttons.print.min.js'); ?>"></script>
     <script src="<?= base_url('assets/plugins/datatables-buttons/js/buttons.colVis.min.js'); ?>"></script>
 
+    <script src="<?= base_url('assets/plugins/chart.js/Chart.min.js'); ?>"></script>
+
     <script src="<?= base_url('assets/plugins/select2/js/select2.full.min.js'); ?>"></script>
 
     <!-- Include Toastr CSS -->
@@ -156,10 +150,6 @@
 
     <!-- Include Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
 
     <script>
         $(document).ready(function() {
@@ -240,6 +230,30 @@
         $(document).ready(function() {
             $('.select2').select2({
                 theme: 'bootstrap4'
+            });
+        });
+    </script>
+
+    <script>
+        $(function() {
+            var barChartCanvas = $('#barChart').get(0).getContext('2d');
+            var barChartData = {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'Penjualan Kredit',
+                    backgroundColor: 'rgba(60,141,188,0.9)',
+                    borderColor: 'rgba(60,141,188,0.8)',
+                    data: [28, 48, 40, 19, 86, 27, 90]
+                }, ]
+            };
+            var barChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+            };
+            new Chart(barChartCanvas, {
+                type: 'bar',
+                data: barChartData,
+                options: barChartOptions
             });
         });
     </script>

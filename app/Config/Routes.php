@@ -60,11 +60,13 @@ $routes->get('produk/kategori/delete/(:num)', 'Produk::deleteKategori/$1');
 
 // Penjualan Barang
 $routes->get('penjualan', 'Penjualan::index');
+$routes->get('penjualan/hapus/(:num)', 'Penjualan::hapusPenjualan/$1');
+
+// Penjualan For Keranjang Belanja
 $routes->post('keranjang', 'Penjualan::keranjang_addPost');
 $routes->get('keranjang', 'Penjualan::keranjang');
 $routes->post('penjualan/cekout', 'Penjualan::cekout');
 $routes->get('keranjang/delete/(:num)', 'Penjualan::hapusProdukKeranjang/$1');
-
 
 // Autentikasi Users
 $routes->get('login', 'Auth::index');
@@ -81,7 +83,7 @@ $routes->get('google', 'Auth::googleAuth');
 $routes->get('google/callback', 'Auth::googleAuth_callback');
 
 // Statistik Penjualan
-$routes->get('statistik', 'CommingSoon::index');
+$routes->get('statistik', 'StatistikPenjualan::index');
 
 $routes->get('/', 'Home::index');
 $routes->get('dashboard', 'Home::index');

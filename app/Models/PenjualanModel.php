@@ -23,4 +23,9 @@ class PenjualanModel extends Model
     {
         return $this->insert($data);
     }
+
+    public function deletePenjualan($id)
+    {
+        return $this->where('id', $id)->delete();
+    }
 }

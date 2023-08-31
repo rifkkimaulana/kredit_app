@@ -60,6 +60,20 @@ class Penjualan extends Controller
         return view('admin/pages/Penjualan', $data);
     }
 
+    public function hapusPenjualan($id)
+    {
+        $penjualanModel = new PenjualanModel();
+        $penjualanViewId = $penjualanModel->find($id);
+
+        if (!$penjualanViewId) {
+            return redirect()->to(base_url('penjualan'))->with('error', 'Penjualan ini tidak ditemukan di database.');
+        }
+
+        $penjualanModel->deletePenjualan($id);
+
+        return redirect()->to(base_url('penjualan'))->with('success', 'Penjualan berhasil dihapus.');
+    }
+
     public function keranjang()
     {
         if (!session('user_id')) {
