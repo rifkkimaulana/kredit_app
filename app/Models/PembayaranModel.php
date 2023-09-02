@@ -29,4 +29,14 @@ class PembayaranModel extends Model
     {
         return $this->insert($data);
     }
+
+    public function updatePembayaran($id, $data)
+    {
+        return $this->update($id, $data);
+    }
+
+    public function deletePembayaran($id)
+    {
+        return $this->where('id', $id)->delete();
+    }
 }

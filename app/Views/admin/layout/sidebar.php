@@ -73,14 +73,6 @@
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= base_url('email_setting'); ?>" class="nav-link <?= $title === 'Users' ? 'active' : ''; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Setting Email</p>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
                                 <a href="<?= base_url('whatsapp_api_setting'); ?>" class="nav-link <?= $title === 'Users' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Whatsapp API</p>
@@ -156,16 +148,15 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="<?= base_url('log_aktivitas'); ?>" class="nav-link <?= $title === 'Log Aktivitas' ? 'active' : ''; ?>">
-                        <i class="nav-icon fas fa-history"></i>
-                        <p>Log Aktivitas</p>
-                    </a>
-                </li>
+                <?php if ($user['user_level'] === 'administrator') : ?>
+                    <li class="nav-item">
+                        <a href="<?= base_url('log_aktivitas'); ?>" class="nav-link <?= $title === 'Log Aktivitas' ? 'active' : ''; ?>">
+                            <i class="nav-icon fas fa-history"></i>
+                            <p>Log Aktivitas</p>
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
-
         </nav>
-        <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
 </aside>

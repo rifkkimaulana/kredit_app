@@ -33,8 +33,6 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 //$routes->get('/', 'Home::index');
 
-$routes->get('email_setting', 'CommingSoon::index');
-
 $routes->get('laporan_penjualan', 'CommingSoon::index');
 $routes->get('pesanan', 'CommingSoon::index');
 $routes->get('tagihan', 'CommingSoon::index');
@@ -43,6 +41,8 @@ $routes->get('bayar_angsuran', 'CommingSoon::index');
 // Pembayaran Tagihan
 $routes->get('pembayaran', 'Pembayaran::index');
 $routes->post('pembayaran/tambah', 'Pembayaran::pembayaranInsert');
+$routes->get('pembayaran/konfirmasi/(:num)', 'Pembayaran::pembayaranKonfirmasi/$1');
+$routes->get('pembayaran/delete/(:num)', 'Pembayaran::delete/$1');
 
 // Log Aktifitas User
 $routes->get('log_aktivitas', 'LogAktifitas::index');
