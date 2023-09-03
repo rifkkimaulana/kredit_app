@@ -1,10 +1,8 @@
 <?= $this->extend('admin/layout/template'); ?>
 <?= $this->section('content'); ?>
 
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <!-- Main row -->
         <form method="post" action="<?= base_url('penjualan/cekout') ?>">
             <div class="row">
                 <div class="col-md-5">
@@ -12,7 +10,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Detail Pembelian</h3>
                             <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addModal">
-                                Tambah Produk
+                                Pilih Produk
                             </button>
                         </div>
                         <div class="card-body">
@@ -55,7 +53,6 @@
                             <h3 class="card-title">Detail Pembayaran</h3>
                         </div>
                         <div class="card-body">
-
                             <div class="form-group">
                                 <label for="pembeli">Pembeli</label>
                                 <select class="form-control select2" name="user_id">
