@@ -71,7 +71,7 @@ class Produk extends Controller
 
             $produkModel->insertProduk($data);
 
-            return redirect()->to(base_url('pengaturan/produk'))->with('success', 'Produk berhasil ditambahkan.');
+            return redirect()->to(base_url('produk/list'))->with('success', 'Produk berhasil ditambahkan.');
         }
     }
 
@@ -121,7 +121,7 @@ class Produk extends Controller
 
             $produkModel->updateProduk($id, $data);
 
-            return redirect()->to(base_url('pengaturan/produk'))->with('success', 'Produk berhasil diperbarui.');
+            return redirect()->to(base_url('produk/list'))->with('success', 'Produk berhasil diperbarui.');
         }
     }
 

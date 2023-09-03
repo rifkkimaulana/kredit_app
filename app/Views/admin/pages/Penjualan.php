@@ -65,51 +65,104 @@
     <div class="modal fade" id="detailModal<?= $penjualan['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="detailModalLabel">Detail Pembelian</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label><strong>No. Transaksi:</strong></label>
-                        <input type="text" class="form-control" id="namaPelanggan" value="<?= $penjualan['no_transaksi'] ?>" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="namaPelanggan"><strong>Nama Pelanggan:</strong></label>
-                        <input type="text" class="form-control" id="namaPelanggan" value="<?= $userMap[$penjualan['id_users']]['user_nama'] ?>" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="statusPembelian"><strong>Status Pembelian:</strong></label>
-                        <input type="text" class="form-control" id="statusPembelian" value="<?= $penjualan['status'] ?>" disabled>
-                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="modal-title" id="detailModalLabel"><b><?= $perusahaan['nama_aplikasi'] ?></b></h5>
+                        </div>
+                        <div class="col-md-6 text-right">
 
-                    <div class="form-group">
-                        <label for="tanggalPenjualan"><strong>Tanggal Penjualan:</strong></label>
-                        <input type="text" class="form-control" id="tanggalPenjualan" value="<?= $penjualan['tanggal_penjualan'] ?>" disabled>
+                        </div>
                     </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <address>
+                                <strong>Pelanggan:</strong><br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <b>Nama</b>
+                                    </div>
+                                    <div class="col-md-8">
+                                        : <?= $userMap[$penjualan['id_users']]['user_nama'] ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <b>No WA</b>
+                                    </div>
+                                    <div class="col-md-8">
+                                        : <?= $userMap[$penjualan['id_users']]['no_wa'] ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <b>Email</b>
+                                    </div>
+                                    <div class="col-md-8">
+                                        : <?= $userMap[$penjualan['id_users']]['email'] ?>
+                                    </div>
+                                </div>
+                            </address>
 
+                        </div>
+                        <div class="col-md-6">
+                            <address>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <strong>Tanggal</strong>
+                                    </div>
+                                    <div class="col-md-7">
+                                        : <?= $penjualan['tanggal_penjualan'] ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <strong>No.</strong>
+                                    </div>
+                                    <div class="col-md-7">
+                                        : <?= $penjualan['no_transaksi'] ?>
+                                    </div>
+                                </div>
+                            </address>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Deskripsi</th>
+                                    <th>Jumlah</th>
+                                    <th>Harga Satuan</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><?= $produkMap[$penjualan['id_produk']]['nama_produk'] ?></td>
+                                    <td><?= $penjualan['jumlah'] ?></td>
+                                    <td>Rp <?= number_format($penjualan['harga_satuan'], 0, ',', '.') ?></td>
+                                    <td>Rp <?= number_format($penjualan['total_harga'], 0, ',', '.') ?></td>
 
-                    <div class="form-group">
-                        <label for="namaProduk"><strong>Nama Produk:</strong></label>
-                        <input type="text" class="form-control" value="<?= $produkMap[$penjualan['id_produk']]['nama_produk'] ?>" disabled>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-
-                    <div class="form-group">
-                        <label for="namaProduk"><strong>Banyaknya:</strong></label>
-                        <input type="text" class="form-control" value="<?= $penjualan['jumlah'] ?>" disabled>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Jenis Pembayaran:</strong> <?= $penjualan['metode_pembayaran'] ?></p>
+                            <p><strong>Status Pembayaran:</strong> <?= $penjualan['status'] ?></p>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <p><strong>Total Tagihan:</strong> Rp <?= number_format($penjualan['total_harga'], 0, ',', '.') ?></p>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="jenisPembayaran"><strong>Jenis Pembayaran:</strong></label>
-                        <input type="text" class="form-control" value="<?= $penjualan['metode_pembayaran'] ?>" disabled>
+                    <hr>
+                    <div class="text-center">
+                        <small><strong>Nomor Referensi:</strong> <?= $penjualan['no_referensi'] ?></small>
                     </div>
-                    <div class="form-group">
-                        <label for="jenisPembayaran"><strong>Status Pembayaran:</strong></label>
-                        <input type="text" class="form-control" value="<?= $penjualan['status'] ?>" disabled>
-                    </div>
-                    <small> Transaksi ini sah dengan nomor referensi: <b><?= $penjualan['no_referensi'] ?></b>.
                 </div>
+
                 <div class="modal-footer">
                     <div class="float-right">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
