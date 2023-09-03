@@ -7,7 +7,7 @@
         <!-- Main row -->
         <form role="form" method="post" action="<?= base_url('produk/kategori/update'); ?>" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"><?= $title; ?></h3>

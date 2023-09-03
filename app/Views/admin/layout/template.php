@@ -37,70 +37,24 @@
     <link rel="stylesheet" href="<?= base_url('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css'); ?>">
     <!-- Include Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 </head>
 
-<body class="hold-transition sidebar-colapse layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
+
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="<?= base_url('assets/image/perusahaan/' . $perusahaan['logo']) ?>" alt="AdminLTELogo" height="60" width="60">
+        </div>
 
         <?= $this->include('admin/layout/navbar'); ?>
         <?= $this->include('admin/layout/sidebar'); ?>
 
-        <script>
-            // Fungsi untuk menghapus preloader
-            function hidePreloader() {
-                var preloader = document.getElementById('preloader');
-                if (preloader) {
-                    preloader.style.display = 'none';
-                }
-            }
-
-            // Cek apakah cookie 'save_halaman' sudah ada
-            var cookieName = 'c_pages';
-            var isPageSaved = (document.cookie.indexOf(cookieName) !== -1);
-
-            if (isPageSaved) {
-                hidePreloader();
-            }
-
-            // Set cookie 'save_halaman' jika belum ada
-            if (!isPageSaved) {
-                // Set cookie dengan nama 'save_halaman' dengan nilai '1'
-                document.cookie = 'c_pages=1; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/';
-
-                // Setelah itu, Anda dapat menyembunyikan preloader
-                hidePreloader();
-            }
-        </script>
-
         <div class="content-wrapper">
             <div class="card"></div>
-
             <?= $this->renderSection('content'); ?>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="logoutModalLabel">Konfirmasi Logout</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Apakah Anda yakin ingin logout?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <a href="<?= base_url('logout'); ?>" class="btn btn-primary">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Modal-->
-
-        <!-- /.content-wrapper -->
         <footer class="main-footer">
             <strong>Copyright &copy; 2023. <?= $perusahaan['nama_perusahaan']; ?>. </strong>
             All rights reserved.
@@ -108,13 +62,6 @@
                 <b>Version</b> 1
             </div>
         </footer>
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
-
     </div>
 
     <!-- jQuery -->
@@ -166,21 +113,8 @@
     <script src="<?= base_url('assets/plugins/select2/js/select2.full.min.js'); ?>"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
     <script>
         $(document).ready(function() {
-            <?php if (session()->getFlashdata('success')) : ?>
-                toastr.success('<?= session()->getFlashdata('success') ?>');
-            <?php endif; ?>
-
-            <?php if (session()->getFlashdata('error')) : ?>
-                toastr.error('<?= session()->getFlashdata('error') ?>');
-            <?php endif; ?>
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            // Inisialisasi tabel menggunakan DataTables
             var table = $("#tableAddPenjualan").DataTable({
                 paging: false,
                 lengthChange: true,
@@ -200,16 +134,14 @@
                 pageLength: 5,
             });
 
-            // Event listener untuk perubahan panjang tampilan
             $("#selectLength").on("change", function() {
-                // Mengatur panjang tampilan tabel sesuai dengan pilihan
                 table.page.len($(this).val()).draw();
             });
         });
     </script>
+
     <script>
         $(document).ready(function() {
-            // Inisialisasi tabel menggunakan DataTables 
             var table = $("#tablerifkkimaulana").DataTable({
                 paging: true,
                 lengthChange: true,
@@ -235,44 +167,26 @@
                 pageLength: 5,
             });
 
-            // Event listener untuk perubahan panjang tampilan
             $("#selectLength").on("change", function() {
-                // Mengatur panjang tampilan tabel sesuai dengan pilihan
                 table.page.len($(this).val()).draw();
             });
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
+
+            // Identifikasi plugin select2
             $('.select2').select2({
                 theme: 'bootstrap4'
             });
+
+            // Inisialisasi Notifikasi all pages from session
+            <?php if (session()->getFlashdata('success')) : ?>
+                toastr.success('<?= session()->getFlashdata('success') ?>');
+            <?php endif; ?>
+
+            <?php if (session()->getFlashdata('error')) : ?>
+                toastr.error('<?= session()->getFlashdata('error') ?>');
+            <?php endif; ?>
         });
     </script>
 
-    <script>
-        $(function() {
-            var barChartCanvas = $('#barChart').get(0).getContext('2d');
-            var barChartData = {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [{
-                    label: 'Penjualan Kredit',
-                    backgroundColor: 'rgba(60,141,188,0.9)',
-                    borderColor: 'rgba(60,141,188,0.8)',
-                    data: [28, 48, 40, 19, 86, 27, 90]
-                }, ]
-            };
-            var barChartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-            };
-            new Chart(barChartCanvas, {
-                type: 'bar',
-                data: barChartData,
-                options: barChartOptions
-            });
-        });
-    </script>
 </body>
 
 </html>

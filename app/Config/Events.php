@@ -44,7 +44,7 @@ Events::on('pre_system', function () {
 	}
 
 	$keranjangModel = new \App\Models\KeranjangModel();
-	$perusahaanModel = new \App\Models\AplikasiModel(); // Perbaikan: nama model menggunakan huruf kapital
+	$perusahaanModel = new \App\Models\AplikasiModel();
 	$label = $keranjangModel->where('user_id', session('user_id'))->countAllResults();
 	$perusahaan = $perusahaanModel->find(1);
 

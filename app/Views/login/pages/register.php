@@ -62,16 +62,13 @@
                             </label>
                         </div>
                     </div>
-
                     <div class="col-4">
                         <button type="submit" class="btn btn-primary btn-block">Register</button>
                     </div>
-
                 </div>
             </form>
             <a href="<?= base_url('login'); ?>" class="text-center">I already have a membership</a>
         </div>
-
     </div>
 </div>
 

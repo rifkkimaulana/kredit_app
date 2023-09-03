@@ -2,7 +2,6 @@
 <?= $this->section('content'); ?>
 
 <div class="login-box">
-
     <div class="login-logo">
         <a href="<?= base_url('/forgot-password'); ?>"><b><?= $perusahaan['nama_aplikasi']; ?></b></a>
     </div>
@@ -45,7 +44,6 @@
                 <a href="<?= base_url('register'); ?>" class="text-center">Register a new membership</a>
             </p>
         </div>
-
     </div>
 </div>
 

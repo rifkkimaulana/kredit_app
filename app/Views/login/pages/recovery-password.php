@@ -1,5 +1,6 @@
 <?= $this->extend('login/layout/template'); ?>
 <?= $this->section('content'); ?>
+
 <div class="login-box">
     <div class="login-logo">
         <a href="<?= base_url('/recovery/' . $token); ?>"><b><?= $perusahaan['nama_aplikasi']; ?></b></a>
@@ -23,7 +24,6 @@
 
             <form action="<?= base_url('recovery'); ?>" method="post">
                 <input type="hidden" class="form-control" name="token" value="<?= $token; ?>">
-
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" placeholder="Password" name="password" required>
                     <div class="input-group-append">
@@ -44,14 +44,12 @@
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary btn-block">Change password</button>
                     </div>
-
                 </div>
             </form>
             <p class="mt-3 mb-1">
                 <a href="<?= base_url('login'); ?>">Login</a>
             </p>
         </div>
-
     </div>
 </div>
 

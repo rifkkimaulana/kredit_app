@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UsersModel;
 
-class Home extends BaseController
+class Dashboard extends BaseController
 {
 	// Dashboard View
 	public function index()

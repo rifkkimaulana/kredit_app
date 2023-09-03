@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Dashboard');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -32,11 +32,6 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 //$routes->get('/', 'Home::index');
-
-$routes->get('laporan_penjualan', 'CommingSoon::index');
-$routes->get('pesanan', 'CommingSoon::index');
-$routes->get('tagihan', 'CommingSoon::index');
-$routes->get('bayar_angsuran', 'CommingSoon::index');
 
 // Pembayaran Tagihan
 $routes->get('pembayaran/tagihan', 'Pembayaran::index');
@@ -58,7 +53,6 @@ $routes->get('produk/kategori', 'Produk::kategori');
 $routes->post('produk/kategori/insert', 'Produk::kategori_postInsert');
 $routes->post('produk/kategori/update', 'Produk::kategori_postUpdate');
 $routes->get('produk/kategori/delete/(:num)', 'Produk::deleteKategori/$1');
-
 
 // Penjualan Barang
 $routes->get('penjualan/list_penjualan', 'Penjualan::index');
@@ -89,8 +83,11 @@ $routes->get('google/callback', 'Auth::googleAuth_callback');
 $routes->get('penjualan/statistik', 'StatistikPenjualan::index');
 
 // Dashboard Pages
-$routes->get('/', 'Home::index');
-$routes->get('dashboard', 'Home::index');
+$routes->get('/', 'Dashboard::index');
+$routes->get('dashboard', 'Dashboard::index');
+
+// End Session All
+$routes->get('logout', 'Dashboard::logout');
 
 // Pengaturan menu
 $routes->get('pengaturan/profile', 'Pengaturan::profile');
@@ -108,9 +105,6 @@ $routes->get('pengaturan/users/delete/(:num)', 'Pengaturan::deleteUsers/$1');
 
 $routes->get('pengaturan/whatsapp_api', 'Pengaturan::whatsappApiSetting');
 $routes->post('pengaturan/whatsapp_api/update', 'Pengaturan::whatsappApiSetting_update');
-
-// End Session All
-$routes->get('logout', 'Home::logout');
 
 /**
  * --------------------------------------------------------------------
