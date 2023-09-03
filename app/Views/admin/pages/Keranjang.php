@@ -59,7 +59,6 @@
                             <div class="form-group">
                                 <label for="pembeli">Pembeli</label>
                                 <select class="form-control select2" name="user_id">
-                                    <option value="">Pilih Pembeli</option>
                                     <?php foreach ($userList as $user) : ?>
                                         <?php if ($user['user_level'] === 'member') : ?>
                                             <option value="<?= $user['user_id'] ?>"><?= $user['user_nama'] ?></option>
@@ -72,8 +71,7 @@
                                 <label for="metode_pembayaran">Metode Pembayaran</label>
                                 <select class="form-control" id="metode_pembayaran" name="metode_pembayaran">
                                     <option value="tunai">Cash</option>
-                                    <option value="kredit">Kredit</option>
-                                    <option value="bank">Transfer Bank</option>
+                                    <option value="transfer_bank">Transfer Bank</option>
                                 </select>
                             </div>
                         </div>

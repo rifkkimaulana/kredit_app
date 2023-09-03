@@ -23,6 +23,11 @@ class KategoriProdukModel extends Model
         return $this->insert($data);
     }
 
+    public function updateKategori($id, $data)
+    {
+        $this->update($id, $data);
+    }
+
     public function deleteKategoriProduk($id)
     {
         $this->where('id', $id)->delete();

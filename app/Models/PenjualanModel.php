@@ -9,6 +9,7 @@ class PenjualanModel extends Model
     protected $table = 'tb_penjualan';
     protected $primaryKey = 'id';
     protected $allowedFields = [
+        'no_transaksi',
         'tanggal_penjualan',
         'id_users',
         'id_produk',
@@ -16,7 +17,8 @@ class PenjualanModel extends Model
         'harga_satuan',
         'total_harga',
         'metode_pembayaran',
-        'status'
+        'status',
+        'no_referensi'
     ];
 
     public function insertPenjualan($data)
@@ -27,5 +29,10 @@ class PenjualanModel extends Model
     public function deletePenjualan($id)
     {
         return $this->where('id', $id)->delete();
+    }
+
+    public function updatePenjualan($id, $data)
+    {
+        $this->update($id, $data);
     }
 }

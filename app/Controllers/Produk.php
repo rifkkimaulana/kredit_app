@@ -16,8 +16,6 @@ class Produk extends Controller
         }
         if (
             session('user_level') !== 'administrator'
-            && session('user_level') !== 'manager'
-            && session('user_level') !== 'member'
         ) {
             return redirect()->to('login');
         }
@@ -73,7 +71,7 @@ class Produk extends Controller
 
             $produkModel->insertProduk($data);
 
-            return redirect()->to(base_url('produk'))->with('success', 'Produk berhasil ditambahkan.');
+            return redirect()->to(base_url('pengaturan/produk'))->with('success', 'Produk berhasil ditambahkan.');
         }
     }
 
@@ -123,7 +121,7 @@ class Produk extends Controller
 
             $produkModel->updateProduk($id, $data);
 
-            return redirect()->to(base_url('produk'))->with('success', 'Produk berhasil diperbarui.');
+            return redirect()->to(base_url('pengaturan/produk'))->with('success', 'Produk berhasil diperbarui.');
         }
     }
 
@@ -155,8 +153,6 @@ class Produk extends Controller
         }
         if (
             session('user_level') !== 'administrator'
-            && session('user_level') !== 'manager'
-            && session('user_level') !== 'member'
         ) {
             return redirect()->to('login');
         }
@@ -201,6 +197,26 @@ class Produk extends Controller
         }
     }
 
+    public function kategori_postUpdate()
+    {
+        if ($this->request->getMethod() === 'post') {
+            $kategoriModel = new KategoriProdukModel();
+
+            $id = $this->request->getPost('id');
+            $nama_kategori = $this->request->getPost('nama_kategori');
+            $deskripsi = $this->request->getPost('deskripsi');
+
+            $kategoriData = [
+                'nama_kategori' => $nama_kategori,
+                'deskripsi' => $deskripsi
+            ];
+
+            $kategoriModel->updateKategori($id, $kategoriData);
+
+            return redirect()->to(base_url('produk/kategori'))->with('success', 'Kategori produk berhasil ditambahkan.');
+        }
+    }
+
     public function deleteKategori($id)
     {
         $kategoriModel = new KategoriProdukModel();
@@ -209,9 +225,13 @@ class Produk extends Controller
         if (!$kategori) {
             return redirect()->to(base_url('produk/kategori'))->with('error', 'Kategori tidak ditemukan.');
         }
-        // Delete produk dari database
-        $kategoriModel->deleteKategoriProduk($id);
 
-        return redirect()->to(base_url('produk/kategori'))->with('success', 'Kategori berhasil dihapus.');
+        try {
+            $kategoriModel->deleteKategoriProduk($id);
+
+            return redirect()->to(base_url('produk/kategori'))->with('success', 'Kategori berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->to(base_url('produk/kategori'))->with('error', 'Terjadi masalah saat menghapus kategori: ' . $e->getMessage());
+        }
     }
 }

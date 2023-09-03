@@ -42,15 +42,39 @@
 <body class="hold-transition sidebar-colapse layout-fixed">
     <div class="wrapper">
 
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="<?= base_url('assets/image/perusahaan/' . $perusahaan['logo']); ?>" alt="AdminLTELogo" height="60" width="60">
-        </div>
         <?= $this->include('admin/layout/navbar'); ?>
         <?= $this->include('admin/layout/sidebar'); ?>
 
+        <script>
+            // Fungsi untuk menghapus preloader
+            function hidePreloader() {
+                var preloader = document.getElementById('preloader');
+                if (preloader) {
+                    preloader.style.display = 'none';
+                }
+            }
+
+            // Cek apakah cookie 'save_halaman' sudah ada
+            var cookieName = 'c_pages';
+            var isPageSaved = (document.cookie.indexOf(cookieName) !== -1);
+
+            if (isPageSaved) {
+                hidePreloader();
+            }
+
+            // Set cookie 'save_halaman' jika belum ada
+            if (!isPageSaved) {
+                // Set cookie dengan nama 'save_halaman' dengan nilai '1'
+                document.cookie = 'c_pages=1; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/';
+
+                // Setelah itu, Anda dapat menyembunyikan preloader
+                hidePreloader();
+            }
+        </script>
+
         <div class="content-wrapper">
             <div class="card"></div>
+
             <?= $this->renderSection('content'); ?>
         </div>
 

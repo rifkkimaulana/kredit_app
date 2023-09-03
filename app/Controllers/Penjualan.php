@@ -188,6 +188,14 @@ class Penjualan extends Controller
                     $jumlah = $item['jumlah'];
                     $total_harga = $harga_satuan * $jumlah;
 
+                    $tanggal = date("Ymd");
+                    $waktu = date("His");
+                    $nomor_transaksi = $tanggal . $waktu;
+
+
+                    $karakter_acak = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 10);
+                    $nomor_referensi = $tanggal . $waktu . $karakter_acak;
+
                     $tanggal_penjualan = date('Y-m-d');
                     $data = [
                         'id_users' => $id_userpelanggan,
@@ -197,7 +205,9 @@ class Penjualan extends Controller
                         'total_harga' => $total_harga,
                         'metode_pembayaran' => $metode_pembayaran,
                         'status' => $status,
-                        'tanggal_penjualan' => $tanggal_penjualan
+                        'tanggal_penjualan' => $tanggal_penjualan,
+                        'no_transaksi' => $nomor_transaksi,
+                        'no_referensi' => $nomor_referensi
                     ];
 
                     $penjualanModel->insert($data);
@@ -211,6 +221,35 @@ class Penjualan extends Controller
                 session()->setFlashdata('error', 'Keranjang belanja kosong.');
                 return redirect()->to(base_url('penjualan'));
             }
+        }
+    }
+
+    public function verifikasi()
+    {
+        if ($this->request->getMethod() === 'post') {
+            $PenjualanModel = new PenjualanModel();
+            $produkModel = new ProdukModel();
+
+            $penjualan_id = $this->request->getPost('penjualan_id');
+            $produk_id = $this->request->getPost('produk_id');
+            $jumlah_beli = $this->request->getPost('jumlah_beli');
+            $stok_produk = $this->request->getPost('stok_produk');
+
+            $updateStok = $stok_produk - $jumlah_beli;
+
+            $dataPenjualan = [
+                'status' => 'Lunas',
+            ];
+
+            $dataProduk = [
+                'stok' => $updateStok
+            ];
+
+            $PenjualanModel->updatePenjualan($penjualan_id, $dataPenjualan);
+            $produkModel->updateProduk($produk_id, $dataProduk);
+
+            session()->setFlashdata('success', 'Transaksi ini berhasil diverifikasi.');
+            return redirect()->to(base_url('penjualan'));
         }
     }
 

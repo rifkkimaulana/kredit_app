@@ -1,7 +1,15 @@
 <!-- Main Sidebar Container -->
+<?php
+$current_uri = uri_string();
+$segments = explode('/', $current_uri);
+
+$segment1 = isset($segments[0]) ? $segments[0] : '';
+$segment2 = isset($segments[1]) ? $segments[1] : '';
+?>
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="<?= base_url('dashboard'); ?>" class="brand-link text-center">
+    <a href="<?= $segment1 === 'dashboard' ? 'javascript:void(0);' : base_url('dashboard'); ?>" class="brand-link text-center">
         <img src="<?= base_url('assets/image/perusahaan/' . $perusahaan['logo']); ?>" alt="<?= $perusahaan['nama_perusahaan'] ?>" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light"><b><?= $perusahaan['nama_aplikasi']; ?></b></span>
     </a>
@@ -18,20 +26,21 @@
                 <?php } ?>
             </div>
             <div class="info">
-                <a href="<?= base_url('profile'); ?>" class="d-block"><?= $user['user_nama']; ?></a>
+                <a href="<?= $segment2 === 'profile' ? 'javascript:void(0)' : base_url('pengaturan/profile'); ?>" class="d-block"><?= $user['user_nama']; ?></a>
             </div>
         </div>
 
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+            <ul class="nav nav-pills nav-sidebar flex-column nav-compact nav-child-indent nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="<?= base_url('dashboard'); ?>" class="nav-link <?= $title === 'Dashboard' ? 'active' : ''; ?>">
+                    <a href="<?= $segment1 === 'dashboard' ? 'javascript:void(0);' : base_url('dashboard'); ?>" class="nav-link <?= $segment1 === 'dashboard' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item <?= $title === 'Pengaturan' ? 'menu-open' : ''; ?>">
-                    <a href="<?= base_url('pengaturan'); ?>" class="nav-link <?= $title === 'Pengaturan' ? 'active' : ''; ?>">
+                <li class="nav-item <?= $segment1 === 'pengaturan' ? 'menu-open' : ''; ?>">
+                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'pengaturan' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>
                             Pengaturan
@@ -40,7 +49,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= base_url('profile'); ?>" class="nav-link <?= $title === 'Pengaturan Umum' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'profile' ? 'javascript:void(0)' : base_url('pengaturan/profile'); ?>" class="nav-link <?= $segment2 === 'profile' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Profile</p>
                             </a>
@@ -49,7 +58,7 @@
                     <?php if ($user['user_level'] === 'administrator') : ?>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= base_url('pengaturan'); ?>" class="nav-link <?= $title === 'Pengaturan Umum' ? 'active' : ''; ?>">
+                                <a href="<?= $segment2 === 'umum' ? 'javascript:void(0)' : base_url('pengaturan/umum'); ?>" class="nav-link <?= $segment2 === 'umum' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Pengaturan Umum</p>
                                 </a>
@@ -57,23 +66,21 @@
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= base_url('users'); ?>" class="nav-link <?= $title === 'Users' ? 'active' : ''; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
+                                <a href="<?= $segment2 === 'users' ? 'javascript:void(0)' : base_url('pengaturan/users'); ?>" class="nav-link <?= $segment2 === 'users' ? 'active' : ''; ?>"> <i class="far fa-circle nav-icon"></i>
                                     <p>Manajemen Users</p>
                                 </a>
                             </li>
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= base_url('setting/google_api'); ?>" class="nav-link <?= $title === 'Users' ? 'active' : ''; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Google Api Setting</p>
+                                <a href="<?= $segment2 === 'google_api' ? 'javascript:void(0)' : base_url('pengaturan/google_api'); ?>" class="nav-link <?= $segment2 === 'google_api' ? 'active' : ''; ?>"> <i class="far fa-circle nav-icon"></i>
+                                    <p>Google Api</p>
                                 </a>
                             </li>
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= base_url('whatsapp_api_setting'); ?>" class="nav-link <?= $title === 'Users' ? 'active' : ''; ?>">
+                                <a href="<?= $segment2 === 'whatsapp_api' ? 'javascript:void(0)' : base_url('pengaturan/whatsapp_api'); ?>" class="nav-link <?= $segment2 === 'whatsapp_api' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Whatsapp API</p>
                                 </a>
@@ -82,8 +89,8 @@
                     <?php endif; ?>
                 </li>
                 <?php if ($user['user_level'] === 'administrator') : ?>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item <?= $segment1 === 'produk' ? 'menu-open' : ''; ?>">
+                        <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'produk' ? 'active' : ''; ?>">
                             <i class="nav-icon fas fa-box"></i>
                             <p>
                                 Produk
@@ -92,13 +99,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= base_url('produk'); ?>" class="nav-link <?= $title === 'Produk' ? 'active' : ''; ?>">
+                                <a href="<?= $segment2 === 'list' ? 'javascript:void(0)' : base_url('produk/list'); ?>" class="nav-link <?= $segment2 === 'list' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Daftar Produk</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url('produk/kategori'); ?>" class="nav-link <?= $title === 'Produk' ? 'active' : ''; ?>">
+                                <a href="<?= $segment2 === 'kategori' ? 'javascript:void(0)' : base_url('produk/kategori'); ?>" class="nav-link <?= $segment2 === 'kategori' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Kategori Produk</p>
                                 </a>
@@ -107,8 +114,8 @@
                     </li>
                 <?php endif; ?>
                 <?php if ($user['user_level'] === 'administrator') : ?>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item <?= $segment1 === 'penjualan' ? 'menu-open' : ''; ?>">
+                        <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'penjualan' ? 'active' : ''; ?>">
                             <i class="nav-icon fas fa-shopping-cart"></i>
                             <p>
                                 Penjualan
@@ -117,13 +124,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= base_url('penjualan'); ?>" class="nav-link <?= $title === 'Penjualan' ? 'active' : ''; ?>">
+                                <a href="<?= $segment2 === 'list_penjualan' ? 'javascript:void(0)' : base_url('penjualan/list_penjualan'); ?>" class="nav-link <?= $segment2 === 'list_penjualan' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Daftar Penjualan</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url('statistik'); ?>" class="nav-link <?= $title === 'Penjualan' ? 'active' : ''; ?>">
+                                <a href="<?= $segment2 === 'statistik' ? 'javascript:void(0)' : base_url('penjualan/statistik'); ?>" class="nav-link <?= $segment2 === 'statistik' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Statistik Penjualan</p>
                                 </a>
@@ -131,8 +138,8 @@
                         </ul>
                     </li>
                 <?php endif; ?>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item <?= $segment1 === 'pembayaran' ? 'menu-open' : ''; ?>">
+                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'pembayaran' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-credit-card"></i>
                         <p>
                             Pembayaran
@@ -141,7 +148,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= base_url('pembayaran'); ?>" class="nav-link <?= $title === 'Pembayaran' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'tagihan' ? 'javascript:void(0)' : base_url('pembayaran/tagihan'); ?>" class="nav-link <?= $segment2 === 'tagihan' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pembayaran Tagihan</p>
                             </a>

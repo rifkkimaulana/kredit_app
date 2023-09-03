@@ -5,7 +5,7 @@
 <section class="content">
     <div class="container-fluid">
         <!-- Main row -->
-        <form role="form" method="post" action="<?= base_url('produk/kategori'); ?>" enctype="multipart/form-data">
+        <form role="form" method="post" action="<?= base_url('produk/kategori/update'); ?>" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
@@ -43,6 +43,59 @@
                                                     </a>
                                                 </td>
                                             </tr>
+
+                                            <!-- Modal Konfirmasi Delete -->
+                                            <div class="modal fade" id="deleteModal<?= $kategori['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Apakah Anda yakin ingin menghapus Kategori: <?= $kategori['nama_kategori'] ?>?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                            <a href="<?= base_url('produk/kategori/delete/' . $kategori['id']) ?>" class="btn btn-danger">Hapus</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Modal edit Produk -->
+                                            <div class="modal fade" id="editModal<?= $kategori['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="editModalLabel">Edit Produk</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form method="post" action="<?= base_url('produk/kategori/update') ?>" enctype="multipart/form-data">
+                                                            <div class="modal-body">
+                                                                <input type="hidden" class="form-control" name="id" value="<?= $kategori['id'] ?>">
+                                                                <div class="form-group">
+                                                                    <label for="nama_produk">Nama Kategori</label>
+                                                                    <input type="text" class="form-control" name="nama_kategori" value="<?= $kategori['nama_kategori'] ?>">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="deskripsi">Deskripsi</label>
+                                                                    <textarea class="form-control" name="deskripsi"><?= $kategori['deskripsi'] ?></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
@@ -56,7 +109,7 @@
 </section>
 <!-- /.content -->
 
-<!-- Modal Tambah Produk -->
+<!-- Modal Kategori Produk -->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -66,9 +119,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="<?= base_url('produk/kategori') ?>" enctype="multipart/form-data">
+            <form method="post" action="<?= base_url('produk/kategori/insert') ?>" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <!-- Form input untuk menambahkan data produk -->
                     <div class="form-group">
                         <label for="nama_produk">Nama Kategori</label>
                         <input type="text" class="form-control" id="nama_produk" name="nama_kategori">
@@ -86,61 +138,5 @@
         </div>
     </div>
 </div>
-
-
-<?php foreach ($kategoriProduk as $kategori) : ?>
-
-    <!-- Modal Konfirmasi Delete -->
-    <div class="modal fade" id="deleteModal<?= $kategori['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Apakah Anda yakin ingin menghapus Kategori: <?= $kategori['nama_kategori'] ?>?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <a href="<?= base_url('produk/kategori/delete/' . $kategori['id']) ?>" class="btn btn-danger">Hapus</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal edit Produk -->
-    <div class="modal fade" id="editModal<?= $kategori['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Produk</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form method="post" action="<?= base_url('kategori/edit') ?>" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="nama_produk">Nama Kategori</label>
-                            <input type="text" class="form-control" id="nama_produk" name="nama_produk" value="<?= $kategori['nama_kategori'] ?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="deskripsi">Deskripsi</label>
-                            <textarea class="form-control" id="deskripsi" name="deskripsi"><?= $kategori['deskripsi'] ?></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-<?php endforeach; ?>
 
 <?= $this->endSection(); ?>

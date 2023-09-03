@@ -5,7 +5,7 @@
 <section class="content">
     <div class="container-fluid">
         <!-- Main row -->
-        <form role="form" method="post" action="<?= base_url('setting/google_api'); ?>" enctype="multipart/form-data">
+        <form role="form" method="post" action="<?= base_url('pengaturan/google_api/update'); ?>" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">

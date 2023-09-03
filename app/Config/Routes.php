@@ -39,7 +39,7 @@ $routes->get('tagihan', 'CommingSoon::index');
 $routes->get('bayar_angsuran', 'CommingSoon::index');
 
 // Pembayaran Tagihan
-$routes->get('pembayaran', 'Pembayaran::index');
+$routes->get('pembayaran/tagihan', 'Pembayaran::index');
 $routes->post('pembayaran/tambah', 'Pembayaran::pembayaranInsert');
 $routes->get('pembayaran/konfirmasi/(:num)', 'Pembayaran::pembayaranKonfirmasi/$1');
 $routes->get('pembayaran/delete/(:num)', 'Pembayaran::delete/$1');
@@ -48,20 +48,22 @@ $routes->get('pembayaran/delete/(:num)', 'Pembayaran::delete/$1');
 $routes->get('log_aktivitas', 'LogAktifitas::index');
 
 // Produk Routes
-$routes->get('produk', 'Produk::index');
+$routes->get('produk/list', 'Produk::index');
 $routes->post('produk/tambah', 'Produk::produk_postInsert');
 $routes->post('produk/update', 'Produk::produk_postUpdate');
 $routes->get('produk/delete/(:num)', 'Produk::deleteProduk/$1');
 
-// Kategori Produk Routes
+// Produk Routes - kategori
 $routes->get('produk/kategori', 'Produk::kategori');
-$routes->post('produk/kategori', 'Produk::kategori_postInsert');
+$routes->post('produk/kategori/insert', 'Produk::kategori_postInsert');
+$routes->post('produk/kategori/update', 'Produk::kategori_postUpdate');
 $routes->get('produk/kategori/delete/(:num)', 'Produk::deleteKategori/$1');
 
 
 // Penjualan Barang
-$routes->get('penjualan', 'Penjualan::index');
+$routes->get('penjualan/list_penjualan', 'Penjualan::index');
 $routes->get('penjualan/hapus/(:num)', 'Penjualan::hapusPenjualan/$1');
+$routes->post('penjualan/verifikasi', 'Penjualan::verifikasi');
 
 // Penjualan For Keranjang Belanja
 $routes->post('keranjang', 'Penjualan::keranjang_addPost');
@@ -84,28 +86,31 @@ $routes->get('google', 'Auth::googleAuth');
 $routes->get('google/callback', 'Auth::googleAuth_callback');
 
 // Statistik Penjualan
-$routes->get('statistik', 'StatistikPenjualan::index');
+$routes->get('penjualan/statistik', 'StatistikPenjualan::index');
 
+// Dashboard Pages
 $routes->get('/', 'Home::index');
 $routes->get('dashboard', 'Home::index');
-$routes->get('setting/google_api', 'Home::settingApiGoogle');
-$routes->post('setting/google_api', 'Home::settingApiGoogle_post');
 
-$routes->get('profile', 'Home::profile');
-$routes->post('profile', 'Home::userProfile_postUpdate');
+// Pengaturan menu
+$routes->get('pengaturan/profile', 'Pengaturan::profile');
+$routes->post('pengaturan/profile_update', 'Pengaturan::profilePostUpdate');
 
-$routes->get('pengaturan', 'Home::pengaturan');
-$routes->post('pengaturan', 'Home::pengaturan_post');
-$routes->get('users', 'Home::users');
-$routes->post('users', 'Home::user_postUpdate');
-$routes->get('users/delete/(:num)', 'Home::deleteUsers/$1');
+$routes->get('pengaturan/google_api', 'Pengaturan::settingApiGoogle');
+$routes->post('pengaturan/google_api/update', 'Pengaturan::settingApiGoogle_post');
 
-$routes->get('whatsapp_api_setting', 'Home::whatsappApiSetting');
-$routes->post('whatsapp_api_setting', 'Home::whatsappApiSetting_update');
+$routes->get('pengaturan/umum', 'Pengaturan::pengaturan');
+$routes->post('pengaturan/umum/update', 'Pengaturan::pengaturanPostUpdate');
 
+$routes->get('pengaturan/users', 'Pengaturan::users');
+$routes->post('pengaturan/users/update', 'Pengaturan::user_postUpdate');
+$routes->get('pengaturan/users/delete/(:num)', 'Pengaturan::deleteUsers/$1');
+
+$routes->get('pengaturan/whatsapp_api', 'Pengaturan::whatsappApiSetting');
+$routes->post('pengaturan/whatsapp_api/update', 'Pengaturan::whatsappApiSetting_update');
+
+// End Session All
 $routes->get('logout', 'Home::logout');
-
-
 
 /**
  * --------------------------------------------------------------------

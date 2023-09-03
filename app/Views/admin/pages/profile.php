@@ -5,7 +5,7 @@
 <section class="content">
     <div class="container-fluid">
         <!-- Main row -->
-        <form role="form" method="post" action="<?= base_url('profile'); ?>" enctype="multipart/form-data">
+        <form role="form" method="post" action="<?= base_url('pengaturan/profile_update'); ?>" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-4">
                     <div class="card">

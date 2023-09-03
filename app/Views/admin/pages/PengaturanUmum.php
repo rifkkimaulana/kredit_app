@@ -5,13 +5,12 @@
 <section class="content">
     <div class="container-fluid">
         <!-- Main row -->
-        <form role="form" method="post" action="<?= base_url('pengaturan'); ?>" enctype="multipart/form-data">
+        <form role="form" method="post" action="<?= base_url('pengaturan/umum/update'); ?>" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Pengaturan Umum</h3>
-                            <button type="submit" class="btn btn-sm btn-primary float-right">Update</button>
                         </div>
                         <div class="card-body">
                             <input type="hidden" class="form-control" name="logoLama" value="<?= $perusahaan['logo']; ?>">
@@ -133,6 +132,9 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary float-right">Update</button>
                         </div>
                     </div>
                 </div>

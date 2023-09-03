@@ -37,7 +37,7 @@
                                             <tr>
                                                 <td class="text-center"><?= $no++; ?></td>
                                                 <td><?= $product['nama_produk'] ?></td>
-                                                <td><?= $product['deskripsi'] ?></td>
+                                                <td><?= substr($product['deskripsi'], 0, 50) ?></td>
                                                 <td class="text-center"><?= $product['kategori']['nama_kategori'] ?></td>
                                                 <td class="text-center"><?= 'Rp.' . ' ' . $product['harga'] ?></td>
                                                 <td class="text-center"><?= $product['stok'] ?></td>
