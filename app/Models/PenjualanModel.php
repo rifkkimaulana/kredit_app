@@ -21,6 +21,11 @@ class PenjualanModel extends Model
         'no_referensi'
     ];
 
+    public function getPenjualanById($id_users)
+    {
+        return $this->where('id_users', $id_users)->findAll();
+    }
+
     public function insertPenjualan($data)
     {
         return $this->insert($data);

@@ -59,6 +59,9 @@
                 <a href="<?= base_url('google'); ?>" class="btn btn-block btn-danger">
                     <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
                 </a>
+                <a href="<?= base_url('whatsapp'); ?>" class="btn btn-block btn-success">
+                    <i class="fab fa-whatsapp mr-2"></i> Sign in using Whatsapp
+                </a>
             </div>
 
             <p class="mb-1">

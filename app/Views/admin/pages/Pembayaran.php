@@ -10,13 +10,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title"><?= $title; ?></h3>
-                        <?php if (!empty($jumlah_bayar)) {
-                        ?> <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#pembayaranModal">
-                                Konfirmasi Pembayaran
-                            </button>
-                        <?php
-                        } ?>
-
+                        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#pembayaranModal">
+                            Konfirmasi Pembayaran
+                        </button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -155,7 +151,6 @@
 </section>
 <!-- /.content -->
 
-
 <!-- Modal Pembayaran Tagihan -->
 <div class="modal fade" id="pembayaranModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -166,50 +161,96 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="<?= base_url('pembayaran/tambah') ?>" enctype="multipart/form-data">
-                <div class="modal-body">
-                    <input type="hidden" class="form-control" name="user_id" value="<?= $user_id; ?>">
-                    <input type="hidden" class="form-control" name="kredit_id" value="<?= $kredit_id; ?>">
-                    <input type="hidden" class="form-control" name="status" value="Menunggu Konfirmasi">
-                    <div class="form-group">
-                        <label for="jenis_pembayaran">Jenis Pembayaran</label>
-                        <select class="form-control" name="jenis_pembayaran">
-                            <option value="Tunai">Pembayaran Tunai</option>
-                            <option value="Transfer">Pembayaran Transfer Bank</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="kategori_id">Nomor Kontrak</label>
-                        <select class="form-control" name="no_kontrak">
-                            <?php foreach ($kontrakList as $kredit) : ?>
-                                <option value="<?= $kredit['no_kontrak']; ?>"><?= $kredit['no_kontrak']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-
-                        <small>Silahkan pilih nomor kontrak sebelum melakukan konfirmasi pembayaran</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="harga">Jumlah Bayar</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Rp</span>
+            <?php if (!empty($total_bayar)) { ?>
+                <form method="post" action="<?= base_url('pembayaran/tambah') ?>" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" class="form-control" name="user_id" value="<?= $user_id; ?>">
+                        <input type="hidden" class="form-control" name="kredit_id" value="<?= $kredit_id; ?>">
+                        <input type="hidden" class="form-control" name="status" value="Menunggu Konfirmasi">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="jenis_pembayaran">Jenis Pembayaran</label>
+                                    <select class="form-control" name="jenis_pembayaran">
+                                        <option value="Transfer">Pembayaran Transfer Bank</option>
+                                        <?php if ($user['user_level'] === 'administrator') : ?>
+                                            <option value="Tunai">Pembayaran Tunai</option>
+                                        <?php endif; ?>
+                                    </select>
+                                </div>
                             </div>
-                            <input type="text" class="form-control" name="jumlah_bayar" value="<?= $total_bayar; ?>" readonly>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="kategori_id">Nomor Kontrak</label>
+                                    <select class="form-control" name="no_kontrak">
+                                        <?php foreach ($kontrakList as $kredit) : ?>
+                                            <option value="<?= $kredit['no_kontrak']; ?>"><?= $kredit['no_kontrak']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <small>Silahkan melakukan pembayaran dengan nominal tertera diatas</small>
+                        <div class="form-group">
+                            <label for="harga">Jumlah Bayar</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Rp</span>
+                                </div>
+                                <?php
+                                $total_bayar_formatted = number_format($total_bayar, 0, ',', '.');
+                                ?>
+                                <input type="text" class="form-control" name="jumlah_bayar" value="<?= $total_bayar_formatted; ?>" readonly>
+                            </div>
+                            <small>Silahkan melakukan pembayaran dengan nominal tertera diatas</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Silahkan Transfer Melalui Rekening Bank Dibawah.</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control text-center" value="<?= $perusahaan['bank1']; ?>" readonly>
+                                <input type="text" class="form-control text-center" id="nomorRekening1" value="<?= $perusahaan['no_rekening1']; ?>" readonly>
+                                <input type="text" class="form-control text-center" value="<?= $perusahaan['atas_nama1']; ?>" readonly>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-copy" id="copyIcon1"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control text-center" value="<?= $perusahaan['bank2']; ?>" readonly>
+                                <input type="text" class="form-control text-center" id="nomorRekening2" value="<?= $perusahaan['no_rekening2']; ?>" readonly>
+                                <input type="text" class="form-control text-center" value="<?= $perusahaan['atas_nama2']; ?>" readonly>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-copy" id="copyIcon2"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control text-center" value="<?= $perusahaan['bank3']; ?>" readonly>
+                                <input type="text" class="form-control text-center" id="nomorRekening3" value="<?= $perusahaan['no_rekening3']; ?>" readonly>
+                                <input type="text" class="form-control text-center" value="<?= $perusahaan['atas_nama3']; ?>" readonly>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-copy" id="copyIcon3"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gambar">Upload Bukti Transfer.</label>
+                            <input type="file" class="form-control-file" id="gambar" name="gambar" required>
+                            <small> Jika pembayaran melalui bank transfer silahkan upload bukti transfer.</small>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="gambar">Upload Bukti Transfer.</label>
-                        <input type="file" class="form-control-file" id="gambar" name="gambar" required>
-                        <small> Jika pembayaran melalui bank transfer silahkan upload bukti transfer.</small>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Kirim Konfirmasi</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Kirim Konfirmasi</button>
-                </div>
-            </form>
+                </form>
+            <?php } else { ?>
+                <div class="modal-body">
+                    Anda tidak dapat melakukan pembayaran, anda belum membeli barang dengan pembayaran cicilan!
+                </div><?php }; ?>
         </div>
     </div>
 </div>

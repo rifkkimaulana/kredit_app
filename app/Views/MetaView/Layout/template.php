@@ -47,16 +47,16 @@
             <img class="animation__shake" src="<?= base_url('assets/image/perusahaan/' . $perusahaan['logo']) ?>" alt="AdminLTELogo" height="60" width="60">
         </div>
 
-        <?= $this->include('admin/layout/navbar'); ?>
-        <?= $this->include('admin/layout/sidebar'); ?>
+        <?= $this->include('MetaView/layout/navbar'); ?>
+        <?= $this->include('MetaView/layout/sidebar'); ?>
 
         <div class="content-wrapper">
             <div class="card"></div>
-            <?= $this->renderSection('content'); ?>
+            <?= $this->renderSection('meta-content'); ?>
         </div>
 
         <footer class="main-footer">
-            <strong>Copyright &copy; 2023. <?= $perusahaan['nama_perusahaan']; ?>. </strong>
+            <strong>Copyright &copy; 2023. META RG Aplication Inc. </strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 1
@@ -113,112 +113,35 @@
     <script src="<?= base_url('assets/plugins/select2/js/select2.full.min.js'); ?>"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            var table = $("#tableAddPenjualan").DataTable({
-                paging: false,
-                lengthChange: true,
-                searching: true,
-                ordering: true,
-                info: true,
-                autoWidth: false,
-                language: {
-                    lengthMenu: "_MENU_",
-                    zeroRecords: "No data found",
-                    info: "",
-                    infoEmpty: "",
-                    infoFiltered: "",
-                    search: "Cari:",
-                },
-                lengthMenu: [5, 10],
-                pageLength: 5,
-            });
 
-            $("#selectLength").on("change", function() {
-                table.page.len($(this).val()).draw();
-            });
+    <script>
+        var table = $("#tablemeta_rg").DataTable({
+            paging: true,
+            lengthChange: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            autoWidth: false,
+            language: {
+                lengthMenu: "_MENU_",
+                zeroRecords: "No data found",
+                info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                infoEmpty: "Showing 0 to 0 of 0 entries",
+                infoFiltered: "(filtered from _MAX_ total entries)",
+                search: "Cari:",
+                paginate: {
+                    first: "Start",
+                    last: "End",
+                    next: "Next",
+                    previous: "Previous",
+                },
+            },
+            lengthMenu: [5, 10, 50, 100],
+            pageLength: 5,
         });
-    </script>
 
-    <script>
-        $(document).ready(function() {
-            var table = $("#tablerifkkimaulana").DataTable({
-                paging: true,
-                lengthChange: true,
-                searching: true,
-                ordering: true,
-                info: true,
-                autoWidth: false,
-                language: {
-                    lengthMenu: "_MENU_",
-                    zeroRecords: "No data found",
-                    info: "Showing _START_ to _END_ of _TOTAL_ entries",
-                    infoEmpty: "Showing 0 to 0 of 0 entries",
-                    infoFiltered: "(filtered from _MAX_ total entries)",
-                    search: "Cari:",
-                    paginate: {
-                        first: "Start",
-                        last: "End",
-                        next: "Next",
-                        previous: "Previous",
-                    },
-                },
-                lengthMenu: [5, 10, 50, 100],
-                pageLength: 5,
-            });
-
-            $("#selectLength").on("change", function() {
-                table.page.len($(this).val()).draw();
-            });
-
-            // Identifikasi plugin select2
-            $('.select2').select2({
-                theme: 'bootstrap4'
-            });
-
-            // Inisialisasi Notifikasi all pages from session
-            <?php if (session()->getFlashdata('success')) : ?>
-                toastr.success('<?= session()->getFlashdata('success') ?>');
-            <?php endif; ?>
-
-            <?php if (session()->getFlashdata('error')) : ?>
-                toastr.error('<?= session()->getFlashdata('error') ?>');
-            <?php endif; ?>
-
-            // Copy No Rekening
-            $("#copyIcon1").click(function() {
-                // Pilih teks dalam input
-                var copyText = document.getElementById("nomorRekening1");
-
-                // Salin teks ke clipboard
-                copyText.select();
-                document.execCommand("copy");
-
-                // Tampilkan pemberitahuan bahwa teks telah disalin
-                alert("Nomor rekening telah disalin: " + copyText.value);
-            });
-            $("#copyIcon2").click(function() {
-                // Pilih teks dalam input
-                var copyText = document.getElementById("nomorRekening2");
-
-                // Salin teks ke clipboard
-                copyText.select();
-                document.execCommand("copy");
-
-                // Tampilkan pemberitahuan bahwa teks telah disalin
-                alert("Nomor rekening telah disalin: " + copyText.value);
-            });
-            $("#copyIcon3").click(function() {
-                // Pilih teks dalam input
-                var copyText = document.getElementById("nomorRekening3");
-
-                // Salin teks ke clipboard
-                copyText.select();
-                document.execCommand("copy");
-
-                // Tampilkan pemberitahuan bahwa teks telah disalin
-                alert("Nomor rekening telah disalin: " + copyText.value);
-            });
+        $("#selectLength").on("change", function() {
+            table.page.len($(this).val()).draw();
         });
     </script>
 

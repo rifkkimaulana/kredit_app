@@ -56,19 +56,23 @@
                             <div class="form-group">
                                 <label for="pembeli">Pembeli</label>
                                 <select class="form-control select2" name="user_id">
-                                    <?php foreach ($userList as $user) : ?>
-                                        <?php if ($user['user_level'] === 'member') : ?>
-                                            <option value="<?= $user['user_id'] ?>"><?= $user['user_nama'] ?></option>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
+                                    <?php if ($user['user_level'] === 'administrator') { ?>
+                                        <?php foreach ($userList as $user) : ?>
+                                            <?php if ($user['user_level'] === 'member') : ?>
+                                                <option value="<?= $user['user_id'] ?>"><?= $user['user_nama'] ?></option>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    <?php } else { ?>
+                                        <option value="<?= $user['user_id'] ?>"><?= $user['user_nama'] ?></option>
+                                    <?php }; ?>
                                 </select>
 
                             </div>
                             <div class="form-group">
                                 <label for="metode_pembayaran">Metode Pembayaran</label>
                                 <select class="form-control" id="metode_pembayaran" name="metode_pembayaran">
-                                    <option value="tunai">Cash</option>
-                                    <option value="transfer_bank">Transfer Bank</option>
+                                    <option value="Tunai">Cash</option>
+                                    <option value="Transfer">Transfer Bank</option>
                                 </select>
                             </div>
                         </div>

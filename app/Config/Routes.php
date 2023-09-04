@@ -25,6 +25,27 @@ $routes->setAutoRoute(true);
 
 /**
  * --------------------------------------------------------------------
+ * Meta RG Aplication - Routes Configuration
+ * --------------------------------------------------------------------
+ */
+// Meta Panel
+$routes->group('meta', ['namespace' => 'App\Controllers\Meta_RG_Controller'], function ($routes) {
+
+	//Meta Dashboard
+	$routes->get('/', 'Dashboard::index');
+	$routes->get('dashboard', 'Dashboard::index');
+
+	// Meta Management Aplications
+	$routes->get('app_management', 'Aplication::index');
+	$routes->post('open/aplication', 'Aplication::sign_in');
+
+
+	$routes->get('user_management', 'Users::index');
+});
+
+
+/**
+ * --------------------------------------------------------------------
  * Route Definitions
  * --------------------------------------------------------------------
  */
@@ -55,7 +76,7 @@ $routes->post('produk/kategori/update', 'Produk::kategori_postUpdate');
 $routes->get('produk/kategori/delete/(:num)', 'Produk::deleteKategori/$1');
 
 // Penjualan Barang
-$routes->get('penjualan/list_penjualan', 'Penjualan::index');
+$routes->get('penjualan/list_order', 'Penjualan::index');
 $routes->get('penjualan/hapus/(:num)', 'Penjualan::hapusPenjualan/$1');
 $routes->post('penjualan/verifikasi', 'Penjualan::verifikasi');
 
@@ -72,6 +93,11 @@ $routes->get('forgot-password', 'Auth::forgot_password');
 $routes->post('forgot-password', 'Auth::forgot_password_post');
 $routes->get('recovery/(:segment)', 'Auth::recovery_view/$1');
 $routes->post('recovery', 'Auth::recovery_post');
+
+// Sign With Whatsapp Number only OTP Code
+$routes->get('whatsapp', 'Auth::signWhatsappNumber');
+$routes->post('whatsapp/send_otp', 'Auth::signWhatsappNumber_post');
+$routes->get('login/(:segment)', 'Auth::signWhatsappNumber_login/$1');
 
 $routes->get('register', 'Auth::register');
 $routes->post('register', 'Auth::register_post');

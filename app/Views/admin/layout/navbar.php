@@ -40,16 +40,14 @@
                 <i class="fas fa-expand-arrows-alt"></i>
             </a>
         </li>
-        <?php if ($user['user_level'] === 'administrator') : ?>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('keranjang') ?>">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="badge badge-warning navbar-badge">
-                        <?= $label; ?>
-                    </span>
-                </a>
-            </li>
-        <?php endif; ?>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('keranjang') ?>">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge badge-warning navbar-badge">
+                    <?= $label; ?>
+                </span>
+            </a>
+        </li>
 
         <li class="nav-item">
             <a class="nav-link" href="" role="button" data-toggle="modal" data-target="#logoutModal">

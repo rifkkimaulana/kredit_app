@@ -47,10 +47,17 @@ class Penjualan extends Controller
             $produkMap[$produk['id']] = $produk;
         }
 
+        if (session('user_level') !== 'administrator') {
+            $penjualanList = $penjualanModel->getPenjualanById(session('user_id'));
+        } else {
+            $penjualanList = $penjualanModel->findAll();
+        }
+
+
         $data = [
-            'title' => 'Manajemen Produk',
+            'title' => 'Daftar Transaksi',
             'products' => $produkList,
-            'penjualanList' => $penjualanModel->findAll(),
+            'penjualanList' => $penjualanList,
             'userList' => $userList,
             'user' => $user,
             'userMap' => $userMap,
@@ -80,10 +87,7 @@ class Penjualan extends Controller
             return redirect()->to('login');
         }
 
-        if (
-            session('user_level') !== 'administrator'
-            && session('user_level') !== 'manager'
-        ) {
+        if (session('user_level') !== 'administrator'  && session('user_level') !== 'member') {
             return redirect()->to('login');
         }
 
@@ -142,28 +146,32 @@ class Penjualan extends Controller
 
         foreach ($selectedProduk as $idProduk) {
             $idProduk = intval($idProduk);
-            if (isset($jumlahBeli[$idProduk]) && $jumlahBeli[$idProduk] > 0) {
-                $data = [
-                    'user_id' => session('user_id'),
-                    'produk_id' => $idProduk,
-                    'harga_satuan' => $produkMap[$idProduk]['harga'],
-                    'jumlah' => intval($jumlahBeli[$idProduk])
-                ];
+            if ($produkMap[$idProduk]['stok'] > 0) {
+                if (isset($jumlahBeli[$idProduk]) && $jumlahBeli[$idProduk] > 0) {
+                    $data = [
+                        'user_id' => session('user_id'),
+                        'produk_id' => $idProduk,
+                        'harga_satuan' => $produkMap[$idProduk]['harga'],
+                        'jumlah' => intval($jumlahBeli[$idProduk])
+                    ];
 
-                // Check if the same product_id is already in the keranjang
-                if (!$keranjangModel->isProductInKeranjang($data['produk_id'], session('user_id'))) {
-                    $keranjangModel->addToKeranjang($data);
+                    // Check if the same product_id is already in the keranjang
+                    if (!$keranjangModel->isProductInKeranjang($data['produk_id'], session('user_id'))) {
+                        $keranjangModel->addToKeranjang($data);
+                    } else {
+                        $session->setFlashdata('error', 'Produk sudah ada dalam keranjang.');
+                        return redirect()->to(base_url('keranjang'));
+                    }
                 } else {
-                    $session->setFlashdata('error', 'Produk sudah ada dalam keranjang.');
+                    $session->setFlashdata('error', 'Jumlah beli produk tidak valid.');
                     return redirect()->to(base_url('keranjang'));
                 }
             } else {
-                $session->setFlashdata('error', 'Jumlah beli produk tidak valid.');
+                $session->setFlashdata('error', 'Stok Produk Tidak Tersedia.');
                 return redirect()->to(base_url('keranjang'));
             }
         }
 
-        // Set success flash message
         $session->setFlashdata('success', 'Produk berhasil ditambahkan ke keranjang.');
         return redirect()->to(base_url('keranjang'));
     }
@@ -226,6 +234,21 @@ class Penjualan extends Controller
 
     public function verifikasi()
     {
+        if (!session('user_id')) {
+            return redirect()->to('login');
+        }
+
+        if (session('user_level') !== 'administrator') {
+            return redirect()->to('login');
+        }
+
+        $userModel = new UsersModel();
+        $user = $userModel->find(session('user_id'));
+
+        if (!$user) {
+            return redirect()->to('login');
+        }
+
         if ($this->request->getMethod() === 'post') {
             $PenjualanModel = new PenjualanModel();
             $produkModel = new ProdukModel();

@@ -30,10 +30,18 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email" name="email" required>
+                    <input type="text" class="form-control" placeholder="username for login account" name="user_username" required>
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="No Whatsapp use 62831-xxxx-xxxx" name="no_wa" required>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-phone"></span>
                         </div>
                     </div>
                 </div>

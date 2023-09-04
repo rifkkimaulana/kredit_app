@@ -16,10 +16,10 @@
                         <thead>
                             <tr>
                                 <th class="text-center" style="padding: 10px;">No</th>
-                                <th class="text-center" style="padding: 10px;">Tanggal Penjualan</th>
+                                <th class="text-center" style="padding: 10px;">Tanggal</th>
                                 <th class="text-center" style="padding: 10px;">Produk</th>
-                                <th class="text-center" style="padding: 10px;">Pelanggan</th>
-                                <th class="text-center" style="padding: 10px;">Metode Pembayaran</th>
+                                <th class="text-center" style="padding: 10px;">Cust.</th>
+                                <th class="text-center" style="padding: 10px;">M. Pembayaran</th>
                                 <th class="text-center" style="padding: 10px;">Total Harga</th>
                                 <th class="text-center" style="padding: 10px;">Status</th>
                                 <th class="text-center" style="padding: 10px;">Aksi</th>
@@ -38,16 +38,20 @@
                                     <td class="text-center"><?= 'Rp.' . number_format($penjualan['total_harga'], 2) ?></td>
                                     <td class="text-center"><?= $penjualan['status'] ?></td>
                                     <td class="text-center">
-                                        <?php if ($penjualan['status'] === 'pending') { ?>
-                                            <a data-toggle="modal" data-target="#verifikasiModal<?= $penjualan['id'] ?>" class="btn btn-success btn-sm">
-                                                <i class="fas fa-check"></i> Verifikasi
-                                            </a><?php } ?>
+                                        <?php if ($user['user_level'] === 'administrator') : ?>
+                                            <?php if ($penjualan['status'] === 'pending') { ?>
+                                                <a data-toggle="modal" data-target="#verifikasiModal<?= $penjualan['id'] ?>" class="btn btn-success btn-sm">
+                                                    <i class="fas fa-check"></i> Verifikasi
+                                                </a><?php } ?>
+                                        <?php endif; ?>
                                         <a data-toggle="modal" data-target="#detailModal<?= $penjualan['id'] ?>" class="btn btn-info btn-sm">
-                                            <i class="fas fa-eye"></i> Lihat Detail
+                                            <i class="fas fa-eye"></i> Detail
                                         </a>
-                                        <a data-toggle="modal" data-target="#hapusModal<?= $penjualan['id'] ?>" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash"></i> Hapus
-                                        </a>
+                                        <?php if ($user['user_level'] === 'administrator') : ?>
+                                            <a data-toggle="modal" data-target="#hapusModal<?= $penjualan['id'] ?>" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash"></i> Hapus
+                                            </a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

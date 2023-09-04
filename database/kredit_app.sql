@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2023 at 01:41 PM
+-- Generation Time: Sep 04, 2023 at 12:17 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `app_kredit`
+-- Database: `kredit_app`
 --
 
 -- --------------------------------------------------------
@@ -46,15 +46,16 @@ CREATE TABLE `tb_appsetting` (
   `atas_nama3` varchar(50) NOT NULL,
   `no_rekening1` varchar(50) NOT NULL,
   `no_rekening2` varchar(50) NOT NULL,
-  `no_rekening3` varchar(50) NOT NULL
+  `no_rekening3` varchar(50) NOT NULL,
+  `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_appsetting`
 --
 
-INSERT INTO `tb_appsetting` (`id`, `nama_aplikasi`, `nama_perusahaan`, `alamat1`, `alamat2`, `kode_pos`, `email`, `telpon`, `logo`, `bank1`, `bank2`, `bank3`, `atas_nama1`, `atas_nama2`, `atas_nama3`, `no_rekening1`, `no_rekening2`, `no_rekening3`) VALUES
-(1, 'RG PRODUCTION', 'CV. MITRA MANDIRI SKM', 'Darmaraja', 'Sumedang', '45372', 'rifkkimaulana@gmail.com', '083130649979', '1693495288_f60c98d12ef86f8e8c24.png', 'Bank Mandiri', 'Bank Mandiri', 'LINK AJA', 'RIFKI MAULANA', 'RUKMANA', 'RIFKI MAULANA', '1310016635064', '1310016161319', '083130649979');
+INSERT INTO `tb_appsetting` (`id`, `nama_aplikasi`, `nama_perusahaan`, `alamat1`, `alamat2`, `kode_pos`, `email`, `telpon`, `logo`, `bank1`, `bank2`, `bank3`, `atas_nama1`, `atas_nama2`, `atas_nama3`, `no_rekening1`, `no_rekening2`, `no_rekening3`, `keterangan`) VALUES
+(1, 'RG PRODUCTION', 'CV. MITRA MANDIRI SKM', 'Darmaraja', 'Sumedang', '45372', 'rifkkimaulana@gmail.com', '083130649979', '1693495288_f60c98d12ef86f8e8c24.png', 'Bank Mandiri', 'Bank Mandiri', 'LINK AJA', 'RIFKI MAULANA', 'RUKMANA', 'RIFKI MAULANA', '1310016635064', '1310016161319', '083130649979', 'Aplikasi Kredit Barang');
 
 -- --------------------------------------------------------
 
@@ -111,6 +112,14 @@ CREATE TABLE `tb_keranjang` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_keranjang`
+--
+
+INSERT INTO `tb_keranjang` (`id`, `user_id`, `produk_id`, `harga_satuan`, `jumlah`, `created_at`, `updated_at`) VALUES
+(4, 9, 10, '20000.00', 1, '2023-09-04 06:34:18', '2023-09-04 06:34:18'),
+(5, 14, 10, '20000.00', 1, '2023-09-04 06:39:43', '2023-09-04 06:39:43');
 
 -- --------------------------------------------------------
 
@@ -198,7 +207,11 @@ INSERT INTO `tb_penjualan` (`id`, `no_transaksi`, `tanggal_penjualan`, `id_users
 (5, '', '2023-09-03', 9, 10, 1, '20000.00', '20000.00', 'tunai', 'Lunas', '', '2023-09-03 08:08:02', '2023-09-03 08:08:33'),
 (6, '', '2023-09-03', 9, 10, 1, '20000.00', '20000.00', 'transfer_bank', 'Lunas', '', '2023-09-03 08:11:54', '2023-09-03 08:14:37'),
 (7, '', '2023-09-03', 9, 10, 2, '20000.00', '40000.00', 'tunai', 'Lunas', '', '2023-09-03 08:15:29', '2023-09-03 08:15:38'),
-(8, '20230903032009', '2023-09-03', 9, 10, 2, '20000.00', '40000.00', 'transfer_bank', 'Lunas', '2023090303200980IEO4', '2023-09-03 08:20:09', '2023-09-03 08:23:27');
+(8, '20230903032009', '2023-09-03', 9, 10, 2, '20000.00', '40000.00', 'transfer_bank', 'Lunas', '2023090303200980IEO4', '2023-09-03 08:20:09', '2023-09-03 08:23:27'),
+(9, '20230904000010', '2023-09-04', 9, 10, 1, '20000.00', '20000.00', 'transfer_bank', 'Lunas', '20230904000010Z52NSJ', '2023-09-04 05:00:10', '2023-09-04 05:19:14'),
+(10, '20230904004008', '2023-09-04', 12, 10, 1, '20000.00', '20000.00', 'Transfer', 'pending', '2023090400400816UMAS', '2023-09-04 05:40:08', '2023-09-04 05:40:08'),
+(11, '20230904021622', '2023-09-04', 9, 10, 1, '20000.00', '20000.00', 'Tunai', 'pending', '20230904021622WCEZQY', '2023-09-04 07:16:22', '2023-09-04 07:16:22'),
+(13, '20230904023627', '2023-09-04', 9, 10, 1, '20000.00', '20000.00', 'Tunai', 'Lunas', '202309040236271F3MYN', '2023-09-04 07:36:27', '2023-09-04 07:37:31');
 
 -- --------------------------------------------------------
 
@@ -223,7 +236,7 @@ CREATE TABLE `tb_produk` (
 --
 
 INSERT INTO `tb_produk` (`id`, `nama_produk`, `deskripsi`, `harga`, `stok`, `gambar`, `kategori_id`, `created_at`, `updated_at`) VALUES
-(10, 'Paket Mendak Studio', 'Paket Mendak Studio', '20000.00', 1, '1693720748_5e345c6609ad983083bb.jpg', 4, '2023-09-03 05:59:08', '2023-09-03 08:23:27');
+(10, 'Paket Mendak Studio', 'Paket Mendak Studio', '20000.00', 1, '1693720748_5e345c6609ad983083bb.jpg', 4, '2023-09-03 05:59:08', '2023-09-04 07:37:31');
 
 -- --------------------------------------------------------
 
@@ -243,6 +256,7 @@ CREATE TABLE `tb_users` (
   `reset_token` varchar(100) NOT NULL,
   `reset_id` varchar(100) NOT NULL,
   `keterangan` text NOT NULL,
+  `app_id` int(11) NOT NULL,
   `country` varchar(50) NOT NULL,
   `facebook` varchar(50) NOT NULL,
   `tweeter` varchar(50) NOT NULL,
@@ -253,9 +267,13 @@ CREATE TABLE `tb_users` (
 -- Dumping data for table `tb_users`
 --
 
-INSERT INTO `tb_users` (`user_id`, `user_nama`, `user_username`, `user_password`, `user_foto`, `user_level`, `email`, `no_wa`, `reset_token`, `reset_id`, `keterangan`, `country`, `facebook`, `tweeter`, `instagram`) VALUES
-(4, 'Rifki Maulana', 'admin', '$2y$10$FWIR7MpBvlYjO.ocx1NZI.iFgb68KxmNWRxYGarVCbQD9kzr9LLC.', '', 'administrator', 'rifkkimaulana@gmail.com', '083130649979', '255195ff9863afc25f017044da4ffa68', '4ada0148-a11a-4240-8c4b-d04c54e0ba6b', '-', 'Indonesia', '-', '-', '-'),
-(9, 'asd', '', '$2y$10$9S3dY1DTAt/6v6XG9FwIv.zWnKM4wjysuvwzNAfisTv3pw.VNL.rO', NULL, 'member', 'asd@asd.asd', '', '', '', '', '', '', '', '');
+INSERT INTO `tb_users` (`user_id`, `user_nama`, `user_username`, `user_password`, `user_foto`, `user_level`, `email`, `no_wa`, `reset_token`, `reset_id`, `keterangan`, `app_id`, `country`, `facebook`, `tweeter`, `instagram`) VALUES
+(4, 'Rifki Maulana', 'admin', '$2y$10$FWIR7MpBvlYjO.ocx1NZI.iFgb68KxmNWRxYGarVCbQD9kzr9LLC.', '', 'administrator', 'rifkkimaulana@gmail.com', '083130649979', '', '', '-', 0, 'Indonesia', '-', '-', '-'),
+(9, 'asd', '', '$2y$10$9S3dY1DTAt/6v6XG9FwIv.zWnKM4wjysuvwzNAfisTv3pw.VNL.rO', NULL, 'member', 'asd@asd.asd', '', '', '', '', 0, '', '', '', ''),
+(12, 'kiki', 'kiki', '$2y$10$17MErUlwytGwpynH6CIymuZbD0IWxn2ibJEQ8uT9rNMEOSnaaCFX.', NULL, 'member', 'rifki@gmail.com', '', '', '', '', 0, '', '', '', ''),
+(13, 'asdf', 'asdf', '$2y$10$vXGr/Qx0d3baMzvvy1mg5.AL41V4euB/gSUBztpXvfKrXT1vOlRWi', NULL, 'member', '', '628989858782', '', '', '', 0, '', '', '', ''),
+(14, 'asdfg', 'asdfg', '$2y$10$oEiNNyv49rZ3zlWCO8xVG.3iP/HwoD2jVvJzTXq.naG0dvxp9PtGe', NULL, 'member', '64f56fe9861c1_contoh@emailkamu.com', '082118844992', '', '', '', 0, '', '', '', ''),
+(15, '', 'username_4e1094948e', '', NULL, '', '5f3b7c12d3sample@gmail.com', '088288284654', '', '', '', 0, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -380,7 +398,7 @@ ALTER TABLE `tb_kategoriproduk`
 -- AUTO_INCREMENT for table `tb_keranjang`
 --
 ALTER TABLE `tb_keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tb_kredit`
@@ -404,7 +422,7 @@ ALTER TABLE `tb_pembayaran`
 -- AUTO_INCREMENT for table `tb_penjualan`
 --
 ALTER TABLE `tb_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tb_produk`
@@ -416,7 +434,7 @@ ALTER TABLE `tb_produk`
 -- AUTO_INCREMENT for table `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tb_wablas`

@@ -141,7 +141,8 @@ class Auth extends BaseController
     public function register_post()
     {
         $userNama = $this->request->getPost('user_nama');
-        $email = $this->request->getPost('email');
+        $user_username = $this->request->getPost('user_username');
+        $no_wa = $this->request->getPost('no_wa');
         $password = $this->request->getPost('password');
         $confirmPassword = $this->request->getPost('confirm-password');
 
@@ -155,13 +156,17 @@ class Auth extends BaseController
 
         $usersModel = new UsersModel();
 
-        if ($usersModel->where('email', $email)->countAllResults() > 0) {
-            session()->setFlashdata('error', 'Email is already registered.');
+        if ($usersModel->where('user_username', $user_username)->countAllResults() > 0) {
+            session()->setFlashdata('error', 'Username is already registered.');
             return redirect()->to('register');
         }
+
+        $email = uniqid() . '_contoh@emailkamu.com';
         $userData = [
             'user_nama' => $userNama,
+            'user_username' => $user_username,
             'email' => $email,
+            'no_wa' => $no_wa,
             'user_password' => $hashedPassword,
             'user_level' => 'member'
         ];
@@ -279,6 +284,66 @@ class Auth extends BaseController
         $result = file_get_contents($url);
         $response = json_decode($result, true);
         return $response;
+    }
+
+    // Sign With Whatsapp Accound
+    // Index form whatsapp number input
+
+    public function signWhatsappNumber()
+    {
+        $data = [
+            'title' => 'Recovery Password'
+        ];
+        return view('login/pages/WhatsappLogin', $data);
+    }
+
+    public function signWhatsappNumber_post()
+    {
+        $no_wa = $this->request->getPost('no_wa');
+
+        $usersModel = new UsersModel();
+        $user = $usersModel->where('no_wa', $no_wa)->first();
+
+        if ($user) {
+
+            $noWa = $user['no_wa'];
+            $user_id = $user['user_id'];
+
+            $token = bin2hex(random_bytes(16));
+            $usersModel->loginToken($user_id, $token, $noWa);
+
+            session()->setFlashdata('success', 'Silahkan cek link untuk login anda di whatsapp.');
+            return redirect()->to(base_url('login'));
+        } else {
+            session()->setFlashdata('error', 'Nomor yang anda masukan belum terdaftar.');
+            return redirect()->to(base_url('whatsapp'));
+        }
+    }
+
+    public function signWhatsappNumber_login($token)
+    {
+        $usersModel = new UsersModel();
+        $user = $usersModel->where('reset_token', $token)->first();
+
+        if ($user) {
+            $id = $user['user_id'];
+
+            session()->set('user_id', $user['user_id']);
+            session()->set('user_level', $user['user_level']);
+
+            $data = [
+                'reset_id' => '',
+                'reset_token' => ''
+            ];
+
+            $usersModel->updateUser($id, $data);
+
+            session()->setFlashdata('success', 'berhasil login menggunakan whatsapp.');
+            return redirect()->to(base_url('dashboard'));
+        } else {
+            session()->setFlashdata('error', 'Token Expired.');
+            return redirect()->to(base_url('whatsapp'));
+        }
     }
 
     //--------------------------------------------------------------------
