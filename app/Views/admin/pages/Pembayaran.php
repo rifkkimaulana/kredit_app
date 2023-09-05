@@ -1,10 +1,8 @@
 <?= $this->extend('admin/layout/template'); ?>
 <?= $this->section('content'); ?>
 
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <!-- Main row -->
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -20,10 +18,11 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center" style="padding: 10px;">No</th>
+                                        <th class="text-center" style="padding: 10px;">Status</th>
                                         <th class="text-center" style="padding: 10px;">Nomor Kontrak</th>
                                         <th class="text-center" style="padding: 10px;">Jumlah Pembayaran</th>
                                         <th class="text-center" style="padding: 10px;">Jenis Pembayaran</th>
-                                        <th class="text-center" style="padding: 10px;">Status Pembayaran</th>
+                                        <th class="text-center" style="padding: 10px;">Tanggal</th>ran
                                         <th class="text-center" style="padding: 10px;">Aksi</th>
                                     </tr>
                                 </thead>
@@ -33,19 +32,60 @@
                                     foreach ($pembayaran as $pembayaran) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++ ?></td>
-                                            <td class="text-center"><?= $pembayaran['no_kontrak'] ?></td>
-                                            <td class="text-center"><?= $pembayaran['jumlah_pembayaran'] ?></td>
-                                            <td class="text-center"><?= $pembayaran['jenis_pembayaran'] ?></td>
-                                            <td class="text-center"><?= $pembayaran['status'] ?></td>
                                             <td class="text-center">
+                                                <?php if ($pembayaran['status'] === 'Berhasil Diterima') { ?>
+                                                    <a class="btn btn-success btn-sm">
+                                                        <?= $pembayaran['status']; ?>
+                                                    </a>
+                                                <?php } else { ?>
+                                                    <a class="btn btn-warning btn-sm">
+                                                        <?= $pembayaran['status']; ?>
+                                                    </a>
+                                                <?php } ?>
+                                            </td>
+                                            <td class="text-center"><?= $pembayaran['no_kontrak'] ?></td>
+                                            <td class="text-center">Rp. <?= number_format($pembayaran['jumlah_pembayaran'], 0, ',', '.'); ?></td>
+                                            <td class="text-center"><?= $pembayaran['jenis_pembayaran'] ?></td>
+                                            <td class="text-center"><?= $pembayaran['created_at'] ?></td>
+                                            <td class="text-center">
+                                                <?php if ($user['user_level'] === 'administrator') :
+                                                    if ($pembayaran['status'] === 'Menunggu Konfirmasi') { ?>
+                                                        <a data-toggle="modal" data-target="#verifikasiModal<?= $pembayaran['id'] ?>" class="btn btn-success btn-sm">
+                                                            <i class="fas fa-check"></i> Verifikasi</a>
+                                                    <?php } ?>
+                                                <?php endif; ?>
                                                 <a data-toggle="modal" data-target="#detailPembayaran<?= $pembayaran['id'] ?>" class="btn btn-primary btn-sm">
                                                     <i class="fas fa-eye"></i> Detail
                                                 </a>
-                                                <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal<?= $pembayaran['id'] ?>">
-                                                    <i class="far fa-trash-alt"></i> Delete
-                                                </a>
+                                                <?php if ($user['user_level'] === 'administrator') : ?>
+                                                    <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal<?= $pembayaran['id'] ?>">
+                                                        <i class="far fa-trash-alt"></i> Delete
+                                                    </a>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
+
+                                        <!-- Modal Verifikasi -->
+                                        <div class="modal fade" id="verifikasiModal<?= $pembayaran['id'] ?>" tabindex="-1" aria-labelledby="hapusModalLabel<?= $pembayaran['id'] ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="hapusModalLabel<?= $pembayaran['id'] ?>">Konfirmasi Penerimaan Pembayaran</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Apakah Anda yakin ingin memverifikasi pembayaran dengan NO. Kontrak : <b> <?= $pembayaran['no_kontrak'] ?> </b>?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                        <a href="<?= base_url('paylater/konfirmasi/' . $pembayaran['id']) ?>" class="btn btn-success">Terima Pembayaran</a>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <!-- Modal Konfirmasi Delete -->
                                         <div class="modal fade" id="deleteModal<?= $pembayaran['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -66,7 +106,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                        <a href="<?= base_url('pembayaran/delete/' . $pembayaran['id']) ?>" class="btn btn-danger">Hapus</a>
+                                                        <a href="<?= base_url('paylater/delete/' . $pembayaran['id']) ?>" class="btn btn-danger">Hapus</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -99,7 +139,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Total Pembayaran</label>
-                                                            <input type="text" class="form-control" value="<?= $pembayaran['jumlah_pembayaran'] ?>" readonly>
+                                                            <input type="text" class="form-control" value="Rp. <?= number_format($pembayaran['jumlah_pembayaran'], 0, ',', '.'); ?>" readonly>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-6">
@@ -122,16 +162,7 @@
                                                                     <img src="<?= base_url('assets/image/pembayaran/' .  $pembayaran['bukti_transfer']) ?>" alt="Bukti Pembayaran" class="img-fluid">
                                                                 </div>
                                                             </div>
-                                                            <?php if ($user['user_level'] === 'administrator') : ?>
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>Konfirmasi Pembayaran</label>
-                                                                        <a href="<?= base_url('pembayaran/konfirmasi/' . $pembayaran['id']) ?>" class="btn btn-success btn-sm">
-                                                                            Submit
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            <?php endif; ?>
+
                                                         </div>
                                                         <hr>
                                                         <small> No. Referensi Bukti Pembayaran : <?= $pembayaran['no_referensi'] ?></small>
@@ -162,7 +193,7 @@
                 </button>
             </div>
             <?php if (!empty($total_bayar)) { ?>
-                <form method="post" action="<?= base_url('pembayaran/tambah') ?>" enctype="multipart/form-data">
+                <form method="post" action="<?= base_url('paylater/tambah') ?>" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" class="form-control" name="user_id" value="<?= $user_id; ?>">
                         <input type="hidden" class="form-control" name="kredit_id" value="<?= $kredit_id; ?>">
@@ -199,7 +230,8 @@
                                 <?php
                                 $total_bayar_formatted = number_format($total_bayar, 0, ',', '.');
                                 ?>
-                                <input type="text" class="form-control" name="jumlah_bayar" value="<?= $total_bayar_formatted; ?>" readonly>
+                                <input type="hidden" name="jumlah_bayar" value="<?= $total_bayar; ?>" class="form-control">
+                                <input type="text" class="form-control" value="<?= $total_bayar_formatted; ?>" readonly>
                             </div>
                             <small>Silahkan melakukan pembayaran dengan nominal tertera diatas</small>
                         </div>

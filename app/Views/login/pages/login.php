@@ -2,7 +2,7 @@
 <?= $this->section('content'); ?>
 <div class="login-box">
     <div class="login-logo">
-        <a href="<?= base_url('login'); ?>"><b><?= $perusahaan['nama_aplikasi']; ?></b></a>
+        <a href="<?= base_url('login'); ?>"> </a>
     </div>
 
     <div class="card">
@@ -56,7 +56,7 @@
 
             <div class="social-auth-links text-center mb-3">
                 <p>- OR -</p>
-                <a href="<?= base_url('google'); ?>" class="btn btn-block btn-danger">
+                <a href="<?= base_url('google'); ?>" class="btn btn-block btn-danger" target="_blank">
                     <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
                 </a>
                 <a href="<?= base_url('whatsapp'); ?>" class="btn btn-block btn-success">

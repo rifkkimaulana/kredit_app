@@ -44,9 +44,15 @@ Events::on('pre_system', function () {
 	}
 
 	$keranjangModel = new \App\Models\KeranjangModel();
-	$perusahaanModel = new \App\Models\AplikasiModel();
 	$label = $keranjangModel->where('user_id', session('user_id'))->countAllResults();
-	$perusahaan = $perusahaanModel->find(1);
+
+	$perusahaanModel = new \App\Models\AplikasiModel();
+
+	if (!empty(session('AplicationId'))) {
+		$perusahaan = $perusahaanModel->find(session('AplicationId'));
+	} else {
+		$perusahaan = $perusahaanModel->find(1);
+	}
 
 	\Config\Services::renderer()->setData([
 		'label' => $label,

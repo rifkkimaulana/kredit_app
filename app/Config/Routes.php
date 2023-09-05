@@ -55,10 +55,11 @@ $routes->group('meta', ['namespace' => 'App\Controllers\Meta_RG_Controller'], fu
 //$routes->get('/', 'Home::index');
 
 // Pembayaran Tagihan
-$routes->get('pembayaran/tagihan', 'Pembayaran::index');
-$routes->post('pembayaran/tambah', 'Pembayaran::pembayaranInsert');
-$routes->get('pembayaran/konfirmasi/(:num)', 'Pembayaran::pembayaranKonfirmasi/$1');
-$routes->get('pembayaran/delete/(:num)', 'Pembayaran::delete/$1');
+$routes->get('paylater/tagihan', 'PayLater::index');
+$routes->get('paylater/kontrak', 'PayLater::KontrakView');
+$routes->post('paylater/tambah', 'PayLater::pembayaranInsert');
+$routes->get('paylater/konfirmasi/(:num)', 'PayLater::pembayaranKonfirmasi/$1');
+$routes->get('paylater/delete/(:num)', 'PayLater::delete/$1');
 
 // Log Aktifitas User
 $routes->get('log_aktivitas', 'LogAktifitas::index');

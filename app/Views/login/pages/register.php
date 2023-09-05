@@ -3,7 +3,7 @@
 
 <div class="register-box">
     <div class="register-logo">
-        <a href="<?= base_url('register'); ?>"><b><?= $perusahaan['nama_aplikasi']; ?></b></a>
+        <a href="<?= base_url('register'); ?>"> </a>
     </div>
     <div class="card">
         <div class="card-body register-card-body">

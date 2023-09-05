@@ -21,7 +21,7 @@ $segment2 = isset($segments[2]) ? $segments[2] : '';
                 <?php } ?>
             </div>
             <div class="info">
-                <a href="<?= $segment2 === 'profile' ? 'javascript:void(0)' : base_url('pengaturan/profile'); ?>" class="d-block"><?= $user['user_nama']; ?></a>
+                <a href="<?= $segment1 === 'app_management' ? 'javascript:void(0);' : base_url('meta/app_management'); ?>" class="d-block"><?= $user['user_nama']; ?></a>
             </div>
         </div>
 

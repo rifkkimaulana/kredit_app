@@ -10,19 +10,35 @@ class Auth extends BaseController
     public function index()
     {
         if (session()->has('user_id')) {
-            return redirect()->to('dashboard');
+            $userLevel = session('user_level');
+
+            if ($userLevel === 'administrator') {
+                return redirect()->to(base_url('meta/dashboard'));
+            } else {
+                return redirect()->to(base_url('dashboard'));
+            }
         }
 
         $data = [
-            'title' => 'Login'
+            'title' => 'Sign In Start Session'
         ];
         return view('login/pages/login', $data);
     }
 
     public function register()
     {
+        if (session()->has('user_id')) {
+            $userLevel = session('user_level');
+
+            if ($userLevel === 'administrator') {
+                return redirect()->to(base_url('meta/dashboard'));
+            } else {
+                return redirect()->to(base_url('dashboard'));
+            }
+        }
+
         $data = [
-            'title' => 'Tambah Akun',
+            'title' => 'Register User for Login',
         ];
         return view('login/pages/register', $data);
     }
@@ -53,17 +69,30 @@ class Auth extends BaseController
                 $this->response->setCookie('remember_me', $cookieValue, 3600 * 24 * 30);
             }
 
-            return redirect()->to('dashboard');
+            // Cek Level User Untuk Pengalihan Halaman
+            $userLevel = session('user_level');
+
+            if ($userLevel === 'administrator') {
+                return redirect()->to(base_url('meta/dashboard'));
+            } else {
+                return redirect()->to(base_url('dashboard'));
+            }
         } else {
             session()->setFlashdata('error', 'Kredensial tidak valid. Silakan coba lagi.');
-            return redirect()->to('login');
+            return redirect()->to(base_url('login'));
         }
     }
 
     public function forgot_password()
     {
-        if (session('user_id')) {
-            return redirect()->to('admin');
+        if (session()->has('user_id')) {
+            $userLevel = session('user_level');
+
+            if ($userLevel === 'administrator') {
+                return redirect()->to(base_url('meta/dashboard'));
+            } else {
+                return redirect()->to(base_url('dashboard'));
+            }
         }
 
         $data = [
@@ -76,7 +105,6 @@ class Auth extends BaseController
     {
         $email = $this->request->getPost('email');
 
-        // Cek apakah email ada dalam database
         $usersModel = new UsersModel();
         $user = $usersModel->where('email', $email)->first();
 
@@ -88,15 +116,25 @@ class Auth extends BaseController
             $usersModel->updateResetToken($email, $token, $noWa);
 
             session()->setFlashdata('success', 'Password recovery email has been sent.');
-            return redirect()->to('forgot-password');
+            return redirect()->to(base_url('forgot-password'));
         } else {
             session()->setFlashdata('error', 'Email not found in our records.');
-            return redirect()->to('forgot-password');
+            return redirect()->to(base_url('forgot-password'));
         }
     }
 
     public function recovery_view($token)
     {
+        if (session()->has('user_id')) {
+            $userLevel = session('user_level');
+
+            if ($userLevel === 'administrator') {
+                return redirect()->to(base_url('meta/dashboard'));
+            } else {
+                return redirect()->to(base_url('dashboard'));
+            }
+        }
+
         $data = [
             'token' => $token,
             'title' => 'Recovery Password'
@@ -119,11 +157,11 @@ class Auth extends BaseController
                 // Hash password baru
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-                // Update password di database
                 $data = [
                     'user_password' => $hashedPassword,
-                    'reset_token' => null, // Hapus token reset
+                    'reset_token' => null,
                 ];
+
                 $usersModel->updatePassword($user['user_id'], $data);
 
                 session()->setFlashdata('success', 'Password berhasil dibuat ulang, silahkan login.');
@@ -146,22 +184,31 @@ class Auth extends BaseController
         $password = $this->request->getPost('password');
         $confirmPassword = $this->request->getPost('confirm-password');
 
-        // Validasi input
         if ($password !== $confirmPassword) {
             session()->setFlashdata('error', 'Password confirmation does not match.');
-            return redirect()->to('register');
+            return redirect()->to(base_url('register'));
         }
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $usersModel = new UsersModel();
 
+        // Cek Ketersediaan Username
         if ($usersModel->where('user_username', $user_username)->countAllResults() > 0) {
-            session()->setFlashdata('error', 'Username is already registered.');
-            return redirect()->to('register');
+
+            session()->setFlashdata('error', 'Username ini sudah digunakan.');
+            return redirect()->to(base_url('register'));
+        }
+
+        // Cek Ketersediaan Nomor Whatsapp
+        if ($usersModel->where('no_wa', $no_wa)->countAllResults() > 0) {
+
+            session()->setFlashdata('error', 'Nomor Whatsapp sudah digunakan.');
+            return redirect()->to(base_url('register'));
         }
 
         $email = uniqid() . '_contoh@emailkamu.com';
+
         $userData = [
             'user_nama' => $userNama,
             'user_username' => $user_username,
@@ -173,8 +220,8 @@ class Auth extends BaseController
 
         $usersModel->insertUsersMember($userData);
 
-        session()->setFlashdata('success', 'Registration successful. Please log in.');
-        return redirect()->to('login');
+        session()->setFlashdata('success', 'Anda sekarang terdaftar di sistem kami silahkan login menggunakan username dan password yang anda buat!.');
+        return redirect()->to(base_url('login'));
     }
 
     // Google API Login
@@ -229,14 +276,21 @@ class Auth extends BaseController
 
                     $userModel = new UsersModel();
                     $user = $userModel->where('email', $userInfo['email'])->first();
+
                     if ($user) {
                         session()->set('user_id', $user['user_id']);
                         session()->set('user_level', $user['user_level']);
                     }
+
                     if (!$user) {
                         return redirect()->to(base_url('login'))->with('error', 'Email tidak terdaftar atau belum diverifikasi');
                     }
-                    return redirect()->to(base_url('dashboard'))->with('success', 'Berhasil Login Menggunakan Google.');
+
+                    if ($user['user_level'] === 'administrator') {
+                        return redirect()->to(base_url('meta/dashboard'))->with('success', 'Berhasil Login Menggunakan Google.');
+                    } else {
+                        return redirect()->to(base_url('dashboard'));
+                    }
                 } else {
                     return redirect()->to(base_url('login'))->with('error', 'Gagal mendapatkan token akses dari Google.');
                 }
@@ -291,9 +345,20 @@ class Auth extends BaseController
 
     public function signWhatsappNumber()
     {
+        if (session()->has('user_id')) {
+            $userLevel = session('user_level');
+
+            if ($userLevel === 'administrator') {
+                return redirect()->to(base_url('meta/dashboard'));
+            } else {
+                return redirect()->to(base_url('dashboard'));
+            }
+        }
+
         $data = [
             'title' => 'Recovery Password'
         ];
+
         return view('login/pages/WhatsappLogin', $data);
     }
 
@@ -339,9 +404,14 @@ class Auth extends BaseController
             $usersModel->updateUser($id, $data);
 
             session()->setFlashdata('success', 'berhasil login menggunakan whatsapp.');
-            return redirect()->to(base_url('dashboard'));
+
+            if ($user['user_level'] === 'administrator') {
+                return redirect()->to(base_url('meta/dashboard'));
+            } else {
+                return redirect()->to(base_url('dashboard'));
+            }
         } else {
-            session()->setFlashdata('error', 'Token Expired.');
+            session()->setFlashdata('error', 'Link login anda sudah tidak berlaku');
             return redirect()->to(base_url('whatsapp'));
         }
     }

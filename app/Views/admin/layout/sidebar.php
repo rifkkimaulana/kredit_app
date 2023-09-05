@@ -133,19 +133,27 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                 </li>
 
                 <?php if ($user['user_level'] === 'administrator') : ?>
-                    <li class="nav-item <?= $segment1 === 'pembayaran' ? 'menu-open' : ''; ?>">
-                        <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'pembayaran' ? 'active' : ''; ?>">
+                    <li class="nav-item <?= $segment1 === 'paylater' ? 'menu-open' : ''; ?>">
+                        <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'paylater' ? 'active' : ''; ?>">
                             <i class="nav-icon fas fa-credit-card"></i>
                             <p>
-                                Pembayaran
+                                Pay Later
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= $segment2 === 'tagihan' ? 'javascript:void(0)' : base_url('pembayaran/tagihan'); ?>" class="nav-link <?= $segment2 === 'tagihan' ? 'active' : ''; ?>">
+                                <a href="<?= $segment2 === 'tagihan' ? 'javascript:void(0)' : base_url('paylater/tagihan'); ?>" class="nav-link <?= $segment2 === 'tagihan' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Bayar Cicilan</p>
+                                    <p>Tagihan & Pembayaran</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?= $segment2 === 'kontrak' ? 'javascript:void(0)' : base_url('paylater/kontrak'); ?>" class="nav-link <?= $segment2 === 'kontrak' ? 'active' : ''; ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Dokument Kontrak</p>
                                 </a>
                             </li>
                         </ul>
@@ -153,7 +161,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                 <?php endif; ?>
 
                 <li class="nav-item">
-                    <a href="<?= base_url('log_aktivitas'); ?>" class="nav-link <?= $title === 'Log Aktivitas' ? 'active' : ''; ?>">
+                    <a href="<?= base_url('log_aktivitas'); ?>" class="nav-link <?= $segment1 === 'log_aktivitas' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-history"></i>
                         <p>Log Aktivitas</p>
                     </a>

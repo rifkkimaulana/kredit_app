@@ -7,7 +7,7 @@ use App\Models\UsersModel;
 use App\Models\PembayaranModel;
 use App\Models\KreditModel;
 
-class Pembayaran extends BaseController
+class PayLater extends BaseController
 {
     public function index()
     {
@@ -16,17 +16,16 @@ class Pembayaran extends BaseController
         }
         if (
             session('user_level') !== 'administrator'
-            && session('user_level') !== 'manager'
             && session('user_level') !== 'member'
         ) {
-            return redirect()->to('login');
+            return redirect()->to(base_url('login'));
         }
 
         $userModel = new UsersModel();
         $user = $userModel->find(session('user_id'));
 
         if (!$user) {
-            return redirect()->to('login');
+            return redirect()->to(base_url('login'));
         }
 
         $pembayaranModel = new PembayaranModel();
@@ -65,6 +64,59 @@ class Pembayaran extends BaseController
         ];
 
         return view('admin/pages/Pembayaran', $data);
+    }
+
+    public function KontrakView()
+    {
+        if (!session('user_id')) {
+            return redirect()->to('login');
+        }
+        if (
+            session('user_level') !== 'administrator'
+            && session('user_level') !== 'member'
+        ) {
+            return redirect()->to('login');
+        }
+
+        $userModel = new UsersModel();
+        $user = $userModel->find(session('user_id'));
+
+        if (!$user) {
+            return redirect()->to('login');
+        }
+
+        $kontrakModel = new KreditModel();
+        $pembayaranModel = new PembayaranModel();
+
+        $kontrakData = $kontrakModel->findAll();
+
+        foreach ($kontrakData as $kontrak) {
+            $noKontrak = $kontrak['no_kontrak'];
+
+            $jumlahterbayar = $pembayaranModel->where('no_kontrak', $noKontrak)->countAllResults();
+        }
+
+
+        if (session('user_level') !== 'administrator') {
+            $kontrakList = $kontrakModel->getKreditByUserId(session('user_id'));
+        } else {
+            $kontrakList = $kontrakModel->findAll();
+        }
+
+        $userMap = [];
+        foreach ($userModel->findAll() as $userData) {
+            $userMap[$userData['user_id']] = $userData;
+        }
+
+        $data = [
+            'title' => 'Daftar Kontrak',
+            'user' => $user,
+            'jumlah_terbayar' => $jumlahterbayar,
+            'kontrakList' => $kontrakList,
+            'userMap' => $userMap
+        ];
+
+        return view('admin/pages/Kontrak', $data);
     }
 
     public function pembayaranInsert()
@@ -116,7 +168,7 @@ class Pembayaran extends BaseController
 
             $pembayaranModel->insertPembayaran($data);
 
-            return redirect()->to(base_url('pembayaran'))->with('success', 'Pembayaran Berhasil dikirim.');
+            return redirect()->to(base_url('paylater/tagihan'))->with('success', 'Pembayaran Berhasil dikirim.');
         }
     }
 
@@ -145,7 +197,7 @@ class Pembayaran extends BaseController
 
         $pembayaranModel->updatePembayaran($id, $data);
 
-        return redirect()->to(base_url('pembayaran'))->with('success', 'Konfirmasi Pembayaran Berhasil.');
+        return redirect()->to(base_url('paylater/tagihan'))->with('success', 'Konfirmasi Pembayaran Berhasil.');
     }
 
     public function delete($id)
@@ -170,11 +222,11 @@ class Pembayaran extends BaseController
         $pembayaran = $pembayaranModel->find($id);
 
         if (!$pembayaran) {
-            return redirect()->to(base_url('pembayaran'))->with('error', 'Data Pembayaran tidak ditemukan.');
+            return redirect()->to(base_url('paylater/tagihan'))->with('error', 'Data Pembayaran tidak ditemukan.');
         }
 
         $pembayaranModel->deletePembayaran($id);
 
-        return redirect()->to(base_url('pembayaran'))->with('success', 'Pembayaran berhasil dihapus.');
+        return redirect()->to(base_url('paylater/tagihan'))->with('success', 'Pembayaran berhasil dihapus.');
     }
 }

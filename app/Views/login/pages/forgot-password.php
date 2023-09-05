@@ -3,7 +3,7 @@
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="<?= base_url('/forgot-password'); ?>"><b><?= $perusahaan['nama_aplikasi']; ?></b></a>
+        <a href="<?= base_url('/forgot-password'); ?>"></a>
     </div>
 
     <div class="card">
