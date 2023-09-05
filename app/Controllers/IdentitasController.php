@@ -214,5 +214,33 @@ class IdentitasController extends BaseController
 
         return view('admin/pages/PeninjauanIdentitas', $data);
     }
+
+    public function PeninjauanTerima($id)
+    {
+        $identitasModel = new IdentitasModel();
+
+        $data = [
+            'status' => 'Disetujui'
+        ];
+
+        $identitasModel->updateIdentitas($id, $data);
+
+        session()->setFlashdata('success', 'Data identitas berhasil diverifikasi.');
+        return redirect()->to(base_url('paylater/peninjauan'));
+    }
+
+    public function PeninjauanTolak($id)
+    {
+        $identitasModel = new IdentitasModel();
+
+        $data = [
+            'status' => 'Tidak Disetujui'
+        ];
+
+        $identitasModel->updateIdentitas($id, $data);
+
+        session()->setFlashdata('success', 'Data identitas berhasil diverifikasi.');
+        return redirect()->to(base_url('paylater/peninjauan'));
+    }
     //--------------------------------------------------------------------
 }
