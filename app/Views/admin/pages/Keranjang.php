@@ -66,8 +66,8 @@
                                         <option value="<?= $user['user_id'] ?>"><?= $user['user_nama'] ?></option>
                                     <?php }; ?>
                                 </select>
-
                             </div>
+
                             <div class="form-group">
                                 <label for="metode_pembayaran">Metode Pembayaran</label>
                                 <select class="form-control" id="metode_pembayaran" name="metode_pembayaran">
@@ -75,10 +75,18 @@
                                     <option value="Transfer">Transfer Bank</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="float-right">
-                                <button type="submit" class="btn btn-primary">Selesaikan Transaksi</button>
+                            <hr>
+                            <div class="card-footer">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="setuju" id="setuju">
+                                    <label class="form-check-label" for="setuju">
+                                        Saya telah membaca, memahami, dan menyetujui Syarat dan Ketentuan Penggunaan Layanan Pembiayaan dan Perjanjian Pembiayaan
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="float-right mt-3">
+                                <button type="submit" class="btn btn-danger">Selesaikan Transaksi</button>
                             </div>
                         </div>
                     </div>

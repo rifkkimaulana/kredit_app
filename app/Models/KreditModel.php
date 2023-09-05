@@ -15,11 +15,25 @@ class KreditModel extends Model
         'total_kredit',
         'tanggal_cetak',
         'jatuh_tempo',
-        'created_at'
+        'created_at',
+        'status',
+        'no_transaksi'
     ];
 
     public function getKreditByUserId($data)
     {
         return $this->where('user_id', $data)->findAll();
+    }
+
+    public function updateByNoKontrak($noKontrak, $data)
+    {
+        $this->set($data)
+            ->where('no_kontrak', $noKontrak)
+            ->update();
+    }
+
+    public function insertKredit($data)
+    {
+        return $this->insert($data);
     }
 }

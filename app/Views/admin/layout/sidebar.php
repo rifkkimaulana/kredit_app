@@ -120,7 +120,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     </li>
                 <?php endif; ?>
 
-                <li class="nav-item <?= $segment1 === 'penjualan' ? 'menu-open' : ''; ?>">
+                <li class="nav-item <?= $segment1 === 'transaksi' ? 'menu-open' : ''; ?>">
                     <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'penjualan' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>

@@ -3,7 +3,7 @@
 
 <section class="content">
     <div class="container-fluid">
-        <form method="post" action="<?= base_url('penjualan/cekout') ?>">
+        <form method="post" action="<?= base_url('paylater/keranjang/cekout') ?>">
             <div class="row">
                 <div class="col-md-5">
                     <div class="card">
@@ -23,20 +23,25 @@
                                     <div class="row">
                                         <div class="col-md-4 text-center mb-2">
                                             <img src="<?= base_url('assets/image/produk/' . $produk[$item['produk_id']]['gambar']) ?>" alt="<?= $produk[$item['produk_id']]['nama_produk'] ?>" class="img-fluid">
-
                                         </div>
+
                                         <div class="col-md-8">
                                             <div class="float-right">
                                                 <a href="<?= base_url('paylater/pendaftaran_kontrak/delete/' . $item['id']) ?>" class="btn btn-sm btn-danger">Hapus</a>
                                             </div>
+
                                             <h3><?= $produk[$item['produk_id']]['nama_produk'] ?></h3>
                                             <hr>
-                                            <a><b>Harga:</b> Rp. <?= $produk[$item['produk_id']]['harga'] ?></a></br>
+                                            <a><b>Harga Satuan:</b> Rp. <?= $produk[$item['produk_id']]['harga'] ?></a></br>
                                             <a><b>Jumlah Pembelian:</b> <?= $item['jumlah'] ?> Pcs</a></br>
                                             <a><b>Deskripsi Produk:</b> </a></br>
                                             <a><?= substr($produk[$item['produk_id']]['deskripsi'], 0, 100) . '...' ?> </a>
 
                                             <input type="hidden" class="form-control" id="jumlah_<?= $item['produk_id'] ?>" name="jumlah[<?= $item['produk_id'] ?>]" value="<?= $item['jumlah']; ?>" min="1">
+                                            <hr>
+                                            <h5>
+                                                <b>Nominal Total Rp. <?= number_format($item['harga_satuan'] * $item['jumlah'] / 1, 0, ',', '.'); ?></b>
+                                            </h5>
                                         </div>
                                     </div>
                                     <hr>
@@ -50,7 +55,7 @@
                 <div class="col-md-7">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Detail Pembayaran</h3>
+                            <h3 class="card-title">Detail Pembayaran Kredit</h3>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
@@ -70,7 +75,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="pembeli">Tenor Pembayaran</label>
-                                <select class="form-control select2" name="tenor_Pembayaran">
+                                <select class="form-control select2" name="tenor_pembayaran">
                                     <?php foreach ($keranjang as $item) : ?>
                                         <option value="1">1 Bulan (Rp. <?= number_format($item['harga_satuan'] * $item['jumlah'] / 1, 0, ',', '.'); ?> / Bulan)</option>
                                         <option value="3">3 Bulan (Rp. <?= number_format($item['harga_satuan'] * $item['jumlah'] / 3, 0, ',', '.'); ?> / Bulan)</option>
@@ -81,21 +86,39 @@
                                 </select>
                             </div>
 
-                            <a class="btn btn-primary" data-toggle="modal" data-target="#signature-modal">Open Signature Modal</a>
+                            <hr>
+                            <?php if (date("d") < 5) {
+                                $periksaTanggal = date("m") + 1;
+                                $tanggalTagihan = '20' . '/' . $periksaTanggal . '/' . date("Y");
+                            } else {
+                                $periksaTanggal = date("m");
+                                $tanggalTagihan = '20' . '/' . $periksaTanggal . '/' . date("Y");
+                            } ?>
 
-
+                            <p> Tanggal Pembayaran Tagihan Pertama : <?= $tanggalTagihan; ?></p>
+                            <hr>
                             <div class="card-footer">
-                                <div class="float-right">
-                                    <button type="submit" class="btn btn-primary">Selesaikan Transaksi</button>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="setuju" id="setuju">
+                                    <label class="form-check-label" for="setuju">
+                                        Saya telah membaca, memahami, dan menyetujui Syarat dan Ketentuan Penggunaan Layanan Pembiayaan dan Perjanjian Pembiayaan
+                                    </label>
                                 </div>
                             </div>
+
+                            <div class="float-right mt-3">
+                                <button type="submit" class="btn btn-danger">Selesaikan Transaksi</button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
+            </div>
         </form>
     </div>
 </section>
-<!-- /.content -->
+<!-- /.content 
+<a class="btn btn-primary" data-toggle="modal" data-target="#signature-modal">Open Signature Modal</a>
 
 <div id="signature-modal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -122,7 +145,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
 <script>
     // Inisialisasi SignaturePad

@@ -62,6 +62,8 @@ $routes->post('paylater/tambah', 'PayLater::pembayaranInsert');
 $routes->get('paylater/konfirmasi/(:num)', 'PayLater::pembayaranKonfirmasi/$1');
 $routes->get('paylater/delete/(:num)', 'PayLater::delete/$1');
 $routes->get('paylater/pendaftaran_kontrak/delete/(:num)', 'PayLater::hapusProdukKeranjang/$1');
+$routes->post('paylater/keranjang/cekout', 'PayLater::cekoutPembayaranPaylater');
+$routes->post('paylater/kontrak/verifikasi', 'PayLater::verifikasiPembelianPaylater');
 
 // Log Aktifitas User
 $routes->get('log_aktivitas', 'LogAktifitas::index');

@@ -18,7 +18,8 @@ class PenjualanModel extends Model
         'total_harga',
         'metode_pembayaran',
         'status',
-        'no_referensi'
+        'no_referensi',
+        'no_kontrak'
     ];
 
     public function getPenjualanById($id_users)
@@ -39,5 +40,12 @@ class PenjualanModel extends Model
     public function updatePenjualan($id, $data)
     {
         $this->update($id, $data);
+    }
+
+    public function updateByNoKontrak($noKontrak, $data)
+    {
+        $this->set($data)
+            ->where('no_kontrak', $noKontrak)
+            ->update();
     }
 }

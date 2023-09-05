@@ -38,16 +38,18 @@
                                     <td class="text-center"><?= 'Rp.' . number_format($penjualan['total_harga'], 2) ?></td>
                                     <td class="text-center"><?= $penjualan['status'] ?></td>
                                     <td class="text-center">
-                                        <?php if ($user['user_level'] === 'administrator') : ?>
-                                            <?php if ($penjualan['status'] === 'pending') { ?>
-                                                <a data-toggle="modal" data-target="#verifikasiModal<?= $penjualan['id'] ?>" class="btn btn-success btn-sm">
-                                                    <i class="fas fa-check"></i> Verifikasi
-                                                </a><?php } ?>
+                                        <?php if ($penjualan['metode_pembayaran'] != 'Kredit Paylater') : ?>
+                                            <?php if ($user['user_level'] === 'administrator') : ?>
+                                                <?php if ($penjualan['status'] === 'pending') { ?>
+                                                    <a data-toggle="modal" data-target="#verifikasiModal<?= $penjualan['id'] ?>" class="btn btn-success btn-sm">
+                                                        <i class="fas fa-check"></i> Verifikasi
+                                                    </a><?php } ?>
+                                            <?php endif; ?>
                                         <?php endif; ?>
                                         <a data-toggle="modal" data-target="#detailModal<?= $penjualan['id'] ?>" class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"></i> Detail
                                         </a>
-                                        <?php if ($user['user_level'] === 'administrator') : ?>
+                                        <?php if ($user['user_level'] === 'administrator' && $penjualan['metode_pembayaran'] != 'Kredit Paylater') : ?>
                                             <a data-toggle="modal" data-target="#hapusModal<?= $penjualan['id'] ?>" class="btn btn-danger btn-sm">
                                                 <i class="fas fa-trash"></i> Hapus
                                             </a>
