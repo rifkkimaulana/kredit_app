@@ -1,18 +1,28 @@
 <?= $this->extend('admin/layout/template'); ?>
 <?= $this->section('content'); ?>
 
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <!-- Main row -->
         <form role="form" method="post" action="<?= base_url('pengaturan/profile_update'); ?>" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Profile Picture</h3>
+                            <div class="float-right">
+                                <?php if ($identitas['status'] === 'Disetujui') : ?>
+                                    <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#statusModal">
+                                        <i class="fas fa-check"></i> ter-Verifikasi</a>
+                                <?php elseif ($identitas['status'] === 'Sedang Ditinjau') : ?>
+                                    <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#statusModal">
+                                        Sedang Ditinjau</a>
+                                <?php elseif ($identitas['status'] === 'Tidak Disetujui') : ?>
+                                    <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#statusModal">
+                                        Gagal Verifikasi</a>
+                                <?php endif; ?>
+                            </div>
                         </div>
-                        <div class="card-body">
+                        <div class=" card-body">
                             <div class="form-group text-center">
                                 <?php if (!empty($user['user_foto'])) : ?>
                                     <img src="<?= base_url('assets/image/user/' . $user['user_foto']); ?>" alt="Foto Pengguna" style="max-width: 200px;">
@@ -38,6 +48,7 @@
                             <ul class="nav nav-pills">
                                 <li class="nav-item"><a class="nav-link active" href="#detailuser<?= $user['user_id'] ?>" data-toggle="tab">Detail User</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#password<?= $user['user_id'] ?>" data-toggle="tab">Ubah Password</a></li>
+                                <a class="nav-link" href="<?= base_url('identitas'); ?>">Lengkapi Identitas</a>
                             </ul>
                         </div>
                         <div class="card-body">
@@ -140,4 +151,52 @@
 </section>
 <!-- /.content -->
 
+<!-- Modal Status Pemeriksaan-->
+<div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <?php if ($identitas['status'] === 'Disetujui') : ?>
+                    <a class="btn btn-success btn-sm">
+                        <i class="fas fa-check"></i> ter-Verifikasi</a>
+                <?php elseif ($identitas['status'] === 'Sedang Ditinjau') : ?>
+                    <a class="btn btn-warning btn-sm">
+                        Sedang Ditinjau</a>
+                <?php else : ?>
+                    <a class="btn btn-danger btn-sm">
+                        Gagal Verifikasi</a>
+                <?php endif; ?>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <?php if ($identitas['status'] === 'Disetujui') { ?>
+                <div class="modal-body">
+                    Selamat Anda Berhasil Terverifikasi.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            <?php } elseif ($identitas['status'] === 'Sedang Ditinjau') { ?>
+                <div class="modal-body">
+                    Permohonan data yang anda kirimkan sedang kami lakukan proses peninjauan biasanya proses peninjauan ini kurang lebih 3x24 Jam sejak formulir dikirimkan.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            <?php } else { ?>
+                <div class="modal-body">
+                    Silahkan perbaiki kembali data identitas, jangan sampai ada gambar yang buram atau ada data yang tidak sesuai
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="<?= base_url('identitas/update'); ?>" class="btn btn-warning">Perbaiki Data Pengajuan</a>
+                </div>
+
+            <?php } ?>
+
+        </div>
+    </div>
+</div>
 <?= $this->endSection(); ?>

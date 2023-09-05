@@ -99,9 +99,15 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= $segment2 === 'list' ? 'javascript:void(0)' : base_url('produk/list'); ?>" class="nav-link <?= $segment2 === 'list' ? 'active' : ''; ?>">
+                                <a href="<?= $segment2 === 'daftar' ? 'javascript:void(0)' : base_url('produk/daftar'); ?>" class="nav-link <?= $segment2 === 'daftar' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Daftar Produk</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= $segment2 === 'list' ? 'javascript:void(0)' : base_url('produk/list'); ?>" class="nav-link <?= $segment2 === 'list' ? 'active' : ''; ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>List Produk</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -124,9 +130,17 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= $segment2 === 'list_order' ? 'javascript:void(0)' : base_url('penjualan/list_order'); ?>" class="nav-link <?= $segment2 === 'list_order' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'list_order' ? 'javascript:void(0)' : base_url('transaksi/list_order'); ?>" class="nav-link <?= $segment2 === 'list_order' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>List Order</p>
+                                <p>List Transaksi</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'keranjang' ? 'javascript:void(0)' : base_url('transaksi/keranjang'); ?>" class="nav-link <?= $segment2 === 'keranjang' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Keranjang</p>
                             </a>
                         </li>
                     </ul>
@@ -143,6 +157,14 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+                                <a href="<?= $segment2 === 'pendaftaran_kontrak' ? 'javascript:void(0)' : base_url('paylater/pendaftaran_kontrak'); ?>" class="nav-link <?= $segment2 === 'pendaftaran_kontrak' ? 'active' : ''; ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Form Pembelian Kredit</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
                                 <a href="<?= $segment2 === 'tagihan' ? 'javascript:void(0)' : base_url('paylater/tagihan'); ?>" class="nav-link <?= $segment2 === 'tagihan' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Tagihan & Pembayaran</p>
@@ -154,6 +176,14 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                                 <a href="<?= $segment2 === 'kontrak' ? 'javascript:void(0)' : base_url('paylater/kontrak'); ?>" class="nav-link <?= $segment2 === 'kontrak' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Dokument Kontrak</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?= $segment2 === 'peninjauan' ? 'javascript:void(0)' : base_url('paylater/peninjauan'); ?>" class="nav-link <?= $segment2 === 'peninjauan' ? 'active' : ''; ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Peninjauan Identitas</p>
                                 </a>
                             </li>
                         </ul>

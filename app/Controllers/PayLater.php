@@ -7,6 +7,9 @@ use App\Models\UsersModel;
 use App\Models\PembayaranModel;
 use App\Models\KreditModel;
 
+use App\Models\KeranjangModel;
+use App\Models\ProdukModel;
+
 class PayLater extends BaseController
 {
     public function index()
@@ -228,5 +231,48 @@ class PayLater extends BaseController
         $pembayaranModel->deletePembayaran($id);
 
         return redirect()->to(base_url('paylater/tagihan'))->with('success', 'Pembayaran berhasil dihapus.');
+    }
+
+    public function formKontrakNew()
+    {
+        if (!session('user_id')) {
+            return redirect()->to('login');
+        }
+
+        if (session('user_level') !== 'administrator'  && session('user_level') !== 'member') {
+            return redirect()->to('login');
+        }
+
+        $userModel = new UsersModel();
+        $user = $userModel->find(session('user_id'));
+
+        if (!$user) {
+            return redirect()->to('login');
+        }
+
+        $keranjangModel = new KeranjangModel();
+        $produkModel = new ProdukModel();
+
+        $keranjangItems = $keranjangModel->getKeranjangByUser(session('user_id'));
+        $produkIds = array_column($keranjangItems, 'produk_id');
+
+        $produk = [];
+        foreach ($produkIds as $productId) {
+            $product = $produkModel->find($productId);
+            if ($product) {
+                $produk[$productId] = $product;
+            }
+        }
+
+        $data = [
+            'title' => 'Keranjang Belanja',
+            'userList' => $userModel->findAll(),
+            'keranjang' => $keranjangItems,
+            'user' => $user,
+            'produk' => $produk,
+            'products' => $produkModel->findAll()
+        ];
+
+        return view('admin/pages/FormKeranjang', $data,);
     }
 }

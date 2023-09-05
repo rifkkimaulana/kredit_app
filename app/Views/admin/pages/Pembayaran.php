@@ -22,7 +22,7 @@
                                         <th class="text-center" style="padding: 10px;">Nomor Kontrak</th>
                                         <th class="text-center" style="padding: 10px;">Jumlah Pembayaran</th>
                                         <th class="text-center" style="padding: 10px;">Jenis Pembayaran</th>
-                                        <th class="text-center" style="padding: 10px;">Tanggal</th>ran
+                                        <th class="text-center" style="padding: 10px;">Tanggal</th>
                                         <th class="text-center" style="padding: 10px;">Aksi</th>
                                     </tr>
                                 </thead>

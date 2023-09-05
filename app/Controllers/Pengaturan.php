@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\AplikasiModel;
 use App\Models\UsersModel;
+use App\Models\IdentitasModel;
 use App\Models\WablasModel;
 
 use App\Models\GoogleApiModel;
@@ -15,6 +16,7 @@ class Pengaturan extends BaseController
         if (!session('user_id')) {
             return redirect()->to('login');
         }
+
         if (
             session('user_level') !== 'administrator'
             && session('user_level') !== 'manager'
@@ -30,9 +32,13 @@ class Pengaturan extends BaseController
             return redirect()->to('login');
         }
 
+        $identitasModel = new IdentitasModel();
+        $identitas = $identitasModel->where('user_id', session('user_id'))->first();
+
         $data = [
             'title' => 'Profile',
-            'user' => $user
+            'user' => $user,
+            'identitas' => $identitas
         ];
         return view('admin/pages/profile', $data);
     }

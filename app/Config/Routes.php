@@ -54,8 +54,9 @@ $routes->group('meta', ['namespace' => 'App\Controllers\Meta_RG_Controller'], fu
 // route since we don't have to scan directories.
 //$routes->get('/', 'Home::index');
 
-// Pembayaran Tagihan
+// Pembayaran Tagihan 
 $routes->get('paylater/tagihan', 'PayLater::index');
+$routes->get('paylater/pendaftaran_kontrak', 'PayLater::formKontrakNew');
 $routes->get('paylater/kontrak', 'PayLater::KontrakView');
 $routes->post('paylater/tambah', 'PayLater::pembayaranInsert');
 $routes->get('paylater/konfirmasi/(:num)', 'PayLater::pembayaranKonfirmasi/$1');
@@ -66,6 +67,7 @@ $routes->get('log_aktivitas', 'LogAktifitas::index');
 
 // Produk Routes
 $routes->get('produk/list', 'Produk::index');
+$routes->get('produk/daftar', 'Produk::daftarProduk');
 $routes->post('produk/tambah', 'Produk::produk_postInsert');
 $routes->post('produk/update', 'Produk::produk_postUpdate');
 $routes->get('produk/delete/(:num)', 'Produk::deleteProduk/$1');
@@ -73,17 +75,18 @@ $routes->get('produk/delete/(:num)', 'Produk::deleteProduk/$1');
 // Produk Routes - kategori
 $routes->get('produk/kategori', 'Produk::kategori');
 $routes->post('produk/kategori/insert', 'Produk::kategori_postInsert');
+$routes->post('produk/daftar/sent', 'Produk::sentProdukForKeranjangKredit');
 $routes->post('produk/kategori/update', 'Produk::kategori_postUpdate');
 $routes->get('produk/kategori/delete/(:num)', 'Produk::deleteKategori/$1');
 
 // Penjualan Barang
-$routes->get('penjualan/list_order', 'Penjualan::index');
+$routes->get('transaksi/list_order', 'Penjualan::index');
 $routes->get('penjualan/hapus/(:num)', 'Penjualan::hapusPenjualan/$1');
 $routes->post('penjualan/verifikasi', 'Penjualan::verifikasi');
 
 // Penjualan For Keranjang Belanja
 $routes->post('keranjang', 'Penjualan::keranjang_addPost');
-$routes->get('keranjang', 'Penjualan::keranjang');
+$routes->get('transaksi/keranjang', 'Penjualan::keranjang');
 $routes->post('penjualan/cekout', 'Penjualan::cekout');
 $routes->get('keranjang/delete/(:num)', 'Penjualan::hapusProdukKeranjang/$1');
 
@@ -94,6 +97,14 @@ $routes->get('forgot-password', 'Auth::forgot_password');
 $routes->post('forgot-password', 'Auth::forgot_password_post');
 $routes->get('recovery/(:segment)', 'Auth::recovery_view/$1');
 $routes->post('recovery', 'Auth::recovery_post');
+
+// Identitas User Add
+$routes->get('identitas', 'IdentitasController::index');
+$routes->post('identitas/create', 'IdentitasController::simpanData');
+$routes->get('identitas/update', 'IdentitasController::UpdateIdentitas_view');
+$routes->post('identitas/update', 'IdentitasController::UpdateIdentitas_post');
+
+$routes->get('paylater/peninjauan', 'IdentitasController::Peninjauan_view');
 
 // Sign With Whatsapp Number only OTP Code
 $routes->get('whatsapp', 'Auth::signWhatsappNumber');

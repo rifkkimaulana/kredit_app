@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Sep 2023 pada 05.05
--- Versi server: 10.1.37-MariaDB
--- Versi PHP: 7.3.0
+-- Generation Time: Sep 05, 2023 at 12:12 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_appsetting`
+-- Table structure for table `tb_appsetting`
 --
 
 CREATE TABLE `tb_appsetting` (
@@ -51,16 +51,16 @@ CREATE TABLE `tb_appsetting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_appsetting`
+-- Dumping data for table `tb_appsetting`
 --
 
 INSERT INTO `tb_appsetting` (`id`, `nama_aplikasi`, `nama_perusahaan`, `alamat1`, `alamat2`, `kode_pos`, `email`, `telpon`, `logo`, `bank1`, `bank2`, `bank3`, `atas_nama1`, `atas_nama2`, `atas_nama3`, `no_rekening1`, `no_rekening2`, `no_rekening3`, `keterangan`) VALUES
-(1, 'RG PRODUCTION', 'CV. MITRA MANDIRI SKM', 'Darmaraja', 'Sumedang', '45372', 'rifkkimaulana@gmail.com', '083130649979', '1693495288_f60c98d12ef86f8e8c24.png', 'Bank Mandiri', 'Bank Mandiri', 'LINK AJA', 'RIFKI MAULANA', 'RUKMANA', 'RIFKI MAULANA', '1310016635064', '1310016161319', '083130649979', 'Aplikasi Kredit Barang');
+(1, 'KREDIT APP', 'CV. MITRA MANDIRI SKM', 'Darmaraja', 'Sumedang', '45372', 'rifkkimaulana@gmail.com', '083130649979', '1693495288_f60c98d12ef86f8e8c24.png', 'Bank Mandiri', 'Bank Mandiri', 'LINK AJA', 'RIFKI MAULANA', 'RUKMANA', 'RIFKI MAULANA', '1310016635064', '1310016161319', '083130649979', 'Aplikasi Kredit Barang');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_google_api_login`
+-- Table structure for table `tb_google_api_login`
 --
 
 CREATE TABLE `tb_google_api_login` (
@@ -70,7 +70,7 @@ CREATE TABLE `tb_google_api_login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_google_api_login`
+-- Dumping data for table `tb_google_api_login`
 --
 
 INSERT INTO `tb_google_api_login` (`id`, `client_id`, `client_secret`) VALUES
@@ -79,7 +79,45 @@ INSERT INTO `tb_google_api_login` (`id`, `client_id`, `client_secret`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_kategoriproduk`
+-- Table structure for table `tb_identitas`
+--
+
+CREATE TABLE `tb_identitas` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `nama_lengkap` varchar(255) DEFAULT NULL,
+  `nomor_identitas` varchar(20) DEFAULT NULL,
+  `tempat_lahir` varchar(100) DEFAULT NULL,
+  `tanggal_lahir` date DEFAULT NULL,
+  `jenis_kelamin` enum('Laki-laki','Perempuan') DEFAULT NULL,
+  `alamat` text,
+  `agama` varchar(50) DEFAULT NULL,
+  `status_pernikahan` enum('Belum Menikah','Menikah','Cerai') DEFAULT NULL,
+  `pekerjaan` varchar(100) DEFAULT NULL,
+  `nomor_telepon` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `foto_identitas` varchar(255) DEFAULT NULL,
+  `foto_selvi_ktp` varchar(255) DEFAULT NULL,
+  `status` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `nomor_alternatif_1` varchar(20) DEFAULT NULL,
+  `nama_alternatif_1` varchar(255) DEFAULT NULL,
+  `nomor_alternatif_2` varchar(20) DEFAULT NULL,
+  `nama_alternatif_2` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_identitas`
+--
+
+INSERT INTO `tb_identitas` (`id`, `user_id`, `nama_lengkap`, `nomor_identitas`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `agama`, `status_pernikahan`, `pekerjaan`, `nomor_telepon`, `email`, `foto_identitas`, `foto_selvi_ktp`, `status`, `created_at`, `updated_at`, `nomor_alternatif_1`, `nama_alternatif_1`, `nomor_alternatif_2`, `nama_alternatif_2`) VALUES
+(3, 4, 'Rifki Maulana', '32110303254158', 'Sumedang', '2002-01-10', 'Laki-laki', 'SUMEDANG', 'ISLAM', 'Belum Menikah', 'Wiraswasta', '083130649979', 'rifkkimaulana@gmail.com', 'ktp_1693905118_a6c186f6f8467a9160f5.png', 'selvi_1693905118_343a2409d4c73e2ef163.png', 'Sedang Ditinjau', '2023-09-05 07:47:56', '2023-09-05 09:32:38', '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_kategoriproduk`
 --
 
 CREATE TABLE `tb_kategoriproduk` (
@@ -91,7 +129,7 @@ CREATE TABLE `tb_kategoriproduk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_kategoriproduk`
+-- Dumping data for table `tb_kategoriproduk`
 --
 
 INSERT INTO `tb_kategoriproduk` (`id`, `nama_kategori`, `deskripsi`, `created_at`, `updated_at`) VALUES
@@ -100,7 +138,7 @@ INSERT INTO `tb_kategoriproduk` (`id`, `nama_kategori`, `deskripsi`, `created_at
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_keranjang`
+-- Table structure for table `tb_keranjang`
 --
 
 CREATE TABLE `tb_keranjang` (
@@ -114,18 +152,18 @@ CREATE TABLE `tb_keranjang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_keranjang`
+-- Dumping data for table `tb_keranjang`
 --
 
 INSERT INTO `tb_keranjang` (`id`, `user_id`, `produk_id`, `harga_satuan`, `jumlah`, `created_at`, `updated_at`) VALUES
 (4, 9, 10, '20000.00', 1, '2023-09-04 06:34:18', '2023-09-04 06:34:18'),
 (5, 14, 10, '20000.00', 1, '2023-09-04 06:39:43', '2023-09-04 06:39:43'),
-(23, 4, 10, '20000.00', 1, '2023-09-04 15:29:03', '2023-09-04 15:29:03');
+(29, 4, 10, '20000.00', 1, '2023-09-05 06:19:59', '2023-09-05 06:19:59');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_kredit`
+-- Table structure for table `tb_kredit`
 --
 
 CREATE TABLE `tb_kredit` (
@@ -136,20 +174,21 @@ CREATE TABLE `tb_kredit` (
   `total_kredit` varchar(100) DEFAULT NULL,
   `tanggal_cetak` int(11) DEFAULT NULL,
   `jatuh_tempo` int(11) DEFAULT NULL,
+  `file_kontrak` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_kredit`
+-- Dumping data for table `tb_kredit`
 --
 
-INSERT INTO `tb_kredit` (`id`, `user_id`, `no_kontrak`, `jangka_waktu`, `total_kredit`, `tanggal_cetak`, `jatuh_tempo`, `created_at`) VALUES
-(1, 4, '3544576223', 10, '2300000', 15, 5, '2023-09-04 17:27:51');
+INSERT INTO `tb_kredit` (`id`, `user_id`, `no_kontrak`, `jangka_waktu`, `total_kredit`, `tanggal_cetak`, `jatuh_tempo`, `file_kontrak`, `created_at`) VALUES
+(1, 4, '3544576223', 10, '2300000', 15, 5, '', '2023-09-04 17:27:51');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_log_aktifitas`
+-- Table structure for table `tb_log_aktifitas`
 --
 
 CREATE TABLE `tb_log_aktifitas` (
@@ -162,7 +201,7 @@ CREATE TABLE `tb_log_aktifitas` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pembayaran`
+-- Table structure for table `tb_pembayaran`
 --
 
 CREATE TABLE `tb_pembayaran` (
@@ -179,7 +218,7 @@ CREATE TABLE `tb_pembayaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_pembayaran`
+-- Dumping data for table `tb_pembayaran`
 --
 
 INSERT INTO `tb_pembayaran` (`id`, `user_id`, `jenis_pembayaran`, `kredit_id`, `bukti_transfer`, `no_kontrak`, `jumlah_pembayaran`, `no_referensi`, `status`, `created_at`) VALUES
@@ -189,7 +228,7 @@ INSERT INTO `tb_pembayaran` (`id`, `user_id`, `jenis_pembayaran`, `kredit_id`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_penjualan`
+-- Table structure for table `tb_penjualan`
 --
 
 CREATE TABLE `tb_penjualan` (
@@ -208,24 +247,10 @@ CREATE TABLE `tb_penjualan` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `tb_penjualan`
---
-
-INSERT INTO `tb_penjualan` (`id`, `no_transaksi`, `tanggal_penjualan`, `id_users`, `id_produk`, `jumlah`, `harga_satuan`, `total_harga`, `metode_pembayaran`, `status`, `no_referensi`, `created_at`, `updated_at`) VALUES
-(5, '', '2023-09-03', 9, 10, 1, '20000.00', '20000.00', 'tunai', 'Lunas', '', '2023-09-03 08:08:02', '2023-09-03 08:08:33'),
-(6, '', '2023-09-03', 9, 10, 1, '20000.00', '20000.00', 'transfer_bank', 'Lunas', '', '2023-09-03 08:11:54', '2023-09-03 08:14:37'),
-(7, '', '2023-09-03', 9, 10, 2, '20000.00', '40000.00', 'tunai', 'Lunas', '', '2023-09-03 08:15:29', '2023-09-03 08:15:38'),
-(8, '20230903032009', '2023-09-03', 9, 10, 2, '20000.00', '40000.00', 'transfer_bank', 'Lunas', '2023090303200980IEO4', '2023-09-03 08:20:09', '2023-09-03 08:23:27'),
-(9, '20230904000010', '2023-09-04', 9, 10, 1, '20000.00', '20000.00', 'transfer_bank', 'Lunas', '20230904000010Z52NSJ', '2023-09-04 05:00:10', '2023-09-04 05:19:14'),
-(10, '20230904004008', '2023-09-04', 12, 10, 1, '20000.00', '20000.00', 'Transfer', 'pending', '2023090400400816UMAS', '2023-09-04 05:40:08', '2023-09-04 05:40:08'),
-(11, '20230904021622', '2023-09-04', 9, 10, 1, '20000.00', '20000.00', 'Tunai', 'pending', '20230904021622WCEZQY', '2023-09-04 07:16:22', '2023-09-04 07:16:22'),
-(13, '20230904023627', '2023-09-04', 9, 10, 1, '20000.00', '20000.00', 'Tunai', 'Lunas', '202309040236271F3MYN', '2023-09-04 07:36:27', '2023-09-04 07:37:31');
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_produk`
+-- Table structure for table `tb_produk`
 --
 
 CREATE TABLE `tb_produk` (
@@ -241,16 +266,16 @@ CREATE TABLE `tb_produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_produk`
+-- Dumping data for table `tb_produk`
 --
 
 INSERT INTO `tb_produk` (`id`, `nama_produk`, `deskripsi`, `harga`, `stok`, `gambar`, `kategori_id`, `created_at`, `updated_at`) VALUES
-(10, 'Paket Mendak Studio', 'Paket Mendak Studio', '20000.00', 1, '1693720748_5e345c6609ad983083bb.jpg', 4, '2023-09-03 05:59:08', '2023-09-04 07:37:31');
+(10, 'Paket Mendak Studio', 'Paket Mendak Studio', '20000.00', 100, '1693720748_5e345c6609ad983083bb.jpg', 4, '2023-09-03 05:59:08', '2023-09-05 06:16:28');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_users`
+-- Table structure for table `tb_users`
 --
 
 CREATE TABLE `tb_users` (
@@ -273,7 +298,7 @@ CREATE TABLE `tb_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `tb_users`
+-- Dumping data for table `tb_users`
 --
 
 INSERT INTO `tb_users` (`user_id`, `user_nama`, `user_username`, `user_password`, `user_foto`, `user_level`, `email`, `no_wa`, `reset_token`, `reset_id`, `keterangan`, `app_id`, `country`, `facebook`, `tweeter`, `instagram`) VALUES
@@ -287,7 +312,7 @@ INSERT INTO `tb_users` (`user_id`, `user_nama`, `user_username`, `user_password`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_wablas`
+-- Table structure for table `tb_wablas`
 --
 
 CREATE TABLE `tb_wablas` (
@@ -297,7 +322,7 @@ CREATE TABLE `tb_wablas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_wablas`
+-- Dumping data for table `tb_wablas`
 --
 
 INSERT INTO `tb_wablas` (`id`, `domain`, `token_api`) VALUES
@@ -308,25 +333,32 @@ INSERT INTO `tb_wablas` (`id`, `domain`, `token_api`) VALUES
 --
 
 --
--- Indeks untuk tabel `tb_appsetting`
+-- Indexes for table `tb_appsetting`
 --
 ALTER TABLE `tb_appsetting`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_google_api_login`
+-- Indexes for table `tb_google_api_login`
 --
 ALTER TABLE `tb_google_api_login`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_kategoriproduk`
+-- Indexes for table `tb_identitas`
+--
+ALTER TABLE `tb_identitas`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nomor_identitas` (`nomor_identitas`);
+
+--
+-- Indexes for table `tb_kategoriproduk`
 --
 ALTER TABLE `tb_kategoriproduk`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_keranjang`
+-- Indexes for table `tb_keranjang`
 --
 ALTER TABLE `tb_keranjang`
   ADD PRIMARY KEY (`id`),
@@ -334,26 +366,26 @@ ALTER TABLE `tb_keranjang`
   ADD KEY `produk_id` (`produk_id`);
 
 --
--- Indeks untuk tabel `tb_kredit`
+-- Indexes for table `tb_kredit`
 --
 ALTER TABLE `tb_kredit`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `no_kontrak` (`no_kontrak`);
 
 --
--- Indeks untuk tabel `tb_log_aktifitas`
+-- Indexes for table `tb_log_aktifitas`
 --
 ALTER TABLE `tb_log_aktifitas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_pembayaran`
+-- Indexes for table `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_penjualan`
+-- Indexes for table `tb_penjualan`
 --
 ALTER TABLE `tb_penjualan`
   ADD PRIMARY KEY (`id`),
@@ -361,14 +393,14 @@ ALTER TABLE `tb_penjualan`
   ADD KEY `id_produk` (`id_produk`);
 
 --
--- Indeks untuk tabel `tb_produk`
+-- Indexes for table `tb_produk`
 --
 ALTER TABLE `tb_produk`
   ADD PRIMARY KEY (`id`),
   ADD KEY `kategori_id` (`kategori_id`);
 
 --
--- Indeks untuk tabel `tb_users`
+-- Indexes for table `tb_users`
 --
 ALTER TABLE `tb_users`
   ADD PRIMARY KEY (`user_id`),
@@ -376,101 +408,107 @@ ALTER TABLE `tb_users`
   ADD UNIQUE KEY `email & whatsapp` (`email`,`no_wa`);
 
 --
--- Indeks untuk tabel `tb_wablas`
+-- Indexes for table `tb_wablas`
 --
 ALTER TABLE `tb_wablas`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tb_appsetting`
+-- AUTO_INCREMENT for table `tb_appsetting`
 --
 ALTER TABLE `tb_appsetting`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_google_api_login`
+-- AUTO_INCREMENT for table `tb_google_api_login`
 --
 ALTER TABLE `tb_google_api_login`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_kategoriproduk`
+-- AUTO_INCREMENT for table `tb_identitas`
+--
+ALTER TABLE `tb_identitas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tb_kategoriproduk`
 --
 ALTER TABLE `tb_kategoriproduk`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_keranjang`
+-- AUTO_INCREMENT for table `tb_keranjang`
 --
 ALTER TABLE `tb_keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_kredit`
+-- AUTO_INCREMENT for table `tb_kredit`
 --
 ALTER TABLE `tb_kredit`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_log_aktifitas`
+-- AUTO_INCREMENT for table `tb_log_aktifitas`
 --
 ALTER TABLE `tb_log_aktifitas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_pembayaran`
+-- AUTO_INCREMENT for table `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_penjualan`
+-- AUTO_INCREMENT for table `tb_penjualan`
 --
 ALTER TABLE `tb_penjualan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_produk`
+-- AUTO_INCREMENT for table `tb_produk`
 --
 ALTER TABLE `tb_produk`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_users`
+-- AUTO_INCREMENT for table `tb_users`
 --
 ALTER TABLE `tb_users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_wablas`
+-- AUTO_INCREMENT for table `tb_wablas`
 --
 ALTER TABLE `tb_wablas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `tb_keranjang`
+-- Constraints for table `tb_keranjang`
 --
 ALTER TABLE `tb_keranjang`
   ADD CONSTRAINT `tb_keranjang_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tb_users` (`user_id`),
   ADD CONSTRAINT `tb_keranjang_ibfk_2` FOREIGN KEY (`produk_id`) REFERENCES `tb_produk` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `tb_penjualan`
+-- Constraints for table `tb_penjualan`
 --
 ALTER TABLE `tb_penjualan`
   ADD CONSTRAINT `tb_penjualan_ibfk_1` FOREIGN KEY (`id_users`) REFERENCES `tb_users` (`user_id`),
   ADD CONSTRAINT `tb_penjualan_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `tb_produk` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `tb_produk`
+-- Constraints for table `tb_produk`
 --
 ALTER TABLE `tb_produk`
   ADD CONSTRAINT `tb_produk_ibfk_1` FOREIGN KEY (`kategori_id`) REFERENCES `tb_kategoriproduk` (`id`);
