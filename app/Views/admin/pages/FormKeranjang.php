@@ -9,9 +9,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Detail Pembelian</h3>
-                            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addModal">
+                            <a class="btn btn-primary float-right" href="<?= base_url('produk/daftar'); ?>">
                                 Pilih Produk
-                            </button>
+                            </a>
                         </div>
                         <div class="card-body">
                             <input type="hidden" class="form-control" name="status" value="pending">
@@ -27,7 +27,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="float-right">
-                                                <a href="<?= base_url('keranjang/delete/' . $item['id']) ?>" class="btn btn-sm btn-danger">Hapus</a>
+                                                <a href="<?= base_url('paylater/pendaftaran_kontrak/delete/' . $item['id']) ?>" class="btn btn-sm btn-danger">Hapus</a>
                                             </div>
                                             <h3><?= $produk[$item['produk_id']]['nama_produk'] ?></h3>
                                             <hr>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="pembeli">Pembeli</label>
+                                <label for="pembeli">Customer Name</label>
                                 <select class="form-control select2" name="user_id">
                                     <?php if ($user['user_level'] === 'administrator') { ?>
                                         <?php foreach ($userList as $user) : ?>
@@ -69,81 +69,76 @@
 
                             </div>
                             <div class="form-group">
-                                <label for="metode_pembayaran">Metode Pembayaran</label>
-                                <select class="form-control" id="metode_pembayaran" name="metode_pembayaran">
-                                    <option value="Tunai">Cash</option>
-                                    <option value="Transfer">Transfer Bank</option>
+                                <label for="pembeli">Tenor Pembayaran</label>
+                                <select class="form-control select2" name="tenor_Pembayaran">
+                                    <?php foreach ($keranjang as $item) : ?>
+                                        <option value="1">1 Bulan (Rp. <?= number_format($item['harga_satuan'] * $item['jumlah'] / 1, 0, ',', '.'); ?> / Bulan)</option>
+                                        <option value="3">3 Bulan (Rp. <?= number_format($item['harga_satuan'] * $item['jumlah'] / 3, 0, ',', '.'); ?> / Bulan)</option>
+                                        <option value="6">6 Bulan (Rp. <?= number_format($item['harga_satuan'] * $item['jumlah'] / 6, 0, ',', '.'); ?> / Bulan)</option>
+                                        <option value="9">9 Bulan (Rp. <?= number_format($item['harga_satuan'] * $item['jumlah'] / 9, 0, ',', '.'); ?> / Bulan)</option>
+                                        <option value="12">12 Bulan (Rp. <?= number_format($item['harga_satuan'] * $item['jumlah'] / 12, 0, ',', '.'); ?> / Bulan)</option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="float-right">
-                                <button type="submit" class="btn btn-primary">Selesaikan Transaksi</button>
+
+                            <a class="btn btn-primary" data-toggle="modal" data-target="#signature-modal">Open Signature Modal</a>
+
+
+                            <div class="card-footer">
+                                <div class="float-right">
+                                    <button type="submit" class="btn btn-primary">Selesaikan Transaksi</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </form>
     </div>
 </section>
 <!-- /.content -->
 
-<!-- Modal Tambah Penjualan -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div id="signature-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">New Transaction</h5>
+                <h5 class="modal-title">Signature</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="<?= base_url('keranjang') ?>">
-                <div class="modal-body">
-                    <table id="tableAddPenjualan" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th class="text-center">Pilih</th>
-                                <th>Nama Produk</th>
-                                <th class="text-center">Jumlah Beli</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($products as $produk) : ?>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <div class="icheck-primary d-inline">
-                                                <input type="checkbox" name="selectedProduk[]" value="<?= $produk['id'] ?>" id="checkbox_<?= $produk['id'] ?>">
-                                                <label for="checkbox_<?= $produk['id'] ?>"></label>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class=" d-flex align-items-center">
-                                            <img src="<?= base_url('assets/image/produk/' . $produk['gambar']) ?>" alt="<?= $produk['nama_produk'] ?>" class="mr-3" style="max-width: 50px;">
-                                            <?= $produk['nama_produk'] ?>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <input type="number" class="form-control" name="jumlahbeli[<?= $produk['id'] ?>]" value="1" min="1">
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                    <div class="card-footer">
-                        <div class="float-right">
-                            <button type="submit" class="btn btn-primary">Pilih Produk</button>
-                        </div>
+            <div class="modal-body">
+                <form action="<?= base_url('signature_post'); ?>" method="post">
+
+                    <div id="signature-container">
+                        <canvas id="signature-pad" width="450" height="300"></canvas>
                     </div>
-                </div>
-            </form>
+                    <input type="hidden" name="tanda_tangan" id="tanda_tangan" required>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="hapus-tanda-tangan">Hapus Tanda Tangan</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="save-signature-modal" class="btn btn-primary">Save Signature</button>
+            </div>
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+<script>
+    // Inisialisasi SignaturePad
+    var canvas = document.getElementById('signature-pad');
+    var signaturePad = new SignaturePad(canvas);
+
+    // Hapus tanda tangan jika tombol "Hapus Tanda Tangan" diklik
+    document.getElementById('hapus-tanda-tangan').addEventListener('click', function() {
+        signaturePad.clear();
+    });
+
+    // Simpan tanda tangan sebagai data URL dalam input tersembunyi saat form disubmit
+    document.querySelector('form').addEventListener('submit', function() {
+        var tandaTanganInput = document.getElementById('tanda_tangan');
+        tandaTanganInput.value = signaturePad.toDataURL();
+    });
+</script>
 
 <?= $this->endSection(); ?>

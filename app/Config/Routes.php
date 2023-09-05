@@ -61,6 +61,7 @@ $routes->get('paylater/kontrak', 'PayLater::KontrakView');
 $routes->post('paylater/tambah', 'PayLater::pembayaranInsert');
 $routes->get('paylater/konfirmasi/(:num)', 'PayLater::pembayaranKonfirmasi/$1');
 $routes->get('paylater/delete/(:num)', 'PayLater::delete/$1');
+$routes->get('paylater/pendaftaran_kontrak/delete/(:num)', 'PayLater::hapusProdukKeranjang/$1');
 
 // Log Aktifitas User
 $routes->get('log_aktivitas', 'LogAktifitas::index');
@@ -105,6 +106,8 @@ $routes->get('identitas/update', 'IdentitasController::UpdateIdentitas_view');
 $routes->post('identitas/update', 'IdentitasController::UpdateIdentitas_post');
 
 $routes->get('paylater/peninjauan', 'IdentitasController::Peninjauan_view');
+$routes->get('paylater/peninjauan/tolak/(:segment)', 'IdentitasController::PeninjauanTolak/$1');
+$routes->get('paylater/peninjauan/terima/(:segment)', 'IdentitasController::PeninjauanTerima/$1');
 
 // Sign With Whatsapp Number only OTP Code
 $routes->get('whatsapp', 'Auth::signWhatsappNumber');

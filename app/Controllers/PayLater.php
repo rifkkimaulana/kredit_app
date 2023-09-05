@@ -265,7 +265,7 @@ class PayLater extends BaseController
         }
 
         $data = [
-            'title' => 'Keranjang Belanja',
+            'title' => 'Keranjang Pembelian Kredit',
             'userList' => $userModel->findAll(),
             'keranjang' => $keranjangItems,
             'user' => $user,
@@ -274,5 +274,19 @@ class PayLater extends BaseController
         ];
 
         return view('admin/pages/FormKeranjang', $data,);
+    }
+
+    public function hapusProdukKeranjang($id)
+    {
+        $keranjangModel = new KeranjangModel();
+        $keranjang = $keranjangModel->find($id);
+
+        if (!$keranjang) {
+            return redirect()->to(base_url('paylater/pendaftaran_kontrak'))->with('error', 'Data Keranjang tidak ditemukan.');
+        }
+
+        $keranjangModel->removeFromKeranjang($id);
+
+        return redirect()->to(base_url('paylater/pendaftaran_kontrak'))->with('success', 'Produk di keranjang berhasil dihapus.');
     }
 }

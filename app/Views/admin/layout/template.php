@@ -38,6 +38,19 @@
     <!-- Include Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+    <style>
+        /* Gaya khusus untuk elemen input readonly */
+        input[disabled].form-control {
+            background-color: transparent;
+            /* Ubah warna latar belakang */
+            color: #888;
+            /* Ubah warna teks */
+            cursor: not-allowed;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/plugins/signature/css/jquery.signature.css'); ?>">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -111,6 +124,10 @@
     <script src="<?= base_url('assets/plugins/chart.js/Chart.min.js'); ?>"></script>
 
     <script src="<?= base_url('assets/plugins/select2/js/select2.full.min.js'); ?>"></script>
+
+    <script type="text/javascript" src="<?= base_url('assets/plugins/signature/js/jquery.signature.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/plugins/signature/js/jquery.ui.touch-punch.min.js'); ?>"></script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>

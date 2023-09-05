@@ -288,6 +288,6 @@ class Penjualan extends Controller
         // Delete produk dari database
         $keranjangModel->removeFromKeranjang($id);
 
-        return redirect()->to(base_url('keranjang'))->with('success', 'Produk di keranjang berhasil dihapus.');
+        return redirect()->to(base_url('transaksi/keranjang'))->with('success', 'Produk di keranjang berhasil dihapus.');
     }
 }

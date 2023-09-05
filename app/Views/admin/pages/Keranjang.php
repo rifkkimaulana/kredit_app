@@ -54,7 +54,7 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="pembeli">Pembeli</label>
+                                <label for="pembeli">Customer Name</label>
                                 <select class="form-control select2" name="user_id">
                                     <?php if ($user['user_level'] === 'administrator') { ?>
                                         <?php foreach ($userList as $user) : ?>
