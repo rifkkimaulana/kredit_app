@@ -54,6 +54,30 @@ $routes->group('meta', ['namespace' => 'App\Controllers\Meta_RG_Controller'], fu
 // route since we don't have to scan directories.
 //$routes->get('/', 'Home::index');
 
+// Routes For Kredit_App
+$routes->group('/', ['namespace' => 'App\Controllers\Kredit_App'], function ($routes) {
+	// ka-dashboard
+	$routes->get('/', 'Dashboard::index');
+	$routes->get('ka-dashboard', 'Dashboard::index');
+
+	// ka-settings - Profile
+	$routes->get('ka-settings/profile', 'Settings/Profile::index');
+	$routes->post('ka-settings/profile', 'Settings/Profile::profile_update');
+
+	$routes->get('ka-settings/app', 'Settings/App::index');
+	$routes->post('ka-settings/app', 'Settings/App::app_update');
+
+	$routes->get('ka-settings/google_api', 'Pengaturan::settingApiGoogle');
+	$routes->post('pengaturan/google_api/update', 'Pengaturan::settingApiGoogle_post');
+
+	$routes->get('ka-settings/users', 'Pengaturan::users');
+	$routes->post('pengaturan/users/update', 'Pengaturan::user_postUpdate');
+	$routes->get('ka-settings/users/delete/(:num)', 'Pengaturan::deleteUsers/$1');
+
+	$routes->get('ka-settings/whatsapp_api', 'Pengaturan::whatsappApiSetting');
+	$routes->post('pengaturan/whatsapp_api/update', 'Pengaturan::whatsappApiSetting_update');
+});
+
 // Pembayaran Tagihan 
 $routes->get('paylater/tagihan', 'PayLater::index');
 $routes->get('paylater/pendaftaran_kontrak', 'PayLater::formKontrakNew');
@@ -88,7 +112,7 @@ $routes->get('penjualan/hapus/(:num)', 'Penjualan::hapusPenjualan/$1');
 $routes->post('penjualan/verifikasi', 'Penjualan::verifikasi');
 
 // Penjualan For Keranjang Belanja
-$routes->post('keranjang', 'Penjualan::keranjang_addPost');
+$routes->post('transaksi/keranjang', 'Penjualan::keranjang_addPost');
 $routes->get('transaksi/keranjang', 'Penjualan::keranjang');
 $routes->post('penjualan/cekout', 'Penjualan::cekout');
 $routes->get('keranjang/delete/(:num)', 'Penjualan::hapusProdukKeranjang/$1');
@@ -126,8 +150,7 @@ $routes->get('google/callback', 'Auth::googleAuth_callback');
 $routes->get('penjualan/statistik', 'StatistikPenjualan::index');
 
 // Dashboard Pages
-$routes->get('/', 'Dashboard::index');
-$routes->get('dashboard', 'Dashboard::index');
+
 
 // End Session All
 $routes->get('logout', 'Dashboard::logout');

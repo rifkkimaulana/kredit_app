@@ -107,7 +107,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="<?= base_url('keranjang') ?>">
+            <form method="post" action="<?= base_url('transaksi/keranjang') ?>">
                 <div class="modal-body">
                     <table id="tableAddPenjualan" class="table table-bordered table-striped">
                         <thead>

@@ -13,7 +13,7 @@ class IdentitasModel extends Model
         'jenis_kelamin', 'alamat', 'agama', 'status_pernikahan',
         'pekerjaan', 'nomor_telepon', 'email', 'foto_identitas', 'foto_selvi_ktp',
         'created_at', 'updated_at', 'status', 'nomor_alternatif_1',
-        'nama_alternatif_1', 'nomor_alternatif_2', 'nama_alternatif_2'
+        'nama_alternatif_1'
     ];
 
     public function insertIdentitas($data)

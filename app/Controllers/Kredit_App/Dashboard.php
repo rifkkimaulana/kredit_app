@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Kredit_App;
 
 use App\Models\UsersModel;
 
 class Dashboard extends BaseController
 {
-	// Dashboard View
 	public function index()
 	{
 		if (!session('user_id')) {
@@ -32,10 +31,9 @@ class Dashboard extends BaseController
 			'title' => 'Dashboard',
 			'user' => $user
 		];
-		return view('admin/pages/dashboard', $data);
+		return view('kredit_app/pages/dashboard', $data);
 	}
 
-	// Logout All Session
 	public function logout()
 	{
 		session()->destroy();

@@ -173,7 +173,7 @@ class Penjualan extends Controller
         }
 
         $session->setFlashdata('success', 'Produk berhasil ditambahkan ke keranjang.');
-        return redirect()->to(base_url('keranjang'));
+        return redirect()->to(base_url('transaksi/keranjang'));
     }
 
 

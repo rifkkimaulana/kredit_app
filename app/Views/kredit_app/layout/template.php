@@ -47,8 +47,8 @@
             <img class="animation__shake" src="<?= base_url('assets/image/perusahaan/' . $perusahaan['logo']) ?>" alt="AdminLTELogo" height="60" width="60">
         </div>
 
-        <?= $this->include('admin/layout/navbar'); ?>
-        <?= $this->include('admin/layout/sidebar'); ?>
+        <?= $this->include('kredit_app/layout/navbar'); ?>
+        <?= $this->include('kredit_app/layout/sidebar'); ?>
 
         <div class="content-wrapper">
             <div class="card"></div>

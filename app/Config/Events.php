@@ -42,20 +42,4 @@ Events::on('pre_system', function () {
 		Events::on('DBQuery', 'CodeIgniter\Debug\Toolbar\Collectors\Database::collect');
 		Services::toolbar()->respond();
 	}
-
-	$keranjangModel = new \App\Models\KeranjangModel();
-	$label = $keranjangModel->where('user_id', session('user_id'))->countAllResults();
-
-	$perusahaanModel = new \App\Models\AplikasiModel();
-
-	if (!empty(session('AplicationId'))) {
-		$perusahaan = $perusahaanModel->find(session('AplicationId'));
-	} else {
-		$perusahaan = $perusahaanModel->find(1);
-	}
-
-	\Config\Services::renderer()->setData([
-		'label' => $label,
-		'perusahaan' => $perusahaan
-	]);
 });

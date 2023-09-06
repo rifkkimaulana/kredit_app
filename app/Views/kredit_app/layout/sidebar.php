@@ -7,7 +7,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
 ?>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="<?= $segment1 === 'dashboard' ? 'javascript:void(0);' : base_url('dashboard'); ?>" class="brand-link text-center">
+    <a href="<?= $segment1 === 'ka-dashboard' ? 'javascript:void(0);' : base_url('ka-dashboard'); ?>" class="brand-link text-center">
         <img src="<?= base_url('assets/image/perusahaan/' . $perusahaan['logo']); ?>" alt="<?= $perusahaan['nama_perusahaan'] ?>" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light"><b><?= $perusahaan['nama_aplikasi']; ?></b></span>
     </a>
@@ -23,7 +23,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                 <?php } ?>
             </div>
             <div class="info">
-                <a href="<?= $segment2 === 'profile' ? 'javascript:void(0)' : base_url('pengaturan/profile'); ?>" class="d-block"><?= $user['user_nama']; ?></a>
+                <a href="<?= $segment2 === 'profile' ? 'javascript:void(0)' : base_url('ka-settings/profile'); ?>" class="d-block"><?= $user['user_nama']; ?></a>
             </div>
         </div>
 
@@ -31,14 +31,14 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
 
                 <li class="nav-item">
-                    <a href="<?= $segment1 === 'dashboard' ? 'javascript:void(0);' : base_url('dashboard'); ?>" class="nav-link <?= $segment1 === 'dashboard' ? 'active' : ''; ?>">
+                    <a href="<?= $segment1 === 'ka-dashboard' ? 'javascript:void(0);' : base_url('ka-dashboard'); ?>" class="nav-link <?= $segment1 === 'ka-dashboard' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
 
-                <li class="nav-item <?= $segment1 === 'pengaturan' ? 'menu-open' : ''; ?>">
-                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'pengaturan' ? 'active' : ''; ?>">
+                <li class="nav-item <?= $segment1 === 'ka-settings' ? 'menu-open' : ''; ?>">
+                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'ka-settings' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>
                             Pengaturan
@@ -47,7 +47,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= $segment2 === 'profile' ? 'javascript:void(0)' : base_url('pengaturan/profile'); ?>" class="nav-link <?= $segment2 === 'profile' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'profile' ? 'javascript:void(0)' : base_url('ka-settings/profile'); ?>" class="nav-link <?= $segment2 === 'profile' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Profile</p>
                             </a>

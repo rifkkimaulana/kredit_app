@@ -1,11 +1,9 @@
-<?= $this->extend('admin/layout/template'); ?>
+<?= $this->extend('kredit_app/layout/template'); ?>
 <?= $this->section('content'); ?>
 
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <!-- Main row -->
-        <form role="form" method="post" action="<?= base_url('pengaturan/umum/update'); ?>" enctype="multipart/form-data">
+        <form role="form" method="post" action="<?= base_url('ka-settings/app'); ?>" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
@@ -134,7 +132,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary float-right">Update</button>
+                            <button type="submit" class="btn btn-primary float-right">Perbaharui Aplikasi</button>
                         </div>
                     </div>
                 </div>
@@ -142,6 +140,5 @@
         </form>
     </div>
 </section>
-<!-- /.content -->
 
 <?= $this->endSection(); ?>
