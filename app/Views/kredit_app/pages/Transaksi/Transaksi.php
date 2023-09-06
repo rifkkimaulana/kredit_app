@@ -1,4 +1,4 @@
-<?= $this->extend('admin/layout/template'); ?>
+<?= $this->extend('kredit_app/layout/template'); ?>
 <?= $this->section('content'); ?>
 
 <section class="content">
@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title"><?= $title; ?></h3>
-                <a href="<?= base_url('keranjang'); ?>" type="button" class="btn btn-primary float-right">
+                <a href="<?= base_url('ka-transaksi/keranjang'); ?>" type="button" class="btn btn-primary float-right">
                     Tambah Transaksi
                 </a>
             </div>
@@ -28,7 +28,7 @@
                         <tbody>
                             <?php
                             $no = 1;
-                            foreach ($penjualanList as $penjualan) : ?>
+                            foreach ($penjualanFindAll as $penjualan) : ?>
                                 <tr>
                                     <td class="text-center"><?= $no++ ?></td>
                                     <td class="text-center"><?= $penjualan['tanggal_penjualan'] ?></td>
@@ -60,13 +60,12 @@
                         </tbody>
                     </table>
                 </div>
-            </div> <!-- End Card Body-->
+            </div>
         </div>
     </div>
 </section>
-<!-- /.content -->
 
-<?php foreach ($penjualanList as $penjualan) : ?>
+<?php foreach ($penjualanFindAll as $penjualan) : ?>
     <!-- Detail Modal-->
     <div class="modal fade" id="detailModal<?= $penjualan['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -194,7 +193,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <a href="<?= base_url('penjualan/hapus/' . $penjualan['id']) ?>" class="btn btn-danger">Hapus</a>
+                    <a href="<?= base_url('ka-transaksi/transaksi/d/' . $penjualan['id']) ?>" class="btn btn-danger">Hapus</a>
                 </div>
             </div>
         </div>

@@ -89,8 +89,8 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                 </li>
 
                 <?php if ($user['user_level'] === 'administrator') : ?>
-                    <li class="nav-item <?= $segment1 === 'produk' ? 'menu-open' : ''; ?>">
-                        <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'produk' ? 'active' : ''; ?>">
+                    <li class="nav-item <?= $segment1 === 'ka-produk' ? 'menu-open' : ''; ?>">
+                        <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'ka-produk' ? 'active' : ''; ?>">
                             <i class="nav-icon fas fa-box"></i>
                             <p>
                                 Produk
@@ -99,19 +99,19 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= $segment2 === 'daftar' ? 'javascript:void(0)' : base_url('produk/daftar'); ?>" class="nav-link <?= $segment2 === 'daftar' ? 'active' : ''; ?>">
+                                <a href="<?= $segment2 === 'produk' ? 'javascript:void(0)' : base_url('ka-produk/produk'); ?>" class="nav-link <?= $segment2 === 'produk' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Daftar Produk</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= $segment2 === 'list' ? 'javascript:void(0)' : base_url('produk/list'); ?>" class="nav-link <?= $segment2 === 'list' ? 'active' : ''; ?>">
+                                <a href="<?= $segment2 === 'management_produk' ? 'javascript:void(0)' : base_url('ka-produk/management_produk'); ?>" class="nav-link <?= $segment2 === 'management_produk' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>List Produk</p>
+                                    <p>Management Produk</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= $segment2 === 'kategori' ? 'javascript:void(0)' : base_url('produk/kategori'); ?>" class="nav-link <?= $segment2 === 'kategori' ? 'active' : ''; ?>">
+                                <a href="<?= $segment2 === 'kategori' ? 'javascript:void(0)' : base_url('ka-produk/kategori'); ?>" class="nav-link <?= $segment2 === 'kategori' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Kategori Produk</p>
                                 </a>
@@ -120,8 +120,8 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     </li>
                 <?php endif; ?>
 
-                <li class="nav-item <?= $segment1 === 'transaksi' ? 'menu-open' : ''; ?>">
-                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'penjualan' ? 'active' : ''; ?>">
+                <li class="nav-item <?= $segment1 === 'ka-transaksi' ? 'menu-open' : ''; ?>">
+                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'ka-transaksi' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>
                             Transaksi
@@ -130,15 +130,15 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= $segment2 === 'list_order' ? 'javascript:void(0)' : base_url('transaksi/list_order'); ?>" class="nav-link <?= $segment2 === 'list_order' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'transaksi' ? 'javascript:void(0)' : base_url('ka-transaksi/transaksi'); ?>" class="nav-link <?= $segment2 === 'transaksi' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>List Transaksi</p>
+                                <p>Management Transaksi</p>
                             </a>
                         </li>
                     </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= $segment2 === 'keranjang' ? 'javascript:void(0)' : base_url('transaksi/keranjang'); ?>" class="nav-link <?= $segment2 === 'keranjang' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'keranjang' ? 'javascript:void(0)' : base_url('ka-transaksi/keranjang'); ?>" class="nav-link <?= $segment2 === 'keranjang' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Keranjang</p>
                             </a>

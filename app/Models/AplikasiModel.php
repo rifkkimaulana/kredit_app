@@ -25,7 +25,8 @@ class AplikasiModel extends Model
         'no_rekening2',
         'bank3',
         'atas_nama3',
-        'no_rekening3'
+        'no_rekening3',
+        'slug'
     ];
 
     public function updatePengaturan($id, $data)

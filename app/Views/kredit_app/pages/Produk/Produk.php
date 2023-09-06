@@ -1,4 +1,4 @@
-<?= $this->extend('admin/layout/template'); ?>
+<?= $this->extend('kredit_app/layout/template'); ?>
 <?= $this->section('content'); ?>
 
 <section class="content">
@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <?php foreach ($produkList as $produk) : ?>
+                    <?php foreach ($produkFindAll as $produk) : ?>
                         <div class="col-6 col-sm-4 col-md-3">
                             <a data-toggle="modal" data-target=".bd-example-modal-lg">
                                 <div class="card">

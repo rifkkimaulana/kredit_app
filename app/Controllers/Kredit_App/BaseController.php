@@ -6,6 +6,9 @@ use App\Models\AplikasiModel;
 use App\Models\UsersModel;
 use App\Models\IdentitasModel;
 use App\Models\KeranjangModel;
+use App\Models\PenjualanModel;
+use App\Models\ProdukModel;
+use App\Models\KategoriProdukModel;
 
 /**
  * Class BaseController
@@ -48,10 +51,17 @@ class BaseController extends Controller
 
 	protected $aplikasi;
 
+	protected $produkFindAll;
+	protected $kategoriProdukFindAll;
+	protected $penjualanFindAll;
+
 	protected $userModel;
 	protected $identitasModel;
 	protected $aplikasiModel;
 	protected $keranjangModel;
+	protected $penjualanModel;
+	protected $produkModel;
+	protected $kategoriProdukModel;
 
 	public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
 	{
@@ -69,6 +79,9 @@ class BaseController extends Controller
 		$this->identitasModel = new IdentitasModel();
 		$this->aplikasiModel = new AplikasiModel();
 		$this->keranjangModel = new KeranjangModel();
+		$this->penjualanModel = new PenjualanModel();
+		$this->produkModel = new ProdukModel();
+		$this->kategoriProdukModel = new KategoriProdukModel();
 
 		// Cek sesi pengguna
 		if (!session('user_level') || !(session('user_level') === 'administrator' || session('user_level') === 'member')) {
@@ -77,6 +90,12 @@ class BaseController extends Controller
 
 		$userFindAll = $this->userModel->findAll();
 		$this->userFindAll = $userFindAll;
+
+		$produkFindAll = $this->produkModel->findAll();
+		$this->produkFindAll = $produkFindAll;
+
+		$kategoriProdukFindAll = $this->kategoriProdukModel->findAll();
+		$this->kategoriProdukFindAll = $kategoriProdukFindAll;
 
 		$user = $this->userModel->where('user_id', session('user_id'))->first();
 		$this->user = $user;
@@ -94,5 +113,9 @@ class BaseController extends Controller
 		// Mendapatkan Jumlah Keranjang berdasarkan user_id
 		$label = $this->keranjangModel->where('user_id', session('user_id'))->countAllResults();
 		$this->label = $label;
+
+		// Mendapatkan semua data penjualan
+		$penjualan = $this->penjualanModel->findAll();
+		$this->penjualanFindAll = $penjualan;
 	}
 }

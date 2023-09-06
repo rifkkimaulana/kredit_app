@@ -18,7 +18,7 @@ class WhatsappApi extends BaseController
             'user' => $this->user,
             'perusahaan' => $this->aplikasi,
             'label' => $this->label,
-            'wa' => $wablasModel->find(1)
+            'wa' => $wablasModel->find($this->aplikasi['wablasapi_id'])
         ];
         return view('kredit_app/pages/Settings/ApiWhatsapp', $data);
     }

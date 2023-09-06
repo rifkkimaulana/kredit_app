@@ -1,4 +1,4 @@
-<?= $this->extend('kredit_aoo/layout/template'); ?>
+<?= $this->extend('kredit_app/layout/template'); ?>
 <?= $this->section('content'); ?>
 
 <section class="content">

@@ -55,7 +55,8 @@ $routes->group('meta', ['namespace' => 'App\Controllers\Meta_RG_Controller'], fu
 //$routes->get('/', 'Home::index');
 
 // Routes For Kredit_App
-$routes->group('/', ['namespace' => 'App\Controllers\Kredit_App'], function ($routes) {
+$routes->group('', ['namespace' => 'App\Controllers\Kredit_App'], function ($routes) {
+
 	// ka-dashboard
 	$routes->get('/', 'Dashboard::index');
 	$routes->get('ka-dashboard', 'Dashboard::index');
@@ -79,48 +80,62 @@ $routes->group('/', ['namespace' => 'App\Controllers\Kredit_App'], function ($ro
 		$routes->post('whatsapp_api', 'WhatsappApi::WhatsappApiUpdate');
 	});
 
+	// Produk Routes
+	$routes->group('ka-produk', ['namespace' => 'App\Controllers\Kredit_App\Produk'], function ($routes) {
+		// Produk
+		$routes->get('produk', 'Produk::index');
+
+		// Produk Management
+		$routes->get('management_produk', 'Produk::management_produk');
+		$routes->post('management_produk', 'Produk::produk_post');
+
+		// Kategori Produk
+		$routes->get('kategori', 'Produk::kategori_produk');
+		$routes->post('kategori', 'Produk::kategori_post');
+	});
+
+	// Transaksi
+	$routes->group('ka-transaksi', ['namespace' => 'App\Controllers\Kredit_App\Transaksi'], function ($routes) {
+
+		// Transaksi Management
+		$routes->get('transaksi', 'Transaksi::index');
+		$routes->post('transaksi', 'Transaksi::transaksi_post');
+		$routes->get('transaksi/d/(:num)', 'Transaksi::transaksi_delete/$1');
+		$routes->post('transaksi/verifikasi', 'Transaksi::verifikasi');
+
+		// Statistik Transaksi
+		$routes->get('statistik', 'StatistikPenjualan::index');
+
+		// Penjualan For Keranjang Belanja
+		$routes->get('keranjang', 'Keranjang::index');
+		$routes->post('keranjang', 'Keranjang::keranjang_insert');
+		$routes->get('d/(:num)', 'Keranjang::keranjang_delete/$1');
+	});
+
+	// Paylater
+	$routes->group('ka-paylater', ['namespace' => 'App\Controllers\Kredit_App\Transaksi'], function ($routes) {
+
+		$routes->get('tagihan', 'PayLater::index');
+		$routes->get('pendaftaran_kontrak', 'PayLater::formKontrakNew');
+		$routes->get('kontrak', 'PayLater::KontrakView');
+		$routes->post('tambah', 'PayLater::pembayaranInsert');
+		$routes->get('konfirmasi/(:num)', 'PayLater::pembayaranKonfirmasi/$1');
+		$routes->get('delete/(:num)', 'PayLater::delete/$1');
+		$routes->get('pendaftaran_kontrak/delete/(:num)', 'PayLater::hapusProdukKeranjang/$1');
+		$routes->post('keranjang/cekout', 'PayLater::cekoutPembayaranPaylater');
+		$routes->post('kontrak/verifikasi', 'PayLater::verifikasiPembelianPaylater');
+
+		$routes->get('peninjauan', 'IdentitasController::Peninjauan_view');
+		$routes->get('peninjauan/tolak/(:segment)', 'IdentitasController::PeninjauanTolak/$1');
+		$routes->get('peninjauan/terima/(:segment)', 'IdentitasController::PeninjauanTerima/$1');
+	});
+
+	// Log Aktifitas User
+	$routes->get('log_aktivitas', 'Log::index');
+
 	// End Session All
 	$routes->get('logout', 'Dashboard::logout');
-});
-
-// Pembayaran Tagihan 
-$routes->get('paylater/tagihan', 'PayLater::index');
-$routes->get('paylater/pendaftaran_kontrak', 'PayLater::formKontrakNew');
-$routes->get('paylater/kontrak', 'PayLater::KontrakView');
-$routes->post('paylater/tambah', 'PayLater::pembayaranInsert');
-$routes->get('paylater/konfirmasi/(:num)', 'PayLater::pembayaranKonfirmasi/$1');
-$routes->get('paylater/delete/(:num)', 'PayLater::delete/$1');
-$routes->get('paylater/pendaftaran_kontrak/delete/(:num)', 'PayLater::hapusProdukKeranjang/$1');
-$routes->post('paylater/keranjang/cekout', 'PayLater::cekoutPembayaranPaylater');
-$routes->post('paylater/kontrak/verifikasi', 'PayLater::verifikasiPembelianPaylater');
-
-// Log Aktifitas User
-$routes->get('log_aktivitas', 'LogAktifitas::index');
-
-// Produk Routes
-$routes->get('produk/list', 'Produk::index');
-$routes->get('produk/daftar', 'Produk::daftarProduk');
-$routes->post('produk/tambah', 'Produk::produk_postInsert');
-$routes->post('produk/update', 'Produk::produk_postUpdate');
-$routes->get('produk/delete/(:num)', 'Produk::deleteProduk/$1');
-
-// Produk Routes - kategori
-$routes->get('produk/kategori', 'Produk::kategori');
-$routes->post('produk/kategori/insert', 'Produk::kategori_postInsert');
-$routes->post('produk/daftar/sent', 'Produk::sentProdukForKeranjangKredit');
-$routes->post('produk/kategori/update', 'Produk::kategori_postUpdate');
-$routes->get('produk/kategori/delete/(:num)', 'Produk::deleteKategori/$1');
-
-// Penjualan Barang
-$routes->get('transaksi/list_order', 'Penjualan::index');
-$routes->get('penjualan/hapus/(:num)', 'Penjualan::hapusPenjualan/$1');
-$routes->post('penjualan/verifikasi', 'Penjualan::verifikasi');
-
-// Penjualan For Keranjang Belanja
-$routes->post('transaksi/keranjang', 'Penjualan::keranjang_addPost');
-$routes->get('transaksi/keranjang', 'Penjualan::keranjang');
-$routes->post('penjualan/cekout', 'Penjualan::cekout');
-$routes->get('keranjang/delete/(:num)', 'Penjualan::hapusProdukKeranjang/$1');
+}); // End Kredit APP
 
 // Autentikasi Users
 $routes->get('login', 'Auth::index');
@@ -129,16 +144,6 @@ $routes->get('forgot-password', 'Auth::forgot_password');
 $routes->post('forgot-password', 'Auth::forgot_password_post');
 $routes->get('recovery/(:segment)', 'Auth::recovery_view/$1');
 $routes->post('recovery', 'Auth::recovery_post');
-
-// Identitas User Add
-$routes->get('identitas', 'IdentitasController::index');
-$routes->post('identitas/create', 'IdentitasController::simpanData');
-$routes->get('identitas/update', 'IdentitasController::UpdateIdentitas_view');
-$routes->post('identitas/update', 'IdentitasController::UpdateIdentitas_post');
-
-$routes->get('paylater/peninjauan', 'IdentitasController::Peninjauan_view');
-$routes->get('paylater/peninjauan/tolak/(:segment)', 'IdentitasController::PeninjauanTolak/$1');
-$routes->get('paylater/peninjauan/terima/(:segment)', 'IdentitasController::PeninjauanTerima/$1');
 
 // Sign With Whatsapp Number only OTP Code
 $routes->get('whatsapp', 'Auth::signWhatsappNumber');
@@ -150,9 +155,6 @@ $routes->post('register', 'Auth::register_post');
 
 $routes->get('google', 'Auth::googleAuth');
 $routes->get('google/callback', 'Auth::googleAuth_callback');
-
-// Statistik Penjualan
-$routes->get('penjualan/statistik', 'StatistikPenjualan::index');
 
 /**
  * --------------------------------------------------------------------

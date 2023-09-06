@@ -17,7 +17,7 @@ class GoogleApi extends BaseController
             'user' => $this->user,
             'perusahaan' => $this->aplikasi,
             'label' => $this->label,
-            'google' => $googleApiModel->find(1)
+            'google' => $googleApiModel->find($this->aplikasi['googleapi_id'])
         ];
         return view('kredit_app/pages/Settings/ApiGoogle', $data);
     }

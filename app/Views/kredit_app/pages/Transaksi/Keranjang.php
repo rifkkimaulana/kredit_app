@@ -1,9 +1,9 @@
-<?= $this->extend('admin/layout/template'); ?>
+<?= $this->extend('kredit_app/layout/template'); ?>
 <?= $this->section('content'); ?>
 
 <section class="content">
     <div class="container-fluid">
-        <form method="post" action="<?= base_url('penjualan/cekout') ?>">
+        <form method="post" action="<?= base_url('ka-transaksi/transaksi') ?>">
             <div class="row">
                 <div class="col-md-5">
                     <div class="card">
@@ -27,7 +27,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="float-right">
-                                                <a href="<?= base_url('keranjang/delete/' . $item['id']) ?>" class="btn btn-sm btn-danger">Hapus</a>
+                                                <a href="<?= base_url('ka-transaksi/d/' . $item['id']) ?>" class="btn btn-sm btn-danger">Hapus</a>
                                             </div>
                                             <h3><?= $produk[$item['produk_id']]['nama_produk'] ?></h3>
                                             <hr>
@@ -78,7 +78,7 @@
                             <hr>
                             <div class="card-footer">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="setuju" id="setuju">
+                                    <input class="form-check-input" type="radio" name="setujukebijakan">
                                     <label class="form-check-label" for="setuju">
                                         Saya telah membaca, memahami, dan menyetujui Syarat dan Ketentuan Penggunaan Layanan Pembiayaan dan Perjanjian Pembiayaan
                                     </label>
@@ -107,7 +107,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="<?= base_url('transaksi/keranjang') ?>">
+            <form method="post" action="<?= base_url('ka-transaksi/keranjang') ?>">
                 <div class="modal-body">
                     <table id="tableAddPenjualan" class="table table-bordered table-striped">
                         <thead>
