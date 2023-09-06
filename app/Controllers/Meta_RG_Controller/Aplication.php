@@ -3,23 +3,19 @@
 namespace App\Controllers\Meta_RG_Controller;
 
 use App\Controllers\Meta_RG_Controller\BaseController;
-use App\Models\UsersModel;
-use App\Models\AplikasiModel;
 
 class Aplication extends BaseController
 {
     public function index()
     {
-        $userModel = new UsersModel();
-        $user = $userModel->find(session('user_id'));
+        $user = $this->userModel->find(session('user_id'));
 
-        $aplikasiModel = new AplikasiModel();
-        $appList = $aplikasiModel->findAll();
+        $appList = $this->aplikasiModel->findAll();
 
         $data = [
             'title' => 'Aplication Management',
             'user' => $user,
-            'appList' => $appList
+            'appList' => $appList,
         ];
 
         return view('MetaView/Pages/AppManagement', $data);
@@ -27,6 +23,8 @@ class Aplication extends BaseController
 
     public function sign_in()
     {
+        session()->remove('ApplicationId');
+
         if ($this->request->getMethod() === 'post') {
 
             $app_id = $this->request->getPost('app_id');
@@ -34,7 +32,7 @@ class Aplication extends BaseController
             session()->set('ApplicationId', $app_id);
 
             session()->setFlashdata('success', 'Anda berhasil beralih.');
-            return redirect()->to(base_url('dashboard'));
+            return redirect()->to(base_url('ka-dashboard'));
         }
     }
 }

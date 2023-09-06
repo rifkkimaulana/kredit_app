@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UsersModel;
 use App\Models\GoogleApiModel;
+use App\Models\AplikasiModel;
 
 class Auth extends BaseController
 {
@@ -15,7 +16,7 @@ class Auth extends BaseController
             if ($userLevel === 'administrator') {
                 return redirect()->to(base_url('meta/dashboard'));
             } else {
-                return redirect()->to(base_url('dashboard'));
+                return redirect()->to(base_url($this->aplikasi['slug']));
             }
         }
 
@@ -33,7 +34,7 @@ class Auth extends BaseController
             if ($userLevel === 'administrator') {
                 return redirect()->to(base_url('meta/dashboard'));
             } else {
-                return redirect()->to(base_url('dashboard'));
+                return redirect()->to(base_url($this->aplikasi['slug']));
             }
         }
 
@@ -59,6 +60,7 @@ class Auth extends BaseController
         if ($pengguna && password_verify($password, $pengguna['user_password'])) {
             session()->set('user_id', $pengguna['user_id']);
             session()->set('user_level', $pengguna['user_level']);
+            session()->set('ApplicationId', $pengguna['app_id']);
 
             // Jika kotak Remember Me dicentang, atur cookie
             if ($this->request->getPost('remember')) {
@@ -75,7 +77,7 @@ class Auth extends BaseController
             if ($userLevel === 'administrator') {
                 return redirect()->to(base_url('meta/dashboard'));
             } else {
-                return redirect()->to(base_url('dashboard'));
+                return redirect()->to(base_url($this->aplikasi['slug']));
             }
         } else {
             session()->setFlashdata('error', 'Kredensial tidak valid. Silakan coba lagi.');
@@ -91,7 +93,7 @@ class Auth extends BaseController
             if ($userLevel === 'administrator') {
                 return redirect()->to(base_url('meta/dashboard'));
             } else {
-                return redirect()->to(base_url('dashboard'));
+                return redirect()->to(base_url($this->aplikasi['slug']));
             }
         }
 
@@ -131,7 +133,7 @@ class Auth extends BaseController
             if ($userLevel === 'administrator') {
                 return redirect()->to(base_url('meta/dashboard'));
             } else {
-                return redirect()->to(base_url('dashboard'));
+                return redirect()->to(base_url($this->aplikasi['slug']));
             }
         }
 

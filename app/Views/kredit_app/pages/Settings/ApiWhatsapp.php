@@ -1,11 +1,9 @@
-<?= $this->extend('admin/layout/template'); ?>
+<?= $this->extend('kredit_app/layout/template'); ?>
 <?= $this->section('content'); ?>
 
-<!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <!-- Main row -->
-        <form role="form" method="post" action="<?= base_url('pengaturan/whatsapp_api/update'); ?>" enctype="multipart/form-data">
+        <form role="form" method="post" action="<?= base_url('ka-settings/whatsapp_api'); ?>">
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
@@ -47,6 +45,5 @@
         </form>
     </div>
 </section>
-<!-- /.content -->
 
 <?= $this->endSection(); ?>

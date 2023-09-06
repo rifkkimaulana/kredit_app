@@ -57,7 +57,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     <?php if ($user['user_level'] === 'administrator') : ?>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= $segment2 === 'umum' ? 'javascript:void(0)' : base_url('pengaturan/umum'); ?>" class="nav-link <?= $segment2 === 'umum' ? 'active' : ''; ?>">
+                                <a href="<?= $segment2 === 'app' ? 'javascript:void(0)' : base_url('ka-settings/app'); ?>" class="nav-link <?= $segment2 === 'app' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Pengaturan Umum</p>
                                 </a>
@@ -65,21 +65,21 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= $segment2 === 'users' ? 'javascript:void(0)' : base_url('pengaturan/users'); ?>" class="nav-link <?= $segment2 === 'users' ? 'active' : ''; ?>"> <i class="far fa-circle nav-icon"></i>
+                                <a href="<?= $segment2 === 'users' ? 'javascript:void(0)' : base_url('ka-settings/users'); ?>" class="nav-link <?= $segment2 === 'users' ? 'active' : ''; ?>"> <i class="far fa-circle nav-icon"></i>
                                     <p>Manajemen Users</p>
                                 </a>
                             </li>
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= $segment2 === 'google_api' ? 'javascript:void(0)' : base_url('pengaturan/google_api'); ?>" class="nav-link <?= $segment2 === 'google_api' ? 'active' : ''; ?>"> <i class="far fa-circle nav-icon"></i>
+                                <a href="<?= $segment2 === 'google_api' ? 'javascript:void(0)' : base_url('ka-settings/google_api'); ?>" class="nav-link <?= $segment2 === 'google_api' ? 'active' : ''; ?>"> <i class="far fa-circle nav-icon"></i>
                                     <p>Google Api</p>
                                 </a>
                             </li>
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= $segment2 === 'whatsapp_api' ? 'javascript:void(0)' : base_url('pengaturan/whatsapp_api'); ?>" class="nav-link <?= $segment2 === 'whatsapp_api' ? 'active' : ''; ?>">
+                                <a href="<?= $segment2 === 'whatsapp_api' ? 'javascript:void(0)' : base_url('ka-settings/whatsapp_api'); ?>" class="nav-link <?= $segment2 === 'whatsapp_api' ? 'active' : ''; ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Whatsapp API</p>
                                 </a>

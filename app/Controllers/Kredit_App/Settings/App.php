@@ -57,8 +57,6 @@ class App extends BaseController
 
                 $logo->move(FCPATH . 'assets/image/perusahaan/', $logoName);
                 $data = ['logo' => $logoName];
-            } else {
-                return redirect()->to(base_url('ka-settings/app'))->with('error', 'Gagal memperbaharui logo perusahaan, cek kembali ukuran file-nya.');
             }
 
             $this->aplikasiModel->updatePengaturan(1, $data);

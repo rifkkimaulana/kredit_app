@@ -44,7 +44,7 @@
             <a class="nav-link" href="<?= base_url('transaksi/keranjang') ?>">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="badge badge-warning navbar-badge">
-                    <?= $this->label; ?>
+                    <?= $label; ?>
                 </span>
             </a>
         </li>

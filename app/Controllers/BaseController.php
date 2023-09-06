@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\AplikasiModel;
+
 /**
  * Class BaseController
  *
@@ -29,6 +31,7 @@ class BaseController extends Controller
 	 */
 	protected $helpers = [];
 
+	protected $aplikasi;
 	/**
 	 * Constructor.
 	 */
@@ -42,5 +45,9 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// E.g.:
 		// $this->session = \Config\Services::session();
+
+		$aplikasiModel = new AplikasiModel();
+		$aplikasi = $aplikasiModel->where('id', session('ApplicationId'))->first();
+		$this->aplikasi = $aplikasi;
 	}
 }

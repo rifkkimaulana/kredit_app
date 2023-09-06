@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Dashboard');
+$routes->setDefaultController('Auth');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -61,21 +61,26 @@ $routes->group('/', ['namespace' => 'App\Controllers\Kredit_App'], function ($ro
 	$routes->get('ka-dashboard', 'Dashboard::index');
 
 	// ka-settings - Profile
-	$routes->get('ka-settings/profile', 'Settings/Profile::index');
-	$routes->post('ka-settings/profile', 'Settings/Profile::profile_update');
+	$routes->group('ka-settings', ['namespace' => 'App\Controllers\Kredit_App\Settings'], function ($routes) {
+		$routes->get('profile', 'Profile::index');
+		$routes->post('profile', 'Profile::profile_update');
 
-	$routes->get('ka-settings/app', 'Settings/App::index');
-	$routes->post('ka-settings/app', 'Settings/App::app_update');
+		$routes->get('app', 'App::index');
+		$routes->post('app', 'App::app_update');
 
-	$routes->get('ka-settings/google_api', 'Pengaturan::settingApiGoogle');
-	$routes->post('pengaturan/google_api/update', 'Pengaturan::settingApiGoogle_post');
+		$routes->get('users', 'Users::index');
+		$routes->post('users', 'Users::user_update');
+		$routes->get('users/(:num)', 'Users::user_delete/$1');
 
-	$routes->get('ka-settings/users', 'Pengaturan::users');
-	$routes->post('pengaturan/users/update', 'Pengaturan::user_postUpdate');
-	$routes->get('ka-settings/users/delete/(:num)', 'Pengaturan::deleteUsers/$1');
+		$routes->get('google_api', 'GoogleApi::index');
+		$routes->post('google_api', 'GoogleApi::GoogleApiUpdate');
 
-	$routes->get('ka-settings/whatsapp_api', 'Pengaturan::whatsappApiSetting');
-	$routes->post('pengaturan/whatsapp_api/update', 'Pengaturan::whatsappApiSetting_update');
+		$routes->get('whatsapp_api', 'WhatsappApi::index');
+		$routes->post('whatsapp_api', 'WhatsappApi::WhatsappApiUpdate');
+	});
+
+	// End Session All
+	$routes->get('logout', 'Dashboard::logout');
 });
 
 // Pembayaran Tagihan 
@@ -148,29 +153,6 @@ $routes->get('google/callback', 'Auth::googleAuth_callback');
 
 // Statistik Penjualan
 $routes->get('penjualan/statistik', 'StatistikPenjualan::index');
-
-// Dashboard Pages
-
-
-// End Session All
-$routes->get('logout', 'Dashboard::logout');
-
-// Pengaturan menu
-$routes->get('pengaturan/profile', 'Pengaturan::profile');
-$routes->post('pengaturan/profile_update', 'Pengaturan::profilePostUpdate');
-
-$routes->get('pengaturan/google_api', 'Pengaturan::settingApiGoogle');
-$routes->post('pengaturan/google_api/update', 'Pengaturan::settingApiGoogle_post');
-
-$routes->get('pengaturan/umum', 'Pengaturan::pengaturan');
-$routes->post('pengaturan/umum/update', 'Pengaturan::pengaturanPostUpdate');
-
-$routes->get('pengaturan/users', 'Pengaturan::users');
-$routes->post('pengaturan/users/update', 'Pengaturan::user_postUpdate');
-$routes->get('pengaturan/users/delete/(:num)', 'Pengaturan::deleteUsers/$1');
-
-$routes->get('pengaturan/whatsapp_api', 'Pengaturan::whatsappApiSetting');
-$routes->post('pengaturan/whatsapp_api/update', 'Pengaturan::whatsappApiSetting_update');
 
 /**
  * --------------------------------------------------------------------

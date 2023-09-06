@@ -1,4 +1,4 @@
-<?= $this->extend('admin/layout/template'); ?>
+<?= $this->extend('kredit_app/layout/template'); ?>
 <?= $this->section('content'); ?>
 
 <section class="content">
@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Manajemen Users</h3>
+                        <h3 class="card-title"><?= $title; ?></h3>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -15,7 +15,7 @@
                                 <thead>
                                     <tr>
                                     <tr>
-                                        <th class="text-center" style="padding: 10px;"></th>
+                                        <th class="text-center" style="padding: 10px;">No</th>
                                         <th class="text-center" style="padding: 10px;">Nama</th>
                                         <th class="text-center" style="padding: 10px;">Username</th>
                                         <th class="text-center" style="padding: 10px;">Email</th>
@@ -27,11 +27,7 @@
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    foreach ($allUsers as $user) :
-                                        if ($user['user_level'] === 'administrator' && session('user_level') !== 'administrator') {
-                                            continue;
-                                        }
-                                    ?>
+                                    foreach ($userFindAll as $user) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
                                             <td><?= $user['user_nama'] ?></td>
@@ -65,7 +61,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                        <a href="<?= base_url('pengaturan/users/delete/' . $user['user_id']) ?>" class="btn btn-danger">Hapus</a>
+                                                        <a href="<?= base_url('ka-settings/users/' . $user['user_id']) ?>" class="btn btn-danger">Hapus</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,7 +81,7 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form method="post" action="<?= base_url('pengaturan/users/update'); ?>" enctype="multipart/form-data">
+                                                    <form method="post" action="<?= base_url('ka-settings/users'); ?>" enctype="multipart/form-data">
                                                         <div class="modal-body">
                                                             <div class="tab-content">
                                                                 <div class="tab-pane" id="edit<?= $user['user_id'] ?>">

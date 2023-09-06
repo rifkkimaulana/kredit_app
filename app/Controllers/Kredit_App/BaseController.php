@@ -41,6 +41,7 @@ class BaseController extends Controller
 	// New Protected String
 
 	protected $user;
+	protected $userFindAll;
 	protected $identitas;
 
 	protected $label;
@@ -69,17 +70,18 @@ class BaseController extends Controller
 		$this->aplikasiModel = new AplikasiModel();
 		$this->keranjangModel = new KeranjangModel();
 
-
-
 		// Cek sesi pengguna
 		if (!session('user_level') || !(session('user_level') === 'administrator' || session('user_level') === 'member')) {
 			return redirect()->to(base_url('login'))->with('error', 'Anda tidak memiliki izin akses.');
 		}
 
-		// Mendapatkan data pengguna menggunakan model berdasarkan session user_id
+		$userFindAll = $this->userModel->findAll();
+		$this->userFindAll = $userFindAll;
+
 		$user = $this->userModel->where('user_id', session('user_id'))->first();
-		$identitas = $this->identitasModel->where('user_id', session('user_id'))->first();
 		$this->user = $user;
+
+		$identitas = $this->identitasModel->where('user_id', session('user_id'))->first();
 		$this->identitas = $identitas;
 
 		// Mendapatkan Sesi Aktif Aplikasi
