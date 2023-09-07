@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Sep 2023 pada 19.37
+-- Waktu pembuatan: 07 Sep 2023 pada 23.50
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.3.0
 
@@ -111,7 +111,7 @@ CREATE TABLE `tb_identitas` (
 --
 
 INSERT INTO `tb_identitas` (`id`, `user_id`, `nama_lengkap`, `nomor_identitas`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `agama`, `status_pernikahan`, `pekerjaan`, `foto_identitas`, `foto_selvi_ktp`, `status`, `created_at`, `updated_at`, `nomor_alternatif_1`, `nama_alternatif_1`) VALUES
-(7, 4, 'Rifki Maulana', '32110303254158', 'Sumedang', '2023-09-07', 'Perempuan', 'op[huilo', 'ISLAM', 'Menikah', 'fftyu', 'ktp_1693989136_35d6301c533de1c54117.jpg', 'selvi_1693989136_c940f7388a12471160a2.jpg', 'Sedang Ditinjau', '2023-09-06 08:17:25', '2023-09-06 08:32:16', 'rtyu', 'rtyu');
+(8, 16, 'Dian Witura', '3211030313210032', 'Sumedang', '1997-02-09', 'Laki-laki', 'Sumedang', 'Islam', 'Cerai', 'Wiraswasta', 'ktp_1694089038_d8e94dff168c31aa4d80.jpg', 'selvi_1694089038_6023125f53c02bf7c30c.jpg', 'Disetujui', '2023-09-07 12:16:30', '2023-09-07 12:17:41', '-', '-');
 
 -- --------------------------------------------------------
 
@@ -230,7 +230,7 @@ CREATE TABLE `tb_penjualan` (
 --
 
 INSERT INTO `tb_penjualan` (`id`, `no_transaksi`, `tanggal_penjualan`, `id_users`, `id_produk`, `jumlah`, `harga_satuan`, `total_harga`, `metode_pembayaran`, `status`, `no_referensi`, `no_kontrak`, `created_at`, `updated_at`) VALUES
-(4, '20230906122115', '2023-09-06', 12, 10, 1, '20000.00', '20000.00', 'Tunai', 'pending', '20230906122115WK9JZY', '', '2023-09-06 17:21:15', '2023-09-06 17:21:15');
+(15, '20230907145456', '2023-09-07', 16, 10, 1, '20000.00', '20000.00', 'Tunai', 'pending', '20230907145456Z0T2RH', '', '2023-09-07 19:54:56', '2023-09-07 19:54:56');
 
 -- --------------------------------------------------------
 
@@ -255,7 +255,7 @@ CREATE TABLE `tb_produk` (
 --
 
 INSERT INTO `tb_produk` (`id`, `nama_produk`, `deskripsi`, `harga`, `stok`, `gambar`, `kategori_id`, `created_at`, `updated_at`) VALUES
-(10, 'Paket Mendak Studio', 'Paket Mendak Studio', '20000.00', 99, '1693720748_5e345c6609ad983083bb.jpg', 4, '2023-09-03 05:59:08', '2023-09-06 17:20:38');
+(10, 'Paket Mendak Studio', 'Paket Mendak Studio', '20000.00', 97, '1693720748_5e345c6609ad983083bb.jpg', 4, '2023-09-03 05:59:08', '2023-09-07 18:07:19');
 
 -- --------------------------------------------------------
 
@@ -287,10 +287,9 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`user_id`, `user_nama`, `user_username`, `user_password`, `user_foto`, `user_level`, `email`, `no_wa`, `reset_token`, `reset_id`, `keterangan`, `app_id`, `country`, `facebook`, `tweeter`, `instagram`) VALUES
-(4, 'Rifki Maulana', 'admin', '$2y$10$FWIR7MpBvlYjO.ocx1NZI.iFgb68KxmNWRxYGarVCbQD9kzr9LLC.', '1693988547_0078b59238b5f1c15c9f.webp', 'administrator', 'rifkkimaulana@gmail.com', '083130649979', '', '', '', 1, 'Indonesia', '', '', ''),
-(12, 'kiki', 'kiki', '$2y$10$17MErUlwytGwpynH6CIymuZbD0IWxn2ibJEQ8uT9rNMEOSnaaCFX.', NULL, 'member', 'rifki@gmail.com', '', '', '', '', 0, '', '', '', ''),
-(13, 'asdf', 'asdf', '$2y$10$vXGr/Qx0d3baMzvvy1mg5.AL41V4euB/gSUBztpXvfKrXT1vOlRWi', NULL, 'member', '', '628989858782', '', '', '', 1, '', '', '', ''),
-(15, '', 'username_4e1094948e', '', NULL, '', '5f3b7c12d3sample@gmail.com', '088288284654', '', '', '', 0, '', '', '', '');
+(4, 'Rifki Maulana', 'admin', '$2y$10$sTLQNlIPTteXcji08YPX4eC1Ob5KQy7.P95.GmIeSnapLpPoUsUh2', '1693988547_0078b59238b5f1c15c9f.webp', 'administrator', 'rifkkimaulana@gmail.com', '083130649979', '', 'be6b8b1e-59da-41df-86ed-4a03dce719ec', '', 1, 'Indonesia', '', '', ''),
+(16, 'Dian Witura', 'dian', '$2y$10$MTHn9EWgER0HkqQpxifyYOkMmOYTh7FzE0kgrUNvo6.o7/xp8LsF.', NULL, 'member', '64f9be690a6ac_contoh@emailkamu.com', '082118844992', '', '', '', 1, '', '', '', ''),
+(17, 'asd', 'asd', '$2y$10$GPmOR8STy.kKBEGLHQmruOLBHVgJFHBnbMgEZ8I5xvc8Gbu9x74Mu', NULL, 'member', '64fa242d49c30_cth@email.com', 'asd', '', '', '', 1, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -416,19 +415,19 @@ ALTER TABLE `tb_google_api_login`
 -- AUTO_INCREMENT untuk tabel `tb_identitas`
 --
 ALTER TABLE `tb_identitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_kategoriproduk`
 --
 ALTER TABLE `tb_kategoriproduk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_keranjang`
 --
 ALTER TABLE `tb_keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_kredit`
@@ -452,19 +451,19 @@ ALTER TABLE `tb_pembayaran`
 -- AUTO_INCREMENT untuk tabel `tb_penjualan`
 --
 ALTER TABLE `tb_penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_produk`
 --
 ALTER TABLE `tb_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_wablas`
