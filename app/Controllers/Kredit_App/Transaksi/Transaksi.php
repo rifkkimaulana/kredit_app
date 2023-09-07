@@ -210,7 +210,7 @@ class Transaksi extends BaseController
             $this->produkModel->updateProduk($produk_id, $dataProduk);
 
             session()->setFlashdata('success', 'Transaksi ini berhasil diverifikasi.');
-            return redirect()->to(base_url('k-transaksi/transaksi'));
+            return redirect()->to(base_url('ka-transaksi/transaksi'));
         }
     }
 }

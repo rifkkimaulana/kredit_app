@@ -16,7 +16,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * Router Setup
  * --------------------------------------------------------------------
  */
-$routes->setDefaultNamespace('App\Controllers');
+$routes->setDefaultNamespace('App\Controllers\Auth');
 $routes->setDefaultController('Auth');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
@@ -145,24 +145,31 @@ $routes->group('', ['namespace' => 'App\Controllers\Kredit_App'], function ($rou
 });
 // End Kredit APP
 
-// Autentikasi Users
-$routes->get('login', 'Auth::index');
-$routes->post('login', 'Auth::login');
-$routes->get('forgot-password', 'Auth::forgot_password');
-$routes->post('forgot-password', 'Auth::forgot_password_post');
-$routes->get('recovery/(:segment)', 'Auth::recovery_view/$1');
-$routes->post('recovery', 'Auth::recovery_post');
+// Auth Users
+$routes->group('', ['namespace' => 'App\Controllers\Auth'], function ($routes) {
 
-// Sign With Whatsapp Number only OTP Code
-$routes->get('whatsapp', 'Auth::signWhatsappNumber');
-$routes->post('whatsapp/send_otp', 'Auth::signWhatsappNumber_post');
-$routes->get('login/(:segment)', 'Auth::signWhatsappNumber_login/$1');
+	// Autentikasi Users
+	$routes->get('login', 'Login::index');
+	$routes->post('login', 'Login::login_post');
 
-$routes->get('register', 'Auth::register');
-$routes->post('register', 'Auth::register_post');
+	$routes->get('forgot-password', 'ForgotPassword::forgot_password');
+	$routes->post('forgot-password', 'ForgotPassword::forgot_password_post');
+	$routes->get('recovery/(:segment)', 'ForgotPassword::recovery_view/$1');
+	$routes->post('recovery', 'ForgotPassword::recovery_post');
 
-$routes->get('google', 'Auth::googleAuth');
-$routes->get('google/callback', 'Auth::googleAuth_callback');
+	// Sign With Whatsapp Number only OTP Code
+	$routes->get('whatsapp', 'Whatsapp::index');
+	$routes->post('whatsapp/send_otp', 'Whatsapp::signWhatsappNumber_post');
+	$routes->get('login/(:segment)', 'Whatsapp::signWhatsappNumber_login/$1');
+
+	$routes->get('register', 'Register::index');
+	$routes->post('register', 'Register::register_post');
+
+	$routes->get('google', 'Google::googleAuth');
+	$routes->get('google/callback', 'Google::googleAuth_callback');
+});
+// End Auth Users
+
 
 /**
  * --------------------------------------------------------------------

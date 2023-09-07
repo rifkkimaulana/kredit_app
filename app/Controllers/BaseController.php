@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 use App\Models\AplikasiModel;
 
+use App\Models\UsersModel;
+use App\Models\GoogleApiModel;
+
 /**
  * Class BaseController
  *
@@ -31,7 +34,12 @@ class BaseController extends Controller
 	 */
 	protected $helpers = [];
 
+	protected $usersModel;
+	protected $googleModel;
+
 	protected $aplikasi;
+	protected $googleData;
+
 	/**
 	 * Constructor.
 	 */
@@ -47,7 +55,13 @@ class BaseController extends Controller
 		// $this->session = \Config\Services::session();
 
 		$aplikasiModel = new AplikasiModel();
+		$googleModel = new GoogleApiModel();
+		$this->usersModel = new UsersModel();
+		$this->googleModel = new GoogleApiModel();
+
 		$aplikasi = $aplikasiModel->where('id', session('ApplicationId'))->first();
 		$this->aplikasi = $aplikasi;
+
+		$this->googleData = $googleModel->where('id', 1)->first();
 	}
 }

@@ -209,7 +209,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="post" action="<?= base_url('penjualan/verifikasi') ?>">
+                <form method="post" action="<?= base_url('ka-transaksi/transaksi/verifikasi') ?>">
                     <div class="modal-body">
                         <input type="hidden" class="form-control" name="penjualan_id" value="<?= $penjualan['id'] ?>">
                         <input type="hidden" class="form-control" name="produk_id" value="<?= $penjualan['id_produk'] ?>">
