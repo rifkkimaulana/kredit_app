@@ -134,6 +134,14 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="<?= $segment2 === 'laporan' ? 'javascript:void(0)' : base_url('ka-transaksi/laporan'); ?>" class="nav-link <?= $segment2 === 'laporan' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Laporan Keuangan</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
                             <a href="<?= $segment2 === 'keranjang' ? 'javascript:void(0)' : base_url('ka-transaksi/keranjang'); ?>" class="nav-link <?= $segment2 === 'keranjang' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Keranjang</p>

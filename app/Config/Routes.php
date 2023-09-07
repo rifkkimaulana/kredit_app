@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers\Auth');
-$routes->setDefaultController('Auth');
+$routes->setDefaultController('Login');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -108,6 +108,11 @@ $routes->group('', ['namespace' => 'App\Controllers\Kredit_App'], function ($rou
 		$routes->get('keranjang', 'Keranjang::index');
 		$routes->post('keranjang', 'Keranjang::keranjang_insert');
 		$routes->get('d/(:num)', 'Keranjang::keranjang_delete/$1');
+
+		// Laporan Keuangan
+		$routes->get('laporan', 'Laporan::index');
+		$routes->get('laporan/filter', 'Laporan::filter');
+		$routes->get('laporan/cetak', 'Laporan::cetak');
 	});
 
 	// Paylater
@@ -152,10 +157,11 @@ $routes->group('', ['namespace' => 'App\Controllers\Auth'], function ($routes) {
 	$routes->get('login', 'Login::index');
 	$routes->post('login', 'Login::login_post');
 
-	$routes->get('forgot-password', 'ForgotPassword::forgot_password');
+	$routes->get('forgot-password', 'ForgotPassword::index');
 	$routes->post('forgot-password', 'ForgotPassword::forgot_password_post');
-	$routes->get('recovery/(:segment)', 'ForgotPassword::recovery_view/$1');
-	$routes->post('recovery', 'ForgotPassword::recovery_post');
+
+	$routes->get('recovery/(:segment)', 'Recovery::index/$1');
+	$routes->post('recovery', 'Recovery::recovery_post');
 
 	// Sign With Whatsapp Number only OTP Code
 	$routes->get('whatsapp', 'Whatsapp::index');

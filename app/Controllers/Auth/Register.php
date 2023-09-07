@@ -57,7 +57,8 @@ class Register extends BaseController
             'email' => $email,
             'no_wa' => $no_wa,
             'user_password' => $hashedPassword,
-            'user_level' => 'member'
+            'user_level' => 'member',
+            'app_id' => '1'
         ];
 
         $this->usersModel->insertUsersMember($userData);

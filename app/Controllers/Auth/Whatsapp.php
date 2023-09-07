@@ -54,6 +54,7 @@ class Whatsapp extends BaseController
 
             session()->set('user_id', $user['user_id']);
             session()->set('user_level', $user['user_level']);
+            session()->set('ApplicationId', $user['app_id']);
 
             $data = [
                 'reset_id' => '',

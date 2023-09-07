@@ -51,7 +51,7 @@ class Recovery extends BaseController
                 return redirect()->to("recovery/$token");
             }
         } else {
-            session()->setFlashdata('error', 'Gagal diperbaharui, coba lagi dari awal.');
+            session()->setFlashdata('error', 'Gagal diperbaharui, Token expired.');
             return redirect()->to(base_url('login'));
         }
     }
