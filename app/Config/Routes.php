@@ -23,26 +23,6 @@ $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(true);
 
-/**
- * --------------------------------------------------------------------
- * Meta RG Aplication - Routes Configuration
- * --------------------------------------------------------------------
- */
-// Meta Panel
-$routes->group('meta', ['namespace' => 'App\Controllers\Meta_RG_Controller'], function ($routes) {
-
-	//Meta Dashboard
-	$routes->get('/', 'Dashboard::index');
-	$routes->get('dashboard', 'Dashboard::index');
-
-	// Meta Management Aplications
-	$routes->get('app_management', 'Aplication::index');
-	$routes->post('open/aplication', 'Aplication::sign_in');
-
-
-	$routes->get('user_management', 'Users::index');
-});
-
 
 /**
  * --------------------------------------------------------------------
@@ -53,6 +33,27 @@ $routes->group('meta', ['namespace' => 'App\Controllers\Meta_RG_Controller'], fu
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 //$routes->get('/', 'Home::index');
+
+
+/**
+ * --------------------------------------------------------------------
+ * Meta RG Aplication - Routes Configuration
+ * --------------------------------------------------------------------
+ */
+
+
+// Meta Panel
+$routes->group('meta', ['namespace' => 'App\Controllers\Meta_RG_Controller'], function ($routes) {
+	//Meta Dashboard
+	$routes->get('/', 'Dashboard::index');
+	$routes->get('dashboard', 'Dashboard::index');
+
+	// Meta Management Aplications
+	$routes->get('app_management', 'Aplication::index');
+	$routes->post('open/aplication', 'Aplication::sign_in');
+	$routes->get('user_management', 'Users::index');
+});
+// END Meta Panel
 
 // Routes For Kredit_App
 $routes->group('', ['namespace' => 'App\Controllers\Kredit_App'], function ($routes) {
@@ -103,9 +104,6 @@ $routes->group('', ['namespace' => 'App\Controllers\Kredit_App'], function ($rou
 		$routes->get('transaksi/d/(:num)', 'Transaksi::transaksi_delete/$1');
 		$routes->post('transaksi/verifikasi', 'Transaksi::verifikasi');
 
-		// Statistik Transaksi
-		$routes->get('statistik', 'StatistikPenjualan::index');
-
 		// Penjualan For Keranjang Belanja
 		$routes->get('keranjang', 'Keranjang::index');
 		$routes->post('keranjang', 'Keranjang::keranjang_insert');
@@ -113,21 +111,26 @@ $routes->group('', ['namespace' => 'App\Controllers\Kredit_App'], function ($rou
 	});
 
 	// Paylater
-	$routes->group('ka-paylater', ['namespace' => 'App\Controllers\Kredit_App\Transaksi'], function ($routes) {
+	$routes->group('ka-paylater', ['namespace' => 'App\Controllers\Kredit_App\Paylater'], function ($routes) {
 
-		$routes->get('tagihan', 'PayLater::index');
-		$routes->get('pendaftaran_kontrak', 'PayLater::formKontrakNew');
-		$routes->get('kontrak', 'PayLater::KontrakView');
+		$routes->get('kontrak', 'Kontrak::index');
+		$routes->get('pembayaran', 'Pembayaran::index');
+		$routes->post('pembayaran', 'Pembayaran::index');
+
+		$routes->post('verifikasi', 'PayLater::verifikasi');
+
 		$routes->post('tambah', 'PayLater::pembayaranInsert');
-		$routes->get('konfirmasi/(:num)', 'PayLater::pembayaranKonfirmasi/$1');
-		$routes->get('delete/(:num)', 'PayLater::delete/$1');
-		$routes->get('pendaftaran_kontrak/delete/(:num)', 'PayLater::hapusProdukKeranjang/$1');
-		$routes->post('keranjang/cekout', 'PayLater::cekoutPembayaranPaylater');
-		$routes->post('kontrak/verifikasi', 'PayLater::verifikasiPembelianPaylater');
 
-		$routes->get('peninjauan', 'IdentitasController::Peninjauan_view');
-		$routes->get('peninjauan/tolak/(:segment)', 'IdentitasController::PeninjauanTolak/$1');
-		$routes->get('peninjauan/terima/(:segment)', 'IdentitasController::PeninjauanTerima/$1');
+		$routes->get('konfirmasi/(:num)', 'PayLater::pembayaranKonfirmasi/$1');
+
+		$routes->get('delete/(:num)', 'PayLater::delete/$1');
+
+		$routes->post('keranjang/cekout', 'PayLater::cekoutPembayaranPaylater');
+
+		// Table Identitas Admin
+		$routes->get('peninjauan', 'Identitas::index');
+		$routes->get('identitas/tolak/(:num)', 'Identitas::PeninjauanTolak/$1');
+		$routes->get('identitas/terima/(:num)', 'Identitas::PeninjauanTerima/$1');
 	});
 
 	// Log Aktifitas User
@@ -135,7 +138,8 @@ $routes->group('', ['namespace' => 'App\Controllers\Kredit_App'], function ($rou
 
 	// End Session All
 	$routes->get('logout', 'Dashboard::logout');
-}); // End Kredit APP
+});
+// End Kredit APP
 
 // Autentikasi Users
 $routes->get('login', 'Auth::index');

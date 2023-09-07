@@ -34,6 +34,7 @@ class Keranjang extends BaseController
 
     public function keranjang_insert()
     {
+
         $produkMap = [];
         foreach ($this->produkFindAll as $product) {
             $produkMap[$product['id']] = $product;

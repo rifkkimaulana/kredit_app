@@ -1,4 +1,4 @@
-<?= $this->extend('admin/layout/template'); ?>
+<?= $this->extend('kredit_app/layout/template'); ?>
 <?= $this->section('content'); ?>
 
 <section class="content">
@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title"><?= $title; ?></h3>
-                        <a href="<?= base_url('paylater/pendaftaran_kontrak'); ?>" class="btn btn-primary float-right">
+                        <a href="<?= base_url('ka-transaksi/keranjang'); ?>" class="btn btn-primary float-right">
                             Create New
                         </a>
                     </div>
@@ -57,10 +57,12 @@
                                         <td class="text-center"> Rp. <?= number_format($belumLunas, 0, ',', '.'); ?></td>
                                         <td class="text-center"><?= $kontrak['created_at'] ?></td>
                                         <td class="text-center">
-                                            <a data-toggle="modal" data-target="#verifikasiModal<?= $kontrak['id'] ?>" class="btn btn-success btn-sm">
-                                                <i class="fas fa-check"></i> Verifikasi
-                                            </a>
-                                            <a data-toggle="modal" data-target="#detailPembayaran<?= $kontrak['id'] ?>" class="btn btn-primary btn-sm">
+                                            <?php if ($kontrak['status'] === 'Sedang Ditinjau') { ?>
+                                                <a data-toggle="modal" data-target="#verifikasiModal<?= $kontrak['id'] ?>" class="btn btn-success btn-sm">
+                                                    <i class="fas fa-check"></i> Verifikasi
+                                                </a>
+                                            <?php } ?>
+                                            <a data-toggle="modal" data-target="#detailModal<?= $kontrak['id'] ?>" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-eye"></i> Detail
                                             </a>
                                         </td>
@@ -76,7 +78,7 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form method="post" action="<?= base_url('paylater/kontrak/verifikasi') ?>">
+                                                    <form method="post" action="<?= base_url('ka-paylater/verifikasi') ?>">
                                                         <div class="modal-body">
                                                             <input type="hidden" class="form-control" name="no_kontrak" value="<?= $kontrak['no_kontrak'] ?>">
 
@@ -90,7 +92,65 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <?php endforeach; ?>
+
+                                        <!-- Detail Modal-->
+                                        <div class="modal fade" id="detailModal<?= $kontrak['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <h5 class="modal-title" id="detailModalLabel"><b><?= $perusahaan['nama_aplikasi'] ?></b></h5>
+                                                            </div>
+                                                            <div class="col-md-6 text-right">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>No. Kontrak:</label>
+                                                                        <p class="form-control-static"><?= $kontrak['no_kontrak'] ?></p>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label>Nama User:</label>
+                                                                        <p class="form-control-static"><?= $userMap[$kontrak['user_id']]['user_nama'] ?></p>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label>Total Kredit:</label>
+                                                                        <p class="form-control-static">Rp. <?= number_format($kontrak['total_kredit'], 0, ',', '.'); ?></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Baru Terbayar:</label>
+                                                                        <p class="form-control-static">Rp. <?= number_format($baruTerbayar, 0, ',', '.'); ?></p>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label>Belum Lunas:</label>
+                                                                        <p class="form-control-static">Rp. <?= number_format($belumLunas, 0, ',', '.'); ?></p>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label>Tanggal Pembuatan:</label>
+                                                                        <p class="form-control-static"><?= $kontrak['created_at'] ?></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <hr>
+                                                        <div class="float-right">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>

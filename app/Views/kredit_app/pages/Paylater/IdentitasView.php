@@ -1,4 +1,4 @@
-<?= $this->extend('admin/layout/template'); ?>
+<?= $this->extend('kredit_app/layout/template'); ?>
 <?= $this->section('content'); ?>
 
 <section class="content">
@@ -141,16 +141,6 @@
                                                                     <input type="text" class="form-control" value="<?= $identitas['pekerjaan']; ?>" disabled>
                                                                 </div>
 
-                                                                <div class="form-group">
-                                                                    <label for="nomor_telepon">Nomor Telepon:</label>
-                                                                    <input type="text" class="form-control" value="<?= $identitas['nomor_telepon']; ?>" disabled>
-                                                                </div>
-
-                                                                <div class="form-group">
-                                                                    <label for="email">Email:</label>
-                                                                    <input type="email" class="form-control" value="<?= $identitas['email']; ?>" disabled>
-                                                                </div>
-
                                                                 <hr>
 
                                                                 <div class="form-group">
@@ -166,32 +156,22 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="form-group">
 
-                                                                    <div class="row">
-                                                                        <div class="col-md-6">
-                                                                            <label for="nomor_alternatif_1">Nama Alternatif 2:</label>
-                                                                            <input type="text" class="form-control" value="<?= $identitas['nama_alternatif_2']; ?>" disabled>
-                                                                        </div>
-
-                                                                        <div class="col-md-6">
-                                                                            <label for="nomor_alternatif_1">Nomor Alternatif 2:</label>
-                                                                            <input type="text" class="form-control" value="<?= $identitas['nomor_alternatif_2']; ?>" disabled>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                        <a href="<?= base_url('paylater/peninjauan/tolak/' . $identitas['id']) ?>" class="btn btn-danger">Tolak</a>
-                                                        <a href="<?= base_url('paylater/peninjauan/terima/' . $identitas['id']) ?>" class="btn btn-success">Setujui</a>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                            <?php if ($identitas['status'] === 'Disetujui') { ?>
+                                                                <a href="<?= base_url('ka-paylater/identitas/tolak/' . $identitas['id']) ?>" class="btn btn-danger">Batal Setuju</a>
+                                                            <?php } else { ?>
+                                                                <a href="<?= base_url('ka-paylater/identitas/tolak/' . $identitas['id']) ?>" class="btn btn-danger">Data Tidak Sesuai</a>
+                                                                <a href="<?= base_url('ka-paylater/identitas/terima/' . $identitas['id']) ?>" class="btn btn-success">Setujui</a>
+                                                            <?php } ?>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    <?php endforeach; ?>
+                                        <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -201,6 +181,5 @@
         </div>
     </div>
 </section>
-<!-- /.content -->
 
 <?= $this->endSection(); ?>

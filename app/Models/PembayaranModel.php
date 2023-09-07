@@ -20,11 +20,6 @@ class PembayaranModel extends Model
         'status'
     ];
 
-    public function getPembayaranByUserId($userId)
-    {
-        return $this->where('user_id', $userId)->findAll();
-    }
-
     public function insertPembayaran($data)
     {
         return $this->insert($data);

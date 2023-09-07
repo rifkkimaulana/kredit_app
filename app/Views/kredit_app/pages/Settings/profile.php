@@ -70,7 +70,9 @@
                         <ul class="nav nav-pills">
                             <li class="nav-item"><a class="nav-link active" href="#detailuser<?= $user['user_id'] ?>" data-toggle="tab">Detail</a></li>
                             <li class="nav-item"><a class="nav-link" href="#password<?= $user['user_id'] ?>" data-toggle="tab">Password</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#identitasuser<?= $user['user_id'] ?>" data-toggle="tab">Identitas</a></li>
+                            <?php if ($identitas['status'] != 'Disetujui') { ?>
+                                <li class="nav-item"><a class="nav-link" href="#identitasuser<?= $user['user_id'] ?>" data-toggle="tab">Identitas</a></li>
+                            <?php } ?>
                         </ul>
                     </div>
                     <div class="card-body">
@@ -175,106 +177,107 @@
                                     <button name="update_password" type="submit" class="btn btn-primary float-right">Perbaharui Password</button>
                                 </form>
                             </div>
+                            <?php if ($identitas['status'] != 'Disetujui') { ?>
+                                <!-- Form Identitas -->
+                                <div class="tab-pane" id="identitasuser<?= $user['user_id'] ?>">
+                                    <form method="post" action="<?= base_url('ka-settings/profile'); ?>" enctype="multipart/form-data">
+                                        <input name="nama_lengkap" value="<?= $user['user_nama']; ?>" type="hidden">
+                                        <div class="form-group">
+                                            <label for="nomor_identitas">Nomor Identitas KTP:</label>
+                                            <input type="text" class="form-control" id="nomor_identitas" value="<?= $identitas['nomor_identitas']; ?>" name="nomor_identitas" required placeholder="Masukan NIK sesuai ktp" <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tempat_lahir">Tempat Lahir:</label>
+                                            <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Masukan tempat lahir sesuai ktp" value="<?= $identitas['tempat_lahir']; ?>" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="tanggal_lahir">Tanggal Lahir:</label>
+                                                    <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="<?= $identitas['tanggal_lahir']; ?>" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Jenis Kelamin:</label>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_laki" value="Laki-laki" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?> <?= ($identitas['jenis_kelamin'] === 'Laki-laki') ? 'checked' : ''; ?>>
+                                                        <label class="form-check-label" for="jenis_kelamin_laki">Laki-laki</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_perempuan" value="Perempuan" <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?> <?= ($identitas['jenis_kelamin'] === 'Perempuan') ? 'checked' : ''; ?>>
+                                                        <label class="form-check-label" for="jenis_kelamin_perempuan">Perempuan</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="alamat">Alamat:</label>
+                                            <textarea class="form-control" id="alamat" name="alamat" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>><?= $identitas['alamat']; ?></textarea>
+                                            <small>Masukan Alamat Lengkap sesuai KTP.</small>
 
-                            <!-- Form Identitas -->
-                            <div class="tab-pane" id="identitasuser<?= $user['user_id'] ?>">
-                                <form method="post" action="<?= base_url('ka-settings/profile'); ?>" enctype="multipart/form-data">
-                                    <input name="nama_lengkap" value="<?= $user['user_nama']; ?>" type="hidden">
-                                    <div class="form-group">
-                                        <label for="nomor_identitas">Nomor Identitas KTP:</label>
-                                        <input type="text" class="form-control" id="nomor_identitas" value="<?= $identitas['nomor_identitas']; ?>" name="nomor_identitas" required placeholder="Masukan NIK sesuai ktp" <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tempat_lahir">Tempat Lahir:</label>
-                                        <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Masukan tempat lahir sesuai ktp" value="<?= $identitas['tempat_lahir']; ?>" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="tanggal_lahir">Tanggal Lahir:</label>
-                                                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="<?= $identitas['tanggal_lahir']; ?>" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
+                                                <label for="agama">Agama:</label>
+                                                <input type="text" class="form-control" id="agama" name="agama" placeholder="Masukan agama sesuai ktp" value="<?= $identitas['agama']; ?>" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
+
                                             <div class="form-group">
-                                                <label>Jenis Kelamin:</label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_laki" value="Laki-laki" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?> <?= ($identitas['jenis_kelamin'] === 'Laki-laki') ? 'checked' : ''; ?>>
-                                                    <label class="form-check-label" for="jenis_kelamin_laki">Laki-laki</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_perempuan" value="Perempuan" <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?> <?= ($identitas['jenis_kelamin'] === 'Perempuan') ? 'checked' : ''; ?>>
-                                                    <label class="form-check-label" for="jenis_kelamin_perempuan">Perempuan</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="alamat">Alamat:</label>
-                                        <textarea class="form-control" id="alamat" name="alamat" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>><?= $identitas['alamat']; ?></textarea>
-                                        <small>Masukan Alamat Lengkap sesuai KTP.</small>
+                                                <label>Status Pernikahan:</label>
+                                                <select class="form-control" id="status_pernikahan" name="status_pernikahan" value="<?= $identitas['status_pernikahan']; ?>" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
+                                                    <option value="Belum Menikah" <?= ($identitas['status_pernikahan'] === 'Belum Menikah') ? 'selected' : ''; ?>>Belum Menikah</option>
+                                                    <option value="Menikah" <?= ($identitas['status_pernikahan'] === 'Menikah') ? 'selected' : ''; ?>>Menikah</option>
+                                                    <option value="Cerai" <?= ($identitas['status_pernikahan'] === 'Cerai') ? 'selected' : ''; ?>>Cerai</option>
 
-                                        <div class="form-group">
-                                            <label for="agama">Agama:</label>
-                                            <input type="text" class="form-control" id="agama" name="agama" placeholder="Masukan agama sesuai ktp" value="<?= $identitas['agama']; ?>" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Status Pernikahan:</label>
-                                            <select class="form-control" id="status_pernikahan" name="status_pernikahan" value="<?= $identitas['status_pernikahan']; ?>" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
-                                                <option value="Belum Menikah" <?= ($identitas['status_pernikahan'] === 'Belum Menikah') ? 'selected' : ''; ?>>Belum Menikah</option>
-                                                <option value="Menikah" <?= ($identitas['status_pernikahan'] === 'Menikah') ? 'selected' : ''; ?>>Menikah</option>
-                                                <option value="Cerai" <?= ($identitas['status_pernikahan'] === 'Cerai') ? 'selected' : ''; ?>>Cerai</option>
-
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="pekerjaan">Pekerjaan:</label>
-                                            <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" placeholder="Pekerjaan anda contoh. Wiraswasta" value="<?= $identitas['pekerjaan']; ?>" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
-                                        </div>
-                                        <div class="row ml-3">
-                                            <div class="cold-md-4">
-                                                <div class="form-group">
-                                                    <label for="foto_identitas">Foto Identitas:</label>
-                                                    <input type="file" class="form-control-file" id="foto_identitas" name="foto_identitas" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="pekerjaan">Pekerjaan:</label>
+                                                <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" placeholder="Pekerjaan anda contoh. Wiraswasta" value="<?= $identitas['pekerjaan']; ?>" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
+                                            </div>
+                                            <div class="row ml-3">
+                                                <div class="cold-md-4">
+                                                    <div class="form-group">
+                                                        <label for="foto_identitas">Foto Identitas:</label>
+                                                        <input type="file" class="form-control-file" id="foto_identitas" name="foto_identitas" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
+                                                    </div>
+                                                </div>
+                                                <div class="cold-md-4">
+                                                    <div class="form-group">
+                                                        <label for="foto_selvi_ktp">Foto Selvi KTP:</label>
+                                                        <input type="file" class="form-control-file" id="foto_selvi_ktp" name="foto_selvi_ktp" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
+                                                    </div>
+                                                </div>
+                                                <div class="cold-md-4">
+                                                    <div class="form-group">
+                                                        <label for="foto_selvi_ktp">Tanda Tangan:</label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="cold-md-4">
-                                                <div class="form-group">
-                                                    <label for="foto_selvi_ktp">Foto Selvi KTP:</label>
-                                                    <input type="file" class="form-control-file" id="foto_selvi_ktp" name="foto_selvi_ktp" required <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label for="nomor_alternatif_1">Nama Keluarga:</label>
+                                                        <input type="text" class="form-control" id="nama_alternatif_1" value="<?= $identitas['nama_alternatif_1']; ?>" name="nama_alternatif_1" placeholder="Nama Lengkap" <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="nomor_alternatif_1">Nomor Telpon Keluarga:</label>
+                                                        <input type="text" class="form-control" id="nomor_alternatif_1" value="<?= $identitas['nomor_alternatif_1']; ?>" name="nomor_alternatif_1" placeholder="Nomor Telpon" <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="cold-md-4">
-                                                <div class="form-group">
-                                                    <label for="foto_selvi_ktp">Tanda Tangan:</label>
-                                                </div>
-                                            </div>
+                                            <?php if (empty($identitas['status'])) : ?>
+                                                <hr>
+                                                <button name="identitas_insert" type="submit" class="btn btn-primary float-right">Kirim Identitas</button>
+                                            <?php elseif ($identitas['status'] === 'Tidak Disetujui') : ?>
+                                                <hr>
+                                                <input type="hidden" class="form-control" name="foto_identitas_lama" value="<?= $identitas['foto_identitas']; ?>">
+                                                <input type="hidden" class="form-control" name="foto_selvi_ktp_lama" value="<?= $identitas['foto_selvi_ktp']; ?>">
+                                                <button name="identitas_update" type="submit" class="btn btn-primary float-right">Kirim Ulang Identitas</button>
+                                            <?php endif; ?>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label for="nomor_alternatif_1">Nama Keluarga:</label>
-                                                    <input type="text" class="form-control" id="nama_alternatif_1" value="<?= $identitas['nama_alternatif_1']; ?>" name="nama_alternatif_1" placeholder="Nama Lengkap" <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="nomor_alternatif_1">Nomor Telpon Keluarga:</label>
-                                                    <input type="text" class="form-control" id="nomor_alternatif_1" value="<?= $identitas['nomor_alternatif_1']; ?>" name="nomor_alternatif_1" placeholder="Nomor Telpon" <?= ($identitas['status'] === 'Sedang Ditinjau') ? 'disabled' : ''; ?>>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <?php if (empty($identitas['status'])) : ?>
-                                            <hr>
-                                            <button name="identitas_insert" type="submit" class="btn btn-primary float-right">Kirim Identitas</button>
-                                        <?php elseif ($identitas['status'] === 'Tidak Disetujui') : ?>
-                                            <hr>
-                                            <input type="hidden" class="form-control" name="foto_identitas_lama" value="<?= $identitas['foto_identitas']; ?>">
-                                            <input type="hidden" class="form-control" name="foto_selvi_ktp_lama" value="<?= $identitas['foto_selvi_ktp']; ?>">
-                                            <button name="identitas_update" type="submit" class="btn btn-primary float-right">Kirim Ulang Identitas</button>
-                                        <?php endif; ?>
-                                    </div>
-                                </form>
-                            </div>
+                                    </form>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

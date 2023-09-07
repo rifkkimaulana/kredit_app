@@ -9,6 +9,8 @@ use App\Models\KeranjangModel;
 use App\Models\PenjualanModel;
 use App\Models\ProdukModel;
 use App\Models\KategoriProdukModel;
+use App\Models\PembayaranModel;
+use App\Models\KreditModel;
 
 /**
  * Class BaseController
@@ -55,6 +57,8 @@ class BaseController extends Controller
 	protected $kategoriProdukFindAll;
 	protected $penjualanFindAll;
 
+	protected $identitasFindAll;
+
 	protected $userModel;
 	protected $identitasModel;
 	protected $aplikasiModel;
@@ -62,6 +66,8 @@ class BaseController extends Controller
 	protected $penjualanModel;
 	protected $produkModel;
 	protected $kategoriProdukModel;
+	protected $pembayaranModel;
+	protected $kontrakModel;
 
 	public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
 	{
@@ -82,6 +88,8 @@ class BaseController extends Controller
 		$this->penjualanModel = new PenjualanModel();
 		$this->produkModel = new ProdukModel();
 		$this->kategoriProdukModel = new KategoriProdukModel();
+		$this->kontrakModel = new KreditModel();
+		$this->pembayaranModel = new PembayaranModel();
 
 		// Cek sesi pengguna
 		if (!session('user_level') || !(session('user_level') === 'administrator' || session('user_level') === 'member')) {
@@ -91,17 +99,20 @@ class BaseController extends Controller
 		$userFindAll = $this->userModel->findAll();
 		$this->userFindAll = $userFindAll;
 
+		$user = $this->userModel->where('user_id', session('user_id'))->first();
+		$this->user = $user;
+
 		$produkFindAll = $this->produkModel->findAll();
 		$this->produkFindAll = $produkFindAll;
 
 		$kategoriProdukFindAll = $this->kategoriProdukModel->findAll();
 		$this->kategoriProdukFindAll = $kategoriProdukFindAll;
 
-		$user = $this->userModel->where('user_id', session('user_id'))->first();
-		$this->user = $user;
-
 		$identitas = $this->identitasModel->where('user_id', session('user_id'))->first();
 		$this->identitas = $identitas;
+
+		$identitasFindAll = $this->identitasModel->findAll();
+		$this->identitasFindAll = $identitasFindAll;
 
 		// Mendapatkan Sesi Aktif Aplikasi
 		if (!empty(session('AplicationId'))) {

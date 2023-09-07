@@ -20,11 +20,6 @@ class KreditModel extends Model
         'no_transaksi'
     ];
 
-    public function getKreditByUserId($data)
-    {
-        return $this->where('user_id', $data)->findAll();
-    }
-
     public function updateByNoKontrak($noKontrak, $data)
     {
         $this->set($data)

@@ -47,6 +47,8 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Bagian Kanan Cekout-->
                 <div class="col-md-7">
                     <div class="card">
                         <div class="card-header">
@@ -73,8 +75,35 @@
                                 <select class="form-control" id="metode_pembayaran" name="metode_pembayaran">
                                     <option value="Tunai">Cash</option>
                                     <option value="Transfer">Transfer Bank</option>
+                                    <option value="Paylater">Paylater</option>
                                 </select>
                             </div>
+
+                            <div id="paylater-details" style="display: none;">
+                                <div class="form-group">
+                                    <label for="pembeli">Tenor Pembayaran</label>
+                                    <select class="form-control select2" name="tenor_pembayaran">
+                                        <?php foreach ($keranjang as $item) : ?>
+                                            <option value="1">1 Bulan (Rp. <?= number_format($item['harga_satuan'] * $item['jumlah'] / 1, 0, ',', '.'); ?> / Bulan)</option>
+                                            <option value="3">3 Bulan (Rp. <?= number_format($item['harga_satuan'] * $item['jumlah'] / 3, 0, ',', '.'); ?> / Bulan)</option>
+                                            <option value="6">6 Bulan (Rp. <?= number_format($item['harga_satuan'] * $item['jumlah'] / 6, 0, ',', '.'); ?> / Bulan)</option>
+                                            <option value="9">9 Bulan (Rp. <?= number_format($item['harga_satuan'] * $item['jumlah'] / 9, 0, ',', '.'); ?> / Bulan)</option>
+                                            <option value="12">12 Bulan (Rp. <?= number_format($item['harga_satuan'] * $item['jumlah'] / 12, 0, ',', '.'); ?> / Bulan)</option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <hr>
+                                <?php if (date("d") < 5) {
+                                    $periksaTanggal = date("m") + 1;
+                                    $tanggalTagihan = '20' . '/' . $periksaTanggal . '/' . date("Y");
+                                } else {
+                                    $periksaTanggal = date("m");
+                                    $tanggalTagihan = '20' . '/' . $periksaTanggal . '/' . date("Y");
+                                } ?>
+
+                                <p> Tanggal Pembayaran Tagihan Pertama : <?= $tanggalTagihan; ?></p>
+                            </div>
+
                             <hr>
                             <div class="card-footer">
                                 <div class="form-check">
@@ -88,6 +117,7 @@
                             <div class="float-right mt-3">
                                 <button type="submit" class="btn btn-danger">Selesaikan Transaksi</button>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -96,6 +126,8 @@
     </div>
 </section>
 <!-- /.content -->
+
+
 
 <!-- Modal Tambah Penjualan -->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
