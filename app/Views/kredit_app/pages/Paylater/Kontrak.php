@@ -31,10 +31,11 @@
                                 <tbody>
                                     <?php foreach ($kontrakList as $kontrak) : ?>
                                         <?php
+
                                         $Pembayaran = $kontrak['total_kredit'] / $kontrak['jangka_waktu'];
 
                                         $baruTerbayar = $jumlah_terbayar * $Pembayaran;
-                                        $belumLunas = ($kontrak['total_kredit']) - ($baruTerbayar); ?>
+                                        $belumLunas = $kontrak['total_kredit'] - $baruTerbayar; ?>
 
                                         <td class="text-center">
                                             <?php if ($belumLunas === 0) { ?>
@@ -50,6 +51,7 @@
                                                 <a class="btn btn-success btn-sm">Disetujui</a>
                                             <?php } ?>
                                         </td>
+
                                         <td class="text-center"><?= $kontrak['no_kontrak'] ?></td>
                                         <td class="text-center"><?= $userMap[$kontrak['user_id']]['user_nama'] ?></td>
                                         <td class="text-center"> Rp. <?= number_format($kontrak['total_kredit'], 0, ',', '.'); ?></td>
@@ -65,9 +67,31 @@
                                             <a data-toggle="modal" data-target="#detailModal<?= $kontrak['id'] ?>" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-eye"></i> Detail
                                             </a>
+                                            <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal<?= $kontrak['id'] ?>">
+                                                <i class="far fa-trash-alt"></i> Delete
+                                            </a>
                                         </td>
                                         </tr>
-
+                                        <!-- Modal Konfirmasi Delete -->
+                                        <div class="modal fade" id="deleteModal<?= $kontrak['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Apakah Anda yakin ingin menghapus Identitas Form: <?= $kontrak['no_kontrak'] ?>?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                        <a class="btn btn-danger" href="<?= base_url('ka-paylater/kontrak/delete') . '/' . $kontrak['id'] ?>">Hapus</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <!-- Modal Verifikasi -->
                                         <div class="modal fade" id="verifikasiModal<?= $kontrak['id'] ?>" tabindex="-1" aria-labelledby="hapusModalLabel<?= $kontrak['id'] ?>" aria-hidden="true">
                                             <div class="modal-dialog">

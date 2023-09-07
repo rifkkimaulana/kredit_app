@@ -11,6 +11,11 @@ class WhatsappApi extends BaseController
 
     public function index()
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         $wablasModel = new WablasModel();
 
         $data = [
@@ -25,6 +30,11 @@ class WhatsappApi extends BaseController
 
     public function WhatsappApiUpdate()
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         $model = new WablasModel();
 
         $data = [

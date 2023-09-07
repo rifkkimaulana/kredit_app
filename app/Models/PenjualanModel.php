@@ -37,6 +37,11 @@ class PenjualanModel extends Model
         return $this->where('id', $id)->delete();
     }
 
+    public function deletePenjualanWhereNoTransaksi($data)
+    {
+        return $this->where('no_transaksi', $data)->delete();
+    }
+
     public function updatePenjualan($id, $data)
     {
         $this->update($id, $data);

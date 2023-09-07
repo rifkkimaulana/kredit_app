@@ -8,6 +8,11 @@ class Users extends BaseController
 {
     public function index()
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         $data = [
             'title' => 'Users Management Settings',
             'user' => $this->user,
@@ -20,6 +25,11 @@ class Users extends BaseController
 
     public function user_update()
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         $userId = $this->request->getPost('user_id');
         $user = $this->userModel->find($userId);
 
@@ -67,6 +77,11 @@ class Users extends BaseController
 
     public function user_delete($userId)
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         $user = $this->userModel->find($userId);
 
         if ($user) {

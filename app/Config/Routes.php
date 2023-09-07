@@ -113,24 +113,25 @@ $routes->group('', ['namespace' => 'App\Controllers\Kredit_App'], function ($rou
 	// Paylater
 	$routes->group('ka-paylater', ['namespace' => 'App\Controllers\Kredit_App\Paylater'], function ($routes) {
 
+		//Kontrak View kontrak/delete
 		$routes->get('kontrak', 'Kontrak::index');
 		$routes->get('pembayaran', 'Pembayaran::index');
-		$routes->post('pembayaran', 'Pembayaran::index');
+		$routes->post('pembayaran', 'Pembayaran::getHargaPembayaran');
+
+		$routes->get('kontrak/delete/(:num)', 'Kontrak::deleteKontrak/$1');
 
 		$routes->post('verifikasi', 'PayLater::verifikasi');
 
-		$routes->post('tambah', 'PayLater::pembayaranInsert');
+		$routes->post('pembayaran/confirm', 'Pembayaran::pembayaranInsert');
 
-		$routes->get('konfirmasi/(:num)', 'PayLater::pembayaranKonfirmasi/$1');
+		$routes->get('pembayaran/confirm/(:num)', 'Pembayaran::pembayaranKonfirmasi/$1');
+		$routes->get('pembayaran/delete/(:num)', 'Pembayaran::delete/$1');
 
-		$routes->get('delete/(:num)', 'PayLater::delete/$1');
-
-		$routes->post('keranjang/cekout', 'PayLater::cekoutPembayaranPaylater');
-
-		// Table Identitas Admin
+		// Table Identitas Admin 
 		$routes->get('peninjauan', 'Identitas::index');
 		$routes->get('identitas/tolak/(:num)', 'Identitas::PeninjauanTolak/$1');
 		$routes->get('identitas/terima/(:num)', 'Identitas::PeninjauanTerima/$1');
+		$routes->get('identitas/delete/(:num)', 'Identitas::delete/$1');
 	});
 
 	// Log Aktifitas User
@@ -138,6 +139,9 @@ $routes->group('', ['namespace' => 'App\Controllers\Kredit_App'], function ($rou
 
 	// End Session All
 	$routes->get('logout', 'Dashboard::logout');
+
+	// Access Denied
+	$routes->get('access_denied', 'Dashboard::access_denied');
 });
 // End Kredit APP
 

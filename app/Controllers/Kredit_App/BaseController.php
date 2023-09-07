@@ -45,6 +45,9 @@ class BaseController extends Controller
 
 	// New Protected String
 
+	protected $pembayaranFindSessionUserId;
+	protected $kontrakFindSessionUserId;
+
 	protected $user;
 	protected $userFindAll;
 	protected $identitas;
@@ -113,6 +116,12 @@ class BaseController extends Controller
 
 		$identitasFindAll = $this->identitasModel->findAll();
 		$this->identitasFindAll = $identitasFindAll;
+
+		$pembayaranFindSessionId = $this->pembayaranModel->where('user_id', session('user_id'))->findAll();
+		$this->pembayaranFindSessionUserId = $pembayaranFindSessionId;
+
+		$kontrakFindSessionUserId = $this->kontrakModel->where('user_id', session('user_id'))->findAll();
+		$this->kontrakFindSessionUserId = $kontrakFindSessionUserId;
 
 		// Mendapatkan Sesi Aktif Aplikasi
 		if (!empty(session('AplicationId'))) {

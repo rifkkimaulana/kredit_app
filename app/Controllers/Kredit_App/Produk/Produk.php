@@ -23,6 +23,11 @@ class Produk extends BaseController
     // View Management Produk
     public function management_produk()
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         $data = [
             'title' => 'Management Produk',
             'user' => $this->user,
@@ -35,9 +40,13 @@ class Produk extends BaseController
         return view('kredit_app/pages/Produk/ManagementProduk', $data);
     }
 
-    // View Management Produk
     public function kategori_produk()
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         $data = [
             'title' => 'Kategori Produk',
             'user' => $this->user,
@@ -53,6 +62,11 @@ class Produk extends BaseController
     // Produk CRUD
     public function produk_post()
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         if ($this->request->getMethod() === 'post') {
 
             // Produk Insert
@@ -143,6 +157,11 @@ class Produk extends BaseController
     // Kategori Produk CRUD
     public function kategori_post()
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         if ($this->request->getMethod() === 'post') {
 
             // Insert Kategori Produk

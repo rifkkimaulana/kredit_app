@@ -25,4 +25,9 @@ class IdentitasModel extends Model
     {
         return $this->update($id, $data);
     }
+
+    public function deleteIdentitas($id)
+    {
+        return $this->where('id', $id)->delete();
+    }
 }

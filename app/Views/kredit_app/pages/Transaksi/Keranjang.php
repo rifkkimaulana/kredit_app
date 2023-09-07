@@ -186,4 +186,17 @@
     </div>
 </div>
 
+<script>
+    // for keranjang metode pembayaran
+    var metodePembayaran = document.getElementById("metode_pembayaran");
+    var paylaterDetails = document.getElementById("paylater-details");
+
+    metodePembayaran.addEventListener("change", function() {
+        if (metodePembayaran.value === "Paylater") {
+            paylaterDetails.style.display = "block";
+        } else {
+            paylaterDetails.style.display = "none";
+        }
+    });
+</script>
 <?= $this->endSection(); ?>

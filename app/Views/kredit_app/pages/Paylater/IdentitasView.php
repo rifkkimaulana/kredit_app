@@ -19,7 +19,9 @@
                                         <th class="text-center" style="padding: 10px;">Nama Lengkap</th>
                                         <th class="text-center" style="padding: 10px;">Alamat</th>
                                         <th class="text-center" style="padding: 10px;">Tanggal Pengajuan</th>
-                                        <th class="text-center" style="padding: 10px;">Aksi</th>
+                                        <?php if ($user['user_level'] === 'administrator') : ?>
+                                            <th class="text-center" style="padding: 10px;">Aksi</th>
+                                        <?php endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,16 +45,38 @@
                                             <td class="text-center"><?= $identitas['nama_lengkap'] ?></td>
                                             <td class="text-center"><?= $identitas['alamat'] ?></td>
                                             <td class="text-center"><?= $identitas['created_at'] ?></td>
-
-                                            <td class="text-center">
-                                                <?php if ($user['user_level'] === 'administrator') : ?>
+                                            <?php if ($user['user_level'] === 'administrator') : ?>
+                                                <td class="text-center">
                                                     <a data-toggle="modal" data-target="#detailModal<?= $identitas['id'] ?>" class="btn btn-primary btn-sm">
                                                         <i class="fas fa-eye"></i> Detail
                                                     </a>
-                                                <?php endif; ?>
-
-                                            </td>
+                                                    <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal<?= $identitas['id'] ?>">
+                                                        <i class="far fa-trash-alt"></i> Delete
+                                                    </a>
+                                                </td>
+                                            <?php endif; ?>
                                         </tr>
+
+                                        <!-- Modal Konfirmasi Delete -->
+                                        <div class="modal fade" id="deleteModal<?= $identitas['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Apakah Anda yakin ingin menghapus Identitas Form: <?= $identitas['nama_lengkap'] ?>?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                        <a class="btn btn-danger" href="<?= base_url('ka-paylater/identitas/delete') . '/' . $identitas['id'] ?>">Hapus</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <!-- Modal Detail -->
                                         <div class="modal fade bd-example-modal-lg" id="detailModal<?= $identitas['id'] ?>" tabindex="-1" aria-labelledby="detailLabel<?= $identitas['id'] ?>" aria-hidden="true">

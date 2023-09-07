@@ -112,8 +112,6 @@
 
     <script src="<?= base_url('assets/plugins/select2/js/select2.full.min.js'); ?>"></script>
 
-    <script type="text/javascript" src="<?= base_url('assets/plugins/signature/js/jquery.signature.min.js'); ?>"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -224,17 +222,25 @@
         });
     </script>
 
-    <script>
-        // for keranjang metode pembayaran
-        var metodePembayaran = document.getElementById("metode_pembayaran");
-        var paylaterDetails = document.getElementById("paylater-details");
 
-        metodePembayaran.addEventListener("change", function() {
-            if (metodePembayaran.value === "Paylater") {
-                paylaterDetails.style.display = "block";
-            } else {
-                paylaterDetails.style.display = "none";
-            }
+    <script>
+        $('#nomorKontrakSelect').change(function() {
+            var selectedValue = $(this).val();
+            // Kirim data ke server melalui AJAX
+            $.ajax({
+                type: 'POST',
+                url: 'pembayaran',
+                data: {
+                    no_kontrak: selectedValue
+                }, // Data yang akan dikirim
+                success: function(response) {
+                    // Ubah nilai harga pembayaran dengan nilai yang diterima dari server
+                    $('#totalBayarDisplay').val('Rp. ' + response.total_bayar.toLocaleString()); // Menampilkan harga dalam format yang sesuai
+                },
+                error: function(xhr, status, error) {
+                    console.error('Terjadi kesalahan: ' + error);
+                }
+            });
         });
     </script>
 

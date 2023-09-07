@@ -166,6 +166,11 @@ class Transaksi extends BaseController
 
     public function transaksi_delete($id)
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         $penjualanViewId = $this->penjualanModel->find($id);
 
         if (!$penjualanViewId) {
@@ -179,6 +184,11 @@ class Transaksi extends BaseController
 
     public function verifikasi()
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         if ($this->request->getMethod() === 'post') {
 
             $penjualan_id = $this->request->getPost('penjualan_id');

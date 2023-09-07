@@ -31,4 +31,9 @@ class KreditModel extends Model
     {
         return $this->insert($data);
     }
+
+    public function deleteKontrak($id)
+    {
+        return $this->where('id', $id)->delete();
+    }
 }

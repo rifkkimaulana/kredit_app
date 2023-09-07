@@ -8,6 +8,11 @@ class App extends BaseController
 {
     public function index()
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         $data = [
             'title' => 'Aplication Settings',
             'user' => $this->user,
@@ -19,6 +24,11 @@ class App extends BaseController
 
     public function app_update()
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         if ($this->request->getMethod() === 'post') {
             $data = [
                 'nama_aplikasi' => $this->request->getPost('nama_aplikasi'),

@@ -10,6 +10,11 @@ class GoogleApi extends BaseController
 {
     public function index()
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         $googleApiModel = new GoogleApiModel();
 
         $data = [
@@ -24,6 +29,11 @@ class GoogleApi extends BaseController
 
     public function GoogleApiUpdate()
     {
+        // Cek apakah pengguna memiliki akses yang sesuai
+        if ($this->user['user_level'] !== 'administrator') {
+            return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        }
+
         $googleApiModel = new GoogleApiModel();
         $data = [
             'client_id' => $this->request->getPost('client_id'),

@@ -54,71 +54,67 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         </li>
                     </ul>
 
-                    <?php if ($user['user_level'] === 'administrator') : ?>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?= $segment2 === 'app' ? 'javascript:void(0)' : base_url('ka-settings/app'); ?>" class="nav-link <?= $segment2 === 'app' ? 'active' : ''; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Pengaturan Umum</p>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?= $segment2 === 'users' ? 'javascript:void(0)' : base_url('ka-settings/users'); ?>" class="nav-link <?= $segment2 === 'users' ? 'active' : ''; ?>"> <i class="far fa-circle nav-icon"></i>
-                                    <p>Manajemen Users</p>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?= $segment2 === 'google_api' ? 'javascript:void(0)' : base_url('ka-settings/google_api'); ?>" class="nav-link <?= $segment2 === 'google_api' ? 'active' : ''; ?>"> <i class="far fa-circle nav-icon"></i>
-                                    <p>Google Api</p>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?= $segment2 === 'whatsapp_api' ? 'javascript:void(0)' : base_url('ka-settings/whatsapp_api'); ?>" class="nav-link <?= $segment2 === 'whatsapp_api' ? 'active' : ''; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Whatsapp API</p>
-                                </a>
-                            </li>
-                        </ul>
-                    <?php endif; ?>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'app' ? 'javascript:void(0)' : base_url('ka-settings/app'); ?>" class="nav-link <?= $segment2 === 'app' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pengaturan Umum</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'users' ? 'javascript:void(0)' : base_url('ka-settings/users'); ?>" class="nav-link <?= $segment2 === 'users' ? 'active' : ''; ?>"> <i class="far fa-circle nav-icon"></i>
+                                <p>Manajemen Users</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'google_api' ? 'javascript:void(0)' : base_url('ka-settings/google_api'); ?>" class="nav-link <?= $segment2 === 'google_api' ? 'active' : ''; ?>"> <i class="far fa-circle nav-icon"></i>
+                                <p>Google Api</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'whatsapp_api' ? 'javascript:void(0)' : base_url('ka-settings/whatsapp_api'); ?>" class="nav-link <?= $segment2 === 'whatsapp_api' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Whatsapp API</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
-                <?php if ($user['user_level'] === 'administrator') : ?>
-                    <li class="nav-item <?= $segment1 === 'ka-produk' ? 'menu-open' : ''; ?>">
-                        <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'ka-produk' ? 'active' : ''; ?>">
-                            <i class="nav-icon fas fa-box"></i>
-                            <p>
-                                Produk
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?= $segment2 === 'produk' ? 'javascript:void(0)' : base_url('ka-produk/produk'); ?>" class="nav-link <?= $segment2 === 'produk' ? 'active' : ''; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Daftar Produk</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?= $segment2 === 'management_produk' ? 'javascript:void(0)' : base_url('ka-produk/management_produk'); ?>" class="nav-link <?= $segment2 === 'management_produk' ? 'active' : ''; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Management Produk</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?= $segment2 === 'kategori' ? 'javascript:void(0)' : base_url('ka-produk/kategori'); ?>" class="nav-link <?= $segment2 === 'kategori' ? 'active' : ''; ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Kategori Produk</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                <?php endif; ?>
+                <li class="nav-item <?= $segment1 === 'ka-produk' ? 'menu-open' : ''; ?>">
+                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'ka-produk' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-box"></i>
+                        <p>
+                            Produk
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'produk' ? 'javascript:void(0)' : base_url('ka-produk/produk'); ?>" class="nav-link <?= $segment2 === 'produk' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Daftar Produk</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'management_produk' ? 'javascript:void(0)' : base_url('ka-produk/management_produk'); ?>" class="nav-link <?= $segment2 === 'management_produk' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Management Produk</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'kategori' ? 'javascript:void(0)' : base_url('ka-produk/kategori'); ?>" class="nav-link <?= $segment2 === 'kategori' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kategori Produk</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
                 <li class="nav-item <?= $segment1 === 'ka-transaksi' ? 'menu-open' : ''; ?>">
                     <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'ka-transaksi' ? 'active' : ''; ?>">
