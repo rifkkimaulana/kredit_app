@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Meta_RG_Controller;
+namespace App\Controllers\Meta;
 
 /**
  * Class BaseController
@@ -17,6 +17,7 @@ namespace App\Controllers\Meta_RG_Controller;
 
 use App\Models\AplikasiModel;
 use App\Models\UsersModel;
+
 use CodeIgniter\Controller;
 
 class BaseController extends Controller
@@ -33,10 +34,6 @@ class BaseController extends Controller
 
     protected $aplikasiModel;
     protected $userModel;
-
-    // Variable
-    protected $user;
-    protected $userListAdministrator;
 
     /**
      * Constructor.
@@ -55,17 +52,5 @@ class BaseController extends Controller
         // Akses UserModel
         $this->userModel = new UsersModel();
         $this->aplikasiModel = new AplikasiModel();
-
-        // Cek sesi pengguna
-        if (!session('user_level') || !(session('user_level') === 'administrator')) {
-            return redirect()->to(base_url('login'))->with('error', 'Anda tidak memiliki izin akses.');
-        }
-
-        // Mendapatkan data pengguna menggunakan model berdasarkan session user_id
-        $user = $this->userModel->where('user_id', session('user_id'))->first();
-        $userListAdministrator = $this->userModel->where('user_level', 'administrator')->findAll();
-
-        $this->user = $user;
-        $this->userListAdministrator = $userListAdministrator;
     }
 }

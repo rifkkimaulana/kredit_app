@@ -43,12 +43,12 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        <?= $this->include('MetaView/layout/navbar'); ?>
-        <?= $this->include('MetaView/layout/sidebar'); ?>
+        <?= $this->include('Meta/Layout/Navbar'); ?>
+        <?= $this->include('Meta/Layout/Sidebar'); ?>
 
         <div class="content-wrapper">
             <div class="card"></div>
-            <?= $this->renderSection('meta-content'); ?>
+            <?= $this->renderSection('content'); ?>
         </div>
 
         <footer class="main-footer">

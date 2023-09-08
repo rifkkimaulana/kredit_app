@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers\Meta_RG_Controller;
+namespace App\Controllers\Meta;
 
-use App\Controllers\Meta_RG_Controller\BaseController;
+use App\Controllers\Meta\BaseController;
 
 class Dashboard extends BaseController
 {
@@ -11,10 +11,10 @@ class Dashboard extends BaseController
         $user = $this->userModel->find(session('user_id'));
 
         $data = [
-            'title' => 'META RG Panel',
+            'title' => 'META IMASNET Panel',
             'user' => $user
         ];
 
-        return view('MetaView/Pages/Dashboard', $data);
+        return view('Meta/Pages/Dashboard', $data);
     }
 }

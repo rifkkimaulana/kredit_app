@@ -1,5 +1,5 @@
-<?= $this->extend('MetaView/layout/template'); ?>
-<?= $this->section('meta-content'); ?>
+<?= $this->extend('Meta/Layout/Template'); ?>
+<?= $this->section('content'); ?>
 
 <section class="content">
     <div class="container-fluid">
@@ -14,7 +14,7 @@
                             <table id="tablemeta_rg" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" style="padding: 10px;">Aplication Name</th>
+                                        <th class="text-center" style="padding: 10px;">Application Name</th>
                                         <th class="text-center" style="padding: 10px;">Keterangan</th>
                                         <th class="text-center" style="padding: 10px;">Aksi</th>
                                     </tr>

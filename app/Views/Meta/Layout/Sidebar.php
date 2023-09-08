@@ -8,7 +8,7 @@ $segment2 = isset($segments[2]) ? $segments[2] : '';
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="<?= $segment1 === 'dashboard' ? 'javascript:void(0);' : base_url('dashboard'); ?>" class="brand-link text-center">
-        <span class="brand-text font-weight-light"><b>META RG PANEL</b></span>
+        <span class="brand-text font-weight-light"><b>META IMASNET PANEL</b></span>
     </a>
 
     <div class="sidebar">

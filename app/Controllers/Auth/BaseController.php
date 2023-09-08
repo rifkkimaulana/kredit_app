@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Auth;
 
 use App\Models\AplikasiModel;
-
 use App\Models\UsersModel;
 use App\Models\GoogleApiModel;
 

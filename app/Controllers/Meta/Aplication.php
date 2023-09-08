@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers\Meta_RG_Controller;
+namespace App\Controllers\Meta;
 
-use App\Controllers\Meta_RG_Controller\BaseController;
+use App\Controllers\Meta\BaseController;
 
 class Aplication extends BaseController
 {
@@ -18,7 +18,7 @@ class Aplication extends BaseController
             'appList' => $appList,
         ];
 
-        return view('MetaView/Pages/AppManagement', $data);
+        return view('Meta/Pages/AppManagement', $data);
     }
 
     public function sign_in()

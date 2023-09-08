@@ -1,5 +1,5 @@
-<?= $this->extend('MetaView/layout/template'); ?>
-<?= $this->section('meta-content'); ?>
+<?= $this->extend('Meta/Layout/Template'); ?>
+<?= $this->section('content'); ?>
 
 <section class="content">
     <div class="container-fluid">

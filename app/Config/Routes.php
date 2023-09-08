@@ -43,7 +43,7 @@ $routes->setAutoRoute(true);
 
 
 // Meta Panel
-$routes->group('meta', ['namespace' => 'App\Controllers\Meta_RG_Controller'], function ($routes) {
+$routes->group('meta', ['namespace' => 'App\Controllers\Meta'], function ($routes) {
 	//Meta Dashboard
 	$routes->get('/', 'Dashboard::index');
 	$routes->get('dashboard', 'Dashboard::index');
