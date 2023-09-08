@@ -55,18 +55,15 @@ $routes->group('meta', ['namespace' => 'App\Controllers\Meta'], function ($route
 });
 // END Meta Panel
 
-
 // Routes For SCC IMASNET
-$routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes) {
-	$routes->get('ims-dahsboard', 'Dashboard::index');
-});
+$routes->get('im-dahsboard', 'App\Controllers\Kredit_App\Dashboard::index');
+
 // END SCC IMASNET
 
 // Routes For Kredit_App
 $routes->group('', ['namespace' => 'App\Controllers\Kredit_App'], function ($routes) {
 
 	// ka-dashboard
-	$routes->get('/', 'Dashboard::index');
 	$routes->get('ka-dashboard', 'Dashboard::index');
 
 	// ka-settings - Profile
@@ -159,7 +156,6 @@ $routes->group('', ['namespace' => 'App\Controllers\Kredit_App'], function ($rou
 
 // Auth Users
 $routes->group('', ['namespace' => 'App\Controllers\Auth'], function ($routes) {
-
 	// Autentikasi Users
 	$routes->get('login', 'Login::index');
 	$routes->post('login', 'Login::login_post');

@@ -2,6 +2,8 @@
 
 namespace App\Controllers\Imasnet;
 
+use App\Controllers\Imasnet\BaseController;
+
 class Dashboard extends BaseController
 {
 	public function index()
@@ -10,7 +12,6 @@ class Dashboard extends BaseController
 			'title' => 'Dashboard',
 			'user' => $this->user,
 			'perusahaan' => $this->aplikasi,
-			'label' => $this->label
 		];
 		return view('Imasnet/Pages/Dashboard', $data);
 	}
@@ -29,7 +30,6 @@ class Dashboard extends BaseController
 			'title' => 'Access Denied',
 			'user' => $this->user,
 			'perusahaan' => $this->aplikasi,
-			'label' => $this->label
 		];
 		return view('kredit_app/pages/AccessDenied', $data);
 	}

@@ -41,7 +41,6 @@ class BaseController extends Controller
 	// Base Admin
 	protected $user;
 	protected $aplikasi;
-	protected $label;
 
 	// Model Protected
 	protected $userModel;
