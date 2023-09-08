@@ -1,50 +1,37 @@
 <?= $this->extend('kredit_app/layout/template'); ?>
 <?= $this->section('content'); ?>
 
-<?php
-if (!empty($_GET['tanggal_awal'])) {
-    $tanggalAwal = $_GET['tanggal_awal'];
-} else {
-    $tanggalAwal = null;
-}
-if (!empty($_GET['tanggal_akhir'])) {
-    $tanggalAkhir = $_GET['tanggal_akhir'];
-} else {
-    $tanggalAkhir = null;
-}
-?>
-
 <section class="content">
     <div class="container-fluid">
         <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mt-2">Report Payment
+                    <?php if (!empty($_GET['tanggal_awal']  || $_GET['tanggal_akhir'])) {
+                        echo ' | Filter Date :' .    $_GET['tanggal_awal'] . ' s/d ' . $_GET['tanggal_akhir'];
+                    } else {
+                        echo '| All Transaction';
+                    } ?>
+                </h5>
+                <div class="float-right">
+                    <a href="<?= base_url('ka-transaksi/laporan/excel') . '?tanggal_awal=' . $_GET['tanggal_awal'] . '&tanggal_akhir=' . $_GET['tanggal_akhir']; ?>" class="btn btn-success">
+                        <i class="fa fa-file-excel"></i> Export to Excel
+                    </a>
+                    <a href="<?= base_url('ka-transaksi/laporan/pdf') . '?tanggal_awal=' . $_GET['tanggal_awal'] . '&tanggal_akhir=' . $_GET['tanggal_akhir']; ?>" class="btn btn-danger ">
+                        <i class="fa fa-file-pdf"></i> Cetak PDF
+                    </a>
+                    <a target="_blank" href="<?= base_url('ka-transaksi/laporan/cetak') . '?tanggal_awal=' . $_GET['tanggal_awal'] . '&tanggal_akhir=' . $_GET['tanggal_akhir']; ?>" class="btn btn-primary">
+                        <i class="fa fa-print"></i> Cetak
+                    </a>
+                </div>
+            </div>
             <div class="card-body">
-                <form action="<?= base_url('ka-transaksi/laporan/filter'); ?>" method="get">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="tanggal_awal">Tanggal Awal</label>
-                                <input type="date" name="tanggal_awal" class="form-control" <?php if (isset($_GET['tanggal_awal'])) echo 'value="' . $_GET['tanggal_awal'] . '"'; ?>>
-                            </div>
-                            <div class="form-group">
-                                <label for="tanggal_akhir">Tanggal Akhir</label>
-                                <input type="date" name="tanggal_akhir" class="form-control" <?php if (isset($_GET['tanggal_akhir'])) echo 'value="' . $_GET['tanggal_akhir'] . '"'; ?>>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-primary" value="Filter">
-                            </div>
-                            <div class="form-group">
-                                <a href="<?= base_url('ka-transaksi/laporan/cetak') . '?tanggal_awal=' . $tanggalAwal . '&tanggal_akhir=' . $tanggalAkhir; ?>" class="btn btn-success mt-4">Cetak</a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <hr>
+
+
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
+                                <th class="text-center" style="padding: 10px;">No</th>
                                 <th class="text-center" style="padding: 10px;">No. Transaksi</th>
                                 <th class="text-center" style="padding: 10px;">Tanggal</th>
                                 <th class="text-center" style="padding: 10px;">Jumlah Beli</th>
@@ -54,8 +41,10 @@ if (!empty($_GET['tanggal_akhir'])) {
                         </thead>
                         <tbody>
                             <?php
+                            $no = 1;
                             foreach ($penjualanFindAll as $penjualan) : ?>
                                 <tr>
+                                    <td class="text-center"><?= $no++ ?></td>
                                     <td class="text-center"><?= $penjualan['no_transaksi'] ?></td>
                                     <td class="text-center"><?= $penjualan['tanggal_penjualan'] ?></td>
                                     <td class="text-center"><?= $penjualan['jumlah'] ?></td>

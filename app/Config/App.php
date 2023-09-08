@@ -23,7 +23,22 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-	public $baseURL = 'http://localhost:8080/';
+
+	public $baseURL = '';
+
+	public function __construct()
+	{
+		// Mendeteksi domain yang digunakan oleh pengguna
+		$domain = $_SERVER['HTTP_HOST'];
+
+		if ($domain === 'localhost:8080') {
+			$this->baseURL = 'http://localhost:8080/';
+		} elseif ($domain === 'meta.imasnet.id') {
+			$this->baseURL = 'https://meta.imasnet.id/';
+		} elseif ($domain === 'paylater') {
+			$this->baseURL = 'https://paylater.imasnet.id/';
+		}
+	}
 
 	/*
 	|--------------------------------------------------------------------------

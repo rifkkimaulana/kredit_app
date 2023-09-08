@@ -112,7 +112,7 @@ $routes->group('', ['namespace' => 'App\Controllers\Kredit_App'], function ($rou
 		// Laporan Keuangan
 		$routes->get('laporan', 'Laporan::index');
 		$routes->get('laporan/filter', 'Laporan::filter');
-		$routes->get('laporan/cetak', 'Laporan::cetak');
+		$routes->get('laporan/(:segment)', 'Laporan::cetak/$1');
 	});
 
 	// Paylater

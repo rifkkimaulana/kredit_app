@@ -39,13 +39,20 @@
 </head>
 
 <body>
-    <h2 class="text-center">Laporan Penjualan KREDIT APP</h2>
-    <p class="text-center">Tanggal Awal: <?= $tanggalAwal ?> | Tanggal Akhir: <?= $tanggalAkhir ?></p>
+    <h2 class="text-center" style="margin-bottom: 5px;">Report Payment</h2>
+    <h3 class="text-center" style="margin-top:0;">
+        <?php if (!empty($_GET['tanggal_awal']  || $_GET['tanggal_akhir'])) {
+            echo ' Filter Date : ' .    $_GET['tanggal_awal'] . ' S/D ' . $_GET['tanggal_akhir'];
+        } else {
+            echo '| All Transaction';
+        } ?>
+    </h3>
 
     <hr>
     <table>
         <thead>
             <tr>
+                <th>No</th>
                 <th>No. Transaksi</th>
                 <th>Tanggal</th>
                 <th>Jumlah Beli</th>
@@ -54,8 +61,11 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($penjualanFindAll as $penjualan) : ?>
+            <?php
+            $no = 1;
+            foreach ($penjualanFindAll as $penjualan) : ?>
                 <tr>
+                    <td><?= $no++ ?></td>
                     <td><?= $penjualan['no_transaksi'] ?></td>
                     <td><?= $penjualan['tanggal_penjualan'] ?></td>
                     <td><?= $penjualan['jumlah'] ?></td>
@@ -67,7 +77,7 @@
         <!-- Tambahkan baris untuk menampilkan total harga -->
         <tfoot>
             <tr>
-                <td colspan="4" class="total-harga">Total Harga</td>
+                <td colspan="5" class="total-harga">Total Harga</td>
                 <td class="total-harga"><?= 'Rp ' . number_format($totalHarga, 2) ?></td>
             </tr>
         </tfoot>

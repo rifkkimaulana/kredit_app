@@ -134,7 +134,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= $segment2 === 'laporan' ? 'javascript:void(0)' : base_url('ka-transaksi/laporan'); ?>" class="nav-link <?= $segment2 === 'laporan' ? 'active' : ''; ?>">
+                            <a href="javascript:void(0);" data-toggle="modal" data-target="#modal-default" class="nav-link <?= $segment2 === 'laporan' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Laporan Keuangan</p>
                             </a>
@@ -149,7 +149,6 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         </li>
                     </ul>
                 </li>
-
                 <li class="nav-item <?= $segment1 === 'ka-paylater' ? 'menu-open' : ''; ?>">
                     <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'ka-paylater' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-credit-card"></i>
@@ -190,11 +189,40 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         <p>Log Aktivitas</p>
                     </a>
                 </li>
-
             </ul>
         </nav>
     </div>
 </aside>
+
+<!-- Modal Filter Keuangan -->
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Pilih Laporan Keuangan</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url('ka-transaksi/laporan/filter'); ?>" method="get">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="tanggal_awal">Tanggal Awal</label>
+                        <input type="date" name="tanggal_awal" class="form-control" <?php if (isset($_GET['tanggal_awal'])) echo 'value="' . $_GET['tanggal_awal'] . '"'; ?>>
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggal_akhir">Tanggal Akhir</label>
+                        <input type="date" name="tanggal_akhir" class="form-control" <?php if (isset($_GET['tanggal_akhir'])) echo 'value="' . $_GET['tanggal_akhir'] . '"'; ?>>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Lihat Laporan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <!-- Modal Logout All Session -->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
