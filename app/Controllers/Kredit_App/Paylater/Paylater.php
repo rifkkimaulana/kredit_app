@@ -21,7 +21,7 @@ class Paylater extends BaseController
         return view('kredit_app/pages/Paylater/IdentitasView', $data);
     }
 
-    public function verifikasi()
+    public function verifikasiKontrak()
     {
         // Cek apakah pengguna memiliki akses yang sesuai
         if ($this->user['user_level'] !== 'administrator') {

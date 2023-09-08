@@ -13,7 +13,7 @@ class Dashboard extends BaseController
 			'perusahaan' => $this->aplikasi,
 			'label' => $this->label
 		];
-		return view('kredit_app/pages/Dashboard', $data);
+		return view('kredit_app/pages/dashboard', $data);
 	}
 
 	public function logout()

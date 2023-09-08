@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class KategoriProdukModel extends Model
 {
-    protected $table = 'tb_kategoriProduk';
+    protected $table = 'tb_kategoriproduk';
     protected $primaryKey = 'id';
     protected $allowedFields = [
         'nama_kategori', 'deskripsi'

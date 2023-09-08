@@ -50,7 +50,7 @@ class Keranjang extends BaseController
         $session = session();
         if (empty($selectedProduk)) {
             $session->setFlashdata('error', 'Pilih setidaknya satu produk.');
-            return redirect()->to(base_url('keranjang'));
+            return redirect()->to(base_url('ka-transaksi/keranjang'));
         }
 
         foreach ($selectedProduk as $idProduk) {
@@ -68,15 +68,15 @@ class Keranjang extends BaseController
                         $this->keranjangModel->addToKeranjang($data);
                     } else {
                         $session->setFlashdata('error', 'Produk sudah ada dalam keranjang.');
-                        return redirect()->to(base_url('keranjang'));
+                        return redirect()->to(base_url('ka-transaksi/keranjang'));
                     }
                 } else {
                     $session->setFlashdata('error', 'Jumlah beli produk tidak valid.');
-                    return redirect()->to(base_url('keranjang'));
+                    return redirect()->to(base_url('ka-transaksi/keranjang'));
                 }
             } else {
                 $session->setFlashdata('error', 'Stok Produk Tidak Tersedia.');
-                return redirect()->to(base_url('keranjang'));
+                return redirect()->to(base_url('ka-transaksi/keranjang'));
             }
         }
 

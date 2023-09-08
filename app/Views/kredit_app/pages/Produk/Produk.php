@@ -31,7 +31,7 @@
                                             <div class="col-md-6">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <form method="post" action="<?= base_url('produk/daftar/sent'); ?>">
+                                                        <form method="post" action="<?= base_url('ka-transaksi/keranjang'); ?>">
                                                             <input type="hidden" name="selectedProduk" value="<?= $produk['id']; ?>">
 
                                                             <h3 class="card-title"><b><?= $produk['nama_produk']; ?></b></h3>
@@ -63,8 +63,8 @@
                                     </div>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
                         </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>

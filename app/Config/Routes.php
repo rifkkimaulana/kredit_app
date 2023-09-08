@@ -125,7 +125,7 @@ $routes->group('', ['namespace' => 'App\Controllers\Kredit_App'], function ($rou
 
 		$routes->get('kontrak/delete/(:num)', 'Kontrak::deleteKontrak/$1');
 
-		$routes->post('verifikasi', 'PayLater::verifikasi');
+		$routes->post('verifikasi', 'PayLater::verifikasiKontrak');
 
 		$routes->post('pembayaran/confirm', 'Pembayaran::pembayaranInsert');
 

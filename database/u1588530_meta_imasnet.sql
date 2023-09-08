@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 07 Sep 2023 pada 23.50
--- Versi server: 10.1.37-MariaDB
--- Versi PHP: 7.3.0
+-- Host: localhost:3306
+-- Waktu pembuatan: 08 Sep 2023 pada 16.47
+-- Versi server: 10.6.14-MariaDB-cll-lve
+-- Versi PHP: 8.1.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `kredit_app`
+-- Database: `u1588530_meta_imasnet`
 --
 
 -- --------------------------------------------------------
@@ -51,7 +50,7 @@ CREATE TABLE `tb_appsetting` (
   `slug` text NOT NULL,
   `wablasapi_id` int(11) NOT NULL,
   `googleapi_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data untuk tabel `tb_appsetting`
@@ -70,7 +69,7 @@ CREATE TABLE `tb_google_api_login` (
   `id` int(11) NOT NULL,
   `client_id` varchar(255) NOT NULL,
   `client_secret` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data untuk tabel `tb_google_api_login`
@@ -93,18 +92,18 @@ CREATE TABLE `tb_identitas` (
   `tempat_lahir` varchar(100) DEFAULT NULL,
   `tanggal_lahir` date DEFAULT NULL,
   `jenis_kelamin` enum('Laki-laki','Perempuan') DEFAULT NULL,
-  `alamat` text,
+  `alamat` text DEFAULT NULL,
   `agama` varchar(50) DEFAULT NULL,
   `status_pernikahan` enum('Belum Menikah','Menikah','Cerai') DEFAULT NULL,
   `pekerjaan` varchar(100) DEFAULT NULL,
   `foto_identitas` varchar(255) DEFAULT NULL,
   `foto_selvi_ktp` varchar(255) DEFAULT NULL,
   `status` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `nomor_alternatif_1` varchar(20) DEFAULT NULL,
   `nama_alternatif_1` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data untuk tabel `tb_identitas`
@@ -122,17 +121,10 @@ INSERT INTO `tb_identitas` (`id`, `user_id`, `nama_lengkap`, `nomor_identitas`, 
 CREATE TABLE `tb_kategoriproduk` (
   `id` int(11) NOT NULL,
   `nama_kategori` varchar(255) NOT NULL,
-  `deskripsi` text,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `tb_kategoriproduk`
---
-
-INSERT INTO `tb_kategoriproduk` (`id`, `nama_kategori`, `deskripsi`, `created_at`, `updated_at`) VALUES
-(4, 'Handphone', 'Handphones', '2023-09-03 05:58:43', '2023-09-06 16:26:33');
+  `deskripsi` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -146,9 +138,9 @@ CREATE TABLE `tb_keranjang` (
   `produk_id` int(11) NOT NULL,
   `harga_satuan` decimal(10,2) NOT NULL,
   `jumlah` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -167,8 +159,8 @@ CREATE TABLE `tb_kredit` (
   `file_kontrak` text NOT NULL,
   `status` varchar(50) NOT NULL,
   `no_transaksi` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -181,7 +173,7 @@ CREATE TABLE `tb_log_aktifitas` (
   `user_id` int(11) NOT NULL,
   `keterangan` varchar(100) NOT NULL,
   `ip_address` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -199,8 +191,8 @@ CREATE TABLE `tb_pembayaran` (
   `jumlah_pembayaran` varchar(50) DEFAULT NULL,
   `no_referensi` varchar(50) DEFAULT NULL,
   `status` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -211,7 +203,7 @@ CREATE TABLE `tb_pembayaran` (
 CREATE TABLE `tb_penjualan` (
   `id` int(11) NOT NULL,
   `no_transaksi` varchar(20) NOT NULL,
-  `tanggal_penjualan` text,
+  `tanggal_penjualan` text DEFAULT NULL,
   `id_users` int(11) DEFAULT NULL,
   `id_produk` int(11) DEFAULT NULL,
   `jumlah` int(11) DEFAULT NULL,
@@ -221,16 +213,9 @@ CREATE TABLE `tb_penjualan` (
   `status` varchar(50) DEFAULT NULL,
   `no_referensi` varchar(20) NOT NULL,
   `no_kontrak` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `tb_penjualan`
---
-
-INSERT INTO `tb_penjualan` (`id`, `no_transaksi`, `tanggal_penjualan`, `id_users`, `id_produk`, `jumlah`, `harga_satuan`, `total_harga`, `metode_pembayaran`, `status`, `no_referensi`, `no_kontrak`, `created_at`, `updated_at`) VALUES
-(15, '20230907145456', '2023-09-07', 16, 10, 1, '20000.00', '20000.00', 'Tunai', 'pending', '20230907145456Z0T2RH', '', '2023-09-07 19:54:56', '2023-09-07 19:54:56');
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -241,21 +226,14 @@ INSERT INTO `tb_penjualan` (`id`, `no_transaksi`, `tanggal_penjualan`, `id_users
 CREATE TABLE `tb_produk` (
   `id` int(11) NOT NULL,
   `nama_produk` varchar(255) NOT NULL,
-  `deskripsi` text,
+  `deskripsi` text DEFAULT NULL,
   `harga` decimal(10,2) NOT NULL,
   `stok` int(11) NOT NULL,
   `gambar` varchar(255) DEFAULT NULL,
   `kategori_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `tb_produk`
---
-
-INSERT INTO `tb_produk` (`id`, `nama_produk`, `deskripsi`, `harga`, `stok`, `gambar`, `kategori_id`, `created_at`, `updated_at`) VALUES
-(10, 'Paket Mendak Studio', 'Paket Mendak Studio', '20000.00', 97, '1693720748_5e345c6609ad983083bb.jpg', 4, '2023-09-03 05:59:08', '2023-09-07 18:07:19');
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -280,16 +258,15 @@ CREATE TABLE `tb_users` (
   `facebook` varchar(50) NOT NULL,
   `tweeter` varchar(50) NOT NULL,
   `instagram` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data untuk tabel `tb_users`
 --
 
 INSERT INTO `tb_users` (`user_id`, `user_nama`, `user_username`, `user_password`, `user_foto`, `user_level`, `email`, `no_wa`, `reset_token`, `reset_id`, `keterangan`, `app_id`, `country`, `facebook`, `tweeter`, `instagram`) VALUES
-(4, 'Rifki Maulana', 'admin', '$2y$10$sTLQNlIPTteXcji08YPX4eC1Ob5KQy7.P95.GmIeSnapLpPoUsUh2', '1693988547_0078b59238b5f1c15c9f.webp', 'administrator', 'rifkkimaulana@gmail.com', '083130649979', '', 'be6b8b1e-59da-41df-86ed-4a03dce719ec', '', 1, 'Indonesia', '', '', ''),
-(16, 'Dian Witura', 'dian', '$2y$10$MTHn9EWgER0HkqQpxifyYOkMmOYTh7FzE0kgrUNvo6.o7/xp8LsF.', NULL, 'member', '64f9be690a6ac_contoh@emailkamu.com', '082118844992', '', '', '', 1, '', '', '', ''),
-(17, 'asd', 'asd', '$2y$10$GPmOR8STy.kKBEGLHQmruOLBHVgJFHBnbMgEZ8I5xvc8Gbu9x74Mu', NULL, 'member', '64fa242d49c30_cth@email.com', 'asd', '', '', '', 1, '', '', '', '');
+(4, 'Rifki Maulana', 'admin', '$2y$10$guzfxMCl3tZSo/Qgfo7OnO05iMmzN7Pfos/xF8TumqhI/qh.zJUma', '1693988547_0078b59238b5f1c15c9f.webp', 'administrator', 'rifkkimaulana@gmail.com', '083130649979', '', 'ecdaa0e0-3e87-4368-be77-92ddd3a57081', '', 1, 'Indonesia', '', '', ''),
+(16, 'Dian Witura', 'dian', '$2y$10$MTHn9EWgER0HkqQpxifyYOkMmOYTh7FzE0kgrUNvo6.o7/xp8LsF.', NULL, 'member', '64f9be690a6ac_contoh@emailkamu.com', '082118844992', '', '', '', 1, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -301,7 +278,7 @@ CREATE TABLE `tb_wablas` (
   `id` int(11) NOT NULL,
   `domain` varchar(100) NOT NULL,
   `token_api` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data untuk tabel `tb_wablas`
@@ -427,7 +404,7 @@ ALTER TABLE `tb_kategoriproduk`
 -- AUTO_INCREMENT untuk tabel `tb_keranjang`
 --
 ALTER TABLE `tb_keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_kredit`
