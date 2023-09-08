@@ -45,23 +45,12 @@ class BaseController extends Controller
 
 	// New Protected String
 
-	protected $pembayaranFindSessionUserId;
-	protected $kontrakFindSessionUserId;
-
+	// Base Admin
 	protected $user;
-	protected $userFindAll;
-	protected $identitas;
-
+	protected $aplikasi;
 	protected $label;
 
-	protected $aplikasi;
-
-	protected $produkFindAll;
-	protected $kategoriProdukFindAll;
-	protected $penjualanFindAll;
-
-	protected $identitasFindAll;
-
+	// Model Protected
 	protected $userModel;
 	protected $identitasModel;
 	protected $aplikasiModel;
@@ -94,48 +83,17 @@ class BaseController extends Controller
 		$this->kontrakModel = new KreditModel();
 		$this->pembayaranModel = new PembayaranModel();
 
-		// Cek sesi pengguna
-		if (!session('user_level') || !(session('user_level') === 'administrator' || session('user_level') === 'member')) {
-			return redirect()->to(base_url('login'))->with('error', 'Anda tidak memiliki izin akses.');
-		}
-
-		$userFindAll = $this->userModel->findAll();
-		$this->userFindAll = $userFindAll;
-
+		// Mendapatkan Sesi Aktif Aplikasi
 		$user = $this->userModel->where('user_id', session('user_id'))->first();
 		$this->user = $user;
 
-		$produkFindAll = $this->produkModel->findAll();
-		$this->produkFindAll = $produkFindAll;
-
-		$kategoriProdukFindAll = $this->kategoriProdukModel->findAll();
-		$this->kategoriProdukFindAll = $kategoriProdukFindAll;
-
-		$identitas = $this->identitasModel->where('user_id', session('user_id'))->first();
-		$this->identitas = $identitas;
-
-		$identitasFindAll = $this->identitasModel->findAll();
-		$this->identitasFindAll = $identitasFindAll;
-
-		$pembayaranFindSessionId = $this->pembayaranModel->where('user_id', session('user_id'))->findAll();
-		$this->pembayaranFindSessionUserId = $pembayaranFindSessionId;
-
-		$kontrakFindSessionUserId = $this->kontrakModel->where('user_id', session('user_id'))->findAll();
-		$this->kontrakFindSessionUserId = $kontrakFindSessionUserId;
-
-		// Mendapatkan Sesi Aktif Aplikasi
 		if (!empty(session('AplicationId'))) {
 			$this->aplikasi = $this->aplikasiModel->find(session('AplicationId'));
 		} else {
 			$this->aplikasi = $this->aplikasiModel->find($user['app_id']);
 		}
 
-		// Mendapatkan Jumlah Keranjang berdasarkan user_id
 		$label = $this->keranjangModel->where('user_id', session('user_id'))->countAllResults();
 		$this->label = $label;
-
-		// Mendapatkan semua data penjualan
-		$penjualan = $this->penjualanModel->findAll();
-		$this->penjualanFindAll = $penjualan;
 	}
 }

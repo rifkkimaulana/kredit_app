@@ -10,10 +10,12 @@ class Produk extends BaseController
     // View Produk Gallery
     public function index()
     {
+        $produkFindAll = $this->produkModel->findAll();
+
         $data = [
             'title' => 'Produk',
             'user' => $this->user,
-            'produkFindAll' => $this->produkFindAll,
+            'produkFindAll' => $produkFindAll,
             'perusahaan' => $this->aplikasi,
             'label' => $this->label
         ];
@@ -28,11 +30,14 @@ class Produk extends BaseController
             return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
         }
 
+        $produkFindAll = $this->produkModel->findAll();
+        $kategoriProdukFindAll = $this->kategoriProdukModel->findAll();
+
         $data = [
             'title' => 'Management Produk',
             'user' => $this->user,
-            'produkFindAll' => $this->produkFindAll,
-            'kategoriProdukFindAll' => $this->kategoriProdukFindAll,
+            'produkFindAll' => $produkFindAll,
+            'kategoriProdukFindAll' => $kategoriProdukFindAll,
             'products' => $this->produkModel->getProdukWithKategori(),
             'perusahaan' => $this->aplikasi,
             'label' => $this->label
@@ -47,11 +52,14 @@ class Produk extends BaseController
             return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
         }
 
+        $produkFindAll = $this->produkModel->findAll();
+        $kategoriProdukFindAll = $this->kategoriProdukModel->findAll();
+
         $data = [
             'title' => 'Kategori Produk',
             'user' => $this->user,
-            'produkFindAll' => $this->produkFindAll,
-            'kategoriProdukFindAll' => $this->kategoriProdukFindAll,
+            'produkFindAll' => $produkFindAll,
+            'kategoriProdukFindAll' => $kategoriProdukFindAll,
             'products' => $this->produkModel->getProdukWithKategori(),
             'perusahaan' => $this->aplikasi,
             'label' => $this->label

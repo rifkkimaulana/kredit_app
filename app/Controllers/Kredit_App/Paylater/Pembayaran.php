@@ -8,18 +8,22 @@ class Pembayaran extends BaseController
 {
     public function index()
     {
+        $userFindAll = $this->userModel->findAll();
 
         $userMap = [];
-
-        foreach ($this->userFindAll as $userData) {
+        foreach ($userFindAll as $userData) {
             $userMap[$userData['user_id']] = $userData;
         }
 
+        $pembayaranFindSessionId = $this->pembayaranModel->where('user_id', session('user_id'))->findAll();
+
         if (session('user_level') !== 'administrator') {
-            $pembayaran = $this->pembayaranFindSessionUserId;
+            $pembayaran = $pembayaranFindSessionId;
         } else {
             $pembayaran = $this->pembayaranModel->findAll();
         }
+
+        $kontrakFindSessionUserId = $this->kontrakModel->where('user_id', session('user_id'))->findAll();
 
         $data = [
             'title' => 'Daftar Pembayaran',
@@ -27,7 +31,7 @@ class Pembayaran extends BaseController
             'perusahaan' => $this->aplikasi,
             'label' => $this->label,
             'pembayaran' => $pembayaran,
-            'kontrakList' => $this->kontrakFindSessionUserId,
+            'kontrakList' => $kontrakFindSessionUserId,
             'userMap' => $userMap,
         ];
 

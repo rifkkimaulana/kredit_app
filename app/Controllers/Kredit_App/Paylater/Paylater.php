@@ -8,10 +8,12 @@ class Paylater extends BaseController
 {
     public function index()
     {
+        $identitasFindAll = $this->identitasModel->findAll();
+
         $data = [
             'title' => 'Daftar Peninjauan Kontrak',
             'user' => $this->user,
-            'identitasList' => $this->identitasFindAll,
+            'identitasList' => $identitasFindAll,
             'perusahaan' => $this->aplikasi,
             'label' => $this->label
         ];

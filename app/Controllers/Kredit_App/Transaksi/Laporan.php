@@ -14,10 +14,12 @@ class Laporan extends BaseController
 {
     public function index()
     {
+        $penjualan = $this->penjualanModel->findAll();
+
         $data = [
             'title' => 'Management Transaksi',
             'user' => $this->user,
-            'penjualanFindAll' => $this->penjualanFindAll,
+            'penjualanFindAll' => $penjualan,
             'perusahaan' => $this->aplikasi,
             'label' => $this->label,
         ];
@@ -42,10 +44,12 @@ class Laporan extends BaseController
                 'label' => $this->label,
             ];
         } else {
+            $penjualan = $this->penjualanModel->findAll();
+
             $data = [
                 'title' => 'Management Transaksi - Filter Tanggal',
                 'user' => $this->user,
-                'penjualanFindAll' => $this->penjualanFindAll,
+                'penjualanFindAll' => $penjualan,
                 'perusahaan' => $this->aplikasi,
                 'label' => $this->label,
             ];
@@ -146,10 +150,12 @@ class Laporan extends BaseController
             $sheet->setCellValue('E2', 'Harga Satuan');
             $sheet->setCellValue('F2', 'Total Harga');
 
+            $penjualanFind = $this->penjualanModel->findAll();
+
             // Data
             $row = 3;
             $no = 1;
-            foreach ($this->penjualanFindAll as $penjualan) {
+            foreach ($penjualanFind as $penjualan) {
                 $sheet->setCellValue('A' . $row, $no);
                 $sheet->setCellValue('B' . $row, $penjualan['no_transaksi']);
                 $sheet->setCellValue('C' . $row, $penjualan['tanggal_penjualan']);

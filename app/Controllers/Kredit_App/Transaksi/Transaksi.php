@@ -8,20 +8,26 @@ class Transaksi extends BaseController
 {
     public function index()
     {
+        $userFindAll = $this->userModel->findAll();
+
         $userMap = [];
-        foreach ($this->userFindAll as $users) {
+        foreach ($userFindAll as $users) {
             $userMap[$users['user_id']] = $users;
         }
 
+        $produkFindAll = $this->produkModel->findAll();
+
         $produkMap = [];
-        foreach ($this->produkFindAll as $produk) {
+        foreach ($produkFindAll as $produk) {
             $produkMap[$produk['id']] = $produk;
         }
+
+        $penjualanFindAll = $this->penjualanModel->findAll();
 
         $data = [
             'title' => 'Management Transaksi',
             'user' => $this->user,
-            'penjualanFindAll' => $this->penjualanFindAll,
+            'penjualanFindAll' => $penjualanFindAll,
             'perusahaan' => $this->aplikasi,
             'label' => $this->label,
             'userMap' => $userMap,

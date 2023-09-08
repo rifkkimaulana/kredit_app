@@ -19,13 +19,16 @@ class Keranjang extends BaseController
             }
         }
 
+        $userFindAll = $this->userModel->findAll();
+        $produkFindAll = $this->produkModel->findAll();
+
         $data = [
             'title' => 'Cekout Pembelian Keranjang',
             'keranjang' => $keranjangItems,
             'produk' => $produk,
             'user' => $this->user,
-            'userList' => $this->userFindAll,
-            'products' => $this->produkFindAll,
+            'userList' => $userFindAll,
+            'products' => $produkFindAll,
             'perusahaan' => $this->aplikasi,
             'label' => $this->label
         ];
@@ -34,9 +37,10 @@ class Keranjang extends BaseController
 
     public function keranjang_insert()
     {
+        $produkFindAll = $this->produkModel->findAll();
 
         $produkMap = [];
-        foreach ($this->produkFindAll as $product) {
+        foreach ($produkFindAll as $product) {
             $produkMap[$product['id']] = $product;
         }
 

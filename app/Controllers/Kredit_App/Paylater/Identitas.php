@@ -13,10 +13,12 @@ class Identitas extends BaseController
             return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
         }
 
+        $identitasFindAll = $this->identitasModel->findAll();
+
         $data = [
             'title' => 'Daftar Peninjauan Identitas',
             'user' => $this->user,
-            'identitasList' => $this->identitasFindAll,
+            'identitasList' => $identitasFindAll,
             'perusahaan' => $this->aplikasi,
             'label' => $this->label
         ];

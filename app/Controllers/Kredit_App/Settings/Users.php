@@ -13,10 +13,12 @@ class Users extends BaseController
             return redirect()->to(base_url('access_denied'))->with('error', 'Anda tidak memiliki akses ke halaman ini.');
         }
 
+        $userFindAll = $this->userModel->findAll();
+
         $data = [
             'title' => 'Users Management Settings',
             'user' => $this->user,
-            'userFindAll' => $this->userFindAll,
+            'userFindAll' => $userFindAll,
             'perusahaan' => $this->aplikasi,
             'label' => $this->label
         ];

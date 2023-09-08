@@ -9,7 +9,7 @@ class Profile extends BaseController
     public function index()
     {
         $user = $this->user;
-        $identitas = $this->identitas;
+        $identitas = $this->identitasModel->where('user_id', session('user_id'))->first();
 
         $data = [
             'title' => 'Profile Settings',
@@ -197,8 +197,8 @@ class Profile extends BaseController
 
                     $data['foto_selvi_ktp'] = $namaUnikSelvi;
                 }
-
-                $this->identitasModel->updateIdentitas($this->identitas['id'], $data);
+                $identitas = $this->identitasModel->where('user_id', session('user_id'))->first();
+                $this->identitasModel->updateIdentitas($identitas['id'], $data);
 
                 return redirect()->to(base_url('ka-settings/profile'))->with('success', $user['user_nama'] . ' ' . 'Identitas Anda berhasil Dikirim Ulang, silahkan tunggu proses verifikasi selanjutnya.');
             }

@@ -15,14 +15,18 @@ class Kontrak extends BaseController
             $jumlahterbayar = $this->pembayaranModel->where('no_kontrak', $noKontrak)->countAllResults();
         }
 
+        $kontrakFindSessionUserId = $this->kontrakModel->where('user_id', session('user_id'))->findAll();
+
         if (session('user_level') !== 'administrator') {
-            $kontrakList = $this->kontrakFindSessionUserId;
+            $kontrakList = $kontrakFindSessionUserId;
         } else {
             $kontrakList = $this->kontrakModel->findAll();
         }
 
+        $userFindAll = $this->userModel->findAll();
+
         $userMap = [];
-        foreach ($this->userFindAll as $userData) {
+        foreach ($userFindAll as $userData) {
             $userMap[$userData['user_id']] = $userData;
         }
 
