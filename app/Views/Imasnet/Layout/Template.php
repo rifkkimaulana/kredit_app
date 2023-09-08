@@ -111,7 +111,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
-        var table = $("#tablemeta_rg").DataTable({
+        var table = $("#tablerifkkimaulana").DataTable({
             paging: true,
             lengthChange: true,
             searching: true,

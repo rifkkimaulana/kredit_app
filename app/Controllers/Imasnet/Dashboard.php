@@ -2,8 +2,6 @@
 
 namespace App\Controllers\Imasnet;
 
-use App\Controllers\Imasnet\BaseController;
-
 class Dashboard extends BaseController
 {
 	public function index()

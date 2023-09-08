@@ -41,7 +41,6 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  */
 
-
 // Meta Panel
 $routes->group('meta', ['namespace' => 'App\Controllers\Meta'], function ($routes) {
 	//Meta Dashboard
@@ -56,8 +55,43 @@ $routes->group('meta', ['namespace' => 'App\Controllers\Meta'], function ($route
 // END Meta Panel
 
 // Routes For SCC IMASNET
-$routes->get('im-dahsboard', 'App\Controllers\Kredit_App\Dashboard::index');
+$routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes) {
+	$routes->get('im-dashboard', 'Dashboard::index');
 
+	// Grup Manajemen Inventory
+	$routes->group('im-inventory', ['namespace' => 'App\Controllers\Imasnet\Inventory'], function ($routes) {
+
+		$routes->get('inventory', 'Inventory::index');
+		$routes->post('inventory/create', 'Inventory::create');
+		$routes->post('inventory/update', 'Inventory::update');
+
+		$routes->get('location', 'Location::index');
+		$routes->post('location/create', 'Location::create');
+		$routes->post('location/update', 'Location::update');
+
+		$routes->get('suppliers', 'Suppliers::index');
+		$routes->post('suppliers/create', 'Suppliers::create');
+		$routes->post('suppliers/update', 'Suppliers::update');
+
+		$routes->get('customers', 'Customers::index');
+		$routes->post('customers', 'Customers::createCust');
+		$routes->post('customers/update', 'Customers::update');
+
+		$routes->get('categories', 'Categories::index');
+		$routes->post('categories/create', 'Categories::create');
+		$routes->post('categories/update', 'Categories::update');
+
+		$routes->get('transaction', 'Transaction::index');
+		$routes->post('transaction/create', 'Transaction::create');
+		$routes->post('transaction/update', 'Transaction::update');
+
+		$routes->get('history', 'History::index');
+		$routes->post('history/create', 'History::create');
+		$routes->post('transaction/update', 'Transaction::update');
+	});
+
+	// END Manajemen Inventory
+});
 // END SCC IMASNET
 
 // Routes For Kredit_App
