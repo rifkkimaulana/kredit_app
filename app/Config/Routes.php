@@ -55,6 +55,13 @@ $routes->group('meta', ['namespace' => 'App\Controllers\Meta'], function ($route
 });
 // END Meta Panel
 
+
+// Routes For SCC IMASNET
+$routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes) {
+	$routes->get('ims-dahsboard', 'Dashboard::index');
+});
+// END SCC IMASNET
+
 // Routes For Kredit_App
 $routes->group('', ['namespace' => 'App\Controllers\Kredit_App'], function ($routes) {
 
