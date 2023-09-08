@@ -2,17 +2,19 @@
 
 namespace App\Controllers\Auth;
 
-use App\Controllers\BaseController;
+use App\Controllers\Auth\BaseController;
 
 class Whatsapp extends BaseController
 {
     public function index()
     {
+        $aplikasi = $this->aplikasiModel->where('id', session('ApplicationId'))->first();
+
         if (!empty(session('user_id'))) {
             if (session('user_level') === 'administrator') {
                 return redirect()->to(base_url('meta/dashboard'));
             } else {
-                return redirect()->to(base_url($this->aplikasi['slug']));
+                return redirect()->to(base_url($aplikasi['slug']));
             }
         }
 
@@ -68,8 +70,10 @@ class Whatsapp extends BaseController
             if (session('user_level') === 'administrator') {
                 return redirect()->to(base_url('meta/dashboard'));
             } else {
-                if (!empty($this->aplikasi['slug'])) {
-                    return redirect()->to(base_url($this->aplikasi['slug']));
+                $aplikasi = $this->aplikasiModel->where('id', session('ApplicationId'))->first();
+
+                if (!empty($aplikasi['slug'])) {
+                    return redirect()->to(base_url($aplikasi['slug']));
                 }
                 return redirect()->to(base_url('login'));
             }

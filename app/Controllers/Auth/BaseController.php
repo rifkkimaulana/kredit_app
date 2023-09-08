@@ -35,9 +35,7 @@ class BaseController extends Controller
 
 	protected $usersModel;
 	protected $googleModel;
-
-	protected $aplikasi;
-	protected $googleData;
+	protected $aplikasiModel;
 
 	/**
 	 * Constructor.
@@ -53,14 +51,9 @@ class BaseController extends Controller
 		// E.g.:
 		// $this->session = \Config\Services::session();
 
-		$aplikasiModel = new AplikasiModel();
-		$googleModel = new GoogleApiModel();
+		$this->aplikasiModel = new AplikasiModel();
+		$this->googleModel = new GoogleApiModel();
 		$this->usersModel = new UsersModel();
 		$this->googleModel = new GoogleApiModel();
-
-		$aplikasi = $aplikasiModel->where('id', session('ApplicationId'))->first();
-		$this->aplikasi = $aplikasi;
-
-		$this->googleData = $googleModel->where('id', 1)->first();
 	}
 }

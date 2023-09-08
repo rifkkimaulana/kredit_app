@@ -2,19 +2,21 @@
 
 namespace App\Controllers\Auth;
 
-use App\Controllers\BaseController;
+use App\Controllers\Auth\BaseController;
 
 class ForgotPassword extends BaseController
 {
     public function index()
     {
+        $aplikasi = $this->aplikasiModel->where('id', session('ApplicationId'))->first();
+
         if (session()->has('user_id')) {
             $userLevel = session('user_level');
 
             if ($userLevel === 'administrator') {
                 return redirect()->to(base_url('meta/dashboard'));
             } else {
-                return redirect()->to(base_url($this->aplikasi['slug']));
+                return redirect()->to(base_url($aplikasi['slug']));
             }
         }
 

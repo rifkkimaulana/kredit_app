@@ -2,16 +2,18 @@
 
 namespace App\Controllers\Auth;
 
-use App\Controllers\BaseController;
+use App\Controllers\Auth\BaseController;
 
 class Google extends BaseController
 {
     // Google API Login
     public function googleAuth()
     {
-        if ($this->googleData) {
-            $clientId = $this->googleData['client_id'];
-            $clientSecret = $this->googleData['client_secret'];
+        $googleData = $this->googleModel->where('id', 1)->first();
+
+        if ($googleData) {
+            $clientId = $googleData['client_id'];
+            $clientSecret = $googleData['client_secret'];
 
             $authUrl = $this->createAuthUrl($clientId, $clientSecret);
             return redirect()->to($authUrl);
@@ -38,9 +40,11 @@ class Google extends BaseController
 
     public function googleAuth_callback()
     {
-        if ($this->googleData) {
-            $client_id = $this->googleData['client_id'];
-            $client_secret = $this->googleData['client_secret'];
+        $googleData = $this->googleModel->where('id', 1)->first();
+
+        if ($googleData) {
+            $client_id = $googleData['client_id'];
+            $client_secret = $googleData['client_secret'];
             $redirect_uri = base_url('google/callback');
 
             if ($this->request->getGet('code')) {
@@ -65,8 +69,10 @@ class Google extends BaseController
                     if (session('user_level') === 'administrator') {
                         return redirect()->to(base_url('meta/dashboard'));
                     } else {
-                        if (!empty($this->aplikasi['slug'])) {
-                            return redirect()->to(base_url($this->aplikasi['slug']));
+                        $aplikasi = $this->aplikasiModel->where('id', session('ApplicationId'))->first();
+
+                        if (!empty($aplikasi['slug'])) {
+                            return redirect()->to(base_url($aplikasi['slug']));
                         }
                         return redirect()->to(base_url('login'));
                     }
