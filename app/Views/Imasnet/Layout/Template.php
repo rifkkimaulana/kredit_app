@@ -139,6 +139,20 @@
         $("#selectLength").on("change", function() {
             table.page.len($(this).val()).draw();
         });
+
+        // Identifikasi plugin select2
+        $('.select2').select2({
+            theme: 'bootstrap4'
+        });
+
+        // Inisialisasi Notifikasi all pages from session
+        <?php if (session()->getFlashdata('success')) : ?>
+            toastr.success('<?= session()->getFlashdata('success') ?>');
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('error')) : ?>
+            toastr.error('<?= session()->getFlashdata('error') ?>');
+        <?php endif; ?>
     </script>
 
 </body>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 08 Sep 2023 pada 21.54
+-- Waktu pembuatan: 09 Sep 2023 pada 14.16
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.3.0
 
@@ -128,7 +128,7 @@ CREATE TABLE `tb_im_inventori` (
   `nama_barang` varchar(255) DEFAULT NULL,
   `stok` int(11) DEFAULT NULL,
   `satuan` varchar(50) DEFAULT NULL,
-  `harga_satuan` decimal(10,2) DEFAULT NULL,
+  `harga_satuan` varchar(200) DEFAULT NULL,
   `keterangan` text,
   `foto` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -140,7 +140,7 @@ CREATE TABLE `tb_im_inventori` (
 --
 
 INSERT INTO `tb_im_inventori` (`id`, `location_id`, `suppliers_id`, `customer_id`, `categories_id`, `nama_barang`, `stok`, `satuan`, `harga_satuan`, `keterangan`, `foto`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 1, 'asdf', 321, 'asdfasdf', '99999999.99', 'szdfzsdfasfdasdf', NULL, '2023-09-08 19:48:02', '2023-09-08 19:48:02');
+(4, 2, NULL, NULL, 4, 'asdf', 3, 'bh', '33333.00', '', '1694258420_3c8780f7299a92acd4fc.jpg', '2023-09-09 11:20:20', '2023-09-09 11:20:20');
 
 -- --------------------------------------------------------
 
@@ -161,7 +161,7 @@ CREATE TABLE `tb_im_inv_categories` (
 --
 
 INSERT INTO `tb_im_inv_categories` (`id`, `nama_kategori`, `keterangan`, `created_at`, `updated_at`) VALUES
-(1, 'Teknologi', 'ads', '2023-09-08 19:34:23', '2023-09-08 19:34:23');
+(4, 'as', 'dff435', '2023-09-09 09:59:49', '2023-09-09 10:03:39');
 
 -- --------------------------------------------------------
 
@@ -183,7 +183,7 @@ CREATE TABLE `tb_im_inv_customers` (
 --
 
 INSERT INTO `tb_im_inv_customers` (`id`, `nama_lengkap`, `telpon`, `alamat`, `created_at`, `updated_at`) VALUES
-(1, 'Rifki Maulana', '081231234124', 'sumednag', '2023-09-08 19:41:58', '2023-09-08 19:41:58');
+(5, 'Rifki Maulana', '081231234124', '123', '2023-09-09 10:09:51', '2023-09-09 10:11:02');
 
 -- --------------------------------------------------------
 
@@ -204,7 +204,7 @@ CREATE TABLE `tb_im_inv_history` (
 --
 
 INSERT INTO `tb_im_inv_history` (`id`, `keterangan`, `jenis`, `created_at`, `updated_at`) VALUES
-(1, 'adsfa', 'asdf', '2023-09-08 19:44:07', '2023-09-08 19:44:07');
+(2, 'tanpa keterangan', '23452354324', '2023-09-09 10:13:18', '2023-09-09 10:13:28');
 
 -- --------------------------------------------------------
 
@@ -227,7 +227,7 @@ CREATE TABLE `tb_im_inv_location` (
 --
 
 INSERT INTO `tb_im_inv_location` (`id`, `nama_lokasi`, `penanggung_jawab`, `telpon`, `alamat`, `created_at`, `updated_at`) VALUES
-(1, 'asdf', 'asdfas', 'df23523523', 'rasdfasdf', '2023-09-08 19:45:21', '2023-09-08 19:45:21');
+(2, 'avdfvadfv', 'vsd', '234234', '', '2023-09-09 10:16:07', '2023-09-09 10:16:12');
 
 -- --------------------------------------------------------
 
@@ -252,7 +252,7 @@ CREATE TABLE `tb_im_inv_suppliers` (
 --
 
 INSERT INTO `tb_im_inv_suppliers` (`id`, `nama_lengkap`, `telpon`, `no_rek`, `nama_no_rek`, `nama_toko`, `alamat`, `created_at`, `updated_at`) VALUES
-(1, 'asdf', '123123', '1241243', 'asfdasdf', 'asdgasdf', 'asdfasdf', '2023-09-08 19:46:33', '2023-09-08 19:46:33');
+(2, 'Ikbal', '081231234124', '131241324', 'asfdasdf', '32adsf325sadf', '  sumednagdsssfasdf', '2023-09-09 10:19:02', '2023-09-09 10:26:22');
 
 -- --------------------------------------------------------
 
@@ -266,8 +266,8 @@ CREATE TABLE `tb_im_inv_transaction` (
   `supliers_id` int(11) DEFAULT NULL,
   `customers_id` int(11) DEFAULT NULL,
   `inventory_id` int(11) DEFAULT NULL,
-  `pemasukan` decimal(10,2) DEFAULT NULL,
-  `pengeluaran` decimal(10,2) DEFAULT NULL,
+  `biaya` varchar(100) DEFAULT NULL,
+  `jumlah` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -276,8 +276,8 @@ CREATE TABLE `tb_im_inv_transaction` (
 -- Dumping data untuk tabel `tb_im_inv_transaction`
 --
 
-INSERT INTO `tb_im_inv_transaction` (`id`, `keterangan`, `supliers_id`, `customers_id`, `inventory_id`, `pemasukan`, `pengeluaran`, `created_at`, `updated_at`) VALUES
-(1, 'asdfasdf', 1, 1, 1, '2134.00', '123.00', '2023-09-08 19:53:39', '2023-09-08 19:53:39');
+INSERT INTO `tb_im_inv_transaction` (`id`, `keterangan`, `supliers_id`, `customers_id`, `inventory_id`, `biaya`, `jumlah`, `created_at`, `updated_at`) VALUES
+(2, 'Pembelian', 2, 5, 4, '30000', 3, '2023-09-09 10:37:01', '2023-09-09 11:51:59');
 
 -- --------------------------------------------------------
 
@@ -481,7 +481,10 @@ ALTER TABLE `tb_identitas`
 -- Indeks untuk tabel `tb_im_inventori`
 --
 ALTER TABLE `tb_im_inventori`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `location_id` (`location_id`),
+  ADD KEY `suppliers_id` (`suppliers_id`),
+  ADD KEY `customer_id` (`customer_id`);
 
 --
 -- Indeks untuk tabel `tb_im_inv_categories`
@@ -517,7 +520,10 @@ ALTER TABLE `tb_im_inv_suppliers`
 -- Indeks untuk tabel `tb_im_inv_transaction`
 --
 ALTER TABLE `tb_im_inv_transaction`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `supliers_id` (`supliers_id`),
+  ADD KEY `customers_id` (`customers_id`),
+  ADD KEY `inventory_id` (`inventory_id`);
 
 --
 -- Indeks untuk tabel `tb_kategoriproduk`
@@ -607,19 +613,19 @@ ALTER TABLE `tb_identitas`
 -- AUTO_INCREMENT untuk tabel `tb_im_inventori`
 --
 ALTER TABLE `tb_im_inventori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_im_inv_categories`
 --
 ALTER TABLE `tb_im_inv_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_im_inv_customers`
 --
 ALTER TABLE `tb_im_inv_customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_im_inv_history`
@@ -631,19 +637,19 @@ ALTER TABLE `tb_im_inv_history`
 -- AUTO_INCREMENT untuk tabel `tb_im_inv_location`
 --
 ALTER TABLE `tb_im_inv_location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_im_inv_suppliers`
 --
 ALTER TABLE `tb_im_inv_suppliers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_im_inv_transaction`
 --
 ALTER TABLE `tb_im_inv_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_kategoriproduk`
@@ -702,6 +708,24 @@ ALTER TABLE `tb_wablas`
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
+
+--
+-- Ketidakleluasaan untuk tabel `tb_im_inventori`
+--
+ALTER TABLE `tb_im_inventori`
+  ADD CONSTRAINT `tb_im_inventori_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `tb_im_inv_location` (`id`),
+  ADD CONSTRAINT `tb_im_inventori_ibfk_2` FOREIGN KEY (`suppliers_id`) REFERENCES `tb_im_inv_suppliers` (`id`),
+  ADD CONSTRAINT `tb_im_inventori_ibfk_3` FOREIGN KEY (`customer_id`) REFERENCES `tb_im_inv_customers` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_im_inv_transaction`
+--
+ALTER TABLE `tb_im_inv_transaction`
+  ADD CONSTRAINT `tb_im_inv_transaction_ibfk_1` FOREIGN KEY (`supliers_id`) REFERENCES `tb_im_inv_suppliers` (`id`),
+  ADD CONSTRAINT `tb_im_inv_transaction_ibfk_2` FOREIGN KEY (`customers_id`) REFERENCES `tb_im_inv_customers` (`id`),
+  ADD CONSTRAINT `tb_im_inv_transaction_ibfk_3` FOREIGN KEY (`supliers_id`) REFERENCES `tb_im_inv_suppliers` (`id`),
+  ADD CONSTRAINT `tb_im_inv_transaction_ibfk_4` FOREIGN KEY (`customers_id`) REFERENCES `tb_im_inv_customers` (`id`),
+  ADD CONSTRAINT `tb_im_inv_transaction_ibfk_5` FOREIGN KEY (`inventory_id`) REFERENCES `tb_im_inventori` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `tb_keranjang`

@@ -64,30 +64,37 @@ $routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes
 		$routes->get('inventory', 'Inventory::index');
 		$routes->post('inventory/create', 'Inventory::create');
 		$routes->post('inventory/update', 'Inventory::update');
+		$routes->get('inventory/delete/(:num)', 'Inventory::delete/$1');
 
 		$routes->get('location', 'Location::index');
 		$routes->post('location/create', 'Location::create');
 		$routes->post('location/update', 'Location::update');
+		$routes->get('location/delete/(:num)', 'Location::delete/$1');
 
 		$routes->get('suppliers', 'Suppliers::index');
 		$routes->post('suppliers/create', 'Suppliers::create');
 		$routes->post('suppliers/update', 'Suppliers::update');
+		$routes->get('suppliers/delete/(:num)', 'Suppliers::delete/$1');
 
 		$routes->get('customers', 'Customers::index');
 		$routes->post('customers', 'Customers::createCust');
 		$routes->post('customers/update', 'Customers::update');
+		$routes->get('customers/delete/(:num)', 'Customers::delete/$1');
 
 		$routes->get('categories', 'Categories::index');
 		$routes->post('categories/create', 'Categories::create');
 		$routes->post('categories/update', 'Categories::update');
+		$routes->get('categories/delete/(:num)', 'Categories::delete/$1');
 
 		$routes->get('transaction', 'Transaction::index');
 		$routes->post('transaction/create', 'Transaction::create');
 		$routes->post('transaction/update', 'Transaction::update');
+		$routes->get('transaction/delete/(:num)', 'Transaction::delete/$1');
 
 		$routes->get('history', 'History::index');
 		$routes->post('history/create', 'History::create');
-		$routes->post('transaction/update', 'Transaction::update');
+		$routes->post('history/update', 'History::update');
+		$routes->get('history/delete/(:num)', 'History::delete/$1');
 	});
 
 	// END Manajemen Inventory

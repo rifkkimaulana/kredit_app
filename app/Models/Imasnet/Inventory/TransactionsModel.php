@@ -13,8 +13,8 @@ class TransactionsModel extends Model
         'supliers_id',
         'customers_id',
         'inventory_id',
-        'pemasukan',
-        'pengeluaran',
+        'biaya',
+        'jumlah',
         'created_at'
     ];
 

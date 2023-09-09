@@ -44,6 +44,68 @@
                                                 </a>
                                             </td>
                                         </tr>
+
+                                        <!-- Modal Konfirmasi Delete -->
+                                        <div class="modal fade" id="deleteModal<?= $location['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Apakah Anda yakin ingin menghapus Kategori: <?= $location['nama_lokasi'] ?>?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                        <a href="<?= base_url('im-inventory/location/delete/' .  $location['id']); ?>" class="btn btn-primary">Simpan Perubahan</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Modal Tambah Location -->
+                                        <div class="modal fade" id="editModal<?= $location['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="addModalLabel">Ubah Lokasi</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="location/update" method="POST">
+                                                            <input type="hidden" name="id" value="<?= $location['id']; ?>">
+                                                            <div class="form-group">
+                                                                <label for="nama_lokasi">Nama Lokasi</label>
+                                                                <input type="text" class="form-control" value="<?= $location['nama_lokasi']; ?>" id="nama_lokasi" name="nama_lokasi" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="penanggung_jawab">Penanggung Jawab</label>
+                                                                <input type="text" class="form-control" value="<?= $location['penanggung_jawab']; ?>" id="penanggung_jawab" name="penanggung_jawab">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="telpon">Telpon</label>
+                                                                <input type="text" class="form-control" value="<?= $location['telpon']; ?>" id="telpon" name="telpon">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="alamat">Alamat</label>
+                                                                <textarea class="form-control" value="<?= $location['alamat']; ?>" id="alamat" name="alamat" rows="3"></textarea>
+                                                            </div>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
@@ -55,6 +117,7 @@
     </div>
 </section>
 
+<!-- Modal Tambah Location -->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

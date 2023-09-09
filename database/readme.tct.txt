@@ -33,7 +33,7 @@
 
 // create table tb_im_inv_history (id, keterangan, jenis)
 
-4. Manajement Aset 
+4. Manajement Aset (perlu data server perlu data pelanggan)
 
 5. Manajement Server (server ini terkait dengan user pengelola)
 
@@ -46,7 +46,7 @@
 
 9. Manajement Keuangan Pengeluaran dan Pemasukan
  - Pemasukan 
- - Pengeluaran
+ - Pengeluaran 
  - Laporan Pemasukan dan Pengeluaran
 
 10. Manajement Persediaan Kartu Voucher

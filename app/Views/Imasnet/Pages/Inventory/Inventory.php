@@ -22,6 +22,7 @@
                                         <th class="text-center" style="padding: 10px;">Stok</th>
                                         <th class="text-center" style="padding: 10px;">Satuan</th>
                                         <th class="text-center" style="padding: 10px;">Harga Satuan</th>
+                                        <th class="text-center" style="padding: 10px;">Foto</th>
                                         <th class="text-center" style="padding: 10px;">Aksi</th>
                                     </tr>
                                 </thead>
@@ -35,6 +36,9 @@
                                             <td><?= $inventory['stok']; ?></td>
                                             <td><?= $inventory['satuan']; ?></td>
                                             <td><?= $inventory['harga_satuan']; ?></td>
+                                            <td>
+                                                <img src="<?= base_url('assets/image/Imasnet/Inventory/' . $inventory['foto']); ?>" alt="Gambar Inventory" class="img-fluid" style="max-width: 100px; max-height: 100px;">
+                                            </td>
                                             <td class="text-center">
                                                 <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal<?= $inventory['id']; ?>">
                                                     <i class="far fa-edit"></i> Edit
@@ -44,6 +48,139 @@
                                                 </a>
                                             </td>
                                         </tr>
+
+                                        <!-- Modal Konfirmasi Delete -->
+                                        <div class="modal fade" id="deleteModal<?= $inventory['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Apakah Anda yakin ingin menghapus Kategori: <?= $inventory['nama_barang'] ?>?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                        <a href="<?= base_url('im-inventory/inventory/delete/' .  $inventory['id']); ?>" class="btn btn-primary">Simpan Perubahan</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Ubah Data Inventory Modal -->
+                                        <div class="modal fade" id="editModal<?= $inventory['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editModalInv<?= $inventory['id']; ?>" aria-hidden="true">
+                                            <div class="modal-dialog lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="editModalInv<?= $inventory['id']; ?>">Tambah Data Inventory</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="inventory/update" method="POST" enctype="multipart/form-data">
+
+                                                            <div id="accordion">
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h4 class="card-title w-100">
+                                                                            <a class="d-block w-100 text-center" data-toggle="collapse" href="#collapseOne">
+                                                                                Preview Image
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="collapseOne" class="collapse" data-parent="#accordion">
+                                                                        <div class="form-group">
+                                                                            <img src="<?= base_url('assets/image/Imasnet/Inventory/' . $inventory['foto']); ?>" alt="Gambar Inventory" class="img-fluid">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="location_id">Lokasi Gudang</label>
+                                                                <select class="form-control" id="location_id" name="location_id">
+                                                                    <?php foreach ($locations as $location) : ?>
+                                                                        <?php $selected = ($location['id'] === $inventory['location_id']) ? 'selected' : ''; ?>
+                                                                        <option value="<?= $location['id']; ?> " <?= $selected; ?>><?= $location['nama_lokasi']; ?></option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="supliers_id">Pemasok</label>
+                                                                <select class="form-control" id="supliers_id" name="supliers_id" required>
+                                                                    <?php foreach ($suppliers as $supplier) : ?>
+                                                                        <?php $selected = ($supplier['id'] === $inventory['suppliers_id']) ? 'selected' : ''; ?>
+                                                                        <option value="<?= $supplier['id']; ?>" <?= $selected; ?>><?= $supplier['nama_lengkap']; ?></option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="customers_id">Pelanggan</label>
+                                                                <select class="form-control" id="customers_id" name="customers_id" required>
+                                                                    <?php foreach ($customers as $customer) : ?>
+                                                                        <?php $selected = ($customer['id'] === $inventory['customer_id']) ? 'selected' : ''; ?>
+                                                                        <option value="<?= $customer['id']; ?>" <?= $selected; ?>><?= $customer['nama_lengkap']; ?></option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="categories_id">Kategori</label>
+                                                                <select class="form-control" id="categories_id" name="categories_id">
+                                                                    <?php foreach ($categories as $category) : ?>
+                                                                        <?php $selected = ($category['id'] === $inventory['categories_id']) ? 'selected' : ''; ?>
+                                                                        <option value="<?= $category['id']; ?>" <?= $selected; ?>><?= $category['nama_kategori']; ?></option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="nama_barang">Nama Barang</label>
+                                                                <input type="text" class="form-control" value="<?= $inventory['nama_barang']; ?>" id="nama_barang" name="nama_barang">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="stok">Stok</label>
+                                                                <input type="number" class="form-control" value=" <?= $inventory['stok']; ?>" id="stok" name="stok">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="satuan">Satuan</label>
+                                                                <input type="text" class="form-control" value="<?= $inventory['satuan']; ?> " id="satuan" name="satuan">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="harga_satuan">Harga Satuan</label>
+                                                                <input type="number" class="form-control" value="<?= $inventory['harga_satuan']; ?>" id="harga_satuan" name="harga_satuan">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="keterangan">Keterangan</label>
+                                                                <textarea class="form-control" id="keterangan" name="keterangan" rows="3"><?= $inventory['keterangan']; ?></textarea>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="foto">Foto</label>
+                                                                <input type="file" class="form-control-file" id="foto" name="foto" required>
+                                                            </div>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
@@ -66,44 +203,40 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('im-inventory/inventory/create'); ?>" method="POST">
+                <form action="inventory/create" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="location_id">Lokasi</label>
+                        <label for="location_id">Lokasi Gudang</label>
                         <select class="form-control" id="location_id" name="location_id">
-                            <!-- Option untuk Lokasi -->
-                            <option value="1">Lokasi 1</option>
-                            <option value="2">Lokasi 2</option>
-                            <!-- Tambahkan option sesuai dengan data yang Anda miliki -->
+                            <?php foreach ($locations as $location) : ?>
+                                <option value="<?= $location['id']; ?>"><?= $location['nama_lokasi']; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="suppliers_id">Pemasok</label>
-                        <select class="form-control" id="suppliers_id" name="suppliers_id">
-                            <!-- Option untuk Pemasok -->
-                            <option value="1">Pemasok 1</option>
-                            <option value="2">Pemasok 2</option>
-                            <!-- Tambahkan option sesuai dengan data yang Anda miliki -->
+                        <label for="supliers_id">Pemasok</label>
+                        <select class="form-control" id="supliers_id" name="supliers_id" required>
+                            <?php foreach ($suppliers as $suplier) : ?>
+                                <option value="<?= $suplier['id']; ?>"><?= $suplier['nama_lengkap']; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="customer_id">Pelanggan</label>
-                        <select class="form-control" id="customer_id" name="customer_id">
-                            <!-- Option untuk Pelanggan -->
-                            <option value="1">Pelanggan 1</option>
-                            <option value="2">Pelanggan 2</option>
-                            <!-- Tambahkan option sesuai dengan data yang Anda miliki -->
+                        <label for="customers_id">Pelanggan</label>
+                        <select class="form-control" id="customers_id" name="customers_id" required>
+                            <?php foreach ($customers as $customer) : ?>
+                                <option value="<?= $customer['id']; ?>"><?= $customer['nama_lengkap']; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="categories_id">Kategori</label>
                         <select class="form-control" id="categories_id" name="categories_id">
-                            <!-- Option untuk Kategori -->
-                            <option value="1">Kategori 1</option>
-                            <option value="2">Kategori 2</option>
-                            <!-- Tambahkan option sesuai dengan data yang Anda miliki -->
+                            <?php foreach ($categories as $category) : ?>
+                                <option value="<?= $category['id']; ?>"><?= $category['nama_kategori']; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
@@ -134,7 +267,7 @@
 
                     <div class="form-group">
                         <label for="foto">Foto</label>
-                        <input type="file" class="form-control-file" id="foto" name="foto">
+                        <input type="file" class="form-control-file" id="foto" name="foto" required>
                     </div>
 
                     <div class="modal-footer">
