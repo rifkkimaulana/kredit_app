@@ -87,6 +87,46 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item <?= $segment1 === 'im-manajemen-server' ? 'menu-open' : ''; ?>">
+                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-manajemen-server' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-server"></i>
+                        <p>
+                            Manajemen Server
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-server/server'); ?>" class="nav-link <?= $segment2 === 'server' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pengelola Server</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-server/users-pengelola'); ?>" class="nav-link <?= $segment2 === 'users-pengelola' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Users Pengelola</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item <?= $segment1 === 'im-manajemen-customer' ? 'menu-open' : ''; ?>">
+                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-manajemen-customer' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Manajemen Pelanggan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-customer/customer'); ?>" class="nav-link <?= $segment2 === 'customer' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Data Pelanggan</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </div>

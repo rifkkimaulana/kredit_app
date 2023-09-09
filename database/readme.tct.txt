@@ -33,11 +33,20 @@
 
 // create table tb_im_inv_history (id, keterangan, jenis)
 
+5. Manajement Server 
+ # Pengelola Server
+ # Users Pengelola
+
+// create table tb_im_server (id, kode_server, nama_server, alamat_server, link kordinat server, latitude, longitude, pengelola_id, created_at, updated_at)
+
+// create table tb_im_srv_pengelola (id, nama_lengkap, alamat, telpon, created_at, updated_at)
+
 4. Manajement Aset (perlu data server perlu data pelanggan)
 
-5. Manajement Server (server ini terkait dengan user pengelola)
+6. Manajement Pelanggan
+ - Data Pelanggan
 
-6. Manajement Pelanggan (id pelanggan, nama pelanggan, alamat pelanggan, no telpon)
+// create table (id, id_pelanggan, nama_pelanggan, alamat, telpon, latitude, longitude, status, created_at, updated_at)
 
 7. Manajement Ticket Gangguan
 

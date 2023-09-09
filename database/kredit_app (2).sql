@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Sep 2023 pada 14.16
+-- Waktu pembuatan: 09 Sep 2023 pada 20.38
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.3.0
 
@@ -112,6 +112,32 @@ CREATE TABLE `tb_identitas` (
 
 INSERT INTO `tb_identitas` (`id`, `user_id`, `nama_lengkap`, `nomor_identitas`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `agama`, `status_pernikahan`, `pekerjaan`, `foto_identitas`, `foto_selvi_ktp`, `status`, `created_at`, `updated_at`, `nomor_alternatif_1`, `nama_alternatif_1`) VALUES
 (8, 16, 'Dian Witura', '3211030313210032', 'Sumedang', '1997-02-09', 'Laki-laki', 'Sumedang', 'Islam', 'Cerai', 'Wiraswasta', 'ktp_1694089038_d8e94dff168c31aa4d80.jpg', 'selvi_1694089038_6023125f53c02bf7c30c.jpg', 'Disetujui', '2023-09-07 12:16:30', '2023-09-07 12:17:41', '-', '-');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_ims_customer`
+--
+
+CREATE TABLE `tb_ims_customer` (
+  `id` int(11) NOT NULL,
+  `id_pelanggan` varchar(255) NOT NULL,
+  `nama_pelanggan` varchar(255) NOT NULL,
+  `alamat` text,
+  `telpon` varchar(20) DEFAULT NULL,
+  `latitude` varchar(100) DEFAULT NULL,
+  `longitude` varchar(100) DEFAULT NULL,
+  `status` int(11) DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_ims_customer`
+--
+
+INSERT INTO `tb_ims_customer` (`id`, `id_pelanggan`, `nama_pelanggan`, `alamat`, `telpon`, `latitude`, `longitude`, `status`, `created_at`, `updated_at`) VALUES
+(2, '123455qasdf', 'kiki', 'sumednag', '081231234124', '2134234', '34235345', 0, '2023-09-09 18:33:01', '2023-09-09 18:37:24');
 
 -- --------------------------------------------------------
 
@@ -278,6 +304,46 @@ CREATE TABLE `tb_im_inv_transaction` (
 
 INSERT INTO `tb_im_inv_transaction` (`id`, `keterangan`, `supliers_id`, `customers_id`, `inventory_id`, `biaya`, `jumlah`, `created_at`, `updated_at`) VALUES
 (2, 'Pembelian', 2, 5, 4, '30000', 3, '2023-09-09 10:37:01', '2023-09-09 11:51:59');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_im_server`
+--
+
+CREATE TABLE `tb_im_server` (
+  `id` int(11) NOT NULL,
+  `kode_server` varchar(255) DEFAULT NULL,
+  `nama_server` varchar(255) DEFAULT NULL,
+  `alamat_server` varchar(255) DEFAULT NULL,
+  `latitude` varchar(100) DEFAULT NULL,
+  `longitude` varchar(100) DEFAULT NULL,
+  `pengelola_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_im_srv_pengelola`
+--
+
+CREATE TABLE `tb_im_srv_pengelola` (
+  `id` int(11) NOT NULL,
+  `nama_lengkap` varchar(255) DEFAULT NULL,
+  `alamat` varchar(255) DEFAULT NULL,
+  `telpon` varchar(20) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_im_srv_pengelola`
+--
+
+INSERT INTO `tb_im_srv_pengelola` (`id`, `nama_lengkap`, `alamat`, `telpon`, `created_at`, `updated_at`) VALUES
+(2, 'Rifki Maulana', 'sumednag', '081231234124', '2023-09-09 17:55:30', '2023-09-09 17:55:30');
 
 -- --------------------------------------------------------
 
@@ -478,6 +544,12 @@ ALTER TABLE `tb_identitas`
   ADD UNIQUE KEY `nomor_identitas` (`nomor_identitas`);
 
 --
+-- Indeks untuk tabel `tb_ims_customer`
+--
+ALTER TABLE `tb_ims_customer`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `tb_im_inventori`
 --
 ALTER TABLE `tb_im_inventori`
@@ -524,6 +596,19 @@ ALTER TABLE `tb_im_inv_transaction`
   ADD KEY `supliers_id` (`supliers_id`),
   ADD KEY `customers_id` (`customers_id`),
   ADD KEY `inventory_id` (`inventory_id`);
+
+--
+-- Indeks untuk tabel `tb_im_server`
+--
+ALTER TABLE `tb_im_server`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_tb_im_server_pengelola` (`pengelola_id`);
+
+--
+-- Indeks untuk tabel `tb_im_srv_pengelola`
+--
+ALTER TABLE `tb_im_srv_pengelola`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `tb_kategoriproduk`
@@ -610,6 +695,12 @@ ALTER TABLE `tb_identitas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT untuk tabel `tb_ims_customer`
+--
+ALTER TABLE `tb_ims_customer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT untuk tabel `tb_im_inventori`
 --
 ALTER TABLE `tb_im_inventori`
@@ -649,6 +740,18 @@ ALTER TABLE `tb_im_inv_suppliers`
 -- AUTO_INCREMENT untuk tabel `tb_im_inv_transaction`
 --
 ALTER TABLE `tb_im_inv_transaction`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_im_server`
+--
+ALTER TABLE `tb_im_server`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_im_srv_pengelola`
+--
+ALTER TABLE `tb_im_srv_pengelola`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -726,6 +829,12 @@ ALTER TABLE `tb_im_inv_transaction`
   ADD CONSTRAINT `tb_im_inv_transaction_ibfk_3` FOREIGN KEY (`supliers_id`) REFERENCES `tb_im_inv_suppliers` (`id`),
   ADD CONSTRAINT `tb_im_inv_transaction_ibfk_4` FOREIGN KEY (`customers_id`) REFERENCES `tb_im_inv_customers` (`id`),
   ADD CONSTRAINT `tb_im_inv_transaction_ibfk_5` FOREIGN KEY (`inventory_id`) REFERENCES `tb_im_inventori` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `tb_im_server`
+--
+ALTER TABLE `tb_im_server`
+  ADD CONSTRAINT `fk_tb_im_server_pengelola` FOREIGN KEY (`pengelola_id`) REFERENCES `tb_im_srv_pengelola` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `tb_keranjang`

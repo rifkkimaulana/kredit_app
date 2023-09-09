@@ -96,8 +96,28 @@ $routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes
 		$routes->post('history/update', 'History::update');
 		$routes->get('history/delete/(:num)', 'History::delete/$1');
 	});
-
 	// END Manajemen Inventory
+
+	$routes->group('im-manajemen-server', ['namespace' => 'App\Controllers\Imasnet\ManajemenServer'], function ($routes) {
+
+		$routes->get('server', 'Server::index');
+		$routes->post('server/create', 'Server::create');
+		$routes->post('server/update', 'Server::update');
+		$routes->get('server/delete/(:num)', 'Server::delete/$1');
+
+		$routes->get('users-pengelola', 'UsersPengelola::index');
+		$routes->post('users-pengelola/create', 'UsersPengelola::create');
+		$routes->post('users-pengelola/update', 'UsersPengelola::update');
+		$routes->get('users-pengelola/delete/(:num)', 'UsersPengelola::delete/$1');
+	});
+
+	$routes->group('im-manajemen-customer', ['namespace' => 'App\Controllers\Imasnet\ManajemenCustomer'], function ($routes) {
+
+		$routes->get('customer', 'Customer::index');
+		$routes->post('customer/create', 'Customer::create');
+		$routes->post('customer/update', 'Customer::update');
+		$routes->get('customer/delete/(:num)', 'Customer::delete/$1');
+	});
 });
 // END SCC IMASNET
 
