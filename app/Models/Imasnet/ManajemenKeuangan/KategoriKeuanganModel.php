@@ -4,12 +4,12 @@ namespace App\Models\Imasnet\ManajemenKeuangan;
 
 use CodeIgniter\Model;
 
-class JenisKeuangan extends Model
+class KategoriKeuanganModel extends Model
 {
-    protected $table = 'tb_im_keu_jenis';
+    protected $table = 'tb_im_keu_kategori';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'nama_jenis',
+        'nama_kategori',
         'keterangan',
     ];
 

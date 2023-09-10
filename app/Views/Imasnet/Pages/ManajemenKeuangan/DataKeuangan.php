@@ -74,10 +74,56 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form action="<?= base_url('im-manajemen-customer/data-keuangan/update'); ?>" method="post">
+                                                    <form action="<?= base_url('im-manajemen-keuangan/data-keuangan/update'); ?>" method="post" enctype="multipart/form-data">
                                                         <div class="modal-body">
                                                             <input type="hidden" name="id" value="<?= $keuangan['id']; ?>">
 
+                                                            <div class="form-group">
+                                                                <label for="kategori_id">Kategori</label>
+                                                                <select class="form-control" id="kategori_id" name="kategori_id">
+                                                                    <?php foreach ($kategoriKeuanganData as $kategori) : ?>
+                                                                        <option value="<?= $kategori['id']; ?>" <?= ($kategori['id'] == $keuangan['kategori_id']) ? 'selected' : ''; ?>>
+                                                                            <?= $kategori['nama_kategori']; ?>
+                                                                        </option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="jenis_id">Jenis</label>
+                                                                <select class="form-control" id="jenis_id" name="jenis_id">
+                                                                    <?php foreach ($jenisKeuanganData as $jenis) : ?>
+                                                                        <option value="<?= $jenis['id']; ?>" <?= ($jenis['id'] == $keuangan['jenis_id']) ? 'selected' : ''; ?>>
+                                                                            <?= $jenis['nama_jenis']; ?>
+                                                                        </option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="pengelola_id">Pengelola</label>
+                                                                <select class="form-control" id="pengelola_id" name="pengelola_id">
+                                                                    <?php foreach ($pengelolaKeuanganData as $pengelola) : ?>
+                                                                        <option value="<?= $pengelola['id']; ?>" <?= ($pengelola['id'] == $keuangan['pengelola_id']) ? 'selected' : ''; ?>>
+                                                                            <?= $pengelola['nama_lengkap']; ?>
+                                                                        </option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="pemasukan">Pemasukan</label>
+                                                                <input type="text" class="form-control" id="pemasukan" name="pemasukan" value="<?= $keuangan['pemasukan']; ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="pengeluaran">Pengeluaran</label>
+                                                                <input type="text" class="form-control" id="pengeluaran" name="pengeluaran" value="<?= $keuangan['pengeluaran']; ?>">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="keterangan">Keterangan</label>
+                                                                <textarea class="form-control" id="keterangan" name="keterangan" rows="3"><?= $keuangan['keterangan']; ?></textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="foto">Foto</label>
+                                                                <input type="file" class="form-control-file" id="foto" name="foto">
+                                                            </div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -104,14 +150,53 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Tambah Pelanggan</h5>
+                <h5 class="modal-title" id="addModalLabel">Tambah Data Keuangan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form action="<?= base_url('im-manajemen-keuangan/data-keuangan/create'); ?>" method="post">
                 <div class="modal-body">
-
+                    <div class="form-group">
+                        <label for="kategori_id">Kategori</label>
+                        <select class="form-control" id="kategori_id" name="kategori_id">
+                            <?php foreach ($kategoriKeuanganData as $kategori) : ?>
+                                <option value="<?= $kategori['id']; ?>"><?= $kategori['nama_kategori']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="jenis_id">Jenis</label>
+                        <select class="form-control" id="jenis_id" name="jenis_id">
+                            <?php foreach ($jenisKeuanganData as $jenis) : ?>
+                                <option value="<?= $jenis['id']; ?>"><?= $jenis['nama_jenis']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pengelola_id">Pengelola</label>
+                        <select class="form-control" id="pengelola_id" name="pengelola_id">
+                            <?php foreach ($pengelolaKeuanganData as $pengelola) : ?>
+                                <option value="<?= $pengelola['id']; ?>"><?= $pengelola['nama_lengkap']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pemasukan">Pemasukan</label>
+                        <input type="text" class="form-control" id="pemasukan" name="pemasukan">
+                    </div>
+                    <div class="form-group">
+                        <label for="pengeluaran">Pengeluaran</label>
+                        <input type="text" class="form-control" id="pengeluaran" name="pengeluaran">
+                    </div>
+                    <div class="form-group">
+                        <label for="keterangan">Keterangan</label>
+                        <textarea class="form-control" id="keterangan" name="keterangan" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="foto">Foto</label>
+                        <input type="file" class="form-control-file" id="foto" name="foto">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -121,6 +206,5 @@
         </div>
     </div>
 </div>
-
 
 <?= $this->endSection(); ?>

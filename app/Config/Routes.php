@@ -155,9 +155,7 @@ $routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes
 		$routes->get('pengelola-keuangan/delete/(:num)', 'PengelolaKeuangan::delete/$1');
 
 		$routes->get('riwayat-transaksi', 'RiwayatKeuangan::index');
-		$routes->post('riwayat-transaksi/create', 'RiwayatKeuangan::create');
-		$routes->post('riwayat-transaksi/update', 'RiwayatKeuangan::update');
-		$routes->get('riwayat-transaksi/delete/(:num)', 'RiwayatKeuangan::delete/$1');
+		$routes->get('riwayat-transaksi/delete', 'RiwayatKeuangan::deleteAll');
 
 		$routes->get('laporan-keuangan', 'LaporanKeuangan::index');
 		$routes->post('laporan-keuangan/create', 'LaporanKeuangan::create');

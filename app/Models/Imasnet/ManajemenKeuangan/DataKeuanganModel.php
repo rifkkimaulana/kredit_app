@@ -4,7 +4,7 @@ namespace App\Models\Imasnet\ManajemenKeuangan;
 
 use CodeIgniter\Model;
 
-class RiwayatKeuangan extends Model
+class DataKeuanganModel extends Model
 {
     protected $table = 'tb_im_keu_riwayat';
     protected $primaryKey = 'id';
@@ -13,7 +13,7 @@ class RiwayatKeuangan extends Model
         'kategori_id',
         'jenis_id',
         'pengelola_id',
-        'keterangan'
+        'keterangan',
     ];
 
 
