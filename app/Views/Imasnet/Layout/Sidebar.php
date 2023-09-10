@@ -127,6 +127,83 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item <?= $segment1 === 'im-manajemen-assets' ? 'menu-open' : ''; ?>">
+                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-manajemen-assets' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-briefcase"></i>
+                        <p>
+                            Manajemen Aset
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-assets/data-aset'); ?>" class="nav-link <?= $segment2 === 'data-aset' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Data Aset</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-assets/kategori-aset'); ?>" class="nav-link <?= $segment2 === 'kategori-aset' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kategori Aset</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Menu Manajemen Keuangan Pengeluaran dan Pemasukan -->
+                <li class="nav-item <?= $segment1 === 'im-manajemen-keuangan' ? 'menu-open' : ''; ?>">
+                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-manajemen-keuangan' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-money-bill-wave"></i>
+                        <p>
+                            Manajemen Keuangan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <!-- Submenu Data Keuangan -->
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-keuangan/data-keuangan'); ?>" class="nav-link <?= $segment2 === 'data-keuangan' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Data Keuangan</p>
+                            </a>
+                        </li>
+                        <!-- Submenu Kategori Keuangan -->
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-keuangan/kategori-keuangan'); ?>" class="nav-link <?= $segment2 === 'kategori-keuangan' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kategori Keuangan</p>
+                            </a>
+                        </li>
+                        <!-- Submenu Jenis Keuangan -->
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-keuangan/jenis-keuangan'); ?>" class="nav-link <?= $segment2 === 'jenis-keuangan' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Jenis Keuangan</p>
+                            </a>
+                        </li>
+                        <!-- Submenu Pengelola Keuangan -->
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-keuangan/pengelola-keuangan'); ?>" class="nav-link <?= $segment2 === 'pengelola-keuangan' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pengelola Keuangan</p>
+                            </a>
+                        </li>
+                        <!-- Submenu Riwayat Transaksi -->
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-keuangan/riwayat-transaksi'); ?>" class="nav-link <?= $segment2 === 'riwayat-transaksi' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Riwayat Transaksi</p>
+                            </a>
+                        </li>
+                        <!-- Submenu Laporan Keuangan -->
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-keuangan/laporan-keuangan'); ?>" class="nav-link <?= $segment2 === 'laporan-keuangan' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Laporan Keuangan</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </div>

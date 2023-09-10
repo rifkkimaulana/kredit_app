@@ -41,22 +41,30 @@
 
 // create table tb_im_srv_pengelola (id, nama_lengkap, alamat, telpon, created_at, updated_at)
 
-4. Manajement Aset (perlu data server perlu data pelanggan)
+4. Manajement Asets
+# Data Asets
+# Kategori Assets
+
+// create tb_im_assets (id, kategori_id, nama_assets, keterangan, penanggung_jawab
+latitude, longitude, harga_satuan, jumlah, satuan, created_at, updated_at)
+
+// create tb_im_assets_kategori ( id, nama_kategori, keterangan)
 
 6. Manajement Pelanggan
  - Data Pelanggan
 
 // create table (id, id_pelanggan, nama_pelanggan, alamat, telpon, latitude, longitude, status, created_at, updated_at)
 
-7. Manajement Ticket Gangguan
-
-8. Manajement Validasi Gangguan Pelanggan
- - 
-
 9. Manajement Keuangan Pengeluaran dan Pemasukan
- - Pemasukan 
- - Pengeluaran 
- - Laporan Pemasukan dan Pengeluaran
+ - Data Keuangan
+ - Kategori Keuangan
+ - Jenis Keuangan
+ - Pengelola Keuangan
+ - Riwayat Transaksi
+ - Laporan Keuangan
+
+// create table tb_im_keuangan (id, kategori_id, jenis_id, pengelola_id, 
+pemasukan, pengeluaran, keterangan, foto, created_at, updated_at, no_referensi)
 
 10. Manajement Persediaan Kartu Voucher
  - Persediaan Stok Voucher Terkait dengan Server id
@@ -67,4 +75,10 @@
 11. Management Pendapatan User
  - Pendapatan Dari Pemeliharaan Gangguan Jaringan
  - Pendapatan Dari Pengiriman Kartu Voucher
+
+7. Manajement Ticket Gangguan
+
+8. Manajement Validasi Gangguan Pelanggan
+ - 
+
 

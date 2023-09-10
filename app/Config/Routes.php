@@ -118,6 +118,52 @@ $routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes
 		$routes->post('customer/update', 'Customer::update');
 		$routes->get('customer/delete/(:num)', 'Customer::delete/$1');
 	});
+
+	$routes->group('im-manajemen-assets', ['namespace' => 'App\Controllers\Imasnet\ManajemenAssets'], function ($routes) {
+
+		$routes->get('data-aset', 'DataAssets::index');
+		$routes->post('data-aset/create', 'DataAssets::create');
+		$routes->post('data-aset/update', 'DataAssets::update');
+		$routes->get('data-aset/delete/(:num)', 'DataAssets::delete/$1');
+
+		$routes->get('kategori-aset', 'KategoriAssets::index');
+		$routes->post('kategori-aset/create', 'KategoriAssets::create');
+		$routes->post('kategori-aset/update', 'KategoriAssets::update');
+		$routes->get('kategori-aset/delete/(:num)', 'KategoriAssets::delete/$1');
+	});
+
+	$routes->group('im-manajemen-keuangan', ['namespace' => 'App\Controllers\Imasnet\ManajemenKeuangan'], function ($routes) {
+
+		$routes->get('data-keuangan', 'DataKeuangan::index');
+		$routes->post('data-keuangan/create', 'DataKeuangan::create');
+		$routes->post('data-keuangan/update', 'DataKeuangan::update');
+		$routes->get('data-keuangan/delete/(:num)', 'DataKeuangan::delete/$1');
+
+		$routes->get('kategori-keuangan', 'KategoriKeuangan::index');
+		$routes->post('kategori-keuangan/create', 'KategoriKeuangan::create');
+		$routes->post('kategori-keuangan/update', 'KategoriKeuangan::update');
+		$routes->get('kategori-keuangan/delete/(:num)', 'KategoriKeuangan::delete/$1');
+
+		$routes->get('jenis-keuangan', 'JenisKeuangan::index');
+		$routes->post('jenis-keuangan/create', 'JenisKeuangan::create');
+		$routes->post('jenis-keuangan/update', 'JenisKeuangan::update');
+		$routes->get('jenis-keuangan/delete/(:num)', 'JenisKeuangan::delete/$1');
+
+		$routes->get('pengelola-keuangan', 'PengelolaKeuangan::index');
+		$routes->post('pengelola-keuangan/create', 'PengelolaKeuangan::create');
+		$routes->post('pengelola-keuangan/update', 'PengelolaKeuangan::update');
+		$routes->get('pengelola-keuangan/delete/(:num)', 'PengelolaKeuangan::delete/$1');
+
+		$routes->get('riwayat-transaksi', 'RiwayatKeuangan::index');
+		$routes->post('riwayat-transaksi/create', 'RiwayatKeuangan::create');
+		$routes->post('riwayat-transaksi/update', 'RiwayatKeuangan::update');
+		$routes->get('riwayat-transaksi/delete/(:num)', 'RiwayatKeuangan::delete/$1');
+
+		$routes->get('laporan-keuangan', 'LaporanKeuangan::index');
+		$routes->post('laporan-keuangan/create', 'LaporanKeuangan::create');
+		$routes->post('laporan-keuangan/update', 'LaporanKeuangan::update');
+		$routes->get('laporan-keuangan/delete/(:num)', 'LaporanKeuangan::delete/$1');
+	});
 });
 // END SCC IMASNET
 
