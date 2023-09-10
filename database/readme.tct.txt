@@ -66,6 +66,16 @@ latitude, longitude, harga_satuan, jumlah, satuan, created_at, updated_at)
 // create table tb_im_keuangan (id, kategori_id, jenis_id, pengelola_id, 
 pemasukan, pengeluaran, keterangan, foto, created_at, updated_at, no_referensi)
 
+// create table tb_im_keu_kategori (id, nama_kategori, keterangan)
+
+// create table tb_im_keu_jenis (id, nama_jenis, keterangan)
+
+// create table tb_im_keu_pengelola (id, nama_lengkap, telpon, alamat, saldo, created_at, updated_at)
+
+// create table tb_im_keu_riwayat (id, keuangan_id, kategori_id, jenis_id, pengelola_id, keterangan, created_at, updated_at)
+
+
+
 10. Manajement Persediaan Kartu Voucher
  - Persediaan Stok Voucher Terkait dengan Server id
  - Pemindahan Pengelolaan Di User Terkait ID user
