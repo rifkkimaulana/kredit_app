@@ -13,7 +13,8 @@ class VoucherModel extends Model
         'reseller_id',
         'pengirim_id',
         'paket_id',
-        'code'
+        'code',
+        'komentar'
     ];
 
 

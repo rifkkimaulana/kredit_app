@@ -33,7 +33,6 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         <p>Dashboard</p>
                     </a>
                 </li>
-
                 <li class="nav-item <?= $segment1 === 'im-inventory' ? 'menu-open' : ''; ?>">
                     <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-inventory' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-cubes"></i>
@@ -173,7 +172,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-voucher/resseler'); ?>" class="nav-link <?= $segment2 === 'resseler' ? 'active' : ''; ?>">
+                            <a href="<?= base_url('im-manajemen-voucher/reseller'); ?>" class="nav-link <?= $segment2 === 'reseller' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Resseler Voucher</p>
                             </a>
@@ -241,6 +240,13 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('im-log-user'); ?>" class="nav-link <?= $segment1 === 'im-log-user' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>Log User</p>
+                    </a>
+                </li>
+
             </ul>
         </nav>
     </div>

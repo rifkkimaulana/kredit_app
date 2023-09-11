@@ -166,9 +166,23 @@ $routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes
 	$routes->group('im-manajemen-voucher', ['namespace' => 'App\Controllers\Imasnet\ManajemenVoucher'], function ($routes) {
 
 		$routes->get('voucher', 'Voucher::index');
+		$routes->post('voucher/create', 'Voucher::create');
+
 		$routes->get('paket', 'Paket::index');
+		$routes->post('paket/create', 'Paket::create');
+		$routes->post('paket/update', 'Paket::update');
+		$routes->get('paket/delete/(:num)', 'Paket::delete/$1');
+
 		$routes->get('reseller', 'Reseller::index');
+		$routes->post('reseller/create', 'Reseller::create');
+		$routes->post('reseller/update', 'Reseller::update');
+		$routes->get('reseller/delete/(:num)', 'Reseller::delete/$1');
+
 		$routes->get('pengirim', 'Pengirim::index');
+		$routes->post('pengirim/create', 'Pengirim::create');
+		$routes->post('pengirim/update', 'Pengirim::update');
+		$routes->get('pengirim/delete/(:num)', 'Pengirim::delete/$1');
+
 		$routes->get('riwayat', 'Riwayat::index');
 	});
 });
