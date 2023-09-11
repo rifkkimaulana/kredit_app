@@ -33,7 +33,7 @@
 
 // create table tb_im_inv_history (id, keterangan, jenis)
 
-5. Manajement Server 
+2. Manajement Server 
  # Pengelola Server
  # Users Pengelola
 
@@ -41,7 +41,7 @@
 
 // create table tb_im_srv_pengelola (id, nama_lengkap, alamat, telpon, created_at, updated_at)
 
-4. Manajement Asets
+3. Manajement Asets
 # Data Asets
 # Kategori Assets
 
@@ -50,12 +50,12 @@ latitude, longitude, harga_satuan, jumlah, satuan, created_at, updated_at)
 
 // create tb_im_assets_kategori ( id, nama_kategori, keterangan)
 
-6. Manajement Pelanggan
+4. Manajement Pelanggan
  - Data Pelanggan
 
 // create table (id, id_pelanggan, nama_pelanggan, alamat, telpon, latitude, longitude, status, created_at, updated_at)
 
-9. Manajement Keuangan Pengeluaran dan Pemasukan
+5. Manajement Keuangan Pengeluaran dan Pemasukan
  - Data Keuangan
  - Kategori Keuangan
  - Jenis Keuangan
@@ -74,21 +74,23 @@ pemasukan, pengeluaran, keterangan, foto, created_at, updated_at, no_referensi)
 
 // create table tb_im_keu_riwayat (id, keuangan_id, kategori_id, jenis_id, pengelola_id, keterangan, created_at, updated_at)
 
-
-
-10. Manajement Persediaan Kartu Voucher
+6. Manajement Persediaan Kartu Voucher
  - Persediaan Stok Voucher Terkait dengan Server id
  - Pemindahan Pengelolaan Di User Terkait ID user
  - Laporan Pendapatan Seluruh Transaksi
  - Laporan User Poin Pengiriman
 
-11. Management Pendapatan User
+# Data Voucher
+# Paket Voucher
+# Resseler Voucher
+# Pengirim Voucher
+# Laporan Pendapatan Voucher
+
+7. Management Teksini
  - Pendapatan Dari Pemeliharaan Gangguan Jaringan
  - Pendapatan Dari Pengiriman Kartu Voucher
 
-7. Manajement Ticket Gangguan
-
-8. Manajement Validasi Gangguan Pelanggan
+8. Manajement Ticket Gangguan
  - 
 
 

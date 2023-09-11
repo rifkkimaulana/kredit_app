@@ -20,6 +20,21 @@ class DataKeuangan extends BaseController
         $pengelolaKeuanganModel = new PengelolaKeuanganModel();
         $riwayatTransaksiModel = new RiwayatTransaksiModel();
 
+        $jenisMap = [];
+        foreach ($jenisKeuanganModel->findAll() as $jenis) {
+            $jenisMap[$jenis['id']] = $jenis;
+        }
+
+        $kategoriMap = [];
+        foreach ($kategoriKeuanganModel->findAll() as $kategori) {
+            $kategoriMap[$kategori['id']] = $kategori;
+        }
+
+        $pengelolaMap = [];
+        foreach ($pengelolaKeuanganModel->findAll() as $pengelola) {
+            $pengelolaMap[$pengelola['id']] = $pengelola;
+        }
+
         $data = [
             'title' => 'Manajemen Server',
             'user' => $this->user,
@@ -29,6 +44,9 @@ class DataKeuangan extends BaseController
             'kategoriKeuanganData' => $kategoriKeuanganModel->findAll(),
             'pengelolaKeuanganData' => $pengelolaKeuanganModel->findAll(),
             'riwayatKeuanganData' => $riwayatTransaksiModel->findAll(),
+            'jenisMap' => $jenisMap,
+            'kategoriMap' => $kategoriMap,
+            'pengelolaMap' => $pengelolaMap,
         ];
         return view('Imasnet/Pages/ManajemenKeuangan/DataKeuangan', $data);
     }
@@ -36,6 +54,10 @@ class DataKeuangan extends BaseController
 
     public function create()
     {
+        $timestamp = time();
+        $randomNumber = mt_rand(1000, 9999);
+        $referenceNumber = "REF" . date("YmdHis", $timestamp) . $randomNumber;
+
         $data = [
             'kategori_id' => $this->request->getPost('kategori_id'),
             'jenis_id' => $this->request->getPost('jenis_id'),
@@ -43,11 +65,19 @@ class DataKeuangan extends BaseController
             'pemasukan' => $this->request->getPost('pemasukan'),
             'pengeluaran' => $this->request->getPost('pengeluaran'),
             'keterangan' => $this->request->getPost('keterangan'),
-            'no_referensi' => $this->request->getPost('no_referensi')
+            'no_referensi' => $referenceNumber
         ];
 
-
         $dateKeuanganModel = new DataKeuanganModel();
+
+        $gambar = $this->request->getFile('foto');
+
+        if ($gambar->isValid() && !$gambar->hasMoved()) {
+            $namaUnik = $gambar->getRandomName();
+            $gambar->move(FCPATH . 'assets/image/Imasnet/ManajemenKeuangan/', $namaUnik);
+
+            $data['foto'] = $namaUnik;
+        }
 
         if ($dateKeuanganModel->insertData($data)) {
             return redirect()->to(base_url('im-manajemen-keuangan/data-keuangan'))->with('success', 'Data keuangan berhasil disimpan');
@@ -72,8 +102,27 @@ class DataKeuangan extends BaseController
 
         $dateKeuanganModel = new DataKeuanganModel();
 
+        $gambar = $this->request->getFile('foto');
+
+        if ($gambar->isValid() && !$gambar->hasMoved()) {
+            $namaUnik = $gambar->getRandomName();
+            $gambar->move(FCPATH . 'assets/image/Imasnet/ManajemenKeuangan/', $namaUnik);
+
+            $inventory = $dateKeuanganModel->where('id', $id)->first();
+            $gambar = $inventory['foto'];
+
+            if (!empty($gambar)) {
+                $gambarPath = FCPATH . 'assets/image/Imasnet/ManajemenKeuangan/' . $gambar;
+                if (file_exists($gambarPath)) {
+                    unlink($gambarPath);
+                }
+            }
+
+            $data['foto'] = $namaUnik;
+        }
+
         if (!$dateKeuanganModel->updateId($id, $data)) {
-            return redirect()->to(base_url('im-manajemen-keuangan/customer'))->with('success', 'Data keuangan berhasil diubah');
+            return redirect()->to(base_url('im-manajemen-keuangan/data-keuangan'))->with('success', 'Data keuangan berhasil diubah');
         } else {
             return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat ubah data keuangan');
         }
@@ -84,9 +133,9 @@ class DataKeuangan extends BaseController
         $dateKeuanganModel = new DataKeuanganModel();
 
         if ($dateKeuanganModel->deleteId($id)) {
-            return redirect()->to(base_url('im-manajemen-keuangan/customer'))->with('success', 'keuangan berhasil dihapus.');
+            return redirect()->to(base_url('im-manajemen-keuangan/data-keuangan'))->with('success', 'keuangan berhasil dihapus.');
         } else {
-            return redirect()->to(base_url('im-manajemen-keuangan/customer'))->with('error', 'keuangan gagal dihapus. Silakan coba lagi.');
+            return redirect()->to(base_url('im-manajemen-keuangan/data-keuangan'))->with('error', 'keuangan gagal dihapus. Silakan coba lagi.');
         }
     }
 }

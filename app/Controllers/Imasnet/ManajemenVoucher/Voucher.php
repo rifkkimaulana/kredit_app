@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controllers\Imasnet\ManajemenServer;
+namespace App\Controllers\Imasnet\ManajemenVoucher;
 
 use App\Models\Imasnet\ManajemenServer\ServerModel;
-use App\Models\Imasnet\ManajemenServer\PengelolaModel;
+use App\Models\Imasnet\ManajemenVoucher\VoucherModel;
 
 use App\Controllers\Imasnet\BaseController;
 
@@ -12,22 +12,12 @@ class Server extends BaseController
     public function index()
     {
         $modelServer = new ServerModel();
-        $pengelolaData = new PengelolaModel();
-
-        $pengelolaMap = [];
-        $pengelola = $pengelolaData->findAll();
-
-        foreach ($pengelola as $pengelola) {
-            $pengelolaMap[$pengelola['id']] = $pengelola;
-        }
 
         $data = [
             'title' => 'Manajemen Server',
             'user' => $this->user,
             'perusahaan' => $this->aplikasi,
             'serverData' => $modelServer->findAll(),
-            'pengelolaData' => $pengelolaData->findAll(),
-            'pengelolaMap' => $pengelolaMap,
         ];
         return view('Imasnet/Pages/ManajemenServer/Server', $data);
     }

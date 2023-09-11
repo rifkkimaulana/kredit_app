@@ -33,6 +33,16 @@
                                     foreach ($keuanganData as $keuangan) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
+                                            <td class="text-center"><?= $kategoriMap[$keuangan['kategori_id']]['nama_kategori']; ?></td>
+                                            <td class="text-center"><?= $jenisMap[$keuangan['jenis_id']]['nama_jenis']; ?></td>
+                                            <td class="text-center"><?= $pengelolaMap[$keuangan['pengelola_id']]['nama_lengkap']; ?></td>
+                                            <td class="text-center"><?= $keuangan['pemasukan']; ?></td>
+                                            <td class="text-center"><?= $keuangan['pengeluaran']; ?></td>
+                                            <td class="text-center"><?= $keuangan['keterangan']; ?></td>
+                                            <td class="text-center">
+                                                <img src="<?= base_url('assets/image/Imasnet/ManajemenKeuangan/' . $keuangan['foto']); ?>" alt="<?= $keuangan['foto'] ?>" class="img-fluid w-25 h-25">
+                                            </td>
+
                                             <td class="text-center">
                                                 <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal<?= $keuangan['id']; ?>">
                                                     <i class="far fa-edit"></i> Edit
@@ -76,6 +86,7 @@
                                                     </div>
                                                     <form action="<?= base_url('im-manajemen-keuangan/data-keuangan/update'); ?>" method="post" enctype="multipart/form-data">
                                                         <div class="modal-body">
+                                                            <input type="hidden" name="no_referensi" value="<?= $keuangan['no_referensi']; ?>">
                                                             <input type="hidden" name="id" value="<?= $keuangan['id']; ?>">
 
                                                             <div class="form-group">

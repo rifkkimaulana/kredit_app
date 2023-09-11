@@ -162,6 +162,15 @@ $routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes
 		$routes->post('laporan-keuangan/update', 'LaporanKeuangan::update');
 		$routes->get('laporan-keuangan/delete/(:num)', 'LaporanKeuangan::delete/$1');
 	});
+
+	$routes->group('im-manajemen-voucher', ['namespace' => 'App\Controllers\Imasnet\ManajemenVoucher'], function ($routes) {
+
+		$routes->get('voucher', 'Voucher::index');
+		$routes->get('paket', 'Paket::index');
+		$routes->get('reseller', 'Reseller::index');
+		$routes->get('pengirim', 'Pengirim::index');
+		$routes->get('riwayat', 'Riwayat::index');
+	});
 });
 // END SCC IMASNET
 

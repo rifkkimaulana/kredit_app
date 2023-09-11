@@ -150,6 +150,49 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         </li>
                     </ul>
                 </li>
+                <!-- Menu Manajemen Voucher -->
+                <li class="nav-item <?= $segment1 === 'im-manajemen-voucher' ? 'menu-open' : ''; ?>">
+                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-manajemen-voucher' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-tags"></i>
+                        <p>
+                            Manajemen Voucher
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-voucher/voucher'); ?>" class="nav-link <?= $segment2 === 'voucher' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Data Voucher</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-voucher/paket'); ?>" class="nav-link <?= $segment2 === 'paket' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Paket Voucher</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-voucher/resseler'); ?>" class="nav-link <?= $segment2 === 'resseler' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Resseler Voucher</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-voucher/pengirim'); ?>" class="nav-link <?= $segment2 === 'pengirim' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pengirim Voucher</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-voucher/riwayat'); ?>" class="nav-link <?= $segment2 === 'riwayat' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Riwayat Transaksi</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <!-- Menu Manajemen Keuangan Pengeluaran dan Pemasukan -->
                 <li class="nav-item <?= $segment1 === 'im-manajemen-keuangan' ? 'menu-open' : ''; ?>">
                     <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-manajemen-keuangan' ? 'active' : ''; ?>">
@@ -160,42 +203,36 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <!-- Submenu Data Keuangan -->
                         <li class="nav-item">
                             <a href="<?= base_url('im-manajemen-keuangan/data-keuangan'); ?>" class="nav-link <?= $segment2 === 'data-keuangan' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Data Keuangan</p>
                             </a>
                         </li>
-                        <!-- Submenu Kategori Keuangan -->
                         <li class="nav-item">
                             <a href="<?= base_url('im-manajemen-keuangan/kategori-keuangan'); ?>" class="nav-link <?= $segment2 === 'kategori-keuangan' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kategori Keuangan</p>
                             </a>
                         </li>
-                        <!-- Submenu Jenis Keuangan -->
                         <li class="nav-item">
                             <a href="<?= base_url('im-manajemen-keuangan/jenis-keuangan'); ?>" class="nav-link <?= $segment2 === 'jenis-keuangan' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Jenis Keuangan</p>
                             </a>
                         </li>
-                        <!-- Submenu Pengelola Keuangan -->
                         <li class="nav-item">
                             <a href="<?= base_url('im-manajemen-keuangan/pengelola-keuangan'); ?>" class="nav-link <?= $segment2 === 'pengelola-keuangan' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pengelola Keuangan</p>
                             </a>
                         </li>
-                        <!-- Submenu Riwayat Transaksi -->
                         <li class="nav-item">
                             <a href="<?= base_url('im-manajemen-keuangan/riwayat-transaksi'); ?>" class="nav-link <?= $segment2 === 'riwayat-transaksi' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Riwayat Transaksi</p>
                             </a>
                         </li>
-                        <!-- Submenu Laporan Keuangan -->
                         <li class="nav-item">
                             <a href="<?= base_url('im-manajemen-keuangan/laporan-keuangan'); ?>" class="nav-link <?= $segment2 === 'laporan-keuangan' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>

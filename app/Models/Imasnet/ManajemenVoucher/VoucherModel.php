@@ -1,22 +1,19 @@
 <?php
 
-namespace App\Models\Imasnet\ManajemenKeuangan;
+namespace App\Models\Imasnet\ManajemenVoucher;
 
 use CodeIgniter\Model;
 
-class DataKeuanganModel extends Model
+class VoucherModel extends Model
 {
-    protected $table = 'tb_im_keuangan';
+    protected $table = 'tb_im_voucher';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'kategori_id',
-        'jenis_id',
-        'pengelola_id',
-        'pemasukan',
-        'pengeluaran',
-        'keterangan',
-        'foto',
-        'no_referensi',
+        'server_id',
+        'reseller_id',
+        'pengirim_id',
+        'paket_id',
+        'code'
     ];
 
 

@@ -10,7 +10,7 @@ use App\Models\Imasnet\ManajemenKeuangan\RiwayatTransaksiModel;
 
 use App\Controllers\Imasnet\BaseController;
 
-class DataKeuangan extends BaseController
+class LaporanKeuangan extends BaseController
 {
     public function index()
     {
