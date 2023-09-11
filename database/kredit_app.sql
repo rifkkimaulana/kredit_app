@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2023 at 12:10 PM
+-- Generation Time: Sep 11, 2023 at 11:59 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -373,6 +373,13 @@ CREATE TABLE `tb_im_keuangan` (
   `no_referensi` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tb_im_keuangan`
+--
+
+INSERT INTO `tb_im_keuangan` (`id`, `kategori_id`, `jenis_id`, `pengelola_id`, `pemasukan`, `pengeluaran`, `keterangan`, `foto`, `created_at`, `updated_at`, `no_referensi`) VALUES
+(1, 1, 1, 1, '20000.00', '0.00', '123', '1694408386_cb003bee677ad544c445.jpeg', '2023-09-11 04:44:27', '2023-09-11 04:59:46', '123');
+
 -- --------------------------------------------------------
 
 --
@@ -385,6 +392,14 @@ CREATE TABLE `tb_im_keu_jenis` (
   `keterangan` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tb_im_keu_jenis`
+--
+
+INSERT INTO `tb_im_keu_jenis` (`id`, `nama_jenis`, `keterangan`) VALUES
+(1, 'Pribadi', ''),
+(2, 'Perusahaan', '');
+
 -- --------------------------------------------------------
 
 --
@@ -396,6 +411,13 @@ CREATE TABLE `tb_im_keu_kategori` (
   `nama_kategori` varchar(255) DEFAULT NULL,
   `keterangan` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_im_keu_kategori`
+--
+
+INSERT INTO `tb_im_keu_kategori` (`id`, `nama_kategori`, `keterangan`) VALUES
+(1, 'Pemeliharaan', '');
 
 -- --------------------------------------------------------
 
@@ -412,6 +434,13 @@ CREATE TABLE `tb_im_keu_pengelola` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_im_keu_pengelola`
+--
+
+INSERT INTO `tb_im_keu_pengelola` (`id`, `nama_lengkap`, `telpon`, `alamat`, `saldo`, `created_at`, `updated_at`) VALUES
+(1, 'Rifki Maulana', '123', 'sumednag', '200000.00', '2023-09-11 03:56:36', '2023-09-11 03:56:36');
 
 -- --------------------------------------------------------
 
@@ -469,6 +498,90 @@ CREATE TABLE `tb_im_srv_pengelola` (
 
 INSERT INTO `tb_im_srv_pengelola` (`id`, `nama_lengkap`, `alamat`, `telpon`, `created_at`, `updated_at`) VALUES
 (2, 'Rifki Maulana', 'sumednag', '081231234124', '2023-09-09 17:55:30', '2023-09-09 17:55:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_im_vc_paket`
+--
+
+CREATE TABLE `tb_im_vc_paket` (
+  `id` int(11) NOT NULL,
+  `nama_paket` varchar(255) DEFAULT NULL,
+  `harga_beli` decimal(10,2) DEFAULT NULL,
+  `harga_jual` decimal(10,2) DEFAULT NULL,
+  `fee_pengirim` decimal(10,2) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_im_vc_pengirim`
+--
+
+CREATE TABLE `tb_im_vc_pengirim` (
+  `id` int(11) NOT NULL,
+  `nama_lengkap` varchar(255) DEFAULT NULL,
+  `alamat` text,
+  `telpon` varchar(20) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_im_vc_reseller`
+--
+
+CREATE TABLE `tb_im_vc_reseller` (
+  `id` int(11) NOT NULL,
+  `nama_lengkap` varchar(255) DEFAULT NULL,
+  `alamat` text,
+  `telpon` varchar(20) DEFAULT NULL,
+  `latitude` decimal(10,8) DEFAULT NULL,
+  `longitude` decimal(11,8) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_im_vc_transaksi`
+--
+
+CREATE TABLE `tb_im_vc_transaksi` (
+  `id` int(11) NOT NULL,
+  `voucher_id` int(11) DEFAULT NULL,
+  `paket_id` int(11) DEFAULT NULL,
+  `reseller_id` int(11) DEFAULT NULL,
+  `pengirim_id` int(11) DEFAULT NULL,
+  `keterangan` text,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_im_voucher`
+--
+
+CREATE TABLE `tb_im_voucher` (
+  `id` int(11) NOT NULL,
+  `server_id` int(11) DEFAULT NULL,
+  `reseller_id` int(11) DEFAULT NULL,
+  `pengirim_id` int(11) DEFAULT NULL,
+  `paket_id` int(11) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -786,6 +899,44 @@ ALTER TABLE `tb_im_srv_pengelola`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tb_im_vc_paket`
+--
+ALTER TABLE `tb_im_vc_paket`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_im_vc_pengirim`
+--
+ALTER TABLE `tb_im_vc_pengirim`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_im_vc_reseller`
+--
+ALTER TABLE `tb_im_vc_reseller`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_im_vc_transaksi`
+--
+ALTER TABLE `tb_im_vc_transaksi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `voucher_id` (`voucher_id`),
+  ADD KEY `paket_id` (`paket_id`),
+  ADD KEY `reseller_id` (`reseller_id`),
+  ADD KEY `pengirim_id` (`pengirim_id`);
+
+--
+-- Indexes for table `tb_im_voucher`
+--
+ALTER TABLE `tb_im_voucher`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `server_id` (`server_id`),
+  ADD KEY `reseller_id` (`reseller_id`),
+  ADD KEY `pengirim_id` (`pengirim_id`),
+  ADD KEY `paket_id` (`paket_id`);
+
+--
 -- Indexes for table `tb_kategoriproduk`
 --
 ALTER TABLE `tb_kategoriproduk`
@@ -933,43 +1084,73 @@ ALTER TABLE `tb_im_inv_transaction`
 -- AUTO_INCREMENT for table `tb_im_keuangan`
 --
 ALTER TABLE `tb_im_keuangan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_im_keu_jenis`
 --
 ALTER TABLE `tb_im_keu_jenis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_im_keu_kategori`
 --
 ALTER TABLE `tb_im_keu_kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_im_keu_pengelola`
 --
 ALTER TABLE `tb_im_keu_pengelola`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_im_keu_riwayat`
 --
 ALTER TABLE `tb_im_keu_riwayat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_im_server`
 --
 ALTER TABLE `tb_im_server`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_im_srv_pengelola`
 --
 ALTER TABLE `tb_im_srv_pengelola`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_im_vc_paket`
+--
+ALTER TABLE `tb_im_vc_paket`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_im_vc_pengirim`
+--
+ALTER TABLE `tb_im_vc_pengirim`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_im_vc_reseller`
+--
+ALTER TABLE `tb_im_vc_reseller`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_im_vc_transaksi`
+--
+ALTER TABLE `tb_im_vc_transaksi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_im_voucher`
+--
+ALTER TABLE `tb_im_voucher`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_kategoriproduk`
@@ -1075,6 +1256,24 @@ ALTER TABLE `tb_im_keu_riwayat`
 --
 ALTER TABLE `tb_im_server`
   ADD CONSTRAINT `fk_tb_im_server_pengelola` FOREIGN KEY (`pengelola_id`) REFERENCES `tb_im_srv_pengelola` (`id`);
+
+--
+-- Constraints for table `tb_im_vc_transaksi`
+--
+ALTER TABLE `tb_im_vc_transaksi`
+  ADD CONSTRAINT `tb_im_vc_transaksi_ibfk_1` FOREIGN KEY (`voucher_id`) REFERENCES `tb_im_voucher` (`id`),
+  ADD CONSTRAINT `tb_im_vc_transaksi_ibfk_2` FOREIGN KEY (`paket_id`) REFERENCES `tb_im_vc_paket` (`id`),
+  ADD CONSTRAINT `tb_im_vc_transaksi_ibfk_3` FOREIGN KEY (`reseller_id`) REFERENCES `tb_im_vc_reseller` (`id`),
+  ADD CONSTRAINT `tb_im_vc_transaksi_ibfk_4` FOREIGN KEY (`pengirim_id`) REFERENCES `tb_im_vc_pengirim` (`id`);
+
+--
+-- Constraints for table `tb_im_voucher`
+--
+ALTER TABLE `tb_im_voucher`
+  ADD CONSTRAINT `tb_im_voucher_ibfk_1` FOREIGN KEY (`server_id`) REFERENCES `tb_im_server` (`id`),
+  ADD CONSTRAINT `tb_im_voucher_ibfk_2` FOREIGN KEY (`reseller_id`) REFERENCES `tb_im_vc_reseller` (`id`),
+  ADD CONSTRAINT `tb_im_voucher_ibfk_3` FOREIGN KEY (`pengirim_id`) REFERENCES `tb_im_vc_pengirim` (`id`),
+  ADD CONSTRAINT `tb_im_voucher_ibfk_4` FOREIGN KEY (`paket_id`) REFERENCES `tb_im_vc_paket` (`id`);
 
 --
 -- Constraints for table `tb_keranjang`
