@@ -80,11 +80,22 @@ pemasukan, pengeluaran, keterangan, foto, created_at, updated_at, no_referensi)
  - Laporan Pendapatan Seluruh Transaksi
  - Laporan User Poin Pengiriman
 
-# Data Voucher
-# Paket Voucher
-# Resseler Voucher
-# Pengirim Voucher
-# Laporan Pendapatan Voucher
+Menu Manajemen Voucher
+Submenu # Data Voucher
+Submenu # Paket Voucher
+Submenu # Resseler Voucher
+Submenu # Pengirim Voucher
+Submenu # Laporan Pendapatan Voucher
+
+// create table tb_im_voucher (id, server_id, reseller_id, pengirim_id, paket_id, code, created_at, updated_at)
+
+// create table tb_im_vc_paket (id, nama_paket, harga_beli, harga_jual, fee_pengirim, created_at, updated_at)
+
+// create table tb_im_vc_resseler (id, nama_lengkap, alamat, telpon, latitude, longitude, status, created_at, updated_at)
+
+// create table tb_im_vc_pengirim (id, nama_lengkap, alamat, telpon, status, created_at, updated_at)
+
+// create table tb_im_vc_transaksi (id, voucher_id, paket_id, resseler_id, pengirim_id, keterangan, created_at, updated_at)
 
 7. Management Teksini
  - Pendapatan Dari Pemeliharaan Gangguan Jaringan

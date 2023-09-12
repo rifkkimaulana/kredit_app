@@ -9,12 +9,9 @@ class VoucherModel extends Model
     protected $table = 'tb_im_voucher';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'server_id',
-        'reseller_id',
-        'pengirim_id',
-        'paket_id',
         'code',
-        'komentar'
+        'komentar',
+        'paket_id'
     ];
 
 

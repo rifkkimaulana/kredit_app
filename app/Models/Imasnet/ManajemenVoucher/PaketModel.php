@@ -11,8 +11,7 @@ class PaketModel extends Model
     protected $allowedFields = [
         'nama_paket',
         'harga_beli',
-        'harga_jual',
-        'fee_pengirim'
+        'harga_jual'
     ];
 
     public function insertData($data)

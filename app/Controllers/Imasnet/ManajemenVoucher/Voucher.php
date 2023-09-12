@@ -2,12 +2,8 @@
 
 namespace App\Controllers\Imasnet\ManajemenVoucher;
 
-use App\Models\Imasnet\ManajemenServer\ServerModel;
 use App\Models\Imasnet\ManajemenVoucher\VoucherModel;
 use App\Models\Imasnet\ManajemenVoucher\PaketModel;
-
-use App\Models\Imasnet\ManajemenVoucher\ResellerModel;
-use App\Models\Imasnet\ManajemenVoucher\PengirimModel;
 
 use App\Controllers\Imasnet\BaseController;
 
@@ -15,13 +11,6 @@ class Voucher extends BaseController
 {
     public function index()
     {
-        $serverModel = new ServerModel();
-
-        $serverMap = [];
-        foreach ($serverModel->findAll() as $server) {
-            $serverMap[$server['id']] = $server;
-        }
-
         $paketModel = new PaketModel();
 
         $paketMap = [];
@@ -31,37 +20,49 @@ class Voucher extends BaseController
 
         $voucherModel = new VoucherModel();
 
+        $voucherData = $voucherModel->orderBy('created_at', 'desc')->findAll();
 
-        $resellerModel = new ResellerModel();
-        $pengirimModel = new PengirimModel();
+        $pilihanKomentar = [];
+        $seenKomentar = [];
+
+        foreach ($voucherData as $voucher) {
+            $komentar = $voucher['komentar'];
+            if (!in_array($komentar, $seenKomentar)) {
+                $pilihanKomentar[] = [
+                    'id' => $voucher['id'],
+                    'komentar' => $komentar,
+                ];
+                $seenKomentar[] = $komentar;
+            }
+        }
 
         $data = [
             'title' => 'Manajemen Voucher Data',
             'user' => $this->user,
             'perusahaan' => $this->aplikasi,
-            'serverData' => $serverModel->findAll(),
-            'serverMap' => $serverMap,
             'paketMap' => $paketMap,
             'paketData' => $paketModel->findAll(),
-            'voucherData' => $voucherModel->findAll(),
-            'resellerData' => $resellerModel->findAll(),
-            'pengirimData' => $pengirimModel->findAll(),
+            'voucherData' => $voucherData,
+            'pilihanKomentar' => $pilihanKomentar, // Menambahkan data pilihan komentar
         ];
+
         return view('Imasnet/Pages/ManajemenVoucher/Voucher', $data);
     }
 
     public function create()
     {
         $jumlah_create = $this->request->getPost('jumlah');
+
+        if ($jumlah_create > 2000) {
+            return redirect()->back()->withInput()->with('error', 'Jumlah generate maksimal adalah 2000.');
+        }
+
         $prefix_komentar = 'im_code_' . bin2hex(random_bytes(4)); // Prefix komentar yang sama untuk setiap kode
 
         $voucherModel = new VoucherModel();
 
         for ($i = 0; $i < $jumlah_create; $i++) {
             $data = [
-                'server_id' => $this->request->getPost('server_id'),
-                'reseller_id' => $this->request->getPost('reseller_id'),
-                'pengirim_id' => $this->request->getPost('pengirim_id'),
                 'paket_id' => $this->request->getPost('paket_id'),
                 'komentar' => $prefix_komentar,
                 'code' => bin2hex(random_bytes(8)), // Menghasilkan kode acak sepanjang 16 karakter (dapat disesuaikan)
@@ -75,37 +76,46 @@ class Voucher extends BaseController
         return redirect()->to(base_url('im-manajemen-voucher/voucher'))->with('success', 'Data voucher berhasil disimpan');
     }
 
-    public function update()
+    public function deleteCheckbox()
     {
-        $id = $this->request->getPost('id');
+        $voucherIds = $this->request->getPost('voucher_ids');
 
         $voucherModel = new VoucherModel();
 
-        $data = [
-            'server_id' => $this->request->getPost('server_id'),
-            'reseller_id' => $this->request->getPost('reseller_id'),
-            'pengirim_id' => $this->request->getPost('pengirim_id'),
-            'paket_id' => $this->request->getPost('paket_id'),
-            'code' => $this->request->getPost('code'),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ];
+        if (!empty($voucherIds)) {
+            foreach ($voucherIds as $voucherId) {
+                $voucherModel->deleteId($voucherId);
+            }
 
-        if (!$voucherModel->updateId($id, $data)) {
-            return redirect()->to(base_url('im-manajemen-voucher/voucher'))->with('success', 'Data voucher berhasil diubah');
+            return redirect()->to(base_url('im-manajemen-voucher/voucher'))->with('success', 'Voucher terpilih berhasil dihapus');
         } else {
-            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat ubah data voucher');
+            return redirect()->to(base_url('im-manajemen-voucher/voucher'))->with('error', 'Tidak ada voucher yang dipilih untuk dihapus');
         }
     }
 
-    public function delete($id)
+    public function cetak()
     {
-        $voucherModel = new VoucherModel();
+        $komentar = $this->request->getGet('komentar');
 
-        if ($voucherModel->deleteId($id)) {
-            return redirect()->to(base_url('im-manajemen-voucher/voucher'))->with('success', 'voucher berhasil dihapus.');
+        if (!empty($komentar)) { // Periksa apakah komentar tidak kosong
+            $voucherModel = new VoucherModel();
+
+            $voucherData = $voucherModel->whereIn('komentar', [$komentar])->findAll(); // Ubah ke dalam bentuk array
+
+            $paketModel = new PaketModel();
+
+            $paketMap = [];
+            foreach ($paketModel->findAll() as $paket) {
+                $paketMap[$paket['id']] = $paket;
+            }
+            $data = [
+                'voucherData' => $voucherData,
+                'paketMap' => $paketMap
+            ];
+
+            return view('Imasnet/Pages/ManajemenVoucher/CetakLabelVoucher', $data);
         } else {
-            return redirect()->to(base_url('im-manajemen-voucher/voucher'))->with('error', 'voucher gagal dihapus. Silakan coba lagi.');
+            return redirect()->back()->with('error', 'Pilih setidaknya satu komentar untuk mencetak.');
         }
     }
 }

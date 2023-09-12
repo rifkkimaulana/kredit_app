@@ -132,7 +132,7 @@
                     previous: "Previous",
                 },
             },
-            lengthMenu: [5, 10, 50, 100],
+            lengthMenu: [5, 10, 50, 100, 500],
             pageLength: 5,
         });
 
@@ -153,6 +153,27 @@
         <?php if (session()->getFlashdata('error')) : ?>
             toastr.error('<?= session()->getFlashdata('error') ?>');
         <?php endif; ?>
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Saat checkbox "Pilih Semua" diubah
+            $("#selectAll").change(function() {
+                // Periksa apakah "Pilih Semua" dicentang atau tidak
+                var isChecked = $(this).is(":checked");
+
+                // Atur status checkbox dalam loop sesuai dengan "Pilih Semua"
+                $(".checkbox-item").prop("checked", isChecked);
+            });
+
+            // Saat salah satu checkbox dalam loop diubah
+            $(".checkbox-item").change(function() {
+                // Periksa apakah semua checkbox dalam loop sudah dicentang atau tidak
+                var allChecked = $(".checkbox-item:checked").length === $(".checkbox-item").length;
+
+                // Jika semua checkbox dalam loop sudah dicentang, centang juga "Pilih Semua"
+                $("#selectAll").prop("checked", allChecked);
+            });
+        });
     </script>
 
 </body>

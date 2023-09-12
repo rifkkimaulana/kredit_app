@@ -167,6 +167,8 @@ $routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes
 
 		$routes->get('voucher', 'Voucher::index');
 		$routes->post('voucher/create', 'Voucher::create');
+		$routes->post('voucher/delete/checkbox', 'Voucher::deleteCheckbox');
+		$routes->get('voucher/cetak', 'Voucher::cetak');
 
 		$routes->get('paket', 'Paket::index');
 		$routes->post('paket/create', 'Paket::create');

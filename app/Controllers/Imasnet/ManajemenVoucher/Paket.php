@@ -27,7 +27,6 @@ class Paket extends BaseController
             'nama_paket' => $this->request->getPost('nama_paket'),
             'harga_beli' => $this->request->getPost('harga_beli'),
             'harga_jual' => $this->request->getPost('harga_jual'),
-            'fee_pengirim' => $this->request->getPost('fee_pengirim'),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
@@ -52,7 +51,6 @@ class Paket extends BaseController
             'nama_paket' => $this->request->getPost('nama_paket'),
             'harga_beli' => $this->request->getPost('harga_beli'),
             'harga_jual' => $this->request->getPost('harga_jual'),
-            'fee_pengirim' => $this->request->getPost('fee_pengirim'),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];

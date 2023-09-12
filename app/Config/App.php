@@ -31,8 +31,8 @@ class App extends BaseConfig
 		// Mendeteksi domain yang digunakan oleh pengguna
 		$domain = $_SERVER['HTTP_HOST'];
 
-		if ($domain === 'localhost:8080') {
-			$this->baseURL = 'http://localhost:8080/';
+		if ($domain === 'localhost') {
+			$this->baseURL = 'http://localhost/kredit_app/public/';
 		} elseif ($domain === 'meta.imasnet.id') {
 			$this->baseURL = 'https://meta.imasnet.id/';
 		} elseif ($domain === 'paylater') {

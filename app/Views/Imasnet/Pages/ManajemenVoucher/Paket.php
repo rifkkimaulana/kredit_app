@@ -21,7 +21,6 @@
                                         <th class="text-center">Paket</th>
                                         <th class="text-center">Harga Beli</th>
                                         <th class="text-center">Harga Jual</th>
-                                        <th class="text-center">Fee Pengirim</th>
                                         <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
@@ -34,7 +33,6 @@
                                             <td class="text-center"><?= $paket['nama_paket']; ?></td>
                                             <td class="text-center"><?= $paket['harga_beli']; ?></td>
                                             <td class="text-center"><?= $paket['harga_jual']; ?></td>
-                                            <td class="text-center"><?= $paket['fee_pengirim']; ?></td>
                                             <td class="text-center">
                                                 <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal<?= $paket['id']; ?>">
                                                     <i class="far fa-edit"></i> Edit
@@ -91,10 +89,6 @@
                                                                 <label for="harga_jual">Harga Jual</label>
                                                                 <input type="text" class="form-control" id="harga_jual" name="harga_jual" value="<?= $paket['harga_jual']; ?>" required>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label for="fee_pengirim">Fee Pengirim</label>
-                                                                <input type="text" class="form-control" id="fee_pengirim" name="fee_pengirim" value="<?= $paket['fee_pengirim']; ?>" required>
-                                                            </div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -138,10 +132,6 @@
                     <div class="form-group">
                         <label for="harga_jual">Harga Jual</label>
                         <input type="text" class="form-control" id="harga_jual" name="harga_jual" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="fee_pengirim">Fee Pengirim</label>
-                        <input type="text" class="form-control" id="fee_pengirim" name="fee_pengirim" required>
                     </div>
                 </div>
                 <div class="modal-footer">
