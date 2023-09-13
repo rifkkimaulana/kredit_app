@@ -49,7 +49,7 @@ class Riwayat extends BaseController
 
         $pengirimMap = [];
         foreach ($pengirimModel->findAll() as $pengirim) {
-            $pengirimMap[$pengirim['id']] = $reseller;
+            $pengirimMap[$pengirim['id']] = $pengirim;
         }
 
         $riwayatModel = new RiwayatModel();
@@ -61,8 +61,10 @@ class Riwayat extends BaseController
             'riwayatData' => $riwayatModel->findAll(),
             'voucherMap' => $voucherMap,
             'serverMap' => $serverMap,
+            'serverData' => $serverModel->findAll(),
             'paketMap' => $paketMap,
             'resellerMap' => $resellerMap,
+            'resellerData' => $resellerModel->findAll(),
             'pengirimMap' => $pengirimMap,
         ];
         return view('Imasnet/Pages/ManajemenVoucher/Riwayat', $data);
@@ -76,6 +78,28 @@ class Riwayat extends BaseController
             return redirect()->to(base_url('im-manajemen-voucher/server'))->with('success', 'server berhasil dihapus.');
         } else {
             return redirect()->to(base_url('im-manajemen-voucher/server'))->with('error', 'server gagal dihapus. Silakan coba lagi.');
+        }
+    }
+
+    public function pengirimanPost()
+    {
+        $data = [
+            'paket_id' => $this->request->getPost('paket_id'),
+            'reseller_id' => $this->request->getPost('reseller_id'),
+            'server_id' => $this->request->getPost('server_id'),
+            'pengirim_id' => $this->request->getPost('pengirim_id'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+
+        $riwayatModel = new RiwayatModel();
+        $voucherModel = new VoucherModel();
+
+        if ($riwayatModel->insertData($data)) {
+            $voucherModel->deleteId($this->request->getPost('voucher_id'));
+            return redirect()->to(base_url('im-manajemen-voucher/riwayat'))->with('success', 'Data pengiriman voucher berhasil disimpan');
+        } else {
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat menyimpan data pengiriman voucher');
         }
     }
 }

@@ -4,8 +4,11 @@ namespace App\Controllers\Imasnet\ManajemenVoucher;
 
 use App\Models\Imasnet\ManajemenVoucher\VoucherModel;
 use App\Models\Imasnet\ManajemenVoucher\PaketModel;
+use App\Models\Imasnet\ManajemenVoucher\ResellerModel;
+use App\Models\Imasnet\ManajemenServer\ServerModel;
 
 use App\Controllers\Imasnet\BaseController;
+use App\Models\Imasnet\ManajemenVoucher\PengirimModel;
 
 class Voucher extends BaseController
 {
@@ -97,25 +100,64 @@ class Voucher extends BaseController
     {
         $komentar = $this->request->getGet('komentar');
 
-        if (!empty($komentar)) { // Periksa apakah komentar tidak kosong
+        if (!empty($komentar)) {
             $voucherModel = new VoucherModel();
+            $voucherData = $voucherModel->where('komentar', $komentar)->findAll();
 
-            $voucherData = $voucherModel->whereIn('komentar', [$komentar])->findAll(); // Ubah ke dalam bentuk array
+            $qrCodeUrls = [];
 
+            foreach ($voucherData as $voucher) {
+                $qrCodeText = base_url('im-manajemen-voucher/voucher/' . $voucher['code']);
+                $qrCodeUrl = 'https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=' . urlencode($qrCodeText);
+                $qrCodeUrls[] = $qrCodeUrl;
+            }
+
+            $data = [
+                'qrCodeUrls' => $qrCodeUrls,
+            ];
+
+            return view('Imasnet/Pages/ManajemenVoucher/CetakLabelVoucher', $data);
+        } else {
+            return redirect()->back()->with('error', 'Pilih setidaknya satu komentar untuk mencetak.');
+        }
+    }
+
+    public function scanqrcode()
+    {
+        return view('Imasnet/Pages/ManajemenVoucher/ScanQrCode');
+    }
+
+    public function submitTransaksi($code)
+    {
+        $voucherModel = new VoucherModel();
+        $voucherData = $voucherModel->where('code', $code)->first();
+
+        if (!empty($voucherData)) {
             $paketModel = new PaketModel();
 
             $paketMap = [];
             foreach ($paketModel->findAll() as $paket) {
                 $paketMap[$paket['id']] = $paket;
             }
+
+            $serverModel = new ServerModel();
+            $resellerModel = new ResellerModel();
+            $pengirimModel = new PengirimModel();
+
             $data = [
-                'voucherData' => $voucherData,
-                'paketMap' => $paketMap
+                'title' => 'Transaksi Pengiriman Kode Voucher',
+                'user' => $this->user,
+                'perusahaan' => $this->aplikasi,
+                'serverData' => $serverModel->findAll(),
+                'resellerData' => $resellerModel->findAll(),
+                'paket' => $paketMap[$voucherData['paket_id']]['nama_paket'],
+                'voucher' => $voucherData,
+                'pengirimData' => $pengirimModel->findAll()
             ];
 
-            return view('Imasnet/Pages/ManajemenVoucher/CetakLabelVoucher', $data);
+            return view('Imasnet/Pages/ManajemenVoucher/NewTransaction', $data);
         } else {
-            return redirect()->back()->with('error', 'Pilih setidaknya satu komentar untuk mencetak.');
+            return redirect()->to(base_url('im-manajemen-voucher/riwayat'))->with('error', 'Kode yang anda pindai sudah tidak berlaku');
         }
     }
 }

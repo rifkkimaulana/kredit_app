@@ -13,6 +13,7 @@ class RiwayatModel extends Model
         'paket_id',
         'reseller_id',
         'pengirim_id',
+        'server_id',
         'keterangan'
     ];
 

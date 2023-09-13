@@ -169,6 +169,9 @@ $routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes
 		$routes->post('voucher/create', 'Voucher::create');
 		$routes->post('voucher/delete/checkbox', 'Voucher::deleteCheckbox');
 		$routes->get('voucher/cetak', 'Voucher::cetak');
+		$routes->get('voucher/myqr', 'Voucher::scanqrcode');
+		$routes->get('voucher/(:segment)', 'Voucher::submitTransaksi/$1');
+
 
 		$routes->get('paket', 'Paket::index');
 		$routes->post('paket/create', 'Paket::create');
@@ -186,6 +189,7 @@ $routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes
 		$routes->get('pengirim/delete/(:num)', 'Pengirim::delete/$1');
 
 		$routes->get('riwayat', 'Riwayat::index');
+		$routes->post('riwayat/submitPengiriman', 'Riwayat::pengirimanPost');
 	});
 });
 // END SCC IMASNET
