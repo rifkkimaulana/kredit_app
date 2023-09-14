@@ -18,9 +18,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center" style="padding: 10px;">No</th>
-                                        <th class="text-center" style="padding: 10px;">Nama Lokasi</th>
                                         <th class="text-center" style="padding: 10px;">Penanggung Jawab</th>
-                                        <th class="text-center" style="padding: 10px;">Telepon</th>
                                         <th class="text-center" style="padding: 10px;">Alamat</th>
                                         <th class="text-center" style="padding: 10px;">Aksi</th>
                                     </tr>
@@ -31,10 +29,8 @@
                                     foreach ($locations as $location) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
-                                            <td><?= $location['nama_lokasi']; ?></td>
-                                            <td><?= $location['penanggung_jawab']; ?></td>
-                                            <td><?= $location['telpon']; ?></td>
-                                            <td><?= $location['alamat']; ?></td>
+                                            <td class="text-center"><?= $location['penanggung_jawab']; ?></td>
+                                            <td class="text-center"><?= $location['alamat']; ?></td>
                                             <td class="text-center">
                                                 <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal<?= $location['id']; ?>">
                                                     <i class="far fa-edit"></i> Edit

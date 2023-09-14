@@ -90,6 +90,7 @@
     <script src="<?= base_url('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js'); ?>"></script>
     <!-- AdminLTE App -->
     <script src="<?= base_url('assets/dist/js/adminlte.js'); ?>"></script>
+    <script src="<?= base_url('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js'); ?>"></script>
 
     <script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
     <script src="<?= base_url('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
@@ -173,6 +174,11 @@
                 // Jika semua checkbox dalam loop sudah dicentang, centang juga "Pilih Semua"
                 $("#selectAll").prop("checked", allChecked);
             });
+        });
+    </script>
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
         });
     </script>
 

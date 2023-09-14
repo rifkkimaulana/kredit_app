@@ -8,7 +8,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="<?= $segment1 === 'im-dashboard' ? 'javascript:void(0);' : base_url('im-dashboard'); ?>" class="brand-link text-center">
-        <span class="brand-text font-weight-light"><b>META IMASNET PANEL</b></span>
+        <span class="brand-text font-weight-light"><b>IMASNET PANEL</b></span>
     </a>
 
     <div class="sidebar">
@@ -27,11 +27,36 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
 
         <nav class="mt-1">
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-header">DASHBOARD</li>
                 <li class="nav-item">
                     <a href="<?= $segment1 === 'im-dashboard' ? 'javascript:void(0);' : base_url('im-dashboard'); ?>" class="nav-link <?= $segment1 === 'im-dashboard' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
+                </li>
+                <li class="nav-header">PENGELOLA PERALATAN</li>
+                <li class="nav-item <?= $segment1 === 'im-manajemen-assets' ? 'menu-open' : ''; ?>">
+                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-manajemen-assets' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-briefcase"></i>
+                        <p>
+                            Manajemen Aset
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-assets/data-aset'); ?>" class="nav-link <?= $segment2 === 'data-aset' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Data Aset</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('im-manajemen-assets/kategori-aset'); ?>" class="nav-link <?= $segment2 === 'kategori-aset' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kategori Aset</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item <?= $segment1 === 'im-inventory' ? 'menu-open' : ''; ?>">
                     <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-inventory' ? 'active' : ''; ?>">
@@ -86,6 +111,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         </li>
                     </ul>
                 </li>
+                <li class="nav-header">PENGELOLA PELANGGAN</li>
                 <li class="nav-item <?= $segment1 === 'im-manajemen-server' ? 'menu-open' : ''; ?>">
                     <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-manajemen-server' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-server"></i>
@@ -126,29 +152,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item <?= $segment1 === 'im-manajemen-assets' ? 'menu-open' : ''; ?>">
-                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-manajemen-assets' ? 'active' : ''; ?>">
-                        <i class="nav-icon fas fa-briefcase"></i>
-                        <p>
-                            Manajemen Aset
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-assets/data-aset'); ?>" class="nav-link <?= $segment2 === 'data-aset' ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Data Aset</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-assets/kategori-aset'); ?>" class="nav-link <?= $segment2 === 'kategori-aset' ? 'active' : ''; ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Kategori Aset</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+
                 <!-- Menu Manajemen Voucher -->
                 <li class="nav-item <?= $segment1 === 'im-manajemen-voucher' ? 'menu-open' : ''; ?>">
                     <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-manajemen-voucher' ? 'active' : ''; ?>">
@@ -192,7 +196,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     </ul>
                 </li>
 
-                <!-- Menu Manajemen Keuangan Pengeluaran dan Pemasukan -->
+                <li class="nav-header">PENGELOLA KEUANGAN</li>
                 <li class="nav-item <?= $segment1 === 'im-manajemen-keuangan' ? 'menu-open' : ''; ?>">
                     <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-manajemen-keuangan' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-money-bill-wave"></i>
@@ -240,13 +244,37 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                         </li>
                     </ul>
                 </li>
+                <li class="nav-header">TOOL SYSTEM</li>
+                <li class="nav-item <?= $segment1 === 'im-settings' ? 'menu-open' : ''; ?>">
+                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-settings' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>
+                            Pengaturan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'profile' ? 'javascript:void(0)' : base_url('im-settings/profile'); ?>" class="nav-link <?= $segment2 === 'profile' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Profile</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'users' ? 'javascript:void(0)' : base_url('im-settings/users'); ?>" class="nav-link <?= $segment2 === 'users' ? 'active' : ''; ?>"> <i class="far fa-circle nav-icon"></i>
+                                <p>Manajemen Pengguna</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
-                    <a href="<?= base_url('im-log-user'); ?>" class="nav-link <?= $segment1 === 'im-log-user' ? 'active' : ''; ?>">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>Log User</p>
+                    <a href="<?= base_url('im-log/activity'); ?>" class="nav-link <?= $segment2 === 'activity' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-history"></i>
+                        <p>Riwayat Aktifitas</p>
                     </a>
                 </li>
-
             </ul>
         </nav>
     </div>

@@ -29,8 +29,8 @@
                                     foreach ($categories as $category) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
-                                            <td><?= $category['nama_kategori']; ?></td>
-                                            <td><?= $category['keterangan']; ?></td>
+                                            <td class="text-center"><?= $category['nama_kategori']; ?></td>
+                                            <td class="text-center"><?= $category['keterangan']; ?></td>
                                             <td class="text-center">
                                                 <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal<?= $category['id']; ?>">
                                                     <i class="far fa-edit"></i> Edit

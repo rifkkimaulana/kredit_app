@@ -20,8 +20,6 @@
                                         <th class="text-center" style="padding: 10px;">No</th>
                                         <th class="text-center" style="padding: 10px;">Nama Barang</th>
                                         <th class="text-center" style="padding: 10px;">Stok</th>
-                                        <th class="text-center" style="padding: 10px;">Satuan</th>
-                                        <th class="text-center" style="padding: 10px;">Harga Satuan</th>
                                         <th class="text-center" style="padding: 10px;">Foto</th>
                                         <th class="text-center" style="padding: 10px;">Aksi</th>
                                     </tr>
@@ -32,11 +30,9 @@
                                     foreach ($inventories as $inventory) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
-                                            <td><?= $inventory['nama_barang']; ?></td>
-                                            <td><?= $inventory['stok']; ?></td>
-                                            <td><?= $inventory['satuan']; ?></td>
-                                            <td><?= $inventory['harga_satuan']; ?></td>
-                                            <td>
+                                            <td class="text-center"><?= $inventory['nama_barang']; ?></td>
+                                            <td class="text-center"><?= $inventory['stok']; ?></td>
+                                            <td class="text-center">
                                                 <img src="<?= base_url('assets/image/Imasnet/Inventory/' . $inventory['foto']); ?>" alt="Gambar Inventory" class="img-fluid" style="max-width: 100px; max-height: 100px;">
                                             </td>
                                             <td class="text-center">

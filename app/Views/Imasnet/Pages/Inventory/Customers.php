@@ -30,9 +30,9 @@
                                     foreach ($customers as $customer) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
-                                            <td><?= $customer['nama_lengkap']; ?></td>
-                                            <td><?= $customer['telpon']; ?></td>
-                                            <td><?= $customer['alamat']; ?></td>
+                                            <td class="text-center"><?= $customer['nama_lengkap']; ?></td>
+                                            <td class="text-center"><?= $customer['telpon']; ?></td>
+                                            <td class="text-center"><?= $customer['alamat']; ?></td>
                                             <td class="text-center">
                                                 <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal<?= $customer['id']; ?>">
                                                     <i class="far fa-edit"></i> Edit

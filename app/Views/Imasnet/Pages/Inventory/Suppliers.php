@@ -18,10 +18,6 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center" style="padding: 10px;">No</th>
-                                        <th class="text-center" style="padding: 10px;">Nama Lengkap</th>
-                                        <th class="text-center" style="padding: 10px;">Telpon</th>
-                                        <th class="text-center" style="padding: 10px;">No Rek</th>
-                                        <th class="text-center" style="padding: 10px;">Nama No Rek</th>
                                         <th class="text-center" style="padding: 10px;">Nama Toko</th>
                                         <th class="text-center" style="padding: 10px;">Alamat</th>
                                         <th class="text-center" style="padding: 10px;">Aksi</th>
@@ -33,12 +29,8 @@
                                     foreach ($suppliers as $suplier) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
-                                            <td><?= $suplier['nama_lengkap']; ?></td>
-                                            <td><?= $suplier['telpon']; ?></td>
-                                            <td><?= $suplier['no_rek']; ?></td>
-                                            <td><?= $suplier['nama_no_rek']; ?></td>
-                                            <td><?= $suplier['nama_toko']; ?></td>
-                                            <td><?= $suplier['alamat']; ?></td>
+                                            <td class="text-center"><?= $suplier['nama_toko']; ?></td>
+                                            <td class="text-center"><?= $suplier['alamat']; ?></td>
                                             <td class="text-center">
                                                 <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal<?= $suplier['id']; ?>">
                                                     <i class="far fa-edit"></i> Edit

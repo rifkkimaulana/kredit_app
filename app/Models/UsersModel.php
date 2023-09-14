@@ -12,7 +12,7 @@ class UsersModel extends Model
     protected $allowedFields = [
         'user_nama', 'user_username', 'user_password', 'user_foto',
         'user_level', 'email', 'no_wa', 'reset_token', 'reset_id',
-        'keterangan', 'country', 'facebook', 'tweeter', 'instagram', 'app_id'
+        'keterangan', 'country', 'facebook', 'tweeter', 'instagram', 'app_id', 'aplication_name'
     ];
 
     public function updateResetToken($email, $token, $noWa)

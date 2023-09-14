@@ -18,7 +18,6 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">No</th>
-                                        <th class="text-center">ID Aset</th>
                                         <th class="text-center">Nama Aset</th>
                                         <th class="text-center">Keterangan</th>
                                         <th class="text-center">Penanggung Jawab</th>
@@ -35,7 +34,6 @@
                                     foreach ($assetsData as $assets) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
-                                            <td class="text-center"><?= $assets['id']; ?></td>
                                             <td class="text-center"><?= $assets['nama_assets']; ?></td>
                                             <td class="text-center"><?= $assets['keterangan']; ?></td>
                                             <td class="text-center"><?= $assets['penanggung_jawab']; ?></td>
@@ -88,10 +86,9 @@
                                                     <form action="<?= base_url('im-manajemen-assets/data-aset/update'); ?>" method="post">
                                                         <div class="modal-body">
                                                             <input type="hidden" name="id" value="<?= $assets['id']; ?>">
-                                                            <div class="form-group">
-                                                                <label for="kategori_id">Kategori ID</label>
-                                                                <input type="text" class="form-control" id="kategori_id" name="kategori_id" value="<?= $assets['kategori_id']; ?>">
-                                                            </div>
+
+                                                            <input type="hidden" class="form-control" id="kategori_id" name="kategori_id" value="<?= $assets['kategori_id']; ?>">
+
                                                             <div class="form-group">
                                                                 <label for="nama_assets">Nama Aset</label>
                                                                 <input type="text" class="form-control" id="nama_assets" name="nama_assets" value="<?= $assets['nama_assets']; ?>">

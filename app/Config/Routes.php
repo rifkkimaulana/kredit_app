@@ -58,6 +58,15 @@ $routes->group('meta', ['namespace' => 'App\Controllers\Meta'], function ($route
 $routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes) {
 	$routes->get('im-dashboard', 'Dashboard::index');
 
+	$routes->group('im-settings', ['namespace' => 'App\Controllers\Imasnet\Settings'], function ($routes) {
+		$routes->get('profile', 'Profile::index');
+
+		$routes->get('users', 'Users::index');
+		$routes->post('users/create', 'Users::create');
+		$routes->post('users/update', 'Users::update');
+		$routes->get('users/delete/(:num)', 'Users::delete/$1');
+	});
+
 	// Grup Manajemen Inventory
 	$routes->group('im-inventory', ['namespace' => 'App\Controllers\Imasnet\Inventory'], function ($routes) {
 
@@ -191,6 +200,8 @@ $routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes
 		$routes->get('riwayat', 'Riwayat::index');
 		$routes->post('riwayat/submitPengiriman', 'Riwayat::pengirimanPost');
 	});
+
+	$routes->get('im-log/activity', 'ActivityLog::index');
 });
 // END SCC IMASNET
 
