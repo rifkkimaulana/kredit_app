@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2023 at 11:45 AM
+-- Generation Time: Sep 18, 2023 at 10:28 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -347,7 +347,6 @@ INSERT INTO `tb_im_inv_transaction` (`id`, `keterangan`, `supliers_id`, `custome
 
 CREATE TABLE `tb_im_keuangan` (
   `id` int(11) NOT NULL,
-  `kategori_id` int(11) DEFAULT NULL,
   `jenis_id` int(11) DEFAULT NULL,
   `pengelola_id` int(11) DEFAULT NULL,
   `pemasukan` decimal(10,2) DEFAULT NULL,
@@ -359,13 +358,6 @@ CREATE TABLE `tb_im_keuangan` (
   `no_referensi` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tb_im_keuangan`
---
-
-INSERT INTO `tb_im_keuangan` (`id`, `kategori_id`, `jenis_id`, `pengelola_id`, `pemasukan`, `pengeluaran`, `keterangan`, `foto`, `created_at`, `updated_at`, `no_referensi`) VALUES
-(1, 1, 1, 1, '20000.00', '0.00', '123', '1694408386_cb003bee677ad544c445.jpeg', '2023-09-11 04:44:27', '2023-09-11 04:59:46', '123');
-
 -- --------------------------------------------------------
 
 --
@@ -374,6 +366,7 @@ INSERT INTO `tb_im_keuangan` (`id`, `kategori_id`, `jenis_id`, `pengelola_id`, `
 
 CREATE TABLE `tb_im_keu_jenis` (
   `id` int(11) NOT NULL,
+  `kategori_id` int(11) NOT NULL,
   `nama_jenis` varchar(255) DEFAULT NULL,
   `keterangan` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -382,9 +375,8 @@ CREATE TABLE `tb_im_keu_jenis` (
 -- Dumping data for table `tb_im_keu_jenis`
 --
 
-INSERT INTO `tb_im_keu_jenis` (`id`, `nama_jenis`, `keterangan`) VALUES
-(1, 'Pribadi', ''),
-(2, 'Perusahaan', '');
+INSERT INTO `tb_im_keu_jenis` (`id`, `kategori_id`, `nama_jenis`, `keterangan`) VALUES
+(3, 2, 'Operasional', 'Keuangan Teknisi Wifi');
 
 -- --------------------------------------------------------
 
@@ -403,7 +395,7 @@ CREATE TABLE `tb_im_keu_kategori` (
 --
 
 INSERT INTO `tb_im_keu_kategori` (`id`, `nama_kategori`, `keterangan`) VALUES
-(1, 'Pemeliharaan', '');
+(2, 'CV. MITRA MANDIRI SKM', 'Keuangan Perusahaan');
 
 -- --------------------------------------------------------
 
@@ -413,9 +405,7 @@ INSERT INTO `tb_im_keu_kategori` (`id`, `nama_kategori`, `keterangan`) VALUES
 
 CREATE TABLE `tb_im_keu_pengelola` (
   `id` int(11) NOT NULL,
-  `nama_lengkap` varchar(255) DEFAULT NULL,
-  `telpon` varchar(20) DEFAULT NULL,
-  `alamat` text,
+  `user_id` int(11) NOT NULL,
   `saldo` decimal(10,2) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -425,8 +415,8 @@ CREATE TABLE `tb_im_keu_pengelola` (
 -- Dumping data for table `tb_im_keu_pengelola`
 --
 
-INSERT INTO `tb_im_keu_pengelola` (`id`, `nama_lengkap`, `telpon`, `alamat`, `saldo`, `created_at`, `updated_at`) VALUES
-(1, 'Rifki Maulana', '123', 'sumednag', '200000.00', '2023-09-11 03:56:36', '2023-09-11 03:56:36');
+INSERT INTO `tb_im_keu_pengelola` (`id`, `user_id`, `saldo`, `created_at`, `updated_at`) VALUES
+(2, 23, '0.00', '2023-09-18 07:43:49', '2023-09-18 07:43:49');
 
 -- --------------------------------------------------------
 
@@ -823,9 +813,10 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`user_id`, `user_nama`, `user_username`, `user_password`, `user_foto`, `user_level`, `email`, `no_wa`, `reset_token`, `reset_id`, `keterangan`, `app_id`, `country`, `aplication_name`, `facebook`, `tweeter`, `instagram`) VALUES
-(4, 'Rifki Maulana', 'admin', '$2y$10$guzfxMCl3tZSo/Qgfo7OnO05iMmzN7Pfos/xF8TumqhI/qh.zJUma', '1693988547_0078b59238b5f1c15c9f.webp', 'administrator', 'rifkkimaulana@gmail.com', '083130649979', '', 'ecdaa0e0-3e87-4368-be77-92ddd3a57081', '', 1, 'Indonesia', '', '', '', ''),
+(4, 'Rifki Maulana', 'admin', '$2y$10$guzfxMCl3tZSo/Qgfo7OnO05iMmzN7Pfos/xF8TumqhI/qh.zJUma', '1695013663_ae2b0352f1219d540cb0.webp', 'administrator', 'rifkkimaulana@gmail.com', '083130649979', '', 'ecdaa0e0-3e87-4368-be77-92ddd3a57081', '-', 1, 'Indonesia', '', '', '', ''),
 (16, 'Dian Witura', 'dian', '$2y$10$MTHn9EWgER0HkqQpxifyYOkMmOYTh7FzE0kgrUNvo6.o7/xp8LsF.', NULL, 'member', '64f9be690a6ac_contoh@emailkamu.com', '082118844992', '', '', '', 1, '', '', '', '', ''),
-(22, 'asdf', 'asdf', '$2y$10$A65zEHluWBgjDCyAVNGwVu2p95b3VkIkKDBSf8rrCPNcnQj5Mxnni', '1694684707_a9a902d749cb2e29f782.png', 'im_member', 'asdf', '6283130649979', '', '', '', 0, '', 'imasnet', '', '', '');
+(22, 'asdf', 'asdf', '$2y$10$A65zEHluWBgjDCyAVNGwVu2p95b3VkIkKDBSf8rrCPNcnQj5Mxnni', '1694684707_a9a902d749cb2e29f782.png', 'im_member', 'asdf', '6283130649979', '', '', '', 0, '', 'imasnet', '', '', ''),
+(23, 'Risna', 'risna', '$2y$10$83hotipV6rblGmZOZe3W8OpoVQdu5NY1wOIY3rZ.lVw4yLXQPOO8i', '1695022954_aedcf76437cddbe702ab.jpg', 'im_member', 'risna@gmail.com', '083130473847', '', '', '', 0, '', 'imasnet', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -941,7 +932,6 @@ ALTER TABLE `tb_im_inv_transaction`
 --
 ALTER TABLE `tb_im_keuangan`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `kategori_id` (`kategori_id`),
   ADD KEY `jenis_id` (`jenis_id`),
   ADD KEY `pengelola_id` (`pengelola_id`);
 
@@ -949,7 +939,8 @@ ALTER TABLE `tb_im_keuangan`
 -- Indexes for table `tb_im_keu_jenis`
 --
 ALTER TABLE `tb_im_keu_jenis`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_keu_jenis_kategori` (`kategori_id`);
 
 --
 -- Indexes for table `tb_im_keu_kategori`
@@ -1176,19 +1167,19 @@ ALTER TABLE `tb_im_keuangan`
 -- AUTO_INCREMENT for table `tb_im_keu_jenis`
 --
 ALTER TABLE `tb_im_keu_jenis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_im_keu_kategori`
 --
 ALTER TABLE `tb_im_keu_kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_im_keu_pengelola`
 --
 ALTER TABLE `tb_im_keu_pengelola`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_im_keu_riwayat`
@@ -1290,7 +1281,7 @@ ALTER TABLE `tb_produk`
 -- AUTO_INCREMENT for table `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tb_wablas`
@@ -1330,9 +1321,14 @@ ALTER TABLE `tb_im_inv_transaction`
 -- Constraints for table `tb_im_keuangan`
 --
 ALTER TABLE `tb_im_keuangan`
-  ADD CONSTRAINT `tb_im_keuangan_ibfk_1` FOREIGN KEY (`kategori_id`) REFERENCES `tb_im_keu_kategori` (`id`),
   ADD CONSTRAINT `tb_im_keuangan_ibfk_2` FOREIGN KEY (`jenis_id`) REFERENCES `tb_im_keu_jenis` (`id`),
   ADD CONSTRAINT `tb_im_keuangan_ibfk_3` FOREIGN KEY (`pengelola_id`) REFERENCES `tb_im_keu_pengelola` (`id`);
+
+--
+-- Constraints for table `tb_im_keu_jenis`
+--
+ALTER TABLE `tb_im_keu_jenis`
+  ADD CONSTRAINT `fk_keu_jenis_kategori` FOREIGN KEY (`kategori_id`) REFERENCES `tb_im_keu_kategori` (`id`);
 
 --
 -- Constraints for table `tb_im_keu_riwayat`
