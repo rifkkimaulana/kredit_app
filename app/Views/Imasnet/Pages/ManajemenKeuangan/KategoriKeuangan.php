@@ -4,12 +4,12 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title"><?= $title; ?></h3>
                         <a class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#addModal">
-                            <i class="fas fa-plus"></i> Tambah Jenis Keuangan
+                            <i class="fas fa-plus"></i> Tambah Kategori
                         </a>
                     </div>
                     <div class="card-body">
@@ -18,7 +18,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">No</th>
-                                        <th class="text-center">Jenis</th>
+                                        <th class="text-center">Kategori Keuangan</th>
                                         <th class="text-center">Keterangan</th>
                                         <th class="text-center">Aksi</th>
                                     </tr>
@@ -51,7 +51,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        Apakah Anda yakin ingin menghapus keuangan dengan Jenis: <?= $kategori['nama_kategori'] ?>?
+                                                        Apakah Anda yakin ingin menghapus keuangan dengan Kategori: <?= $kategori['nama_kategori'] ?>?
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -75,7 +75,7 @@
                                                         <div class="modal-body">
                                                             <input type="hidden" name="id" value="<?= $kategori['id']; ?>">
                                                             <div class="form-group">
-                                                                <label for="nama_kategori">Jenis</label>
+                                                                <label for="nama_kategori">Kategori</label>
                                                                 <input type="text" class="form-control" id="nama_kategori" name="nama_kategori" value="<?= $kategori['nama_kategori']; ?>">
                                                             </div>
                                                             <div class="form-group">
@@ -99,6 +99,18 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">About</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            Setiap kategori keuangan dapat memiliki beberapa "Jenis Keuangan" yang lebih rinci. Misalnya, di bawah kategori "Operasional," Anda dapat memiliki jenis keuangan yang mencakup biaya gaji staf administrasi dan biaya perawatan fasilitas.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -116,7 +128,7 @@
             <form action="<?= base_url('im-manajemen-keuangan/kategori-keuangan/create'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="nama_kategori">Jenis</label>
+                        <label for="nama_kategori">Kategori</label>
                         <input type="text" class="form-control" id="nama_kategori" name="nama_kategori">
                     </div>
                     <div class="form-group">

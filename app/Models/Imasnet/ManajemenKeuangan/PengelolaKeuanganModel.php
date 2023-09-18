@@ -9,9 +9,7 @@ class PengelolaKeuanganModel extends Model
     protected $table = 'tb_im_keu_pengelola';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'nama_lengkap',
-        'telpon',
-        'alamat',
+        'user_id',
         'saldo',
     ];
 

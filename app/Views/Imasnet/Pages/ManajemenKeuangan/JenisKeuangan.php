@@ -4,7 +4,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title"><?= $title; ?></h3>
@@ -18,7 +18,8 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">No</th>
-                                        <th class="text-center">Jenis</th>
+                                        <th class="text-center">Kategori</th>
+                                        <th class="text-center">Jenis Keuangan</th>
                                         <th class="text-center">Keterangan</th>
                                         <th class="text-center">Aksi</th>
                                     </tr>
@@ -28,6 +29,7 @@
                                     foreach ($jenisKeuanganData as $jenis) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
+                                            <td class="text-center"><?= $kategoriMap[$jenis['kategori_id']]['nama_kategori']; ?></td>
                                             <td class="text-center"><?= $jenis['nama_jenis']; ?></td>
                                             <td class="text-center"><?= $jenis['keterangan']; ?></td>
                                             <td class="text-center">
@@ -75,6 +77,16 @@
                                                         <div class="modal-body">
                                                             <input type="hidden" name="id" value="<?= $jenis['id']; ?>">
                                                             <div class="form-group">
+                                                                <label for="kategori_id">Jenis</label>
+                                                                <select class="form-control" id="kategori_id" name="kategori_id">
+                                                                    <?php foreach ($kategoriKeuanganData as $kategori) : ?>
+                                                                        <option value="<?= $kategori['id']; ?>" <?= ($kategori['id'] == $jenis['kategori_id']) ? 'selected' : ''; ?>>
+                                                                            <?= $kategori['nama_kategori']; ?>
+                                                                        </option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <label for="nama_jenis">Jenis</label>
                                                                 <input type="text" class="form-control" id="nama_jenis" name="nama_jenis" value="<?= $jenis['nama_jenis']; ?>">
                                                             </div>
@@ -99,6 +111,18 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">About</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            Dalam konteks aplikasi kami, "Jenis Keuangan" merujuk pada klasifikasi lebih rinci dari transaksi keuangan. Sebagai contoh, di bawah kategori "Operasional," Anda dapat memiliki beberapa jenis keuangan seperti biaya gaji staf administrasi, biaya perawatan fasilitas, dan biaya pengadaan bahan baku. Jenis keuangan membantu Anda melacak dan mengelola transaksi keuangan dengan lebih terperinci.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -115,6 +139,17 @@
             </div>
             <form action="<?= base_url('im-manajemen-keuangan/jenis-keuangan/create'); ?>" method="post">
                 <div class="modal-body">
+                    <div class="form-group">
+                        <label for="kategori_id">Jenis</label>
+                        <select class="form-control" id="kategori_id" name="kategori_id">
+                            <?php foreach ($kategoriKeuanganData as $kategori) : ?>
+                                <option value="<?= $kategori['id']; ?>">
+                                    <?= $kategori['nama_kategori']; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="nama_jenis">Jenis</label>
                         <input type="text" class="form-control" id="nama_jenis" name="nama_jenis">

@@ -3,6 +3,7 @@
 namespace App\Controllers\Imasnet\ManajemenKeuangan;
 
 use App\Models\Imasnet\ManajemenKeuangan\KategoriKeuanganModel;
+use App\Models\Imasnet\ManajemenKeuangan\JenisKeuanganModel;
 
 use App\Controllers\Imasnet\BaseController;
 
@@ -58,6 +59,13 @@ class KategoriKeuangan extends BaseController
     public function delete($id)
     {
         $kategoriKeuanganModel = new KategoriKeuanganModel();
+        $jenisKeuanganModel = new JenisKeuanganModel();
+
+        $jenisKeuanganCount = $jenisKeuanganModel->where('kategori_id', $id)->countAllResults();
+
+        if ($jenisKeuanganCount > 0) {
+            return redirect()->to(base_url('im-manajemen-keuangan/kategori-keuangan'))->with('error', 'Tidak dapat menghapus kategori keuangan ini karena masih terdapat jenis keuangan yang terkait.');
+        }
 
         if ($kategoriKeuanganModel->deleteId($id)) {
             return redirect()->to(base_url('im-manajemen-keuangan/kategori-keuangan'))->with('success', 'Kategori keuangan berhasil dihapus.');

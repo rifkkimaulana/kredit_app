@@ -18,12 +18,11 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">No</th>
-                                        <th class="text-center">Kategori</th>
                                         <th class="text-center">Jenis</th>
                                         <th class="text-center">Pengelola</th>
+                                        <th class="text-center">Keterangan</th>
                                         <th class="text-center">Pemasukan</th>
                                         <th class="text-center">Pengeluaran</th>
-                                        <th class="text-center">Keterangan</th>
                                         <th class="text-center">Gambar</th>
                                         <th class="text-center">Aksi</th>
                                     </tr>
@@ -33,16 +32,16 @@
                                     foreach ($keuanganData as $keuangan) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
-                                            <td class="text-center"><?= $kategoriMap[$keuangan['kategori_id']]['nama_kategori']; ?></td>
                                             <td class="text-center"><?= $jenisMap[$keuangan['jenis_id']]['nama_jenis']; ?></td>
-                                            <td class="text-center"><?= $pengelolaMap[$keuangan['pengelola_id']]['nama_lengkap']; ?></td>
+                                            <td class="text-center"><?= $userMap[$pengelolaMap[$keuangan['pengelola_id']]['user_id']]['user_nama']; ?></td>
+                                            <td class="text-center"><?= $keuangan['keterangan']; ?></td>
                                             <td class="text-center"><?= $keuangan['pemasukan']; ?></td>
                                             <td class="text-center"><?= $keuangan['pengeluaran']; ?></td>
-                                            <td class="text-center"><?= $keuangan['keterangan']; ?></td>
                                             <td class="text-center">
-                                                <img src="<?= base_url('assets/image/Imasnet/ManajemenKeuangan/' . $keuangan['foto']); ?>" alt="<?= $keuangan['foto'] ?>" class="img-fluid w-25 h-25">
+                                                <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#lihatPoto<?= $keuangan['id']; ?>">
+                                                    <i class="fas fa-eye"></i> Lihat
+                                                </a>
                                             </td>
-
                                             <td class="text-center">
                                                 <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal<?= $keuangan['id']; ?>">
                                                     <i class="far fa-edit"></i> Edit
@@ -52,6 +51,19 @@
                                                 </a>
                                             </td>
                                         </tr>
+
+                                        <!-- Modal View Photo -->
+                                        <div class="modal fade" id="lihatPoto<?= $keuangan['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel<?= $keuangan['id'] ?>" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+
+                                                <div class="card-flat">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <img src="<?= base_url('assets/image/Imasnet/ManajemenKeuangan/' . $keuangan['foto']); ?>" alt="<?= $keuangan['foto'] ?>" class="img-fluid">
+                                            </div>
+                                        </div>
 
                                         <!-- Modal Konfirmasi Delete -->
                                         <div class="modal fade" id="deleteModal<?= $keuangan['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel<?= $keuangan['id'] ?>" aria-hidden="true">
@@ -90,16 +102,6 @@
                                                             <input type="hidden" name="id" value="<?= $keuangan['id']; ?>">
 
                                                             <div class="form-group">
-                                                                <label for="kategori_id">Kategori</label>
-                                                                <select class="form-control" id="kategori_id" name="kategori_id">
-                                                                    <?php foreach ($kategoriKeuanganData as $kategori) : ?>
-                                                                        <option value="<?= $kategori['id']; ?>" <?= ($kategori['id'] == $keuangan['kategori_id']) ? 'selected' : ''; ?>>
-                                                                            <?= $kategori['nama_kategori']; ?>
-                                                                        </option>
-                                                                    <?php endforeach; ?>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
                                                                 <label for="jenis_id">Jenis</label>
                                                                 <select class="form-control" id="jenis_id" name="jenis_id">
                                                                     <?php foreach ($jenisKeuanganData as $jenis) : ?>
@@ -114,7 +116,7 @@
                                                                 <select class="form-control" id="pengelola_id" name="pengelola_id">
                                                                     <?php foreach ($pengelolaKeuanganData as $pengelola) : ?>
                                                                         <option value="<?= $pengelola['id']; ?>" <?= ($pengelola['id'] == $keuangan['pengelola_id']) ? 'selected' : ''; ?>>
-                                                                            <?= $pengelola['nama_lengkap']; ?>
+                                                                            <?= $userMap[$pengelolaMap[$keuangan['pengelola_id']]['user_id']]['user_nama']; ?>
                                                                         </option>
                                                                     <?php endforeach; ?>
                                                                 </select>
@@ -169,14 +171,6 @@
             <form action="<?= base_url('im-manajemen-keuangan/data-keuangan/create'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="kategori_id">Kategori</label>
-                        <select class="form-control" id="kategori_id" name="kategori_id">
-                            <?php foreach ($kategoriKeuanganData as $kategori) : ?>
-                                <option value="<?= $kategori['id']; ?>"><?= $kategori['nama_kategori']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="jenis_id">Jenis</label>
                         <select class="form-control" id="jenis_id" name="jenis_id">
                             <?php foreach ($jenisKeuanganData as $jenis) : ?>
@@ -188,7 +182,7 @@
                         <label for="pengelola_id">Pengelola</label>
                         <select class="form-control" id="pengelola_id" name="pengelola_id">
                             <?php foreach ($pengelolaKeuanganData as $pengelola) : ?>
-                                <option value="<?= $pengelola['id']; ?>"><?= $pengelola['nama_lengkap']; ?></option>
+                                <option value="<?= $pengelola['id']; ?>"><?= $userMap[$pengelola['user_id']]['user_nama']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>

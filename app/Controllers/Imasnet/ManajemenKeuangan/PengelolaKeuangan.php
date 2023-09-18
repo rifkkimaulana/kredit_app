@@ -3,6 +3,7 @@
 namespace App\Controllers\Imasnet\ManajemenKeuangan;
 
 use App\Models\Imasnet\ManajemenKeuangan\PengelolaKeuanganModel;
+use App\Models\UsersModel;
 
 use App\Controllers\Imasnet\BaseController;
 
@@ -11,12 +12,20 @@ class PengelolaKeuangan extends BaseController
     public function index()
     {
         $pengelolaKeuanganModel = new PengelolaKeuanganModel();
+        $usersModel = new UsersModel();
+
+        $userMap = [];
+        foreach ($usersModel->findAll() as $user) {
+            $userMap[$user['user_id']] = $user;
+        }
 
         $data = [
             'title' => 'Pengelola Keuangan',
             'user' => $this->user,
             'perusahaan' => $this->aplikasi,
             'pengelolaKeuanganData' => $pengelolaKeuanganModel->findAll(),
+            'usersData' => $usersModel->where('user_level', 'im_member')->findAll(),
+            'userMap' => $userMap
         ];
         return view('Imasnet/Pages/ManajemenKeuangan/PengelolaKeuangan', $data);
     }
@@ -25,9 +34,7 @@ class PengelolaKeuangan extends BaseController
     public function create()
     {
         $data = [
-            'nama_lengkap' => $this->request->getPost('nama_lengkap'),
-            'telpon' => $this->request->getPost('telpon'),
-            'alamat' => $this->request->getPost('alamat'),
+            'user_id' => $this->request->getPost('user_id'),
             'saldo' => $this->request->getPost('saldo')
         ];
 
@@ -45,9 +52,7 @@ class PengelolaKeuangan extends BaseController
         $id = $this->request->getPost('id');
 
         $data = [
-            'nama_lengkap' => $this->request->getPost('nama_lengkap'),
-            'telpon' => $this->request->getPost('telpon'),
-            'alamat' => $this->request->getPost('alamat'),
+            'user_id' => $this->request->getPost('user_id'),
             'saldo' => $this->request->getPost('saldo')
         ];
 

@@ -3,6 +3,7 @@
 namespace App\Controllers\Imasnet\ManajemenKeuangan;
 
 use App\Models\Imasnet\ManajemenKeuangan\JenisKeuanganModel;
+use App\Models\Imasnet\ManajemenKeuangan\KategoriKeuanganModel;
 
 use App\Controllers\Imasnet\BaseController;
 
@@ -11,12 +12,20 @@ class JenisKeuangan extends BaseController
     public function index()
     {
         $jenisKeuanganModel = new JenisKeuanganModel();
+        $kategoriKeuanganModel = new KategoriKeuanganModel();
+
+        $kategoriMap = [];
+        foreach ($kategoriKeuanganModel->findAll() as $kategori) {
+            $kategoriMap[$kategori['id']] = $kategori;
+        }
 
         $data = [
             'title' => 'Manajemen Server',
             'user' => $this->user,
             'perusahaan' => $this->aplikasi,
             'jenisKeuanganData' => $jenisKeuanganModel->findAll(),
+            'kategoriMap' => $kategoriMap,
+            'kategoriKeuanganData' => $kategoriKeuanganModel->findAll()
         ];
         return view('Imasnet/Pages/ManajemenKeuangan/JenisKeuangan', $data);
     }
@@ -24,6 +33,7 @@ class JenisKeuangan extends BaseController
     public function create()
     {
         $data = [
+            'kategori_id' => $this->request->getPost('kategori_id'),
             'nama_jenis' => $this->request->getPost('nama_jenis'),
             'keterangan' => $this->request->getPost('keterangan'),
         ];
@@ -42,6 +52,7 @@ class JenisKeuangan extends BaseController
         $id = $this->request->getPost('id');
 
         $data = [
+            'kategori_id' => $this->request->getPost('kategori_id'),
             'nama_jenis' => $this->request->getPost('nama_jenis'),
             'keterangan' => $this->request->getPost('keterangan'),
         ];

@@ -60,6 +60,7 @@ $routes->group('', ['namespace' => 'App\Controllers\Imasnet'], function ($routes
 
 	$routes->group('im-settings', ['namespace' => 'App\Controllers\Imasnet\Settings'], function ($routes) {
 		$routes->get('profile', 'Profile::index');
+		$routes->post('profile', 'Profile::update');
 
 		$routes->get('users', 'Users::index');
 		$routes->post('users/create', 'Users::create');

@@ -15,7 +15,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
                 <?php if (!empty($user['user_foto'])) { ?>
-                    <img src="<?= base_url('assets/image/user/' . $user['user_foto']); ?>" class="img-circle elevation-2" alt="<?= $user['user_nama'] ?>">
+                    <img src="<?= base_url('assets/image/Imasnet/Settings/Users/' . $user['user_foto']); ?>" class="img-circle elevation-2" alt="<?= $user['user_nama'] ?>">
                 <?php } else { ?>
                     <img src="<?= base_url('assets/image/user/avatar5.png'); ?>" class="img-circle elevation-2" alt="<?= $user['user_nama'] ?>">
                 <?php } ?>
@@ -45,13 +45,13 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-assets/data-aset'); ?>" class="nav-link <?= $segment2 === 'data-aset' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'data-aset' ? 'javascript:void(0)' :  base_url('im-manajemen-assets/data-aset'); ?>" class="nav-link <?= $segment2 === 'data-aset' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Data Aset</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-assets/kategori-aset'); ?>" class="nav-link <?= $segment2 === 'kategori-aset' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'kategori-aset' ? 'javascript:void(0)' :  base_url('im-manajemen-assets/kategori-aset'); ?>" class="nav-link <?= $segment2 === 'kategori-aset' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kategori Aset</p>
                             </a>
@@ -74,37 +74,37 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-inventory/location'); ?>" class="nav-link <?= $segment2 === 'location' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'location' ? 'javascript:void(0)' :  base_url('im-inventory/location'); ?>" class="nav-link <?= $segment2 === 'location' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Location</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-inventory/suppliers'); ?>" class="nav-link <?= $segment2 === 'suppliers' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'suppliers' ? 'javascript:void(0)' :  base_url('im-inventory/suppliers'); ?>" class="nav-link <?= $segment2 === 'suppliers' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Suppliers</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-inventory/customers'); ?>" class="nav-link <?= $segment2 === 'customers' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'customers' ? 'javascript:void(0)' :  base_url('im-inventory/customers'); ?>" class="nav-link <?= $segment2 === 'customers' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Customers</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-inventory/categories'); ?>" class="nav-link <?= $segment2 === 'categories' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'categories' ? 'javascript:void(0)' :  base_url('im-inventory/categories'); ?>" class="nav-link <?= $segment2 === 'categories' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Categories</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-inventory/transaction'); ?>" class="nav-link <?= $segment2 === 'transaction' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'transaction' ? 'javascript:void(0)' :  base_url('im-inventory/transaction'); ?>" class="nav-link <?= $segment2 === 'transaction' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Transaction</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-inventory/history'); ?>" class="nav-link <?= $segment2 === 'history' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'history' ? 'javascript:void(0)' :  base_url('im-inventory/history'); ?>" class="nav-link <?= $segment2 === 'history' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>History</p>
                             </a>
@@ -122,13 +122,13 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-server/server'); ?>" class="nav-link <?= $segment2 === 'server' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'server' ? 'javascript:void(0)' :  base_url('im-manajemen-server/server'); ?>" class="nav-link <?= $segment2 === 'server' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pengelola Server</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-server/users-pengelola'); ?>" class="nav-link <?= $segment2 === 'users-pengelola' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'users-pengelola' ? 'javascript:void(0)' :  base_url('im-manajemen-server/users-pengelola'); ?>" class="nav-link <?= $segment2 === 'users-pengelola' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Users Pengelola</p>
                             </a>
@@ -145,7 +145,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-customer/customer'); ?>" class="nav-link <?= $segment2 === 'customer' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'customer' ? 'javascript:void(0)' :  base_url('im-manajemen-customer/customer'); ?>" class="nav-link <?= $segment2 === 'customer' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Data Pelanggan</p>
                             </a>
@@ -164,33 +164,87 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-voucher/voucher'); ?>" class="nav-link <?= $segment2 === 'voucher' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'voucher' ? 'javascript:void(0)' :  base_url('im-manajemen-voucher/voucher'); ?>" class="nav-link <?= $segment2 === 'voucher' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Data Voucher</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-voucher/paket'); ?>" class="nav-link <?= $segment2 === 'paket' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'paket' ? 'javascript:void(0)' :  base_url('im-manajemen-voucher/paket'); ?>" class="nav-link <?= $segment2 === 'paket' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Paket Voucher</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-voucher/reseller'); ?>" class="nav-link <?= $segment2 === 'reseller' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'reseller' ? 'javascript:void(0)' :  base_url('im-manajemen-voucher/reseller'); ?>" class="nav-link <?= $segment2 === 'reseller' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Resseler Voucher</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-voucher/pengirim'); ?>" class="nav-link <?= $segment2 === 'pengirim' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'pengirim' ? 'javascript:void(0)' : base_url('im-manajemen-voucher/pengirim'); ?>" class="nav-link <?= $segment2 === 'pengirim' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pengirim Voucher</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-voucher/riwayat'); ?>" class="nav-link <?= $segment2 === 'riwayat' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'riwayat' ? 'javascript:void(0)' :  base_url('im-manajemen-voucher/riwayat'); ?>" class="nav-link <?= $segment2 === 'riwayat' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Riwayat Transaksi</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item <?= $segment1 === 'im-manajemen-tiket' ? 'menu-open' : ''; ?>">
+                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-manajemen-tiket' ? 'active' : ''; ?>">
+                        <i class="nav-icon fas fa-ticket-alt"></i>
+                        <p>
+                            Manajemen Tiket
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'semua-tiket' ? 'javascript:void(0)' : base_url('im-manajemen-tiket/semua-tiket'); ?>" class="nav-link <?= $segment2 === 'semua-tiket' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Semua Tiket</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'tiket-aktif' ? 'javascript:void(0)' : base_url('im-manajemen-tiket/tiket-aktif'); ?>" class="nav-link <?= $segment2 === 'tiket-aktif' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tiket Aktif</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'tiket-ditutup' ? 'javascript:void(0)' : base_url('im-manajemen-tiket/tiket-ditutup'); ?>" class="nav-link <?= $segment2 === 'tiket-ditutup' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tiket Ditutup</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item <?= $segment1 === 'im-manajemen-scc' ? 'menu-open' : ''; ?>">
+                    <a href="javascript:void(0);" class="nav-link <?= $segment1 === 'im-manajemen-scc' ? 'active' : ''; ?>">
+                        <i class="fas fa-bookmark nav-icon"></i>
+                        <p>
+                            Manajemen SCC
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'scc-list' ? 'javascript:void(0)' : base_url('im-manajemen-scc/scc-list'); ?>" class="nav-link <?= $segment2 === 'scc-list' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Daftar SCC</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= $segment2 === 'scc-settings' ? 'javascript:void(0)' : base_url('im-manajemen-scc/scc-settings'); ?>" class="nav-link <?= $segment2 === 'scc-settings' ? 'active' : ''; ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pengaturan SCC</p>
                             </a>
                         </li>
                     </ul>
@@ -207,37 +261,37 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-keuangan/data-keuangan'); ?>" class="nav-link <?= $segment2 === 'data-keuangan' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'data-keuangan' ? 'javascript:void(0)' : base_url('im-manajemen-keuangan/data-keuangan'); ?>" class="nav-link <?= $segment2 === 'data-keuangan' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Data Keuangan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-keuangan/kategori-keuangan'); ?>" class="nav-link <?= $segment2 === 'kategori-keuangan' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'kategori-keuangan' ? 'javascript:void(0)' : base_url('im-manajemen-keuangan/kategori-keuangan'); ?>" class="nav-link <?= $segment2 === 'kategori-keuangan' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kategori Keuangan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-keuangan/jenis-keuangan'); ?>" class="nav-link <?= $segment2 === 'jenis-keuangan' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'jenis-keuangan' ? 'javascript:void(0)' : base_url('im-manajemen-keuangan/jenis-keuangan'); ?>" class="nav-link <?= $segment2 === 'jenis-keuangan' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Jenis Keuangan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-keuangan/pengelola-keuangan'); ?>" class="nav-link <?= $segment2 === 'pengelola-keuangan' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'pengelola-keuangan' ? 'javascript:void(0)' : base_url('im-manajemen-keuangan/pengelola-keuangan'); ?>" class="nav-link <?= $segment2 === 'pengelola-keuangan' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pengelola Keuangan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-keuangan/riwayat-transaksi'); ?>" class="nav-link <?= $segment2 === 'riwayat-transaksi' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'riwayat-transaksi' ? 'javascript:void(0)' : base_url('im-manajemen-keuangan/riwayat-transaksi'); ?>" class="nav-link <?= $segment2 === 'riwayat-transaksi' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Riwayat Transaksi</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('im-manajemen-keuangan/laporan-keuangan'); ?>" class="nav-link <?= $segment2 === 'laporan-keuangan' ? 'active' : ''; ?>">
+                            <a href="<?= $segment2 === 'laporan-keuangan' ? 'javascript:void(0)' : base_url('im-manajemen-keuangan/laporan-keuangan'); ?>" class="nav-link <?= $segment2 === 'laporan-keuangan' ? 'active' : ''; ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Laporan Keuangan</p>
                             </a>
@@ -270,7 +324,7 @@ $segment2 = isset($segments[1]) ? $segments[1] : '';
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url('im-log/activity'); ?>" class="nav-link <?= $segment2 === 'activity' ? 'active' : ''; ?>">
+                    <a href="<?= $segment2 === 'activity' ? 'javascript:void(0)' : base_url('im-log/activity'); ?>" class="nav-link <?= $segment2 === 'activity' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-history"></i>
                         <p>Riwayat Aktifitas</p>
                     </a>

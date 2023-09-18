@@ -102,6 +102,8 @@ Submenu # Laporan Pendapatan Voucher
  - Pendapatan Dari Pengiriman Kartu Voucher
 
 8. Manajement Ticket Gangguan
- - 
+ # Semua Tiket
+ # Tiket Aktif
+ # Tiket Ditutup
 
 

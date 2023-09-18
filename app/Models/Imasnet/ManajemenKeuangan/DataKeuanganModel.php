@@ -9,7 +9,6 @@ class DataKeuanganModel extends Model
     protected $table = 'tb_im_keuangan';
     protected $primaryKey = 'id';
     protected $allowedFields = [
-        'kategori_id',
         'jenis_id',
         'pengelola_id',
         'pemasukan',

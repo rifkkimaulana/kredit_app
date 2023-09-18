@@ -7,6 +7,7 @@ use App\Models\Imasnet\ManajemenKeuangan\JenisKeuanganModel;
 use App\Models\Imasnet\ManajemenKeuangan\KategoriKeuanganModel;
 use App\Models\Imasnet\ManajemenKeuangan\PengelolaKeuanganModel;
 use App\Models\Imasnet\ManajemenKeuangan\RiwayatTransaksiModel;
+use App\Models\UsersModel;
 
 use App\Controllers\Imasnet\BaseController;
 
@@ -25,14 +26,16 @@ class DataKeuangan extends BaseController
             $jenisMap[$jenis['id']] = $jenis;
         }
 
-        $kategoriMap = [];
-        foreach ($kategoriKeuanganModel->findAll() as $kategori) {
-            $kategoriMap[$kategori['id']] = $kategori;
-        }
-
         $pengelolaMap = [];
         foreach ($pengelolaKeuanganModel->findAll() as $pengelola) {
             $pengelolaMap[$pengelola['id']] = $pengelola;
+        }
+
+        $usersModel = new UsersModel();
+
+        $userMap = [];
+        foreach ($usersModel->findAll() as $user) {
+            $userMap[$user['user_id']] = $user;
         }
 
         $data = [
@@ -45,8 +48,8 @@ class DataKeuangan extends BaseController
             'pengelolaKeuanganData' => $pengelolaKeuanganModel->findAll(),
             'riwayatKeuanganData' => $riwayatTransaksiModel->findAll(),
             'jenisMap' => $jenisMap,
-            'kategoriMap' => $kategoriMap,
             'pengelolaMap' => $pengelolaMap,
+            'userMap' => $userMap
         ];
         return view('Imasnet/Pages/ManajemenKeuangan/DataKeuangan', $data);
     }
@@ -59,7 +62,6 @@ class DataKeuangan extends BaseController
         $referenceNumber = "REF" . date("YmdHis", $timestamp) . $randomNumber;
 
         $data = [
-            'kategori_id' => $this->request->getPost('kategori_id'),
             'jenis_id' => $this->request->getPost('jenis_id'),
             'pengelola_id' => $this->request->getPost('pengelola_id'),
             'pemasukan' => $this->request->getPost('pemasukan'),
@@ -91,7 +93,6 @@ class DataKeuangan extends BaseController
         $id = $this->request->getPost('id');
 
         $data = [
-            'kategori_id' => $this->request->getPost('kategori_id'),
             'jenis_id' => $this->request->getPost('jenis_id'),
             'pengelola_id' => $this->request->getPost('pengelola_id'),
             'pemasukan' => $this->request->getPost('pemasukan'),

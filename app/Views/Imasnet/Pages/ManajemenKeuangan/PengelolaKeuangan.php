@@ -4,12 +4,12 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title"><?= $title; ?></h3>
                         <a class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#addModal">
-                            <i class="fas fa-plus"></i> Tambah Jenis Keuangan
+                            <i class="fas fa-plus"></i> Tambah Pengelola
                         </a>
                     </div>
                     <div class="card-body">
@@ -20,7 +20,6 @@
                                         <th class="text-center">No</th>
                                         <th class="text-center">Nama Lengkap</th>
                                         <th class="text-center">Telpon</th>
-                                        <th class="text-center">Alamat</th>
                                         <th class="text-center">Saldo</th>
                                         <th class="text-center">Aksi</th>
                                     </tr>
@@ -30,9 +29,8 @@
                                     foreach ($pengelolaKeuanganData as $pengelola) : ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
-                                            <td class="text-center"><?= $pengelola['nama_lengkap']; ?></td>
-                                            <td class="text-center"><?= $pengelola['telpon']; ?></td>
-                                            <td class="text-center"><?= $pengelola['alamat']; ?></td>
+                                            <td class="text-center"><?= $userMap[$pengelola['user_id']]['user_nama']; ?></td>
+                                            <td class="text-center"><?= $userMap[$pengelola['user_id']]['no_wa']; ?></td>
                                             <td class="text-center"><?= $pengelola['saldo']; ?></td>
                                             <td class="text-center">
                                                 <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal<?= $pengelola['id']; ?>">
@@ -55,7 +53,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        Apakah Anda yakin ingin menghapus pengelola keuangan ini: <?= $pengelola['nama_lengkap'] ?>?
+                                                        Apakah Anda yakin ingin menghapus pengelola keuangan ini: <?= $userMap[$pengelola['user_id']]['user_nama']; ?>?
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -79,16 +77,14 @@
                                                         <div class="modal-body">
                                                             <input type="hidden" name="id" value="<?= $pengelola['id']; ?>">
                                                             <div class="form-group">
-                                                                <label for="nama_lengkap">Nama Lengkap</label>
-                                                                <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="<?= $pengelola['nama_lengkap']; ?>">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="telpon">Telpon</label>
-                                                                <input type="text" class="form-control" id="telpon" name="telpon" value="<?= $pengelola['telpon']; ?>">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="alamat">Alamat</label>
-                                                                <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $pengelola['alamat']; ?>">
+                                                                <label for="user_id">User Pengelola</label>
+                                                                <select class="form-control" id="user_id" name="user_id">
+                                                                    <?php foreach ($usersData as $user) : ?>
+                                                                        <option value="<?= $user['user_id']; ?>" <?= ($user['user_id'] == $pengelola['user_id']) ? 'selected' : ''; ?>>
+                                                                            <?= $user['user_nama']; ?>
+                                                                        </option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="saldo">Saldo</label>
@@ -111,6 +107,17 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">About</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            Silahkan tambah pengelola baru, pengelola ini terkait dengan manajemen users </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -128,20 +135,18 @@
             <form action="<?= base_url('im-manajemen-keuangan/pengelola-keuangan/create'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="nama_lengkap">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap">
-                    </div>
-                    <div class="form-group">
-                        <label for="telpon">Telpon</label>
-                        <input type="text" class="form-control" id="telpon" name="telpon">
-                    </div>
-                    <div class="form-group">
-                        <label for="alamat">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat">
+                        <label for="user_id">Pilih Users Menjadi Pengelola</label>
+                        <select class="form-control" id="user_id" name="user_id">
+                            <?php foreach ($usersData as $user) : ?>
+                                <option value="<?= $user['user_id']; ?>">
+                                    <?= $user['user_nama']; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="saldo">Saldo</label>
-                        <input type="text" class="form-control" id="saldo" name="saldo">
+                        <input type="text" class="form-control" id="saldo" name="saldo" value="0">
                     </div>
                 </div>
                 <div class="modal-footer">

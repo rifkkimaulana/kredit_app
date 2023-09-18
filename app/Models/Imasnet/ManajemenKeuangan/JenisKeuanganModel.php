@@ -9,6 +9,7 @@ class JenisKeuanganModel extends Model
     protected $table = 'tb_im_keu_jenis';
     protected $primaryKey = 'id';
     protected $allowedFields = [
+        'kategori_id',
         'nama_jenis',
         'keterangan',
     ];
